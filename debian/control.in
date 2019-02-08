@@ -20,7 +20,6 @@ Build-Depends: autoconf (>= 2.64), @dpkg_dev@
   g++-m68k-linux-gnu [amd64 i386 x32] <!nocheck>,
   g++-mips64-linux-gnuabi64 [amd64 i386 x32] <!nocheck>,
   g++-powerpc-linux-gnu [amd64 i386 ppc64el x32] <!nocheck>,
-  g++-powerpc-linux-gnuspe [amd64 i386 x32] <!nocheck>,
   g++-powerpc64-linux-gnu [amd64 i386 x32] <!nocheck>,
   g++-riscv64-linux-gnu [amd64 i386 x32] <!nocheck>,
   g++-sh4-linux-gnu [amd64 i386 x32] <!nocheck>,

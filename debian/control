@@ -20,7 +20,6 @@ Build-Depends: autoconf (>= 2.64), dpkg-dev (>= 1.19.0.5),
   g++-m68k-linux-gnu [amd64 i386 x32] <!nocheck>,
   g++-mips64-linux-gnuabi64 [amd64 i386 x32] <!nocheck>,
   g++-powerpc-linux-gnu [amd64 i386 ppc64el x32] <!nocheck>,
-  g++-powerpc-linux-gnuspe [amd64 i386 x32] <!nocheck>,
   g++-powerpc64-linux-gnu [amd64 i386 x32] <!nocheck>,
   g++-riscv64-linux-gnu [amd64 i386 x32] <!nocheck>,
   g++-sh4-linux-gnu [amd64 i386 x32] <!nocheck>,
@@ -606,32 +605,6 @@ Multi-Arch: foreign
 Depends: binutils-powerpc-linux-gnu (= ${binary:Version})
 Description: GNU binary utilities, for powerpc-linux-gnu target (debug symbols)
  This package provides debug symbols for binutils-powerpc-linux-gnu.
-
-Package: binutils-powerpc-linux-gnuspe
-Priority: optional
-Architecture: powerpcspe amd64 i386 x32
-Multi-Arch: foreign
-Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
-Provides: 
-Breaks: binutils (<< 2.29-6)
-Replaces: binutils (<< 2.29-6)
-Description: GNU binary utilities, for powerpc-linux-gnuspe target
- This package provides GNU assembler, linker and binary utilities
- for the powerpc-linux-gnuspe target.
- .
- You don't need this package unless you plan to cross-compile programs
- for powerpc-linux-gnuspe and powerpc-linux-gnuspe is not your native platform.
-
-Package: binutils-powerpc-linux-gnuspe-dbg
-Section: debug
-Priority: optional
-Architecture: powerpcspe amd64 i386 x32
-Multi-Arch: foreign
-Depends: binutils-powerpc-linux-gnuspe (= ${binary:Version})
-Description: GNU binary utilities, for powerpc-linux-gnuspe target (debug symbols)
- This package provides debug symbols for binutils-powerpc-linux-gnuspe.
 
 Package: binutils-powerpc64-linux-gnu
 Priority: optional
