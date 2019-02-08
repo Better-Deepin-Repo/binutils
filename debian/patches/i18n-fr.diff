@@ -1,13 +1,11 @@
-Index: b/bfd/po/fr.po
-===================================================================
 --- a/bfd/po/fr.po
 +++ b/bfd/po/fr.po
-@@ -4613,7 +4613,7 @@ msgstr "symbole "
+@@ -4188,7 +4188,7 @@ msgstr "symbole "
  
- #: elf64-x86-64.c:1383 elf64-x86-64.c:1393
+ #: elf64-x86-64.c:1425 elf64-x86-64.c:1435
  msgid "; recompile with -fPIC"
 -msgstr "; recompilé avec -fPIC"
 +msgstr "; recompilez avec -fPIC"
  
- #: elf64-x86-64.c:1388
+ #: elf64-x86-64.c:1430
  msgid "undefined "

@@ -4,7 +4,7 @@ Index: b/ld/genscripts.sh
 ===================================================================
 --- a/ld/genscripts.sh
 +++ b/ld/genscripts.sh
-@@ -189,6 +189,104 @@ append_to_lib_path()
+@@ -220,6 +220,104 @@ append_to_lib_path()
    fi
  }
  
@@ -109,7 +109,7 @@ Index: b/ld/genscripts.sh
  # Always search $(tooldir)/lib, aka /usr/local/TARGET/lib when native
  # except when LIBPATH=":".
  if [ "${LIB_PATH}" != ":" ] ; then
-@@ -207,6 +305,13 @@ if [ "${LIB_PATH}" != ":" ] ; then
+@@ -238,6 +336,13 @@ if [ "${LIB_PATH}" != ":" ] ; then
        case "${NATIVE}:${libpath_suffix}:${TOOL_LIB}" in
  	:* | *::* | *:*:*${libpath_suffix}) ;;
  	*) libs="${exec_prefix}/${target_alias}/lib${libpath_suffix}" ;;
@@ -123,7 +123,7 @@ Index: b/ld/genscripts.sh
        esac
      done
      libs="${exec_prefix}/${TOOL_LIB}/lib ${libs}"
-@@ -214,24 +319,124 @@ if [ "${LIB_PATH}" != ":" ] ; then
+@@ -245,24 +350,124 @@ if [ "${LIB_PATH}" != ":" ] ; then
    append_to_lib_path ${libs}
  fi
  

@@ -6,3 +6,7 @@ binutils source: license-problem-gfdl-invariants
 
 # yes, we know what we are doing
 debian-rules-sets-dpkg-architecture-variable
+
+# test data
+binutils source: source-is-missing binutils/testsuite/binutils-all/nfp/test1_nfp6000.nffw
+binutils source: source-is-missing binutils/testsuite/binutils-all/nfp/test2_nfp6000.nffw
