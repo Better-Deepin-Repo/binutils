@@ -115,9 +115,7 @@ ifeq ($(src_name),binutils)
       CROSS_ARCHS =  s390x ppc64el arm64 armhf armel
       CROSS_ARCHS += mips mipsel mips64el
       CROSS_ARCHS += alpha hppa m68k
-      CROSS_ARCHS += mips64 mipsn32 mipsn32el
       CROSS_ARCHS += powerpc ppc64 sh4 sparc64
-      CROSS_ARCHS += mipsr6 mipsr6el mipsn32r6 mipsn32r6el mips64r6 mips64r6el
       CROSS_ARCHS += ia64 riscv64
       CROSS_ARCHS += kfreebsd-amd64 kfreebsd-i386 hurd-i386
       ifneq (,$(filter $(DEB_HOST_ARCH), i386 x32))
@@ -135,6 +133,21 @@ ifeq ($(src_name),binutils)
       CROSS_ARCHS = ppc64el
     else ifeq ($(DEB_HOST_ARCH),ppc64el)
       CROSS_ARCHS = powerpc ppc64 amd64 i386 x32 arm64 armel armhf
+    else
+      CROSS_ARCHS =
+    endif
+  else
+    # c-t-b passes this one ...
+    CROSS_ARCHS := $(filter-out $(DEB_HOST_ARCH),$(CROSS_ARCHS))
+  endif
+else ifeq ($(src_name),binutils-mipsen)
+  with_native	=
+  with_cross	= yes
+  same_source	=
+  ifeq (,$(CROSS_ARCHS))
+    ifneq (,$(filter $(DEB_HOST_ARCH), amd64 i386 x32 arm64 ppc64el))
+      CROSS_ARCHS = mips64 mipsn32 mipsn32el
+      CROSS_ARCHS += mipsr6 mipsr6el mipsn32r6 mipsn32r6el mips64r6 mips64r6el
     else
       CROSS_ARCHS =
     endif
