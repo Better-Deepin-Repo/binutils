@@ -1,3 +1,9 @@
+binutils (2.32-4) UNRELEASED; urgency=medium
+
+  * Remove mips64 build/check dependency.
+
+ -- Matthias Klose <doko@debian.org>  Wed, 13 Feb 2019 11:13:05 +0100
+
 binutils (2.32-3) experimental; urgency=medium
 
   * Snapshot, taken from the 2.32 branch (20190213).
