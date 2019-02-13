@@ -1,4 +1,4 @@
-binutils (2.32-3) UNRELEASED; urgency=medium
+binutils (2.32-3) experimental; urgency=medium
 
   * Snapshot, taken from the 2.32 branch (20190213).
     - Fix PR ld/24151, PR gas/24165.
