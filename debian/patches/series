@@ -30,6 +30,8 @@ i18n-fr.diff
 gold-no-keep-files-mapped.diff
 
 # trunk backports
+pr23843.diff
+pr24276.diff
 
 # experimental ...
 infinity-notes.diff

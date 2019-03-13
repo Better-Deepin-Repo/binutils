@@ -1,8 +1,19 @@
-binutils (2.32-4) UNRELEASED; urgency=medium
+binutils (2.32-5) experimental; urgency=medium
+
+  * Snapshot, taken from the 2.32 branch (20190213).
+    - S390: Revert "Add support to GNU ld to separate got related plt entries".
+  * binutils-source: Redact the build directory out of the tarball paths.
+    (Andrej Shadura). Closes: #920797.
+
+ -- Matthias Klose <doko@debian.org>  Wed, 06 Mar 2019 11:11:50 +0100
+
+binutils (2.32-4) experimental; urgency=medium
 
   * Remove mips64 build/check dependency.
+  * Fix PR binutils/23843, taken from the trunk.
+  * Fix PR ld/24276, taken from the trunk. Addresses: #923246.
 
- -- Matthias Klose <doko@debian.org>  Wed, 13 Feb 2019 11:13:05 +0100
+ -- Matthias Klose <doko@debian.org>  Wed, 27 Feb 2019 22:34:34 +0100
 
 binutils (2.32-3) experimental; urgency=medium
 
