@@ -1,3 +1,11 @@
+binutils (2.32-6) experimental; urgency=medium
+
+  * Snapshot, taken from the 2.32 branch (20190313).
+    - S/390: arch13 instruction descriptions.
+  * Fix VCS attributes in the control file. Closes: #915982.
+
+ -- Matthias Klose <doko@debian.org>  Wed, 13 Mar 2019 16:12:45 +0100
+
 binutils (2.32-5) experimental; urgency=medium
 
   * Snapshot, taken from the 2.32 branch (20190213).
