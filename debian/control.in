@@ -34,7 +34,7 @@ XS-Testsuite: autopkgtest
 
 Package: binutils-for-host
 Architecture: any
-Depends: ${binutils:native} (>= ${binutils:minver}),
+Depends: ${binutils:native}:any (>= ${binutils:minver}),
   binutils-common (= ${binary:Version}),
 Multi-Arch: same
 Description: GNU assembler, linker and binary utilities for the host architecture

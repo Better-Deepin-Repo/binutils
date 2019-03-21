@@ -34,7 +34,7 @@ XS-Testsuite: autopkgtest
 
 Package: binutils-for-host
 Architecture: any
-Depends: ${binutils:native} (>= ${binutils:minver}),
+Depends: ${binutils:native}:any (>= ${binutils:minver}),
   binutils-common (= ${binary:Version}),
 Multi-Arch: same
 Description: GNU assembler, linker and binary utilities for the host architecture
@@ -192,7 +192,7 @@ Description: Common files for the GNU assembler, linker and binary utilities
 Package: binutils-x86-64-linux-gnu
 Priority: optional
 Architecture: amd64 arm64 i386 ppc64el x32
-Multi-Arch: foreign
+Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
 Suggests: binutils-doc (= ${source:Version})
@@ -218,7 +218,7 @@ Description: GNU binary utilities, for x86-64-linux-gnu target (debug symbols)
 Package: binutils-i686-linux-gnu
 Priority: optional
 Architecture: i386 amd64 arm64 ppc64el x32
-Multi-Arch: foreign
+Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
 Suggests: binutils-doc (= ${source:Version})
@@ -244,7 +244,7 @@ Description: GNU binary utilities, for i686-linux-gnu target (debug symbols)
 Package: binutils-aarch64-linux-gnu
 Priority: optional
 Architecture: arm64 amd64 i386 x32 ppc64el
-Multi-Arch: foreign
+Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
 Suggests: binutils-doc (= ${source:Version})
@@ -270,7 +270,7 @@ Description: GNU binary utilities, for aarch64-linux-gnu target (debug symbols)
 Package: binutils-arm-linux-gnueabihf
 Priority: optional
 Architecture: armhf amd64 i386 x32 arm64 ppc64el
-Multi-Arch: foreign
+Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
 Suggests: binutils-doc (= ${source:Version})
@@ -296,7 +296,7 @@ Description: GNU binary utilities, for arm-linux-gnueabihf target (debug symbols
 Package: binutils-arm-linux-gnueabi
 Priority: optional
 Architecture: armel amd64 i386 x32 arm64 ppc64el
-Multi-Arch: foreign
+Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
 Suggests: binutils-doc (= ${source:Version})
@@ -322,7 +322,7 @@ Description: GNU binary utilities, for arm-linux-gnueabi target (debug symbols)
 Package: binutils-mips-linux-gnu
 Priority: optional
 Architecture: mips amd64 i386 x32
-Multi-Arch: foreign
+Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
 Suggests: binutils-doc (= ${source:Version})
@@ -348,7 +348,7 @@ Description: GNU binary utilities, for mips-linux-gnu target (debug symbols)
 Package: binutils-mipsel-linux-gnu
 Priority: optional
 Architecture: mipsel amd64 i386 x32
-Multi-Arch: foreign
+Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
 Suggests: binutils-doc (= ${source:Version})
@@ -374,7 +374,7 @@ Description: GNU binary utilities, for mipsel-linux-gnu target (debug symbols)
 Package: binutils-mips64el-linux-gnuabi64
 Priority: optional
 Architecture: mips64el amd64 i386 x32
-Multi-Arch: foreign
+Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
 Suggests: binutils-doc (= ${source:Version})
@@ -400,7 +400,7 @@ Description: GNU binary utilities, for mips64el-linux-gnuabi64 target (debug sym
 Package: binutils-powerpc64le-linux-gnu
 Priority: optional
 Architecture: ppc64el amd64 i386 x32 ppc64
-Multi-Arch: foreign
+Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
 Suggests: binutils-doc (= ${source:Version})
@@ -426,7 +426,7 @@ Description: GNU binary utilities, for powerpc64le-linux-gnu target (debug symbo
 Package: binutils-s390x-linux-gnu
 Priority: optional
 Architecture: s390x amd64 i386 x32
-Multi-Arch: foreign
+Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
 Suggests: binutils-doc (= ${source:Version})
@@ -452,7 +452,7 @@ Description: GNU binary utilities, for s390x-linux-gnu target (debug symbols)
 Package: binutils-alpha-linux-gnu
 Priority: optional
 Architecture: alpha amd64 i386 x32
-Multi-Arch: foreign
+Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
 Suggests: binutils-doc (= ${source:Version})
@@ -478,7 +478,7 @@ Description: GNU binary utilities, for alpha-linux-gnu target (debug symbols)
 Package: binutils-hppa-linux-gnu
 Priority: optional
 Architecture: hppa amd64 i386 x32
-Multi-Arch: foreign
+Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
 Suggests: binutils-doc (= ${source:Version})
@@ -504,7 +504,7 @@ Description: GNU binary utilities, for hppa-linux-gnu target (debug symbols)
 Package: binutils-ia64-linux-gnu
 Priority: optional
 Architecture: ia64 amd64 i386 x32
-Multi-Arch: foreign
+Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
 Suggests: binutils-doc (= ${source:Version})
@@ -530,7 +530,7 @@ Description: GNU binary utilities, for ia64-linux-gnu target (debug symbols)
 Package: binutils-m68k-linux-gnu
 Priority: optional
 Architecture: m68k amd64 i386 x32
-Multi-Arch: foreign
+Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
 Suggests: binutils-doc (= ${source:Version})
@@ -556,7 +556,7 @@ Description: GNU binary utilities, for m68k-linux-gnu target (debug symbols)
 Package: binutils-mips64-linux-gnuabi64
 Priority: optional
 Architecture: mips64
-Multi-Arch: foreign
+Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
 Suggests: binutils-doc (= ${source:Version})
@@ -582,7 +582,7 @@ Description: GNU binary utilities, for mips64-linux-gnuabi64 target (debug symbo
 Package: binutils-powerpc-linux-gnu
 Priority: optional
 Architecture: powerpc amd64 i386 x32 ppc64el
-Multi-Arch: foreign
+Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
 Suggests: binutils-doc (= ${source:Version})
@@ -608,7 +608,7 @@ Description: GNU binary utilities, for powerpc-linux-gnu target (debug symbols)
 Package: binutils-powerpc64-linux-gnu
 Priority: optional
 Architecture: ppc64 amd64 i386 x32 ppc64el
-Multi-Arch: foreign
+Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
 Suggests: binutils-doc (= ${source:Version})
@@ -634,7 +634,7 @@ Description: GNU binary utilities, for powerpc64-linux-gnu target (debug symbols
 Package: binutils-riscv64-linux-gnu
 Priority: optional
 Architecture: riscv64 amd64 i386 x32
-Multi-Arch: foreign
+Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
 Suggests: binutils-doc (= ${source:Version})
@@ -660,7 +660,7 @@ Description: GNU binary utilities, for riscv64-linux-gnu target (debug symbols)
 Package: binutils-sh4-linux-gnu
 Priority: optional
 Architecture: sh4 amd64 i386 x32
-Multi-Arch: foreign
+Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
 Suggests: binutils-doc (= ${source:Version})
@@ -686,7 +686,7 @@ Description: GNU binary utilities, for sh4-linux-gnu target (debug symbols)
 Package: binutils-sparc64-linux-gnu
 Priority: optional
 Architecture: sparc64 amd64 i386 x32
-Multi-Arch: foreign
+Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
 Suggests: binutils-doc (= ${source:Version})
@@ -712,7 +712,7 @@ Description: GNU binary utilities, for sparc64-linux-gnu target (debug symbols)
 Package: binutils-x86-64-linux-gnux32
 Priority: optional
 Architecture: x32 amd64 arm64 i386 ppc64el
-Multi-Arch: foreign
+Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
 Suggests: binutils-doc (= ${source:Version})
@@ -738,7 +738,7 @@ Description: GNU binary utilities, for x86-64-linux-gnux32 target (debug symbols
 Package: binutils-i686-gnu
 Priority: optional
 Architecture: hurd-i386 amd64 i386 x32
-Multi-Arch: foreign
+Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
 Suggests: binutils-doc (= ${source:Version})
@@ -764,7 +764,7 @@ Description: GNU binary utilities, for i686-gnu target (debug symbols)
 Package: binutils-x86-64-kfreebsd-gnu
 Priority: optional
 Architecture: kfreebsd-amd64 amd64 i386 x32
-Multi-Arch: foreign
+Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
 Suggests: binutils-doc (= ${source:Version})
@@ -790,7 +790,7 @@ Description: GNU binary utilities, for x86-64-kfreebsd-gnu target (debug symbols
 Package: binutils-i686-kfreebsd-gnu
 Priority: optional
 Architecture: kfreebsd-i386 amd64 i386 x32
-Multi-Arch: foreign
+Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
 Suggests: binutils-doc (= ${source:Version})
@@ -816,7 +816,7 @@ Description: GNU binary utilities, for i686-kfreebsd-gnu target (debug symbols)
 Package: binutils-mips64-linux-gnuabin32
 Priority: optional
 Architecture: mipsn32
-Multi-Arch: foreign
+Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
 Suggests: binutils-doc (= ${source:Version})
@@ -842,7 +842,7 @@ Description: GNU binary utilities, for mips64-linux-gnuabin32 target (debug symb
 Package: binutils-mips64el-linux-gnuabin32
 Priority: optional
 Architecture: mipsn32el
-Multi-Arch: foreign
+Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
 Suggests: binutils-doc (= ${source:Version})
@@ -868,7 +868,7 @@ Description: GNU binary utilities, for mips64el-linux-gnuabin32 target (debug sy
 Package: binutils-mipsisa64r6-linux-gnuabin32
 Priority: optional
 Architecture: mipsn32r6
-Multi-Arch: foreign
+Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
 Suggests: binutils-doc (= ${source:Version})
@@ -894,7 +894,7 @@ Description: GNU binary utilities, for mipsisa64r6-linux-gnuabin32 target (debug
 Package: binutils-mipsisa64r6el-linux-gnuabin32
 Priority: optional
 Architecture: mipsn32r6el
-Multi-Arch: foreign
+Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
 Suggests: binutils-doc (= ${source:Version})
@@ -920,7 +920,7 @@ Description: GNU binary utilities, for mipsisa64r6el-linux-gnuabin32 target (deb
 Package: binutils-mipsisa32r6-linux-gnu
 Priority: optional
 Architecture: mipsr6
-Multi-Arch: foreign
+Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
 Suggests: binutils-doc (= ${source:Version})
@@ -946,7 +946,7 @@ Description: GNU binary utilities, for mipsisa32r6-linux-gnu target (debug symbo
 Package: binutils-mipsisa32r6el-linux-gnu
 Priority: optional
 Architecture: mipsr6el
-Multi-Arch: foreign
+Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
 Suggests: binutils-doc (= ${source:Version})
@@ -972,7 +972,7 @@ Description: GNU binary utilities, for mipsisa32r6el-linux-gnu target (debug sym
 Package: binutils-mipsisa64r6-linux-gnuabi64
 Priority: optional
 Architecture: mips64r6
-Multi-Arch: foreign
+Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
 Suggests: binutils-doc (= ${source:Version})
@@ -998,7 +998,7 @@ Description: GNU binary utilities, for mipsisa64r6-linux-gnuabi64 target (debug 
 Package: binutils-mipsisa64r6el-linux-gnuabi64
 Priority: optional
 Architecture: mips64r6el
-Multi-Arch: foreign
+Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
 Suggests: binutils-doc (= ${source:Version})
