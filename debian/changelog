@@ -1,4 +1,4 @@
-binutils (2.32-6) experimental; urgency=medium
+binutils (2.32-7) experimental; urgency=medium
 
   * Snapshot, taken from the 2.32 branch (20190321).
     - Fix PR ld/24355, segfault in function called from ppc_finish_symbols.
@@ -6,7 +6,7 @@ binutils (2.32-6) experimental; urgency=medium
     (Helmut Grohne). Closes: #920286.
   * Let binutils-for-host Depends: binutils-<host>:any.
 
- -- Matthias Klose <doko@debian.org>  Wed, 13 Mar 2019 16:12:45 +0100
+ -- Matthias Klose <doko@debian.org>  Thu, 21 Mar 2019 16:23:32 +0100
 
 binutils (2.32-6) experimental; urgency=medium
 
