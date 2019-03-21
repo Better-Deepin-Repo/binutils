@@ -1,7 +1,7 @@
 binutils (2.32-6) experimental; urgency=medium
 
   * Snapshot, taken from the 2.32 branch (20190321).
-    - 
+    - Fix PR ld/24355, segfault in function called from ppc_finish_symbols.
   * Demote binutils-<target> from Multi-Arch: foreign to Multi-Arch: allowed
     (Helmut Grohne). Closes: #920286.
   * Let binutils-for-host Depends: binutils-<host>:any.
