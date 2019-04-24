@@ -1,3 +1,15 @@
+binutils (2.32-8) experimental; urgency=medium
+
+  * Snapshot, taken from the 2.32 branch (20190424).
+    - Fix PR ld/24302 (AArch64): When DF_BIND_NOW don't use TLSDESC GOT value.
+    - Fix PR ld/24458 (x86): Also check x86 linker_def for non-shared
+      definition.
+    - AArch64: Add new LDGM/STGM instruction.
+    - AArch64: Update Store Allocation Tag instructions.
+    - AArch64: Fix disassembler bug with out-of-order sections.
+
+ -- Matthias Klose <doko@debian.org>  Wed, 24 Apr 2019 09:25:48 +0200
+
 binutils (2.32-7) experimental; urgency=medium
 
   * Snapshot, taken from the 2.32 branch (20190321).
