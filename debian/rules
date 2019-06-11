@@ -313,7 +313,7 @@ DEB_SVERSION	:= $(shell echo $(DEB_VERSION) | sed 's/+b[0-9][0-9]*$$//')
 DEB_UPSTREAM	:= $(firstword $(subst -,$(SPACE),$(DEB_VERSION)))
 
 VERSION		:= $(shell sed -n 's/^ *VERSION=\(.*\)/\1/p' bfd/configure | head -1 | tr -d \')
-#DATE		:= $(shell sed -n 's/.* \([0-9]*\)$$/\1/p' bfd/version.h)
+DATE		:= $(shell sed -n 's/.* \([0-9]*\)$$/\1/p' bfd/version.h)
 ifneq (,$(DATE))
   DATE_EXT	:= .$(DATE)
 endif
@@ -327,9 +327,9 @@ ifneq ($(DEB_UPSTREAM),$(VERSION)$(DATE_EXT))
   $(error upstream ($(VERSION)$(DATE_EXT)) and debian ($(DEB_UPSTREAM)) version mismatch)
 endif
 
-SINGLE_VERSION= $(VERSION)-system
-MULTI_VERSION = $(VERSION)-multiarch
-HPPA64_VERSION= $(VERSION)-hppa64
+SINGLE_VERSION= -system
+MULTI_VERSION = -multiarch
+HPPA64_VERSION= -hppa64
 
 ifeq (,$(filter $(distrelease),squeeze wheezy precise trusty))
   DPKG_DEV = dpkg-dev (>= 1.17.11),
@@ -640,18 +640,13 @@ endif
 		../configure --with-sysroot=/ \
 			--libdir=/$(PF)/lib/$(DEB_HOST_MULTIARCH) \
 			$(SINGLE_CONFARGS)
-	$(MAKE) -C builddir-single configure-host
 	@mkdir -p stamps
 	touch $@
 
 stamps/build-single: stamps/configure-single
 	$(checkdir)
 	@echo BEGIN $@
-	env MAKE="$(MAKE) VERSION=$(SINGLE_VERSION)" \
-	  $(call SET_MULTIARCH_ENV,$(DEB_HOST_ARCH)) \
-	    $(MAKE) -C builddir-single/bfd headers \
-		LDFLAGS="-Wl,-z,relro"
-	env MAKE="$(MAKE) VERSION=$(SINGLE_VERSION)" \
+	env BFD_SOVER_EXT="$(SINGLE_VERSION)" \
 	  $(call SET_MULTIARCH_ENV,$(DEB_HOST_ARCH)) \
 	    $(MAKE) $(NJOBS) -C builddir-single \
 		LDFLAGS="-Wl,-z,relro"
@@ -753,15 +748,13 @@ stamps/configure-multi:
 		  --with-sysroot=/ \
 		  --libdir=/$(PF)/lib/$(DEB_HOST_MULTIARCH) \
 		  --enable-targets=$(subst $(SPACE),$(COMMA),$(multiarch_targets))
-	$(MAKE) -C builddir-multi configure-host
 	@mkdir -p stamps
 	touch $@
 
 stamps/build-multi: stamps/configure-multi
 	$(checkdir)
 	@echo BEGIN $@
-	$(MAKE) -C builddir-multi/bfd headers
-	env MAKE="$(MAKE) VERSION=$(MULTI_VERSION)" \
+	env BFD_SOVER_EXT="$(MULTI_VERSION)" \
 	  $(call SET_MULTIARCH_ENV,$(DEB_HOST_ARCH)) \
 	  $(MAKE) $(NJOBS) -C builddir-multi \
 		LDFLAGS="-Wl,-z,relro"
@@ -799,7 +792,7 @@ stamps/configure.%:
 stamps/build.%: stamps/configure.%
 	$(checkdir)
 	@echo BEGIN $@
-	env MAKE="$(MAKE) VERSION=$(VERSION)-$*" \
+	env BFD_SOVER_EXT="-$*" \
 	  $(call SET_MULTIARCH_ENV,$*) \
 	  $(MAKE) -C builddir-$* $(NJOBS) \
 		CFLAGS="$(CFLAGS)" \
@@ -940,15 +933,13 @@ stamps/configure-hppa64:
 		$(filter-out --enable-targets=%, $(CONFARGS)) \
 		--libdir=/$(PF)/lib/hppa64-linux-gnu \
 		--target=hppa64-linux-gnu
-	$(MAKE) -C builddir-hppa64 configure-host
 	@mkdir -p stamps
 	touch $@
 
 stamps/build-hppa64: stamps/configure-hppa64
 	$(checkdir)
 	@echo BEGIN $@
-	$(MAKE) -C builddir-hppa64/bfd headers
-	env MAKE="$(MAKE) VERSION=$(HPPA64_VERSION)" \
+	env BFD_SOVER_EXT="$(HPPA64_VERSION)" \
 	  $(MAKE) $(NJOBS) -C builddir-hppa64 \
 	    LDFLAGS="-Wl,-z,relro"
 	touch $@

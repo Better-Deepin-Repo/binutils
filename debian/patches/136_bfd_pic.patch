@@ -1,8 +1,6 @@
 Author: Balint Reczey <balint@balintreczey.hu>
 Description: Build libbfd with -fPIC to allow linking with PIE binaries
 
-Index: b/bfd/Makefile.am
-===================================================================
 --- a/bfd/Makefile.am
 +++ b/bfd/Makefile.am
 @@ -52,7 +52,7 @@ ZLIBINC = @zlibinc@
@@ -14,11 +12,9 @@ Index: b/bfd/Makefile.am
  AM_CPPFLAGS = -DBINDIR='"$(bindir)"'
  if PLUGINS
  bfdinclude_HEADERS += $(INCDIR)/plugin-api.h
-Index: b/bfd/Makefile.in
-===================================================================
 --- a/bfd/Makefile.in
 +++ b/bfd/Makefile.in
-@@ -478,7 +478,7 @@ libbfd_la_LDFLAGS = $(am__append_1) -rel
+@@ -479,7 +479,7 @@ libbfd_la_LDFLAGS = $(am__append_1) -rel
  # case both are empty.
  ZLIB = @zlibdir@ -lz
  ZLIBINC = @zlibinc@

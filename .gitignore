@@ -4,8 +4,15 @@ stamps
 
 debian/files
 debian/tmp
+debian/*.shlibs
+debian/substvars
+debian/binutils-multiarch.postinst
+debian/binutils-multiarch.postrm
+debian/binutils-multiarch.preinst
+debian/binutils-multiarch.prerm
 
 debian/binutils
+debian/binutils-common
 debian/binutils-dev
 debian/binutils-doc
 debian/binutils-for-build
@@ -59,6 +66,7 @@ include
 install-sh
 intl
 ld
+libctf
 libiberty
 libtool.m4
 ltgcc.m4
@@ -73,6 +81,7 @@ missing
 mkdep
 mkinstalldirs
 move-if-change
+multilib.am
 opcodes
 setup.com
 src-release.sh

@@ -2,8 +2,6 @@ Author:
 Description: Description: Fix ld-bootstrap testsuite when configured with --enable-plugins
 Author: Rafael Espindola
 Upstream status: proposed patch
-Index: b/ld/testsuite/ld-bootstrap/bootstrap.exp
-===================================================================
 --- a/ld/testsuite/ld-bootstrap/bootstrap.exp
 +++ b/ld/testsuite/ld-bootstrap/bootstrap.exp
 @@ -46,6 +46,15 @@ if [check_plugin_api_available] {

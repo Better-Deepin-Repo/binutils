@@ -1,11 +1,9 @@
 Author: Chris Chimelis <chris@debian.org>
 Description: Only generate an RPATH entry if LD_RUN_PATH is not empty, for
 cases where -rpath isn't specified. (#151024)
-Index: b/ld/emultempl/elf32.em
-===================================================================
 --- a/ld/emultempl/elf32.em
 +++ b/ld/emultempl/elf32.em
-@@ -1471,6 +1471,8 @@ fragment <<EOF
+@@ -1470,6 +1470,8 @@ fragment <<EOF
  	      && command_line.rpath == NULL)
  	    {
  	      path = (const char *) getenv ("LD_RUN_PATH");
@@ -14,7 +12,7 @@ Index: b/ld/emultempl/elf32.em
  	      if (path
  		  && gld${EMULATION_NAME}_search_needed (path, &n, force))
  		break;
-@@ -1746,6 +1748,8 @@ gld${EMULATION_NAME}_before_allocation (
+@@ -1745,6 +1747,8 @@ gld${EMULATION_NAME}_before_allocation (
    rpath = command_line.rpath;
    if (rpath == NULL)
      rpath = (const char *) getenv ("LD_RUN_PATH");

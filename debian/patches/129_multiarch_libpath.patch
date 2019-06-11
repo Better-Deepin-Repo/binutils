@@ -1,10 +1,8 @@
 # DP: Add multiarch directories to linker search path for ld and gold.
 
-Index: b/ld/genscripts.sh
-===================================================================
 --- a/ld/genscripts.sh
 +++ b/ld/genscripts.sh
-@@ -220,6 +220,104 @@ append_to_lib_path()
+@@ -235,6 +235,104 @@ append_to_lib_path()
    fi
  }
  
@@ -109,7 +107,7 @@ Index: b/ld/genscripts.sh
  # Always search $(tooldir)/lib, aka /usr/local/TARGET/lib when native
  # except when LIBPATH=":".
  if [ "${LIB_PATH}" != ":" ] ; then
-@@ -238,6 +336,13 @@ if [ "${LIB_PATH}" != ":" ] ; then
+@@ -253,6 +351,13 @@ if [ "${LIB_PATH}" != ":" ] ; then
        case "${NATIVE}:${libpath_suffix}:${TOOL_LIB}" in
  	:* | *::* | *:*:*${libpath_suffix}) ;;
  	*) libs="${exec_prefix}/${target_alias}/lib${libpath_suffix}" ;;
@@ -123,7 +121,7 @@ Index: b/ld/genscripts.sh
        esac
      done
      libs="${exec_prefix}/${TOOL_LIB}/lib ${libs}"
-@@ -245,24 +350,124 @@ if [ "${LIB_PATH}" != ":" ] ; then
+@@ -260,24 +365,124 @@ if [ "${LIB_PATH}" != ":" ] ; then
    append_to_lib_path ${libs}
  fi
  
@@ -261,8 +259,6 @@ Index: b/ld/genscripts.sh
  # We need it for testsuite.
  set $EMULATION_LIBPATH
  if [ "x$1" = "x$EMULATION_NAME" ]; then
-Index: b/gold/Makefile.am
-===================================================================
 --- a/gold/Makefile.am
 +++ b/gold/Makefile.am
 @@ -42,6 +42,7 @@ AM_CPPFLAGS = \
@@ -273,8 +269,6 @@ Index: b/gold/Makefile.am
  	-DTOOLLIBDIR="\"$(tooldir)/lib\"" @INCINTL@
  
  LIBIBERTY = ../libiberty/libiberty.a
-Index: b/gold/configure
-===================================================================
 --- a/gold/configure
 +++ b/gold/configure
 @@ -625,6 +625,7 @@ LTLIBOBJS
@@ -300,8 +294,6 @@ Index: b/gold/configure
  
  { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether to enable maintainer-specific portions of Makefiles" >&5
  $as_echo_n "checking whether to enable maintainer-specific portions of Makefiles... " >&6; }
-Index: b/gold/configure.ac
-===================================================================
 --- a/gold/configure.ac
 +++ b/gold/configure.ac
 @@ -682,6 +682,14 @@ AC_CHECK_HEADERS(locale.h)
@@ -319,8 +311,6 @@ Index: b/gold/configure.ac
  AM_MAINTAINER_MODE
  
  AC_OUTPUT(Makefile testsuite/Makefile po/Makefile.in:po/Make-in)
-Index: b/gold/options.cc
-===================================================================
 --- a/gold/options.cc
 +++ b/gold/options.cc
 @@ -1232,8 +1232,15 @@ General_options::finalize()
@@ -339,11 +329,9 @@ Index: b/gold/options.cc
  	}
        else
  	this->add_to_library_path_with_sysroot(TOOLLIBDIR);
-Index: b/gold/Makefile.in
-===================================================================
 --- a/gold/Makefile.in
 +++ b/gold/Makefile.in
-@@ -685,6 +685,7 @@ AM_CPPFLAGS = \
+@@ -674,6 +674,7 @@ AM_CPPFLAGS = \
  	-I$(srcdir) -I$(srcdir)/../include -I$(srcdir)/../elfcpp \
  	-DLOCALEDIR="\"$(datadir)/locale\"" \
  	-DBINDIR="\"$(bindir)\"" -DTOOLBINDIR="\"$(tooldir)/bin\"" \
