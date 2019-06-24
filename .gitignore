@@ -60,6 +60,7 @@ depcomp
 elfcpp
 etc
 gas
+gnulib
 gold
 gprof
 include

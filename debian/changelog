@@ -1,3 +1,10 @@
+binutils (2.32.51.20190624-1) experimental; urgency=medium
+
+  * Snapshot, taken from the trunk (20190624).
+    - Fix PR ld/24704, skiboot link failure. LP: #1833237.
+
+ -- Matthias Klose <doko@debian.org>  Mon, 24 Jun 2019 07:59:05 +0000
+
 binutils (2.32.51.20190611-1) experimental; urgency=medium
 
   * Snapshot, taken from the trunk (20190611).
