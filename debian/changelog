@@ -1,3 +1,9 @@
+binutils (2.32.51.20190701-1) experimental; urgency=medium
+
+  * Snapshot, taken from the trunk (20190701).
+
+ -- Matthias Klose <doko@debian.org>  Mon, 01 Jul 2019 13:46:05 +0200
+
 binutils (2.32.51.20190624-1) experimental; urgency=medium
 
   * Snapshot, taken from the trunk (20190624).
