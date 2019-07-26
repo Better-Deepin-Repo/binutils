@@ -1,3 +1,11 @@
+binutils (2.32.51.20190707-2) UNRELEASED; urgency=medium
+
+  * Build ppc64el packages on arm64.
+  * Build s390x packages on arm64 and ppc64el.
+  * Build riscv64 packages on arm64 and ppc64el. Closes: #932398.
+
+ -- Matthias Klose <doko@debian.org>  Fri, 26 Jul 2019 19:55:06 +0200
+
 binutils (2.32.51.20190707-1) unstable; urgency=medium
 
   * Snapshot, taken from the trunk (20190707).
