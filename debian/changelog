@@ -1,3 +1,10 @@
+binutils (2.32.51.20190727-2) UNRELEASED; urgency=medium
+
+  * binutils-source: Fix ftbfs when with_native is off (YunQiang Su).
+    Closes: #933358.
+
+ -- Matthias Klose <doko@debian.org>  Tue, 13 Aug 2019 16:26:14 +0200
+
 binutils (2.32.51.20190727-1) unstable; urgency=medium
 
   * Snapshot, taken from the trunk (20190727).

@@ -1133,7 +1133,9 @@ endif
 	rm -f $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.la
 
 	chmod ugo-x $(d_lib)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so
+ifeq ($(with_native),yes)
 	$(call strip_package, $(p_lib), $(d_lib))
+endif
 ifeq ($(with_multiarch),yes)
 	chmod ugo-x $(d_mul)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so
 	$(call strip_package, $(p_mul), $(d_mul))
@@ -1205,7 +1207,9 @@ endif
 	for i in $(programs); do \
 	  ln -sf $$i.1.gz $(d_nat)/$(PF)/share/man/man1/$(DEB_HOST_GNU_TYPE)-$$i.1.gz; \
 	done
+ifeq ($(with_native),yes)
 	$(call strip_package, $(p_nat), $(d_nat))
+endif
 ifeq ($(with_multiarch),yes)
 	for i in \
 	  addr2line ar gprof \
