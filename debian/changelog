@@ -1,5 +1,7 @@
-binutils (2.32.51.20190727-2) UNRELEASED; urgency=medium
+binutils (2.32.51.20190813-1) unstable; urgency=medium
 
+  * Snapshot, taken from the trunk (20190813).
+    - Fix PR ld/24857: ld: error adding symbols: bad value. Closes: #932847.
   * binutils-source: Fix ftbfs when with_native is off (YunQiang Su).
     Closes: #933358.
 
