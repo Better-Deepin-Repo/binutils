@@ -113,7 +113,7 @@ ifeq ($(src_name),binutils)
   ifeq (,$(CROSS_ARCHS))
     ifneq (,$(filter $(DEB_HOST_ARCH), amd64 i386 x32))
       CROSS_ARCHS =  s390x ppc64el arm64 armhf armel
-      CROSS_ARCHS += mips mipsel mips64el
+      CROSS_ARCHS += mipsel mips64el
       CROSS_ARCHS += alpha hppa m68k
       CROSS_ARCHS += powerpc ppc64 sh4 sparc64
       CROSS_ARCHS += ia64 riscv64
@@ -183,7 +183,6 @@ endif
 HOST_ARCHS_armhf = amd64 i386 x32 arm64 ppc64el
 HOST_ARCHS_armel = amd64 i386 x32 arm64 ppc64el
 HOST_ARCHS_arm64 = amd64 i386 x32 ppc64el
-HOST_ARCHS_mips = amd64 i386 x32
 HOST_ARCHS_mipsel = amd64 i386 x32
 HOST_ARCHS_powerpc = amd64 i386 x32 ppc64el
 HOST_ARCHS_ppc64el = amd64 i386 x32 ppc64 arm64

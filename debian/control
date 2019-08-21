@@ -10,7 +10,6 @@ Build-Depends: autoconf (>= 2.64), dpkg-dev (>= 1.19.0.5),
   g++-aarch64-linux-gnu [amd64 i386 x32] <!nocheck>,
   g++-arm-linux-gnueabi [amd64 arm64 i386 x32] <!nocheck>,
   g++-arm-linux-gnueabihf [amd64 arm64 i386 x32] <!nocheck>,
-  g++-mips-linux-gnu [amd64 i386 x32] <!nocheck>,
   g++-mips64el-linux-gnuabi64 [amd64 i386 x32] <!nocheck>,
   g++-mipsel-linux-gnu [amd64 i386 x32] <!nocheck>,
   g++-powerpc64le-linux-gnu [amd64 arm64 i386 ppc64 x32] <!nocheck>,
@@ -321,7 +320,7 @@ Description: GNU binary utilities, for arm-linux-gnueabi target (debug symbols)
 
 Package: binutils-mips-linux-gnu
 Priority: optional
-Architecture: mips amd64 i386 x32
+Architecture: mips
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
@@ -339,7 +338,7 @@ Description: GNU binary utilities, for mips-linux-gnu target
 Package: binutils-mips-linux-gnu-dbg
 Section: debug
 Priority: optional
-Architecture: mips amd64 i386 x32
+Architecture: mips
 Multi-Arch: foreign
 Depends: binutils-mips-linux-gnu (= ${binary:Version})
 Description: GNU binary utilities, for mips-linux-gnu target (debug symbols)
