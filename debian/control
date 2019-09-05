@@ -318,35 +318,9 @@ Depends: binutils-arm-linux-gnueabi (= ${binary:Version})
 Description: GNU binary utilities, for arm-linux-gnueabi target (debug symbols)
  This package provides debug symbols for binutils-arm-linux-gnueabi.
 
-Package: binutils-mips-linux-gnu
-Priority: optional
-Architecture: mips
-Multi-Arch: allowed
-Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
-Provides: 
-Breaks: binutils (<< 2.29-6)
-Replaces: binutils (<< 2.29-6)
-Description: GNU binary utilities, for mips-linux-gnu target
- This package provides GNU assembler, linker and binary utilities
- for the mips-linux-gnu target.
- .
- You don't need this package unless you plan to cross-compile programs
- for mips-linux-gnu and mips-linux-gnu is not your native platform.
-
-Package: binutils-mips-linux-gnu-dbg
-Section: debug
-Priority: optional
-Architecture: mips
-Multi-Arch: foreign
-Depends: binutils-mips-linux-gnu (= ${binary:Version})
-Description: GNU binary utilities, for mips-linux-gnu target (debug symbols)
- This package provides debug symbols for binutils-mips-linux-gnu.
-
 Package: binutils-mipsel-linux-gnu
 Priority: optional
-Architecture: mipsel amd64 i386 x32
+Architecture: mipsel
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
@@ -364,7 +338,7 @@ Description: GNU binary utilities, for mipsel-linux-gnu target
 Package: binutils-mipsel-linux-gnu-dbg
 Section: debug
 Priority: optional
-Architecture: mipsel amd64 i386 x32
+Architecture: mipsel
 Multi-Arch: foreign
 Depends: binutils-mipsel-linux-gnu (= ${binary:Version})
 Description: GNU binary utilities, for mipsel-linux-gnu target (debug symbols)
@@ -372,7 +346,7 @@ Description: GNU binary utilities, for mipsel-linux-gnu target (debug symbols)
 
 Package: binutils-mips64el-linux-gnuabi64
 Priority: optional
-Architecture: mips64el amd64 i386 x32
+Architecture: mips64el
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
@@ -390,7 +364,7 @@ Description: GNU binary utilities, for mips64el-linux-gnuabi64 target
 Package: binutils-mips64el-linux-gnuabi64-dbg
 Section: debug
 Priority: optional
-Architecture: mips64el amd64 i386 x32
+Architecture: mips64el
 Multi-Arch: foreign
 Depends: binutils-mips64el-linux-gnuabi64 (= ${binary:Version})
 Description: GNU binary utilities, for mips64el-linux-gnuabi64 target (debug symbols)
