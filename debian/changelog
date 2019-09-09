@@ -1,10 +1,10 @@
-binutils (2.32.51.20190905-1) UNRELEASED; urgency=medium
+binutils (2.32.51.20190909-1) unstable; urgency=medium
 
-  * Snapshot, taken from the trunk (20190905).
+  * Snapshot, taken from the trunk (20190909).
   * Build the mipsel and mips64el cross packages from the binutils-mipsen
     source package.
 
- -- Matthias Klose <doko@debian.org>  Thu, 05 Sep 2019 07:10:24 +0200
+ -- Matthias Klose <doko@debian.org>  Mon, 09 Sep 2019 08:50:20 +0200
 
 binutils (2.32.51.20190821-2) unstable; urgency=medium
 
