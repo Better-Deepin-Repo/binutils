@@ -28,6 +28,9 @@ mips64-default-n64.diff
 gold-mips.diff
 gold-no-keep-files-mapped.diff
 
+146a3bb9cc78c459e63c23259d766b01c32df705.diff
+20057c8c5e67ffdfb1a7b6a4ef3d337ea27663d1.diff
+
 # trunk backports
 
 # experimental ...

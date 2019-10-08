@@ -96,12 +96,11 @@ install_file   = install -m 644
 install_script = install -m 755
 install_binary = install -m 755 -s --strip-program="$(STRIP)"
 
-NATIVE_ARCHS ?= amd64 i386 arm64 armhf armel mipsel mips64el \
-	ppc64el s390x
-NATIVE_ARCHS += alpha hppa ia64 m68k mips64 powerpc ppc64 \
+NATIVE_ARCHS ?= amd64 i386 arm64 armhf armel ppc64el s390x
+NATIVE_ARCHS += alpha hppa ia64 m68k powerpc ppc64 \
 	riscv64 sh4 sparc64 x32
 NATIVE_ARCHS += hurd-i386 kfreebsd-amd64 kfreebsd-i386
-NATIVE_ARCHS += mipsn32 mipsn32el
+NATIVE_ARCHS += mips mipsel mipsn32 mipsn32el mips64 mips64el
 NATIVE_ARCHS += mipsn32r6 mipsn32r6el mipsr6 mipsr6el mips64r6 mips64r6el
 #NATIVE_ARCHS += nios2 or1k s390 sparc
 
@@ -144,8 +143,8 @@ else ifeq ($(src_name),binutils-mipsen)
   with_cross	= yes
   same_source	=
   ifeq (,$(CROSS_ARCHS))
-    ifneq (,$(filter $(DEB_HOST_ARCH), amd64 i386 x32 arm64 ppc64el))
-      CROSS_ARCHS = mipsel mips64el mips64 mipsn32 mipsn32el
+    ifneq (,$(filter $(DEB_HOST_ARCH), amd64 i386 x32))
+      CROSS_ARCHS = mips mipsel mips64el mips64 mipsn32 mipsn32el
       CROSS_ARCHS += mipsr6 mipsr6el mipsn32r6 mipsn32r6el mips64r6 mips64r6el
     else
       CROSS_ARCHS =
@@ -182,7 +181,6 @@ endif
 HOST_ARCHS_armhf = amd64 i386 x32 arm64 ppc64el
 HOST_ARCHS_armel = amd64 i386 x32 arm64 ppc64el
 HOST_ARCHS_arm64 = amd64 i386 x32 ppc64el
-HOST_ARCHS_mipsel = amd64 i386 x32
 HOST_ARCHS_powerpc = amd64 i386 x32 ppc64el
 HOST_ARCHS_ppc64el = amd64 i386 x32 ppc64 arm64
 HOST_ARCHS_s390x = amd64 i386 x32 arm64 ppc64el
@@ -194,15 +192,17 @@ HOST_ARCHS_riscv64 = amd64 i386 x32 arm64 ppc64el
 HOST_ARCHS_alpha = amd64 i386 x32
 HOST_ARCHS_hppa = amd64 i386 x32
 HOST_ARCHS_m68k = amd64 i386 x32
-HOST_ARCHS_mips64 = amd64 i386 x32
-HOST_ARCHS_mips64el = amd64 i386 x32
 HOST_ARCHS_ppc64 = amd64 i386 x32 ppc64el
 HOST_ARCHS_sh4 = amd64 i386 x32
 HOST_ARCHS_sparc64 = amd64 i386 x32
 HOST_ARCHS_x32 = amd64 arm64 i386 ppc64el
 
+HOST_ARCHS_mips = amd64 i386 x32
+HOST_ARCHS_mipsel = amd64 i386 x32
 HOST_ARCHS_mipsn32 = amd64 i386 x32
 HOST_ARCHS_mipsn32el = amd64 i386 x32
+HOST_ARCHS_mips64 = amd64 i386 x32
+HOST_ARCHS_mips64el = amd64 i386 x32
 
 HOST_ARCHS_mipsr6 = amd64 i386 x32
 HOST_ARCHS_mipsr6el = amd64 i386 x32
@@ -266,7 +266,7 @@ SHELL  = /bin/bash
 
 gold_targets = \
 	amd64 arm64 armel armhf i386 \
-	mipsel mipsn32 mipsn32el mips64 mips64el \
+	mips mipsel mipsn32 mipsn32el mips64 mips64el \
 	mipsr6 mipsr6el mipsn32r6 mipsn32r6el mips64r6 mips64r6el \
 	powerpc ppc64 ppc64el sparc sparc64 s390x \
 	x32 kfreebsd-amd64 kfreebsd-i386 hurd-i386
@@ -311,7 +311,7 @@ DEB_SVERSION	:= $(shell echo $(DEB_VERSION) | sed 's/+b[0-9][0-9]*$$//')
 DEB_UPSTREAM	:= $(firstword $(subst -,$(SPACE),$(DEB_VERSION)))
 
 VERSION		:= $(shell sed -n 's/^ *VERSION=\(.*\)/\1/p' bfd/configure | head -1 | tr -d \')
-DATE		:= $(shell sed -n 's/.* \([0-9]*\)$$/\1/p' bfd/version.h)
+#DATE		:= $(shell sed -n 's/.* \([0-9]*\)$$/\1/p' bfd/version.h)
 ifneq (,$(DATE))
   DATE_EXT	:= .$(DATE)
 endif

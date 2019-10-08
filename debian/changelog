@@ -1,3 +1,15 @@
+binutils (2.33-1) unstable; urgency=medium
+
+  * Binutils 2.33 release (taken from the binutils-2_33 tag).
+  * Update from the binutils 2.33 branch:
+    - Fix PR 24942, change objcopy's --set-section-alignment option so that it
+      takes a byte alignment value rather than a power of two alignment value.
+    - x86-64: fix handling of PUSH/POP of segment register. LP: #1843394.
+  * Merge changes from binutils-mipsen.
+  * Bump standards version.
+
+ -- Matthias Klose <doko@debian.org>  Tue, 08 Oct 2019 11:43:29 +0200
+
 binutils (2.32.51.20190909-1) unstable; urgency=medium
 
   * Snapshot, taken from the trunk (20190909).
