@@ -1,3 +1,15 @@
+binutils (2.33-2) unstable; urgency=medium
+
+  * Update from the binutils 2.33 branch:
+    - Fix PR25079, "ar s" stopped working. Closes: #941921.
+    - PowerPC TLS miscounting PLT for __tls_get_addr.
+    - PowerPC section flag tidy.
+    - PowerPC PIC vs. DLL TLS issues.
+    - PR25046, readelf "Reading xxx bytes extends past end of file for dynamic section".
+    - PR24262, plugin search dir doesn't respect --libdir.
+
+ -- Matthias Klose <doko@debian.org>  Wed, 09 Oct 2019 10:42:29 +0200
+
 binutils (2.33-1) unstable; urgency=medium
 
   * Binutils 2.33 release (taken from the binutils-2_33 tag).
