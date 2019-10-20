@@ -21,7 +21,7 @@ Build-Depends: autoconf (>= 2.64), @dpkg_dev@
   g++-sh4-linux-gnu [amd64 i386 x32] <!nocheck>,
   g++-sparc64-linux-gnu [amd64 i386 x32] <!nocheck>,
   g++-i686-linux-gnu [amd64 arm64 ppc64el x32] <!nocheck>,
-  g++-x86-64-linux-gnu [arm64 i386 ppc64el x32] <!nocheck>,
+  g++-x86-64-linux-gnu [arm64 i386 ppc64el] <!nocheck>,
   g++-x86-64-linux-gnux32 [amd64 arm64 i386 ppc64el] <!nocheck>,
 Build-Conflicts: libelf-dev
 Homepage: https://www.gnu.org/software/binutils/
