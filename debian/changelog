@@ -1,3 +1,10 @@
+binutils (2.33.1-3) UNRELEASED; urgency=medium
+
+  * Configure with --enable-mips-fix-loongson3-llsc=yes on mipsel, mips64el,
+    mipsn32el (YunQiang Su).
+
+ -- Matthias Klose <doko@debian.org>  Sat, 26 Oct 2019 14:17:44 +0200
+
 binutils (2.33.1-2) unstable; urgency=medium
 
   * Update from the binutils 2.33 branch:
