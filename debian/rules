@@ -143,9 +143,11 @@ else ifeq ($(src_name),binutils-mipsen)
   with_cross	= yes
   same_source	=
   ifeq (,$(CROSS_ARCHS))
-    ifneq (,$(filter $(DEB_HOST_ARCH), amd64 i386 x32))
+    ifneq (,$(filter $(DEB_HOST_ARCH), amd64 i386 x32 arm64 ppc64el))
       CROSS_ARCHS = mips mipsel mips64el mips64 mipsn32 mipsn32el
       CROSS_ARCHS += mipsr6 mipsr6el mipsn32r6 mipsn32r6el mips64r6 mips64r6el
+    else ifneq (,$(filter $(DEB_HOST_ARCH), arm64 ppc64el))
+      CROSS_ARCHS = mipsel mips64el
     else
       CROSS_ARCHS =
     endif
@@ -198,11 +200,11 @@ HOST_ARCHS_sparc64 = amd64 i386 x32
 HOST_ARCHS_x32 = amd64 arm64 i386 ppc64el
 
 HOST_ARCHS_mips = amd64 i386 x32
-HOST_ARCHS_mipsel = amd64 i386 x32
+HOST_ARCHS_mipsel = amd64 i386 x32 arm64 ppc64el
 HOST_ARCHS_mipsn32 = amd64 i386 x32
 HOST_ARCHS_mipsn32el = amd64 i386 x32
 HOST_ARCHS_mips64 = amd64 i386 x32
-HOST_ARCHS_mips64el = amd64 i386 x32
+HOST_ARCHS_mips64el = amd64 i386 x32 arm64 ppc64el
 
 HOST_ARCHS_mipsr6 = amd64 i386 x32
 HOST_ARCHS_mipsr6el = amd64 i386 x32

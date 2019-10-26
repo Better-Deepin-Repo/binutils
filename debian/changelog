@@ -2,6 +2,8 @@ binutils (2.33.1-3) UNRELEASED; urgency=medium
 
   * Configure with --enable-mips-fix-loongson3-llsc=yes on mipsel, mips64el,
     mipsn32el (YunQiang Su).
+  * Enable building mipsel and mips64el targets on arm64 and ppc64el (YunQiang
+    Su). Addresses: #938979.
 
  -- Matthias Klose <doko@debian.org>  Sat, 26 Oct 2019 14:17:44 +0200
 
