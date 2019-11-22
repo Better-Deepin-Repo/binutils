@@ -1,11 +1,10 @@
-branch-updates.diff
+#branch-updates.diff
 #branch-version.diff
-branch-no-development.diff
+#branch-no-development.diff
 001_ld_makefile_patch.patch
 002_gprof_profile_arcs.patch
 003_gprof_see_also_monitor.patch
 006_better_file_error.patch
-012_check_ldrunpath_length.patch
 013_bash_in_ld_testsuite.patch
 #014_hash_style-both.patch
 128_ppc64_powerpc_biarch.patch
@@ -24,7 +23,7 @@ branch-no-development.diff
 gprof-build.diff
 aarch64-libpath.diff
 #pr-ld-16428.diff
-mips64-default-n64.diff
+#mips64-default-n64.diff
 gold-mips.diff
 gold-no-keep-files-mapped.diff
 

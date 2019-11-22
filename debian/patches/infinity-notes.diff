@@ -13,7 +13,7 @@
  #define NT_GNU_BUILD_ATTRIBUTE_FUNC	0x101
 --- a/binutils/readelf.c
 +++ b/binutils/readelf.c
-@@ -17339,6 +17339,8 @@ get_gnu_elf_note_type (unsigned e_type)
+@@ -17500,6 +17500,8 @@ get_gnu_elf_note_type (unsigned e_type)
        return _("NT_GNU_BUILD_ATTRIBUTE_OPEN");
      case NT_GNU_BUILD_ATTRIBUTE_FUNC:
        return _("NT_GNU_BUILD_ATTRIBUTE_FUNC");
@@ -22,7 +22,7 @@
      default:
        {
  	static char buff[64];
-@@ -17829,6 +17831,133 @@ next:
+@@ -17990,6 +17992,133 @@ next:
    printf ("\n");
  }
  
@@ -156,7 +156,7 @@
  static bfd_boolean
  print_gnu_note (Filedata * filedata, Elf_Internal_Note *pnote)
  {
-@@ -17946,6 +18075,24 @@ print_gnu_note (Filedata * filedata, Elf
+@@ -18107,6 +18236,24 @@ print_gnu_note (Filedata * filedata, Elf
  	printf ("\n");
        }
        break;
