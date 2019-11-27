@@ -1,8 +1,9 @@
-binutils (2.33.50.20191121-3) UNRELEASED; urgency=medium
+binutils (2.33.50.20191127-1) experimental; urgency=medium
 
+  * New upstream snapshot.
   * Split out libctf packages.
 
- -- Matthias Klose <doko@debian.org>  Wed, 27 Nov 2019 13:28:49 +0100
+ -- Matthias Klose <doko@debian.org>  Wed, 27 Nov 2019 20:16:21 +0100
 
 binutils (2.33.50.20191121-2) experimental; urgency=medium
 

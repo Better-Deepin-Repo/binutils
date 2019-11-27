@@ -861,7 +861,7 @@ stamps/install.%: stamps/build.%
 	  mv $$d_src/$$lib.a $$d_dst/$${lib}-$(VERSION)-$*.a; \
 	  ln -sf ../../../lib/$(DEB_HOST_MULTIARCH)/$$lib-$(VERSION)-$*.a $$d_src/$$lib.a; \
 	done
-	mv $(D_CROSS)/$(PF)/lib/$(CROSS_GNU_TYPE)/libctf*.so.* \
+	mv $(D_CROSS)/$(PF)/lib/$(call _multiarch,$*)/libctf*.so.* \
 	  $(D_CROSS)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/.
 
 	: # replace hard links with soft links
@@ -909,6 +909,7 @@ stamps/install.%: stamps/build.%
 	rm -rf $(D_CROSS)/$(PF)/$(DEB_HOST_GNU_TYPE)
 
 	rm -f $(D_CROSS)/$(PF)/lib/*.a $(D_CROSS)/$(PF)/lib/*/*.a
+	rm -f $(D_CROSS)/$(PF)/lib/*.la $(D_CROSS)/$(PF)/lib/*/*.la
 	rm -f $(D_CROSS)/$(PF)/$(DEB_HOST_GNU_TYPE)/$(CROSS_GNU_TYPE)/lib/*.a
 	rm -f $(D_CROSS)/$(PF)/$(DEB_HOST_GNU_TYPE)/$(CROSS_GNU_TYPE)/lib/libctf*
 	rm -f $(D_CROSS)/$(PF)/lib/$(CROSS_GNU_TYPE)/libctf*
@@ -1385,6 +1386,7 @@ endif # ifndef BACKPORT
 		-path './debian/binutils*-dbg' -type d -prune -o \
 		-path './debian/libbinutils-dbg' -type d -prune -o \
 		-path './debian/patches' -prune -o \
+		-path './debian/libctf*' -type d -prune -o \
 		-path './debian/tmp*' -prune -o \
 		-path './debian/.bzr*' -prune -o \
 		-path './debian/files' -prune -o \
