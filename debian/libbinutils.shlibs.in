@@ -1,4 +1,2 @@
 libbfd @VER@-system@DATE_EXT@ libbinutils (>= @DEB_UVER@), libbinutils (<< @DEB_NVER@)
 libopcodes @VER@-system@DATE_EXT@ libbinutils (>= @DEB_UVER@), libbinutils (<< @DEB_NVER@)
-libctf 0 libbinutils (>= 2.33.50)
-libctf-nobfd 0 libbinutils (>= 2.33.50)

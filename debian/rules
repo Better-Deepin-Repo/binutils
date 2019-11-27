@@ -51,6 +51,9 @@ p_doc = $(p_bin)-doc
 p_hppa64 = $(p_bin)-hppa64-linux-gnu
 p_src = $(p_bin)-source
 
+p_ctf = libctf0
+p_ctfn = libctf-nobfd0
+
 p_hst = $(p_bin)-for-host
 p_bld = $(p_bin)-for-build
 
@@ -85,6 +88,9 @@ d_mdev = debian/$(p_mdev)
 d_doc = debian/$(p_doc)
 d_hppa64 = debian/$(p_hppa64)
 d_src = debian/$(p_src)
+
+d_ctf = debian/$(p_ctf)
+d_ctfn = debian/$(p_ctfn)
 
 d_hst = debian/$(p_hst)
 d_bld = debian/$(p_bld)
@@ -568,7 +574,8 @@ clean:
 	rm -f test-summary*
 	rm -rf $(d_bin) $(d_com) $(d_lib) $(d_lib)-dbg $(d_nat) $(d_nat)-dbg \
 	  $(d_hst) $(d_dev) $(d_mul) $(d_mul)-dbg $(d_mdev) $(d_doc) \
-	  $(d_hppa64) $(d_hppa64)-dbg $(d_src) $(d_bld)
+	  $(d_hppa64) $(d_hppa64)-dbg $(d_src) $(d_bld) \
+	  $(d_ctf) $(d_ctf)-dbg $(d_ctfn) $(d_ctfn)-dbg
 	$(foreach ca,$(CROSS_ARCHS), rm -rf debian/binutils-$(shell echo $(call _gnu_type,$(ca)) | sed 's/_/-/g;s/i586/i686/'){,-dbg}; )
 	rm -rf debian/tmp debian/files* debian/substvars
 	rm -f debian/*.orig debian/*.rej
@@ -646,7 +653,7 @@ endif
 stamps/build-single: stamps/configure-single
 	$(checkdir)
 	@echo BEGIN $@
-	env BFD_SOVER_EXT="$(SINGLE_VERSION)" \
+	env BFD_SOVER_EXT="$(SINGLE_VERSION)" CTF_SOVER_EXT="" \
 	  $(call SET_MULTIARCH_ENV,$(DEB_HOST_ARCH)) \
 	    $(MAKE) $(NJOBS) -C builddir-single \
 		LDFLAGS="-Wl,-z,relro"
@@ -754,7 +761,7 @@ stamps/configure-multi:
 stamps/build-multi: stamps/configure-multi
 	$(checkdir)
 	@echo BEGIN $@
-	env BFD_SOVER_EXT="$(MULTI_VERSION)" \
+	env BFD_SOVER_EXT="$(MULTI_VERSION)" CTF_SOVER_EXT="$(MULTI_VERSION)" \
 	  $(call SET_MULTIARCH_ENV,$(DEB_HOST_ARCH)) \
 	  $(MAKE) $(NJOBS) -C builddir-multi \
 		LDFLAGS="-Wl,-z,relro"
@@ -792,7 +799,7 @@ stamps/configure.%:
 stamps/build.%: stamps/configure.%
 	$(checkdir)
 	@echo BEGIN $@
-	env BFD_SOVER_EXT="-$*" \
+	env BFD_SOVER_EXT="-$*" CTF_SOVER_EXT="-$*" \
 	  $(call SET_MULTIARCH_ENV,$*) \
 	  $(MAKE) -C builddir-$* $(NJOBS) \
 		CFLAGS="$(CFLAGS)" \
@@ -854,6 +861,8 @@ stamps/install.%: stamps/build.%
 	  mv $$d_src/$$lib.a $$d_dst/$${lib}-$(VERSION)-$*.a; \
 	  ln -sf ../../../lib/$(DEB_HOST_MULTIARCH)/$$lib-$(VERSION)-$*.a $$d_src/$$lib.a; \
 	done
+	mv $(D_CROSS)/$(PF)/lib/$(CROSS_GNU_TYPE)/libctf*.so.* \
+	  $(D_CROSS)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/.
 
 	: # replace hard links with soft links
 	for i in $(D_CROSS)/usr/$(CROSS_GNU_TYPE)/bin/*; do \
@@ -863,6 +872,7 @@ stamps/install.%: stamps/build.%
 
 	$(call strip_package, $(P_CROSS),$(D_CROSS),.)
 	chmod ugo-x $(D_CROSS)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so
+	chmod ugo-x $(D_CROSS)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so.*
 
 	: # Get rid of .la files since libtool obviously has no idea about transient paths
 	rm -f $(D_CROSS)/$(PF)/$(DEB_HOST_GNU_TYPE)/$(CROSS_GNU_TYPE)/lib/*.la
@@ -900,6 +910,9 @@ stamps/install.%: stamps/build.%
 
 	rm -f $(D_CROSS)/$(PF)/lib/*.a $(D_CROSS)/$(PF)/lib/*/*.a
 	rm -f $(D_CROSS)/$(PF)/$(DEB_HOST_GNU_TYPE)/$(CROSS_GNU_TYPE)/lib/*.a
+	rm -f $(D_CROSS)/$(PF)/$(DEB_HOST_GNU_TYPE)/$(CROSS_GNU_TYPE)/lib/libctf*
+	rm -f $(D_CROSS)/$(PF)/lib/$(CROSS_GNU_TYPE)/libctf*
+	rm -f $(D_CROSS)/$(PF)/include/ctf*.h
 
 	: # remove RPATH
 	chrpath -k -d $$(file $(D_CROSS)/usr/bin/*|awk -F: '/ ELF/ {print $$1}')
@@ -939,7 +952,7 @@ stamps/configure-hppa64:
 stamps/build-hppa64: stamps/configure-hppa64
 	$(checkdir)
 	@echo BEGIN $@
-	env BFD_SOVER_EXT="$(HPPA64_VERSION)" \
+	env BFD_SOVER_EXT="$(HPPA64_VERSION)" CTF_SOVER_EXT="$(HPPA64_VERSION)" \
 	  $(MAKE) $(NJOBS) -C builddir-hppa64 \
 	    LDFLAGS="-Wl,-z,relro"
 	touch $@
@@ -1012,7 +1025,7 @@ install: $(install_stamp)
 stamps/install: checkroot stamps/build $(install_stamps)
 	$(checkdir)
 
-	rm -fr $(d_bin) $(d_com) $(d_lib) $(d_nat) $(d_dev) $(d_mul) $(d_mdev) $(d_doc) $(d_src) $(d_bld)
+	rm -fr $(d_bin) $(d_com) $(d_lib) $(d_nat) $(d_dev) $(d_mul) $(d_mdev) $(d_doc) $(d_src) $(d_bld) $(d_ctf) $(d_ctfn)
 	$(install_dir) $(d_bin) $(d_com) $(d_lib) $(d_nat) $(d_dev) $(d_mul) $(d_mdev) $(d_doc) $(d_src) $(d_bld)
 
 	: # install binutils and -dev stuff
@@ -1110,6 +1123,13 @@ endif
 	$(install_dir) $(d_dev)/$(PF)/include
 	mv $(d_bin)/$(PF)/include/* $(d_dev)/$(PF)/include/
 
+	$(install_dir) $(d_ctf)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
+	mv $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libctf.so.* \
+		$(d_ctf)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/.
+	$(install_dir) $(d_ctfn)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
+	mv $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libctf-nobfd.so.* \
+		$(d_ctfn)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/.
+
 	$(install_dir) $(d_lib)/$(PF)/lib/$(DEB_HOST_MULTIARCH) $(d_dev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
 	mv $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.a \
 	   $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libbfd.so \
@@ -1118,8 +1138,6 @@ endif
 		$(d_dev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
 	mv $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so \
 	   $(d_lib)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
-	mv $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libctf*.so.* \
-	   $(d_lib)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
 
 ifeq ($(with_multiarch),yes)
 	$(install_dir) $(d_mul)/$(PF)/lib/$(DEB_HOST_MULTIARCH) $(d_mdev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
@@ -1127,21 +1145,27 @@ ifeq ($(with_multiarch),yes)
 	   $(d_mdev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libbfd-multiarch.so
 	mv $(d_mul)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libopcodes.so \
 	   $(d_mdev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libopcodes-multiarch.so
+	mv $(d_mul)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libctf-*.so \
+	   $(d_mdev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/.
 	rm -f $(d_mul)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.la \
 	  $(d_mul)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.a
 	rm -f $(d_mul)/$(PF)/lib*/$(DEB_HOST_MULTIARCH)/libiberty*
-	rm -f $(d_mul)/$(PF)/lib*/$(DEB_HOST_MULTIARCH)/libctf*
 endif
 
 	: # Get rid of .la files since libtool obviously has no idea about transient paths
 	rm -f $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.la
 
 	chmod ugo-x $(d_lib)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so
+	chmod ugo-x $(d_ctf)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so.*
+	chmod ugo-x $(d_ctfn)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so.*
 ifeq ($(with_native),yes)
 	$(call strip_package, $(p_lib), $(d_lib))
+	$(call strip_package, $(p_ctf), $(d_ctf))
+	$(call strip_package, $(p_ctfn), $(d_ctfn))
 endif
 ifeq ($(with_multiarch),yes)
 	chmod ugo-x $(d_mul)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so
+	chmod ugo-x $(d_mul)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so.*
 	$(call strip_package, $(p_mul), $(d_mul))
 endif
 
@@ -1269,6 +1293,8 @@ stamps/install-hppa64: checkroot stamps/build-hppa64
 	: # move shared libs to the standard path
 	mv $(d_hppa64)/$(PF)/$(DEB_HOST_GNU_TYPE)/hppa64-linux-gnu/lib/lib*-*.so \
 		$(d_hppa64)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/.
+	mv $(d_hppa64)/$(PF)/lib/hppa64-linux-gnu/libctf*.so.* \
+		$(d_hppa64)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/.
 
 	: # Now get rid of just about everything in binutils-hppa64
 	rm -rf $(d_hppa64)/$(PF)/man
@@ -1287,6 +1313,7 @@ stamps/install-hppa64: checkroot stamps/build-hppa64
 
 	$(call strip_package, $(p_hppa64), $(d_hppa64))
 	chmod ugo-x $(d_hppa64)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so
+	chmod ugo-x $(d_hppa64)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so.*
 
 	: # remove RPATH
 	chrpath -k -d $$(file $(d_hppa64)/usr/bin/*|awk -F: '/ ELF/ {print $$1}')
@@ -1565,6 +1592,14 @@ endif
 	$(install_file) debian/binutils.triggers $(d_lib)/DEBIAN/triggers
 	$(install_file) debian/libbinutils.shlibs $(d_lib)/DEBIAN/shlibs
 
+	$(install_dir) $(d_ctf)/DEBIAN $(d_ctf)-dbg/DEBIAN
+	$(install_file) debian/binutils.triggers $(d_ctf)/DEBIAN/triggers
+	$(install_file) debian/libctf0.shlibs $(d_ctf)/DEBIAN/shlibs
+
+	$(install_dir) $(d_ctfn)/DEBIAN $(d_ctfn)-dbg/DEBIAN
+	$(install_file) debian/binutils.triggers $(d_ctfn)/DEBIAN/triggers
+	$(install_file) debian/libctf-nobfd0.shlibs $(d_ctfn)/DEBIAN/shlibs
+
 	$(install_dir) $(d_com)/DEBIAN
 
 	$(install_dir) $(d_nat)/DEBIAN $(d_nat)-dbg/DEBIAN
@@ -1598,6 +1633,13 @@ endif
 
 	$(install_dir) $(d_lib)/$(PF)/share/doc/
 	ln -sf $(p_com) $(d_lib)/$(PF)/share/doc/$(p_lib)
+
+	$(install_dir) $(d_ctf)/$(PF)/share/doc/
+	ln -sf $(p_lib) $(d_ctf)/$(PF)/share/doc/$(p_ctf)
+
+	$(install_dir) $(d_ctfn)/$(PF)/share/doc/$(p_ctfn)
+	$(install_file)	debian/changelog $(d_ctfn)/$(PF)/share/doc/$(p_ctfn)/changelog.Debian
+	$(install_file)	debian/copyright $(d_ctfn)/$(PF)/share/doc/$(p_ctfn)/
 
 	$(install_dir) $(d_nat)/$(PF)/share/doc/
 	ln -sf $(p_lib) $(d_nat)/$(PF)/share/doc/$(p_nat)
@@ -1654,6 +1696,8 @@ endif
 	$(install_file) gprof/bbconv.pl $(d_com)/$(PF)/share/doc/$(p_bin)/gprof/.
 
 	: # Compress stuff that needs it
+	gzip -9n $(d_ctfn)/$(PF)/share/doc/$(p_ctfn)/changelog.Debian
+
 	gzip -9n $(d_bin)/$(PF)/share/doc/$(p_bin)/changelog.Debian
 	find $(d_com)/$(PF)/share/doc/$(p_bin)/ -type f ! -name bbconv.pl | xargs gzip -9n
 	gzip -9n $(d_com)/$(PF)/share/doc/$(p_com)/changelog.Debian
@@ -1671,6 +1715,23 @@ endif
 	cd $(d_lib) && find -type f  ! -regex './DEBIAN/.*' -printf '%P\n' | LC_ALL=C sort | xargs md5sum > DEBIAN/md5sums
 	dpkg-gencontrol -P$(d_lib)-dbg -p$(p_lib)-dbg
 	cd $(d_lib)-dbg && find -type f  ! -regex './DEBIAN/.*' -printf '%P\n' | LC_ALL=C sort | xargs md5sum > DEBIAN/md5sums
+
+	dpkg-gensymbols -P$(d_ctf) -p$(p_ctf) -v2.33.50 -l$(d_lib)
+	dpkg-gensymbols -P$(d_ctfn) -p$(p_ctfn) -v2.33.50
+
+	rm -f debian/substvars
+	find $(d_ctf) -type f | xargs file | grep ELF | cut -d: -f 1 | xargs dpkg-shlibdeps
+	dpkg-gencontrol -P$(d_ctf) -p$(p_ctf)
+	cd $(d_ctf) && find -type f  ! -regex './DEBIAN/.*' -printf '%P\n' | LC_ALL=C sort | xargs md5sum > DEBIAN/md5sums
+	dpkg-gencontrol -P$(d_ctf)-dbg -p$(p_ctf)-dbg
+	cd $(d_ctf)-dbg && find -type f  ! -regex './DEBIAN/.*' -printf '%P\n' | LC_ALL=C sort | xargs md5sum > DEBIAN/md5sums
+
+	rm -f debian/substvars
+	find $(d_ctfn) -type f | xargs file | grep ELF | cut -d: -f 1 | xargs dpkg-shlibdeps
+	dpkg-gencontrol -P$(d_ctfn) -p$(p_ctfn)
+	cd $(d_ctfn) && find -type f  ! -regex './DEBIAN/.*' -printf '%P\n' | LC_ALL=C sort | xargs md5sum > DEBIAN/md5sums
+	dpkg-gencontrol -P$(d_ctfn)-dbg -p$(p_ctfn)-dbg
+	cd $(d_ctfn)-dbg && find -type f  ! -regex './DEBIAN/.*' -printf '%P\n' | LC_ALL=C sort | xargs md5sum > DEBIAN/md5sums
 
 	rm -f debian/substvars
 	dpkg-gencontrol -P$(d_com) -p$(p_com)
@@ -1710,14 +1771,26 @@ ifeq ($(with_hppa64),yes)
 	cd $(d_hppa64)-dbg && find -type f  ! -regex './DEBIAN/.*' -printf '%P\n' | LC_ALL=C sort | xargs md5sum > DEBIAN/md5sums
 endif
 
-	chown -R root:root $(d_bin) $(d_com) $(d_lib) $(d_lib)-dbg $(d_nat) $(d_nat)-dbg $(d_dev)
-	chmod -R go=rX  $(d_bin) $(d_com) $(d_lib) $(d_lib)-dbg $(d_nat) $(d_nat)-dbg $(d_dev)
+	chown -R root:root $(d_bin) $(d_com) $(d_lib) $(d_lib)-dbg $(d_ctf) $(d_ctf)-dbg $(d_ctfn) $(d_ctfn)-dbg $(d_nat) $(d_nat)-dbg $(d_dev)
+	chmod -R go=rX  $(d_bin) $(d_com) $(d_lib) $(d_lib)-dbg $(d_ctf) $(d_ctf)-dbg $(d_ctfn) $(d_ctfn)-dbg $(d_nat) $(d_nat)-dbg $(d_dev)
 	find $(d_bin) -depth -newermt '$(BUILD_DATE)' -print0 | \
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
 	dpkg --build $(d_bin) ..
 	find $(d_com) -depth -newermt '$(BUILD_DATE)' -print0 | \
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
 	dpkg --build $(d_com) ..
+	find $(d_ctf) -depth -newermt '$(BUILD_DATE)' -print0 | \
+		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
+	dpkg --build $(d_ctf) ..
+	find $(d_ctf)-dbg -depth -newermt '$(BUILD_DATE)' -print0 | \
+		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
+	dpkg --build $(d_ctf)-dbg ..
+	find $(d_ctfn) -depth -newermt '$(BUILD_DATE)' -print0 | \
+		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
+	dpkg --build $(d_ctfn) ..
+	find $(d_ctfn)-dbg -depth -newermt '$(BUILD_DATE)' -print0 | \
+		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
+	dpkg --build $(d_ctfn)-dbg ..
 	find $(d_lib) -depth -newermt '$(BUILD_DATE)' -print0 | \
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
 	dpkg --build $(d_lib) ..
@@ -1782,6 +1855,7 @@ define strip_package
 	ln -sf $(strip $1) $(strip $2)-dbg/usr/share/doc/$(strip $1)-dbg
 	: # Strip shared libraries and binaries
 	set -e; \
+	nfiles=0; \
 	for i in \
 	  $(strip $2)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libbfd-*so \
 	  $(strip $2)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libopcodes-*so \
@@ -1790,12 +1864,16 @@ define strip_package
 	do \
 	  test ! -h $$i || continue; test -f $$i || continue; \
 	  files="$$files $$i"; \
+	  nfiles=$$(expr $$nfiles + 1); \
 	done; \
 	mkdir -p $(strip $2)-dbg/usr/lib/debug/.dwz/$(DEB_HOST_MULTIARCH); \
 	dwz=usr/lib/debug/.dwz/$(DEB_HOST_MULTIARCH)/$(strip $1).debug; \
-	dwz -m $(strip $2)-dbg/$$dwz -M /$$dwz \
-	  $$files; \
-	$(CROSS)objcopy --compress-debug-sections $(strip $2)-dbg/$$dwz; \
+	if [ $$nfiles -gt 1 ]; then \
+	  dwz -m $(strip $2)-dbg/$$dwz -M /$$dwz $$files; \
+	  $(CROSS)objcopy --compress-debug-sections $(strip $2)-dbg/$$dwz; \
+	else \
+	  dwz $$files; \
+	fi; \
 	for i in $$files; do \
 	  b_id=$$(LC_ALL=C $(CROSS)readelf -n $$i | sed -n 's/ *Build ID: *\([0-9a-f][0-9a-f]*\)/\1/p'); \
 	  if [ -z "$$b_id" ]; then \

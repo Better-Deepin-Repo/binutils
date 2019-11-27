@@ -33,6 +33,11 @@ debian/binutils-arm-linux-gnueabihf
 debian/binutils-i686-gnu
 debian/binutils-*-kfreebsd-gnu
 
+debian/libctf-nobfd0-dbg
+debian/libctf-nobfd0
+debian/libctf0-dbg
+debian/libctf0
+
 COPYING
 COPYING.LIB
 COPYING3

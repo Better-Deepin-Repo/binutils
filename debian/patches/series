@@ -32,3 +32,4 @@ gold-no-keep-files-mapped.diff
 # experimental ...
 infinity-notes.diff
 #binutils-no-development.diff
+libctf-soname.diff
