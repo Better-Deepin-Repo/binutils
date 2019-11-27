@@ -802,58 +802,6 @@ Depends: binutils-mipsel-linux-gnu (= ${binary:Version})
 Description: GNU binary utilities, for mipsel-linux-gnu target (debug symbols)
  This package provides debug symbols for binutils-mipsel-linux-gnu.
 
-Package: binutils-mips64-linux-gnuabin32
-Priority: optional
-Architecture: mipsn32
-Multi-Arch: allowed
-Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
-Provides: 
-Breaks: binutils (<< 2.29-6)
-Replaces: binutils (<< 2.29-6)
-Description: GNU binary utilities, for mips64-linux-gnuabin32 target
- This package provides GNU assembler, linker and binary utilities
- for the mips64-linux-gnuabin32 target.
- .
- You don't need this package unless you plan to cross-compile programs
- for mips64-linux-gnuabin32 and mips64-linux-gnuabin32 is not your native platform.
-
-Package: binutils-mips64-linux-gnuabin32-dbg
-Section: debug
-Priority: optional
-Architecture: mipsn32
-Multi-Arch: foreign
-Depends: binutils-mips64-linux-gnuabin32 (= ${binary:Version})
-Description: GNU binary utilities, for mips64-linux-gnuabin32 target (debug symbols)
- This package provides debug symbols for binutils-mips64-linux-gnuabin32.
-
-Package: binutils-mips64el-linux-gnuabin32
-Priority: optional
-Architecture: mipsn32el
-Multi-Arch: allowed
-Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
-Provides: 
-Breaks: binutils (<< 2.29-6)
-Replaces: binutils (<< 2.29-6)
-Description: GNU binary utilities, for mips64el-linux-gnuabin32 target
- This package provides GNU assembler, linker and binary utilities
- for the mips64el-linux-gnuabin32 target.
- .
- You don't need this package unless you plan to cross-compile programs
- for mips64el-linux-gnuabin32 and mips64el-linux-gnuabin32 is not your native platform.
-
-Package: binutils-mips64el-linux-gnuabin32-dbg
-Section: debug
-Priority: optional
-Architecture: mipsn32el
-Multi-Arch: foreign
-Depends: binutils-mips64el-linux-gnuabin32 (= ${binary:Version})
-Description: GNU binary utilities, for mips64el-linux-gnuabin32 target (debug symbols)
- This package provides debug symbols for binutils-mips64el-linux-gnuabin32.
-
 Package: binutils-mips64-linux-gnuabi64
 Priority: optional
 Architecture: mips64
@@ -905,6 +853,58 @@ Multi-Arch: foreign
 Depends: binutils-mips64el-linux-gnuabi64 (= ${binary:Version})
 Description: GNU binary utilities, for mips64el-linux-gnuabi64 target (debug symbols)
  This package provides debug symbols for binutils-mips64el-linux-gnuabi64.
+
+Package: binutils-mips64-linux-gnuabin32
+Priority: optional
+Architecture: mipsn32
+Multi-Arch: allowed
+Depends: binutils-common (= ${binary:Version}),
+  ${shlibs:Depends}, ${extraDepends}
+Suggests: binutils-doc (= ${source:Version})
+Provides: 
+Breaks: binutils (<< 2.29-6)
+Replaces: binutils (<< 2.29-6)
+Description: GNU binary utilities, for mips64-linux-gnuabin32 target
+ This package provides GNU assembler, linker and binary utilities
+ for the mips64-linux-gnuabin32 target.
+ .
+ You don't need this package unless you plan to cross-compile programs
+ for mips64-linux-gnuabin32 and mips64-linux-gnuabin32 is not your native platform.
+
+Package: binutils-mips64-linux-gnuabin32-dbg
+Section: debug
+Priority: optional
+Architecture: mipsn32
+Multi-Arch: foreign
+Depends: binutils-mips64-linux-gnuabin32 (= ${binary:Version})
+Description: GNU binary utilities, for mips64-linux-gnuabin32 target (debug symbols)
+ This package provides debug symbols for binutils-mips64-linux-gnuabin32.
+
+Package: binutils-mips64el-linux-gnuabin32
+Priority: optional
+Architecture: mipsn32el
+Multi-Arch: allowed
+Depends: binutils-common (= ${binary:Version}),
+  ${shlibs:Depends}, ${extraDepends}
+Suggests: binutils-doc (= ${source:Version})
+Provides: 
+Breaks: binutils (<< 2.29-6)
+Replaces: binutils (<< 2.29-6)
+Description: GNU binary utilities, for mips64el-linux-gnuabin32 target
+ This package provides GNU assembler, linker and binary utilities
+ for the mips64el-linux-gnuabin32 target.
+ .
+ You don't need this package unless you plan to cross-compile programs
+ for mips64el-linux-gnuabin32 and mips64el-linux-gnuabin32 is not your native platform.
+
+Package: binutils-mips64el-linux-gnuabin32-dbg
+Section: debug
+Priority: optional
+Architecture: mipsn32el
+Multi-Arch: foreign
+Depends: binutils-mips64el-linux-gnuabin32 (= ${binary:Version})
+Description: GNU binary utilities, for mips64el-linux-gnuabin32 target (debug symbols)
+ This package provides debug symbols for binutils-mips64el-linux-gnuabin32.
 
 Package: binutils-mipsisa64r6-linux-gnuabin32
 Priority: optional

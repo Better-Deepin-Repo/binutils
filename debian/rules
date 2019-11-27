@@ -106,9 +106,15 @@ NATIVE_ARCHS ?= amd64 i386 arm64 armhf armel ppc64el s390x
 NATIVE_ARCHS += alpha hppa ia64 m68k powerpc ppc64 \
 	riscv64 sh4 sparc64 x32
 NATIVE_ARCHS += hurd-i386 kfreebsd-amd64 kfreebsd-i386
-NATIVE_ARCHS += mips mipsel mipsn32 mipsn32el mips64 mips64el
-NATIVE_ARCHS += mipsn32r6 mipsn32r6el mipsr6 mipsr6el mips64r6 mips64r6el
 #NATIVE_ARCHS += nios2 or1k s390 sparc
+
+# don't generate the control file entries for native packages which are never
+# built. Only valid for Ubuntu. The autopkg testers get confused otherwise
+ifneq ($(distribution),Ubuntu)
+  NATIVE_ARCHS += mips mipsel mips64 mips64el
+  NATIVE_ARCHS += mipsn32 mipsn32el
+  NATIVE_ARCHS += mipsn32r6 mipsn32r6el mipsr6 mipsr6el mips64r6 mips64r6el
+endif
 
 src_name := $(shell dpkg-parsechangelog -S Source)
 ifeq ($(src_name),binutils)
@@ -1668,6 +1674,16 @@ ifeq ($(with_check),yes)
 	  $(d_nat)/$(PF)/share/doc/$(p_bin)/test-summary-$(DEB_HOST_ARCH)
 	gzip -9nf \
 	  $(d_nat)/$(PF)/share/doc/$(p_bin)/test-summary-$(DEB_HOST_ARCH)
+
+	: # save log and sum files in $(p_dev)
+	$(install_dir) $(d_dev)/$(PF)/share/doc/$(p_bin)/tests
+	for i in $$(find builddir-single -name '*.sum'); do \
+	  b=$$(basename $$i .sum); \
+	  $(install_file) $$i $(d_dev)/$(PF)/share/doc/$(p_bin)/tests/$$b.sum; \
+	  xz -9v $(d_dev)/$(PF)/share/doc/$(p_bin)/tests/$$b.sum; \
+	  $(install_file) $${i%.sum}.log $(d_dev)/$(PF)/share/doc/$(p_bin)/tests/$$b.log; \
+	  xz -9v $(d_dev)/$(PF)/share/doc/$(p_bin)/tests/$$b.log; \
+	done
 endif
 endif
 	$(install_dir) $(d_com)/$(PF)/share/doc/$(p_bin)
