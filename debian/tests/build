@@ -8,5 +8,12 @@ case "$CPUS" in
   *) CPUS=1
 esac
 
+if [ -n "${DEB_HOST_ARCH:-}" ]; then
+    CROSS="-a$DEB_HOST_ARCH"
+else
+    CROSS=
+fi
+
+
 set -x
-DEB_BUILD_OPTIONS="parallel=$CPUS nohppa nomult nocross" dpkg-buildpackage -d -B --no-sign
+DEB_BUILD_OPTIONS="parallel=$CPUS nohppa nomult nocross" dpkg-buildpackage -d -B --no-sign $CROSS

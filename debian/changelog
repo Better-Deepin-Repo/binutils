@@ -1,15 +1,41 @@
-binutils (2.33.50.20191127-2) UNRELEASED; urgency=medium
+binutils (2.33.50.20200111-1) unstable; urgency=medium
 
-  * Save dejagnu log and sum files in binutils-dev.
+  * New upstream snapshot.
+  * Make autopkgtests cross-test-friendly (Steve Langasek).
 
- -- Matthias Klose <doko@debian.org>  Wed, 27 Nov 2019 22:01:59 +0100
+ -- Matthias Klose <doko@debian.org>  Sat, 11 Jan 2020 14:24:29 +0100
 
-binutils (2.33.50.20191127-1) experimental; urgency=medium
+binutils (2.33.50.20200107-1) unstable; urgency=medium
+
+  * New upstream snapshot.
+
+ -- Matthias Klose <doko@debian.org>  Tue, 07 Jan 2020 23:19:25 +0100
+
+binutils (2.33.50.20200105-2) experimental; urgency=medium
+
+  * New upstream snapshot.
+
+ -- Matthias Klose <doko@debian.org>  Sun, 05 Jan 2020 11:33:49 +0100
+
+binutils (2.33.50.20191212-1) experimental; urgency=medium
+
+  * New upstream snapshot.
+
+ -- Matthias Klose <doko@debian.org>  Thu, 12 Dec 2019 16:16:13 +0100
+
+binutils (2.33.50.20191205-1) experimental; urgency=medium
+
+  * New upstream snapshot.
+
+ -- Matthias Klose <doko@debian.org>  Thu, 05 Dec 2019 21:22:15 +0100
+
+binutils (2.33.50.20191128-1) experimental; urgency=medium
 
   * New upstream snapshot.
   * Split out libctf packages.
+  * Save dejagnu log and sum files in binutils-dev.
 
- -- Matthias Klose <doko@debian.org>  Wed, 27 Nov 2019 20:16:21 +0100
+ -- Matthias Klose <doko@debian.org>  Thu, 28 Nov 2019 09:57:31 +0100
 
 binutils (2.33.50.20191121-2) experimental; urgency=medium
 
@@ -26,6 +52,20 @@ binutils (2.33.50.20191121-1) experimental; urgency=medium
   * Put libctf libctf libraries in libbinutils and binutils-dev for now.
 
  -- Matthias Klose <doko@debian.org>  Thu, 21 Nov 2019 18:50:25 +0100
+
+binutils (2.33.1-6) unstable; urgency=medium
+
+  * Update from the binutils 2.33 branch:
+    - [gas] Implement .cfi_negate_ra_state directive (AArch64).
+
+ -- Matthias Klose <doko@debian.org>  Thu, 12 Dec 2019 23:32:03 +0100
+
+binutils (2.33.1-5) unstable; urgency=medium
+
+  * Revert configuring with --enable-mips-fix-loongson3-llsc=yes on mipsel,
+    mips64el, mipsn32el. Causes GCC bootstrap comparison failures.
+
+ -- Matthias Klose <doko@debian.org>  Mon, 02 Dec 2019 11:55:09 +0100
 
 binutils (2.33.1-4) unstable; urgency=medium
 

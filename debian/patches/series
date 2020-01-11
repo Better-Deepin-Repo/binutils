@@ -30,6 +30,6 @@ gold-no-keep-files-mapped.diff
 # trunk backports
 
 # experimental ...
-infinity-notes.diff
+#infinity-notes.diff
 #binutils-no-development.diff
 libctf-soname.diff

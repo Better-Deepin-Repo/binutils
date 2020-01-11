@@ -109,15 +109,6 @@ Replaces: binutils (<< 2.29-6)
 Description: GNU binary utilities (private shared library)
  This package includes the private shared libraries libbfd and libopcodes.
 
-Package: libbinutils
-Architecture: any
-Multi-Arch: same
-Depends: ${shlibs:Depends}, binutils-common (= ${binary:Version})
-Breaks: binutils (<< 2.29-6)
-Replaces: binutils (<< 2.29-6)
-Description: GNU binary utilities (private shared library)
- This package includes the private shared libraries libbfd and libopcodes.
-
 Package: libbinutils-dbg
 Section: debug
 Architecture: any
