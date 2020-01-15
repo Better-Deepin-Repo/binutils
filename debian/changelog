@@ -1,3 +1,17 @@
+binutils (2.33.50.20200115-1) unstable; urgency=medium
+
+  * New upstream snapshot.
+  * Tighten the build dependency to 2.33.50.20200114-1 for this upload.
+
+ -- Matthias Klose <doko@debian.org>  Wed, 15 Jan 2020 21:18:18 +0100
+
+binutils (2.33.50.20200114-1) unstable; urgency=medium
+
+  * New upstream snapshot.
+  * Build on testing for arm64, and upload the binaries.
+
+ -- Matthias Klose <doko@debian.org>  Tue, 14 Jan 2020 14:19:00 +0100
+
 binutils (2.33.50.20200111-1) unstable; urgency=medium
 
   * New upstream snapshot.
