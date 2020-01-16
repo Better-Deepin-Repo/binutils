@@ -1,6 +1,6 @@
 --- a/bfd/config.bfd
 +++ b/bfd/config.bfd
-@@ -919,11 +919,21 @@ case "${targ}" in
+@@ -910,11 +910,21 @@ case "${targ}" in
      targ_defvec=mips_elf32_be_vec
      targ_selvecs="mips_elf32_le_vec mips_elf64_be_vec mips_elf64_le_vec mips_ecoff_be_vec mips_ecoff_le_vec"
      ;;
@@ -38,28 +38,31 @@
  	    mips_default_abi=N32_ABI
 --- a/ld/configure.tgt
 +++ b/ld/configure.tgt
-@@ -468,10 +468,16 @@ mips*el-*-vxworks*)	targ_emul=elf32elmip
- mips*-*-vxworks*)	targ_emul=elf32ebmipvxworks
- 			targ_extra_emuls="elf32elmipvxworks" ;;
- mips*-*-windiss)	targ_emul=elf32mipswindiss ;;
+@@ -541,11 +541,19 @@ mips*-*-vxworks*)	targ_emul=elf32ebmipvx
+ 			;;
+ mips*-*-windiss)	targ_emul=elf32mipswindiss
+ 			;;
 -mips64*el-*-linux-*)	targ_emul=elf32ltsmipn32
 +mips*64*el-*-linux-gnuabi64)	targ_emul=elf64ltsmip
-+			targ_extra_emuls="elf32btsmipn32 elf32ltsmip elf32btsmip elf32ltsmipn32 elf64btsmip"
-+			targ_extra_libpath=$targ_extra_emuls ;;
-+mips*64*-*-linux-gnuabi64)	targ_emul=elf64btsmip
-+			targ_extra_emuls="elf32ltsmipn32 elf32btsmip elf32ltsmip elf32btsmipn32 elf64ltsmip"
-+			targ_extra_libpath=$targ_extra_emuls ;;
++			targ_extra_emuls="elf32btsmipn32 elf32ltsmipn32 elf32ltsmip elf32btsmip elf64btsmip"
++			targ_extra_libpath=$targ_extra_emuls
++			;;
 +mips*64*el-*-linux-*)	targ_emul=elf32ltsmipn32
  			targ_extra_emuls="elf32btsmipn32 elf32ltsmip elf32btsmip elf64ltsmip elf64btsmip"
- 			targ_extra_libpath=$targ_extra_emuls ;;
+ 			targ_extra_libpath=$targ_extra_emuls
+ 			;;
 -mips64*-*-linux-*)	targ_emul=elf32btsmipn32
++mips*64*-*-linux-gnuabi64)	targ_emul=elf64btsmip
++			targ_extra_emuls="elf32btsmipn32 elf32ltsmipn32 elf32btsmip elf32ltsmip elf64ltsmip"
++			targ_extra_libpath=$targ_extra_emuls
++			;;
 +mips*64*-*-linux-*)	targ_emul=elf32btsmipn32
  			targ_extra_emuls="elf32ltsmipn32 elf32btsmip elf32ltsmip elf64btsmip elf64ltsmip"
- 			targ_extra_libpath=$targ_extra_emuls ;;
- mips*el-*-linux-*)	targ_emul=elf32ltsmip
+ 			targ_extra_libpath=$targ_extra_emuls
+ 			;;
 --- a/gas/configure
 +++ b/gas/configure
-@@ -12778,6 +12778,9 @@ _ACEOF
+@@ -12766,6 +12766,9 @@ _ACEOF
  	esac
  	# Decide which ABI to target by default.
  	case ${target} in

@@ -23,7 +23,7 @@
 gprof-build.diff
 aarch64-libpath.diff
 #pr-ld-16428.diff
-#mips64-default-n64.diff
+mips64-default-n64.diff
 gold-mips.diff
 gold-no-keep-files-mapped.diff
 
