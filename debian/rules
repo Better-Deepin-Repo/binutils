@@ -1602,11 +1602,11 @@ endif
 
 	$(install_dir) $(d_ctf)/DEBIAN $(d_ctf)-dbg/DEBIAN
 	$(install_file) debian/binutils.triggers $(d_ctf)/DEBIAN/triggers
-	$(install_file) debian/libctf0.shlibs $(d_ctf)/DEBIAN/shlibs
+	$(install_file) debian/libctf0.symbols $(d_ctf)/DEBIAN/symbols
 
 	$(install_dir) $(d_ctfn)/DEBIAN $(d_ctfn)-dbg/DEBIAN
 	$(install_file) debian/binutils.triggers $(d_ctfn)/DEBIAN/triggers
-	$(install_file) debian/libctf-nobfd0.shlibs $(d_ctfn)/DEBIAN/shlibs
+	$(install_file) debian/libctf-nobfd0.symbols $(d_ctfn)/DEBIAN/symbols
 
 	$(install_dir) $(d_com)/DEBIAN
 

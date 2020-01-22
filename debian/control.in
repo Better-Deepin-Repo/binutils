@@ -5,7 +5,6 @@ Maintainer: Matthias Klose <doko@debian.org>
 Uploaders: James Troup <binutils@elmo.tasta.io>
 Standards-Version: 4.4.1
 Build-Depends: autoconf (>= 2.64), @dpkg_dev@
-  binutils (>= 2.33.50.20200114-1~) [!hurd-i386],
   bison, flex, gettext, texinfo, dejagnu, quilt, chrpath, dwz,
   python3:any, file, xz-utils, lsb-release, zlib1g-dev, procps,
   g++-aarch64-linux-gnu [amd64 i386 x32] <!nocheck>,
