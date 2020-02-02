@@ -1,3 +1,9 @@
+binutils (2.34-2) unstable; urgency=medium
+
+  * Regenerate the control file.
+
+ -- Matthias Klose <doko@debian.org>  Sun, 02 Feb 2020 17:46:11 +0100
+
 binutils (2.34-1) unstable; urgency=medium
 
   * New upstream release.
