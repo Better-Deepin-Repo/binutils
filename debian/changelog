@@ -1,3 +1,18 @@
+binutils (2.34-3) unstable; urgency=medium
+
+  * Update from the binutils 2.34 branch:
+    - Fix PR gas/25516, Accept Intel64 only instruction by default.
+    - Fix PR 25447, prevents a potential illegal memory access when parsing
+      PE binaries.
+    - Fix PR binutils/25355, import fixes for using the LTO plugin with nm.
+    - Fix PR 25585, PHDR segment not covered by LOAD segment.
+    - MSP430 updates.
+    - Mention x86 assembler options to align branches.
+    - AArch64: Fix MOVPRFX markup for bf16 conversions.
+  * Make the test summary files reproducible. Addresses: #950585.
+
+ -- Matthias Klose <doko@debian.org>  Sat, 22 Feb 2020 09:49:46 +0100
+
 binutils (2.34-2) unstable; urgency=medium
 
   * Regenerate the control file.

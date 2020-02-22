@@ -1445,7 +1445,7 @@ binary.%: stamps/install.% install
 
 ifeq ($(with_check),yes)
 	: # remove user and date from test-summary for reproducible builds
-	sed -i -e '/Test Run By/Id' test-summary-$*
+	sed -i -e '/Test run by/d' test-summary-$*
 	$(install_file) test-summary-$* \
 	  $(D_CROSS)/$(PF)/share/doc/$(P_CROSS)/test-summary
 	gzip -9nf $(D_CROSS)/$(PF)/share/doc/$(P_CROSS)/test-summary
@@ -1668,7 +1668,7 @@ endif
 ifeq ($(DEB_BUILD_GNU_TYPE),$(DEB_HOST_GNU_TYPE))
 ifeq ($(with_check),yes)
 	: # remove user and date from test-summary for reproducible builds
-	sed -i -e '/Test Run By/Id' $(pwd)/test-summary
+	sed -i -e '/Test run by/d' $(pwd)/test-summary
 	$(install_dir) $(d_nat)/$(PF)/share/doc/$(p_bin)
 	$(install_file) test-summary \
 	  $(d_nat)/$(PF)/share/doc/$(p_bin)/test-summary-$(DEB_HOST_ARCH)
@@ -1680,6 +1680,7 @@ ifeq ($(with_check),yes)
 	for i in $$(find builddir-single -name '*.sum'); do \
 	  b=$$(basename $$i .sum); \
 	  $(install_file) $$i $(d_dev)/$(PF)/share/doc/$(p_bin)/tests/$$b.sum; \
+	  sed -i -e '/Test run by/d' $(d_dev)/$(PF)/share/doc/$(p_bin)/tests/$$b.sum; \
 	  xz -9v $(d_dev)/$(PF)/share/doc/$(p_bin)/tests/$$b.sum; \
 	  $(install_file) $${i%.sum}.log $(d_dev)/$(PF)/share/doc/$(p_bin)/tests/$$b.log; \
 	  xz -9v $(d_dev)/$(PF)/share/doc/$(p_bin)/tests/$$b.log; \
