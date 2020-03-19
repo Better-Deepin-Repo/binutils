@@ -1,12 +1,16 @@
 # DP: updates from the binutils-2.34 branch
 
-# git diff d7f734bc7e9e5fb6c33b433973b57e1eed3a7e9f 2c9614faf81029089320e6d093a54c4ef2d99187
+# git diff d7f734bc7e9e5fb6c33b433973b57e1eed3a7e9f 0741367f3e593998ecd01281502387a50b8326c4
 
 diff --git a/bfd/ChangeLog b/bfd/ChangeLog
-index dd2c11d918..702416cd43 100644
+index dd2c11d918..fd102a9cfe 100644
 --- a/bfd/ChangeLog
 +++ b/bfd/ChangeLog
-@@ -1,6 +1,146 @@
+@@ -1,6 +1,150 @@
++2020-03-11  Alan Modra  <amodra@gmail.com>
++
++	* elf64-ppc.c (ppc64_elf_inline_plt): Do increment rel in for loop.
++
 +2020-02-27  Alan Modra  <amodra@gmail.com>
 +
 +	PR 24511
@@ -815,6 +819,19 @@ index 184f01d4ee..784c32ed02 100644
  
  		/* That will change things, so, we should relax again.
  		   Note that this is not required, and it may be slow.  */
+diff --git a/bfd/elf64-ppc.c b/bfd/elf64-ppc.c
+index 73ea2865fd..bea722c6b9 100644
+--- a/bfd/elf64-ppc.c
++++ b/bfd/elf64-ppc.c
+@@ -7507,7 +7507,7 @@ ppc64_elf_inline_plt (struct bfd_link_info *info)
+ 	      return FALSE;
+ 
+ 	    relend = relstart + sec->reloc_count;
+-	    for (rel = relstart; rel < relend; )
++	    for (rel = relstart; rel < relend; rel++)
+ 	      {
+ 		enum elf_ppc64_reloc_type r_type;
+ 		unsigned long r_symndx;
 diff --git a/bfd/plugin.c b/bfd/plugin.c
 index 537ab60311..c79468fab8 100644
 --- a/bfd/plugin.c
@@ -1658,7 +1675,7 @@ index 128cf19145..8a8b74f3f9 100644
    else
      return '?';
 diff --git a/bfd/version.h b/bfd/version.h
-index c54e28f89a..42bffab97c 100644
+index c54e28f89a..abe7e390f1 100644
 --- a/bfd/version.h
 +++ b/bfd/version.h
 @@ -16,7 +16,7 @@
@@ -1666,7 +1683,7 @@ index c54e28f89a..42bffab97c 100644
     In releases, the date is not included in either version strings or
     sonames.  */
 -#define BFD_VERSION_DATE 20200201
-+#define BFD_VERSION_DATE 20200228
++#define BFD_VERSION_DATE 20200319
  #define BFD_VERSION @bfd_version@
  #define BFD_VERSION_STRING  @bfd_version_package@ @bfd_version_string@
  #define REPORT_BUGS_TO @report_bugs_to@
@@ -1812,10 +1829,27 @@ index 0ee3f88386..5b386592a6 100644
  
    START_PROGRESS (program_name, 0);
 diff --git a/gas/ChangeLog b/gas/ChangeLog
-index 25d49fd4c4..8f1cc8cde8 100644
+index 25d49fd4c4..4ad599ae79 100644
 --- a/gas/ChangeLog
 +++ b/gas/ChangeLog
-@@ -1,6 +1,38 @@
+@@ -1,6 +1,55 @@
++2020-03-13  Andre Vieira  <andre.simoesdiasvieira@arm.com>
++
++	Backport from mainline.
++	2020-03-13  Andre Vieira  <andre.simoesdiasvieira@arm.com>
++
++	PR 25660
++	*  config/tc-arm.c (operand_parse_code): Add OP_RNSDMQR and OP_oRNSDMQ.
++	(parse_operands): Handle new operand codes.
++	(do_neon_dyadic_long): Make shape check accept the scalar variants.
++	(asm_opcode_insns): Fix operand codes for vaddl and vsubl.
++	* testsuite/gas/arm/mve-vaddsub-it.s: New test.
++	* testsuite/gas/arm/mve-vaddsub-it.d: New test.
++	* testsuite/gas/arm/mve-vaddsub-it-bad.s: New test.
++	* testsuite/gas/arm/mve-vaddsub-it-bad.l: New test.
++	* testsuite/gas/arm/mve-vaddsub-it-bad.d: New test.
++	* testsuite/gas/arm/nomve-vaddsub-it.d: New test.
++
 +2020-02-10  H.J. Lu  <hongjiu.lu@intel.com>
 +
 +	PR gas/25516
@@ -1870,6 +1904,72 @@ index 5ed7302da7..9a3f352108 100644
  * Add support for Zilog eZ80 and Zilog Z180 CPUs.
  
  * Add support for z80-elf target.
+diff --git a/gas/config/tc-arm.c b/gas/config/tc-arm.c
+index bb0b03e35e..8ad2d6d3bd 100644
+--- a/gas/config/tc-arm.c
++++ b/gas/config/tc-arm.c
+@@ -7046,6 +7046,8 @@ enum operand_parse_code
+   OP_RNDMQ,     /* Neon double precision (0..31) or MVE vector register.  */
+   OP_RNDMQR,    /* Neon double precision (0..31), MVE vector or ARM register.
+ 		 */
++  OP_RNSDMQR,    /* Neon single or double precision, MVE vector or ARM register.
++		 */
+   OP_RNQ,	/* Neon quad precision register */
+   OP_RNQMQ,	/* Neon quad or MVE vector register.  */
+   OP_RVSD,	/* VFP single or double precision register */
+@@ -7195,6 +7197,8 @@ enum operand_parse_code
+   OP_oRNSDQ,	 /* Optional single, double or quad precision vector register */
+   OP_oRNSDQMQ,	 /* Optional single, double or quad register or MVE vector
+ 		    register.  */
++  OP_oRNSDMQ,	 /* Optional single, double register or MVE vector
++		    register.  */
+   OP_oSHll,	 /* LSL immediate */
+   OP_oSHar,	 /* ASR immediate */
+   OP_oSHllar,	 /* LSL or ASR immediate */
+@@ -7391,6 +7395,10 @@ parse_operands (char *str, const unsigned int *pattern, bfd_boolean thumb)
+ 	case OP_RVS:   po_reg_or_fail (REG_TYPE_VFS);	  break;
+ 	case OP_RVD:   po_reg_or_fail (REG_TYPE_VFD);	  break;
+ 	case OP_oRND:
++	case OP_RNSDMQR:
++	  po_reg_or_goto (REG_TYPE_VFS, try_rndmqr);
++	  break;
++	try_rndmqr:
+ 	case OP_RNDMQR:
+ 	  po_reg_or_goto (REG_TYPE_RN, try_rndmq);
+ 	  break;
+@@ -7456,6 +7464,12 @@ parse_operands (char *str, const unsigned int *pattern, bfd_boolean thumb)
+ 	case OP_RVSD_COND:
+ 	  po_reg_or_goto (REG_TYPE_VFSD, try_cond);
+ 	  break;
++	case OP_oRNSDMQ:
++	  po_reg_or_goto (REG_TYPE_NSD, try_mq2);
++	  break;
++	  try_mq2:
++	  po_reg_or_fail (REG_TYPE_MQ);
++	  break;
+ 	case OP_oRNSDQ:
+ 	case OP_RNSDQ: po_reg_or_fail (REG_TYPE_NSDQ);    break;
+ 	case OP_RNSDQMQR:
+@@ -19542,7 +19556,7 @@ neon_mixed_length (struct neon_type_el et, unsigned size)
+ static void
+ do_neon_dyadic_long (void)
+ {
+-  enum neon_shape rs = neon_select_shape (NS_QDD, NS_QQQ, NS_QQR, NS_NULL);
++  enum neon_shape rs = neon_select_shape (NS_QDD, NS_HHH, NS_FFF, NS_DDD, NS_NULL);
+   if (rs == NS_QDD)
+     {
+       if (vfp_or_neon_is_neon (NEON_CHECK_ARCH | NEON_CHECK_CC) == FAIL)
+@@ -26039,8 +26053,8 @@ static const struct asm_opcode insns[] =
+ #define ARM_VARIANT & fpu_neon_ext_v1
+  mnUF(vabd,      _vabd,		  3, (RNDQMQ, oRNDQMQ, RNDQMQ), neon_dyadic_if_su),
+  mnUF(vabdl,     _vabdl,	  3, (RNQMQ, RNDMQ, RNDMQ),   neon_dyadic_long),
+- mnUF(vaddl,     _vaddl,	  3, (RNQMQ, RNDMQ, RNDMQR),  neon_dyadic_long),
+- mnUF(vsubl,     _vsubl,	  3, (RNQMQ, RNDMQ, RNDMQR),  neon_dyadic_long),
++ mnUF(vaddl,     _vaddl,	  3, (RNSDQMQ, oRNSDMQ, RNSDMQR),  neon_dyadic_long),
++ mnUF(vsubl,     _vsubl,	  3, (RNSDQMQ, oRNSDMQ, RNSDMQR),  neon_dyadic_long),
+  mnUF(vand,      _vand,		  3, (RNDQMQ, oRNDQMQ, RNDQMQ_Ibig), neon_logic),
+  mnUF(vbic,      _vbic,		  3, (RNDQMQ, oRNDQMQ, RNDQMQ_Ibig), neon_logic),
+  mnUF(vorr,      _vorr,		  3, (RNDQMQ, oRNDQMQ, RNDQMQ_Ibig), neon_logic),
 diff --git a/gas/config/tc-i386.c b/gas/config/tc-i386.c
 index 8728725b82..3f1d4cab7e 100644
 --- a/gas/config/tc-i386.c
@@ -2173,6 +2273,130 @@ index 0000000000..9ef0ad532f
 +	bfcvtnt z0.h, p1/m, z2.s
 +
 +	ret
+diff --git a/gas/testsuite/gas/arm/mve-vaddsub-it-bad.d b/gas/testsuite/gas/arm/mve-vaddsub-it-bad.d
+new file mode 100644
+index 0000000000..1889c216f1
+--- /dev/null
++++ b/gas/testsuite/gas/arm/mve-vaddsub-it-bad.d
+@@ -0,0 +1,6 @@
++#name: Bad MVE vadd/vsub instructions in IT blocks
++#as: -march=armv8.1-m.main+mve.fp
++#error_output: mve-vaddsub-it-bad.l
++
++.*: +file format .*arm.*
++
+diff --git a/gas/testsuite/gas/arm/mve-vaddsub-it-bad.l b/gas/testsuite/gas/arm/mve-vaddsub-it-bad.l
+new file mode 100644
+index 0000000000..5f41bceaf4
+--- /dev/null
++++ b/gas/testsuite/gas/arm/mve-vaddsub-it-bad.l
+@@ -0,0 +1,7 @@
++[^:]*: Assembler messages:
++[^:]*:4: Warning: ARMv8.2 scalar fp16 instruction cannot be conditional, the behaviour is UNPREDICTABLE
++[^:]*:5: Warning: ARMv8.2 scalar fp16 instruction cannot be conditional, the behaviour is UNPREDICTABLE
++[^:]*:7: Warning: ARMv8.2 scalar fp16 instruction cannot be conditional, the behaviour is UNPREDICTABLE
++[^:]*:8: Warning: ARMv8.2 scalar fp16 instruction cannot be conditional, the behaviour is UNPREDICTABLE
++[^:]*:10: Error: selected FPU does not support instruction -- `vaddl.s8 q0,d1,d2'
++[^:]*:11: Error: selected FPU does not support instruction -- `vsubl.s8 q0,d1,d2'
+diff --git a/gas/testsuite/gas/arm/mve-vaddsub-it-bad.s b/gas/testsuite/gas/arm/mve-vaddsub-it-bad.s
+new file mode 100644
+index 0000000000..180f9392db
+--- /dev/null
++++ b/gas/testsuite/gas/arm/mve-vaddsub-it-bad.s
+@@ -0,0 +1,11 @@
++.syntax unified
++.text
++itt le
++vaddle.f16 s3, s5, s7
++vsuble.f16 s7, s4, s6
++itt lt
++vaddlt.f16 s0, s5, s7
++vsublt.f16 s7, s4, s6
++
++vaddl.s8 q0, d1, d2
++vsubl.s8 q0, d1, d2
+diff --git a/gas/testsuite/gas/arm/mve-vaddsub-it.d b/gas/testsuite/gas/arm/mve-vaddsub-it.d
+new file mode 100644
+index 0000000000..e0842b733f
+--- /dev/null
++++ b/gas/testsuite/gas/arm/mve-vaddsub-it.d
+@@ -0,0 +1,23 @@
++# name: Armv8.1-M Mainline vadd/vsub instructions in it blocks (with MVE)
++# as: -march=armv8.1-m.main+mve.fp+fp.dp
++# objdump: -dr --prefix-addresses --show-raw-insn -marmv8.1-m.main
++
++.*: +file format .*arm.*
++
++Disassembly of section .text:
++[^>]*> bfdc      	itt	le
++[^>]*> ee72 1aa3 	vaddle.f32	s3, s5, s7
++[^>]*> ee34 7b06 	vaddle.f64	d7, d4, d6
++[^>]*> bfbc      	itt	lt
++[^>]*> ee72 1aa3 	vaddlt.f32	s3, s5, s7
++[^>]*> ee34 7b06 	vaddlt.f64	d7, d4, d6
++[^>]*> bfdc      	itt	le
++[^>]*> ee72 1ae3 	vsuble.f32	s3, s5, s7
++[^>]*> ee34 7b46 	vsuble.f64	d7, d4, d6
++[^>]*> bfbc      	itt	lt
++[^>]*> ee72 1ae3 	vsublt.f32	s3, s5, s7
++[^>]*> ee34 7b46 	vsublt.f64	d7, d4, d6
++[^>]*> bfdc      	itt	le
++[^>]*> ee30 0a06 	vaddle.f32	s0, s0, s12
++[^>]*> ee30 0b41 	vsuble.f64	d0, d0, d1
++#...
+diff --git a/gas/testsuite/gas/arm/mve-vaddsub-it.s b/gas/testsuite/gas/arm/mve-vaddsub-it.s
+new file mode 100644
+index 0000000000..f086a73094
+--- /dev/null
++++ b/gas/testsuite/gas/arm/mve-vaddsub-it.s
+@@ -0,0 +1,17 @@
++.syntax unified
++.text
++itt le
++vaddle.f32 s3, s5, s7
++vaddle.f64 d7, d4, d6
++itt lt
++vaddlt.f32 s3, s5, s7
++vaddlt.f64 d7, d4, d6
++itt le
++vsuble.f32 s3, s5, s7
++vsuble.f64 d7, d4, d6
++itt lt
++vsublt.f32 s3, s5, s7
++vsublt.f64 d7, d4, d6
++itt le
++vaddle.f32 s0, s12
++vsuble.f64 d0, d1
+diff --git a/gas/testsuite/gas/arm/nomve-vaddsub-it.d b/gas/testsuite/gas/arm/nomve-vaddsub-it.d
+new file mode 100644
+index 0000000000..50b12a0d5d
+--- /dev/null
++++ b/gas/testsuite/gas/arm/nomve-vaddsub-it.d
+@@ -0,0 +1,24 @@
++# name: Armv8.1-M Mainline vadd/vsub instructions in it blocks (without MVE)
++# as: -march=armv8.1-m.main+fp.dp
++# source: mve-vaddsub-it.s
++# objdump: -dr --prefix-addresses --show-raw-insn -marmv8.1-m.main
++
++.*: +file format .*arm.*
++
++Disassembly of section .text:
++[^>]*> bfdc      	itt	le
++[^>]*> ee72 1aa3 	vaddle.f32	s3, s5, s7
++[^>]*> ee34 7b06 	vaddle.f64	d7, d4, d6
++[^>]*> bfbc      	itt	lt
++[^>]*> ee72 1aa3 	vaddlt.f32	s3, s5, s7
++[^>]*> ee34 7b06 	vaddlt.f64	d7, d4, d6
++[^>]*> bfdc      	itt	le
++[^>]*> ee72 1ae3 	vsuble.f32	s3, s5, s7
++[^>]*> ee34 7b46 	vsuble.f64	d7, d4, d6
++[^>]*> bfbc      	itt	lt
++[^>]*> ee72 1ae3 	vsublt.f32	s3, s5, s7
++[^>]*> ee34 7b46 	vsublt.f64	d7, d4, d6
++[^>]*> bfdc      	itt	le
++[^>]*> ee30 0a06 	vaddle.f32	s0, s0, s12
++[^>]*> ee30 0b41 	vsuble.f64	d0, d0, d1
++#...
 diff --git a/gas/testsuite/gas/i386/i386.exp b/gas/testsuite/gas/i386/i386.exp
 index 9be9c1a22e..a9b1d0c3b9 100644
 --- a/gas/testsuite/gas/i386/i386.exp
