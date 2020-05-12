@@ -1,3 +1,9 @@
+binutils (2.34.50.20200512-1) experimental; urgency=medium
+
+  * New upstream snapshot.
+
+ -- Matthias Klose <doko@debian.org>  Tue, 12 May 2020 16:24:56 +0200
+
 binutils (2.34-6) unstable; urgency=medium
 
   * Update from the binutils 2.34 branch:
