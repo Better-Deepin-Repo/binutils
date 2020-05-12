@@ -1,3 +1,15 @@
+binutils (2.34-6) unstable; urgency=medium
+
+  * Update from the binutils 2.34 branch:
+    - Fix PR lto/94249, typo in a macro usage, improve endianess detection.
+    - PR25745, powerpc64-ld overflows string buffer in --stats mode.
+    - plugin: Don't invoke LTO-wrapper.
+    - PR binutils/25640, plugin: Use LDPT_ADD_SYMBOLS_V2 to get symbol type.
+    - Fix dwarf.c build with GCC 10.
+    - PR binutils/25717, build failure with GCC 10.
+
+ -- Matthias Klose <doko@debian.org>  Tue, 07 Apr 2020 13:29:21 +0200
+
 binutils (2.34-5) unstable; urgency=medium
 
   * Update from the binutils 2.34 branch:
