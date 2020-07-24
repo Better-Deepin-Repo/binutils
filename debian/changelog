@@ -1,3 +1,19 @@
+binutils (2.35-1) unstable; urgency=medium
+
+  * binutils 2.35 release.
+    - Fix PR gas/26263. Closes: #965380.
+  * Explicitly configure with --disable-x86-used-note.
+  * Configure mipsel, mipsn32el, mips64el again with
+    --enable-mips-fix-loongson3-llsc=yes (YunQiang Su). Closes: #952737.
+
+ -- Matthias Klose <doko@debian.org>  Fri, 24 Jul 2020 12:52:26 +0200
+
+binutils (2.34.90.20200706-1) unstable; urgency=medium
+
+  * New upstream snapshot, taken from the binutils 2.35 branch.
+
+ -- Matthias Klose <doko@debian.org>  Mon, 06 Jul 2020 21:10:37 +0200
+
 binutils (2.34.50.20200605-1) experimental; urgency=medium
 
   * New upstream snapshot.

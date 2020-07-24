@@ -279,7 +279,7 @@
  DLOPEN_LIBS
  CXXCPP
  HAVE_NO_USE_LINKER_PLUGIN_FALSE
-@@ -10170,6 +10171,14 @@ $as_echo "#define HAVE_LC_MESSAGES 1" >>
+@@ -10205,6 +10206,14 @@ $as_echo "#define HAVE_LC_MESSAGES 1" >>
    fi
  
  
@@ -296,7 +296,7 @@
  $as_echo_n "checking whether to enable maintainer-specific portions of Makefiles... " >&6; }
 --- a/gold/configure.ac
 +++ b/gold/configure.ac
-@@ -682,6 +682,14 @@ AC_CHECK_HEADERS(locale.h)
+@@ -685,6 +685,14 @@ AC_CHECK_HEADERS(locale.h)
  AC_CHECK_FUNCS(setlocale)
  AM_LC_MESSAGES
  
@@ -313,7 +313,7 @@
  AC_OUTPUT(Makefile testsuite/Makefile po/Makefile.in:po/Make-in)
 --- a/gold/options.cc
 +++ b/gold/options.cc
-@@ -1232,8 +1232,15 @@ General_options::finalize()
+@@ -1246,8 +1246,15 @@ General_options::finalize()
  	       || this->user_set_sysroot()
  	       || *TARGET_SYSTEM_ROOT != '\0')
  	{

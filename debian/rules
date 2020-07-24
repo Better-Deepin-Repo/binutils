@@ -327,7 +327,7 @@ DEB_UPSTREAM	:= $(firstword $(subst -,$(SPACE),$(DEB_VERSION)))
 VERSION		:= $(shell sed -n 's/^ *VERSION=\(.*\)/\1/p' bfd/configure | head -1 | tr -d \')
 DATE		:= $(shell sed -n 's/.* \([0-9]*\)$$/\1/p' bfd/version.h)
 ifneq (,$(DATE))
-  DATE_EXT	:= .$(DATE)
+#  DATE_EXT	:= .$(DATE)
 endif
 BUILD_DATE := $(shell dpkg-parsechangelog | sed -n -e 's/^Date: //p')
 BUILD_DAY  := $(shell date -Idate -u -d "$(BUILD_DATE)")
@@ -405,6 +405,7 @@ CONFARGS = \
 	--enable-deterministic-archives \
 	--disable-compressed-debug-sections \
 	--enable-new-dtags \
+	--disable-x86-used-note \
 	--build=$(DEB_BUILD_GNU_TYPE) \
 	--host=$(DEB_HOST_GNU_TYPE) \
 	--with-pkgversion="GNU Binutils for $(distribution)"
@@ -512,15 +513,15 @@ CONFARGS_TARGET_kfreebsd-i386	= --enable-targets=x86_64-kfreebsd-gnu
 
 CONFARGS_TARGET_mips		= --enable-targets=mips64-linux-gnuabi64,mips64-linux-gnuabin32
 
-CONFARGS_TARGET_mipsel		= --enable-targets=mips64el-linux-gnuabi64,mips64el-linux-gnuabin32 # --enable-mips-fix-loongson3-llsc=yes
+CONFARGS_TARGET_mipsel		= --enable-targets=mips64el-linux-gnuabi64,mips64el-linux-gnuabin32 --enable-mips-fix-loongson3-llsc=yes
 
 CONFARGS_TARGET_mipsn32		= --enable-targets=mips64-linux-gnuabi64,mips-linux-gnu
 
-CONFARGS_TARGET_mipsn32el	= --enable-targets=mips64el-linux-gnuabi64,mipsel-linux-gnu # --enable-mips-fix-loongson3-llsc=yes
+CONFARGS_TARGET_mipsn32el	= --enable-targets=mips64el-linux-gnuabi64,mipsel-linux-gnu --enable-mips-fix-loongson3-llsc=yes
 
 CONFARGS_TARGET_mips64		= --enable-targets=mips64-linux-gnuabin32,mips-linux-gnu
 
-CONFARGS_TARGET_mips64el	= --enable-targets=mips64el-linux-gnuabin32,mipsel-linux-gnu # --enable-mips-fix-loongson3-llsc=yes
+CONFARGS_TARGET_mips64el	= --enable-targets=mips64el-linux-gnuabin32,mipsel-linux-gnu --enable-mips-fix-loongson3-llsc=yes
 
 CONFARGS_TARGET_mipsr6	= --enable-targets=mipsisa64r6-linux-gnuabi64,mipsisa64r6-linux-gnuabin32
 
