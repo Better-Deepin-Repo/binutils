@@ -1,3 +1,14 @@
+binutils (2.35-2) unstable; urgency=medium
+
+  * Update from the binutils 2.35 branch:
+    - Fixes for the eBPF ELF backend.
+    - Fix PR ld/26312, aarch64: set sh_entsize of .plt to 0.
+    - Fix PR gas/26305, x86: Add {disp16} pseudo prefix, handle {disp32}
+      for (%bp)/(%ebp)/(%rbp).
+    - Fix PR ld/26328, compilation warnings.
+
+ -- Matthias Klose <doko@debian.org>  Thu, 13 Aug 2020 16:16:49 +0200
+
 binutils (2.35-1) unstable; urgency=medium
 
   * binutils 2.35 release.
