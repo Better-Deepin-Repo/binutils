@@ -1,3 +1,17 @@
+binutils (2.35.1-2) unstable; urgency=medium
+
+  * Update from the binutils 2.35 branch:
+    - ARM32: Add support for Neoverse N2 and V1 CPUs.
+    - AArch64: Add support for Neoverse V1 CPU.
+    - Various Power10 and Power gold fixes.
+    - Fix PR gas/26685, x86: Check register operand for AddrPrefixOpReg.
+    - Fix PR ld/26711, x86: Properly merge -z ibt and -z shstk.
+    - Fix PR gas/26699, aarch64: Fix bogus type punning in parse_barrier().
+    - Fix PR binutils/26520, fix decoding DWARF information in the BFD library.
+  * AArch64: Add support for Neoverse N2 CPU, taken from the trunk.
+
+ -- Matthias Klose <doko@debian.org>  Fri, 09 Oct 2020 17:10:08 +0200
+
 binutils (2.35.1-1) unstable; urgency=medium
 
   * binutils 2.35.1 release.
