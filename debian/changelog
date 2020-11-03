@@ -1,3 +1,11 @@
+binutils (2.35.50.20201103-1) experimental; urgency=medium
+
+  * Snapshot, taken from the trunk (20201104).
+  * Ignore strip-nondeterminism errors.
+  * Configure with --enable-obsolete (ia64).
+
+ -- Matthias Klose <doko@debian.org>  Tue, 03 Nov 2020 09:30:21 +0100
+
 binutils (2.35.1-2) unstable; urgency=medium
 
   * Update from the binutils 2.35 branch:

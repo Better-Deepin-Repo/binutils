@@ -2,7 +2,7 @@
 
 --- a/gold/options.h
 +++ b/gold/options.h
-@@ -1394,6 +1394,9 @@ class General_options
+@@ -1400,6 +1400,9 @@ class General_options
  		    options::TWO_DASHES, '\0',
  		    N_("Report unresolved symbols as errors"),
  		    NULL, true);
@@ -14,7 +14,7 @@
  	      N_("(ARM only) Do not warn about objects with incompatible "
 --- a/gold/options.cc
 +++ b/gold/options.cc
-@@ -965,6 +965,8 @@ parse_short_option(int argc, const char*
+@@ -973,6 +973,8 @@ parse_short_option(int argc, const char*
      {
        int dummy_i = 0;
        const char* dash_z_arg = *arg;

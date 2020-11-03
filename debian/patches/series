@@ -1,6 +1,6 @@
-branch-updates.diff
+#branch-updates.diff
 #branch-version.diff
-branch-no-development.diff
+#branch-no-development.diff
 001_ld_makefile_patch.patch
 002_gprof_profile_arcs.patch
 003_gprof_see_also_monitor.patch
@@ -28,7 +28,6 @@ gold-mips.diff
 gold-no-keep-files-mapped.diff
 
 # trunk backports
-aarch64-n2.diff
 
 # experimental ...
 #infinity-notes.diff

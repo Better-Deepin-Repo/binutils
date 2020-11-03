@@ -327,7 +327,7 @@ DEB_UPSTREAM	:= $(firstword $(subst -,$(SPACE),$(DEB_VERSION)))
 VERSION		:= $(shell sed -n 's/^ *VERSION=\(.*\)/\1/p' bfd/configure | head -1 | tr -d \')
 DATE		:= $(shell sed -n 's/.* \([0-9]*\)$$/\1/p' bfd/version.h)
 ifneq (,$(DATE))
-#  DATE_EXT	:= .$(DATE)
+  DATE_EXT	:= .$(DATE)
 endif
 BUILD_DATE := $(shell dpkg-parsechangelog | sed -n -e 's/^Date: //p')
 BUILD_DAY  := $(shell date -Idate -u -d "$(BUILD_DATE)")
@@ -397,6 +397,7 @@ endif
 ########################################
 
 CONFARGS = \
+	--enable-obsolete \
 	--enable-shared \
 	--enable-plugins \
 	--enable-threads \
@@ -884,7 +885,7 @@ stamps/install.%: stamps/build.%
 	: # Get rid of .la files since libtool obviously has no idea about transient paths
 	rm -f $(D_CROSS)/$(PF)/$(DEB_HOST_GNU_TYPE)/$(CROSS_GNU_TYPE)/lib/*.la
 
-	if which strip-nondeterminism >/dev/null 2>&1; then \
+	-if which strip-nondeterminism >/dev/null 2>&1; then \
 	  find $(D_CROSS) -name '*.a' -print0 \
 	    | xargs -0r strip-nondeterminism --type ar; \
 	fi
@@ -1177,7 +1178,7 @@ ifeq ($(with_multiarch),yes)
 	$(call strip_package, $(p_mul), $(d_mul))
 endif
 
-	if which strip-nondeterminism >/dev/null 2>&1; then \
+	-if which strip-nondeterminism >/dev/null 2>&1; then \
 	  find $(d_dev) -name '*.a' -print0 \
 	    | xargs -0r strip-nondeterminism --type ar; \
 	fi
@@ -1923,7 +1924,7 @@ endef
 endif
 
 remove-gfdl-files:
-	rm -rf .git* .cvs* gdb libdecnumber readline sim
+	rm -rf .git* .cvs* gdb* libdecnumber readline sim
 ifeq ($(GFDL_INVARIANT_FREE),yes)
 	for i in $(gfdl_toplevel_texinfo_files); do \
 	  if [ -f $$i ]; then \
