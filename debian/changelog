@@ -1,3 +1,15 @@
+binutils (2.35.50.20201206-1) experimental; urgency=medium
+
+  * Snapshot, taken from the trunk (20201206).
+
+ -- Matthias Klose <doko@debian.org>  Sun, 06 Dec 2020 10:35:20 +0100
+
+binutils (2.35.50.20201125-1) experimental; urgency=medium
+
+  * Snapshot, taken from the trunk (20201125).
+
+ -- Matthias Klose <doko@debian.org>  Wed, 25 Nov 2020 10:23:07 +0100
+
 binutils (2.35.50.20201125-1) experimental; urgency=medium
 
   * Snapshot, taken from the trunk (20201125).
