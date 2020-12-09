@@ -541,14 +541,15 @@ CONFARGS_TARGET_aarch64		= --enable-targets=aarch64_be-linux-gnu
 with_check := yes
 ifneq (,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
   # override buildd admins to run the testsuite anyway ...
-  ifeq (,$(filter $(DEB_HOST_ARCH), m68k sh4))
+  ifeq (,$(filter $(DEB_HOST_ARCH), m68k powerpc sh4 sparc64))
     with_check := disabled through DEB_BUILD_OPTIONS
   endif
 endif
 #with_check := disabled for this upload
-#ifneq (,$(filter $(DEB_HOST_ARCH), armel armhf mips mipsel sparc))
-#  ignore_regressions := regressions ignored on architecture $(DEB_HOST_ARCH)
-#endif
+
+ifneq (,$(filter $(DEB_HOST_ARCH), amd64))
+  ignore_regressions := regressions ignored on architecture $(DEB_HOST_ARCH)
+endif
 #ignore_regressions := regressions ignored on architecture $(DEB_HOST_ARCH)
 
 with_strip := yes

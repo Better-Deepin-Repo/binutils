@@ -1,3 +1,10 @@
+binutils (2.35.50.20201209-1) experimental; urgency=medium
+
+  * Snapshot, taken from the trunk (20201209).
+  * Update libctf symbols files.
+
+ -- Matthias Klose <doko@debian.org>  Wed, 09 Dec 2020 12:56:08 +0100
+
 binutils (2.35.50.20201206-1) experimental; urgency=medium
 
   * Snapshot, taken from the trunk (20201206).
