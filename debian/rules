@@ -296,10 +296,15 @@ LDFLAGS =
 CROSS := $(DEB_HOST_GNU_TYPE)-
 CC     = $(CROSS)gcc
 CXX    = $(CROSS)g++
-STRIP  = $(CROSS)strip --remove-section=.comment --remove-section=.note
+STRIP  = $(CROSS)strip -R .comment -R .note
+STRIP_LTO = $(CROSS)strip -R .gnu.lto_* -R .gnu.debuglto_* -N __gnu_lto_slim -N __gnu_lto_v1
 
 ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
   CFLAGS = -g -O0
+else
+  #ifneq (,$(filter $(DEB_HOST_ARCH), amd64 i386 x32))
+    CONF_PGO = --enable-pgo-build=lto
+  #endif
 endif
 
 # this outputs 0 or 1 depending on whether a macro appears in the *default* cpp
@@ -633,6 +638,7 @@ SINGLE_CONFARGS = $(CONFARGS) $(CONFARGS_TARGET_$(DEB_HOST_ARCH))
 ifeq ($(with_gold),yes)
 	SINGLE_CONFARGS += --enable-ld=default --enable-gold
 endif
+SINGLE_CONFARGS += $(CONF_PGO)
 
 stamps/configure-single:
 	$(checkdir)
@@ -760,7 +766,7 @@ stamps/configure-multi:
 	cd builddir-multi \
 	    && env CC="$(CC)" CXX="$(CXX)" CFLAGS="$(CFLAGS)" CXXFLAGS="$(CXXFLAGS)" LDFLAGS="$(LDFLAGS)" \
 	        $(call SET_MULTIARCH_ENV,$(DEB_HOST_ARCH)) \
-		../configure $(CONFARGS) \
+		../configure $(CONFARGS) $(CONF_PGO) \
 		  --with-sysroot=/ \
 		  --libdir=/$(PF)/lib/$(DEB_HOST_MULTIARCH) \
 		  --enable-targets=$(subst $(SPACE),$(COMMA),$(multiarch_targets))
@@ -886,10 +892,14 @@ stamps/install.%: stamps/build.%
 	: # Get rid of .la files since libtool obviously has no idea about transient paths
 	rm -f $(D_CROSS)/$(PF)/$(DEB_HOST_GNU_TYPE)/$(CROSS_GNU_TYPE)/lib/*.la
 
-	-if which strip-nondeterminism >/dev/null 2>&1; then \
-	  find $(D_CROSS) -name '*.a' -print0 \
-	    | xargs -0r strip-nondeterminism --type ar; \
-	fi
+	for i in $(D_CROSS)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.a; do \
+	  echo "lto-stripping $(basename $$i) ..."; \
+	  $(STRIP_LTO) $$i; \
+	  if which strip-nondeterminism >/dev/null 2>&1; then \
+	    echo "strip-nondeterminism $(basename $$i) ..."; \
+	    strip-nondeterminism $$i; \
+	  fi; \
+	done
 
 	: # no spu toolchain
 	rm -f $(D_CROSS)/$(PF)/bin/*embedspu
@@ -1182,10 +1192,14 @@ ifeq ($(with_multiarch),yes)
 	$(call strip_package, $(p_mul), $(d_mul))
 endif
 
-	-if which strip-nondeterminism >/dev/null 2>&1; then \
-	  find $(d_dev) -name '*.a' -print0 \
-	    | xargs -0r strip-nondeterminism --type ar; \
-	fi
+	for i in $(d_dev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.a; do \
+	  echo "lto-stripping $(basename $$i) ..."; \
+	  $(STRIP_LTO) $$i; \
+	  if which strip-nondeterminism >/dev/null 2>&1; then \
+	    echo "strip-nondeterminism $(basename $$i) ..."; \
+	    strip-nondeterminism $$i; \
+	  fi; \
+	done
 
 	: # Don't want /usr/<arch>-linux to exist in any package
 	rm -rf $(d_bin)/$(PF)/$(DEB_HOST_GNU_TYPE)

@@ -28,6 +28,9 @@ gold-mips.diff
 gold-no-keep-files-mapped.diff
 
 # trunk backports
+pgo+lto-1.diff
+pgo+lto-2.diff
+pgo+lto-3.diff
 
 # experimental ...
 #infinity-notes.diff
