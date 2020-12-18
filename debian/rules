@@ -1053,6 +1053,8 @@ stamps/install: checkroot stamps/build $(install_stamps)
 	mv $(d_bin)/$(PF)/share/info $(d_doc)/$(PF)/share/info
 
 	$(install_dir) $(d_nat)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
+	mv $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/bfd-plugins \
+		$(d_nat)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/.
 	mv $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/ldscripts \
 		$(d_nat)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/.
 
@@ -1125,6 +1127,7 @@ ifeq ($(with_multiarch),yes)
 	rm -f $(d_mul)/$(PF)/bin/embedspu
   endif
 	rm -rf $(d_mul)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/ldscripts
+	rm -rf $(d_mul)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/bfd-plugins
 endif
 
 #	rm -rf debian/binutils-*-*-*/$(PF)/lib/$(DEB_HOST_MULTIARCH)/ldscripts \
