@@ -1,3 +1,10 @@
+binutils (2.35.50.20201218-2) UNRELEASED; urgency=medium
+
+  * Fix FTCBFS: Disable pgo for cross builds (Helmut Grohne). Closes: #977822.
+  * 'nopgo' in DEB_BUILD_OPTIONS also disables the pgo builds.
+
+ -- Matthias Klose <doko@debian.org>  Wed, 23 Dec 2020 10:14:01 +0100
+
 binutils (2.35.50.20201218-1) experimental; urgency=medium
 
   * Snapshot, taken from the trunk (20201218).
