@@ -43,8 +43,6 @@ zlib/
  zlib/configure         | 206 ++++++++++++++++++++++++++++++++++++++++-
  11 files changed, 368 insertions(+), 10 deletions(-)
 
-diff --git a/Makefile.in b/Makefile.in
-index fe34132f9e..978e777338 100644
 --- a/Makefile.in
 +++ b/Makefile.in
 @@ -387,7 +387,7 @@ MAKEINFOFLAGS = --split-size=5000000
@@ -65,7 +63,7 @@ index fe34132f9e..978e777338 100644
  READELF = @READELF@
  STRIP = @STRIP@
  WINDRES = @WINDRES@
-@@ -52633,6 +52633,7 @@ AUTOCONF = autoconf
+@@ -52646,6 +52646,7 @@ AUTOCONF = autoconf
  $(srcdir)/configure: @MAINT@ $(srcdir)/configure.ac $(srcdir)/config/acx.m4 \
  	$(srcdir)/config/override.m4 $(srcdir)/config/proginstall.m4 \
  	$(srcdir)/config/elf.m4 $(srcdir)/config/isl.m4 \
@@ -73,8 +71,6 @@ index fe34132f9e..978e777338 100644
  	$(srcdir)/libtool.m4 $(srcdir)/ltoptions.m4 $(srcdir)/ltsugar.m4 \
  	$(srcdir)/ltversion.m4 $(srcdir)/lt~obsolete.m4
  	cd $(srcdir) && $(AUTOCONF)
-diff --git a/Makefile.tpl b/Makefile.tpl
-index 5b118a8ba4..a280a1498c 100644
 --- a/Makefile.tpl
 +++ b/Makefile.tpl
 @@ -390,7 +390,7 @@ MAKEINFOFLAGS = --split-size=5000000
@@ -103,8 +99,6 @@ index 5b118a8ba4..a280a1498c 100644
  	$(srcdir)/libtool.m4 $(srcdir)/ltoptions.m4 $(srcdir)/ltsugar.m4 \
  	$(srcdir)/ltversion.m4 $(srcdir)/lt~obsolete.m4
  	cd $(srcdir) && $(AUTOCONF)
-diff --git a/config/gcc-plugin.m4 b/config/gcc-plugin.m4
-index 8f27871911..c5b72e9a13 100644
 --- a/config/gcc-plugin.m4
 +++ b/config/gcc-plugin.m4
 @@ -124,3 +124,31 @@ AC_DEFUN([GCC_ENABLE_PLUGINS],
@@ -139,8 +133,6 @@ index 8f27871911..c5b72e9a13 100644
 +  AC_MSG_RESULT([no])
 +fi
 +])
-diff --git a/configure b/configure
-index 68779feb42..4c9297d378 100755
 --- a/configure
 +++ b/configure
 @@ -616,6 +616,8 @@ GFORTRAN_FOR_TARGET
@@ -196,8 +188,6 @@ index 68779feb42..4c9297d378 100755
  # Target tools.
  
  # Check whether --with-build-time-tools was given.
-diff --git a/configure.ac b/configure.ac
-index d16a275768..7c4bdff0fa 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -23,6 +23,7 @@ m4_include(config/acx.m4)
@@ -229,11 +219,9 @@ index d16a275768..7c4bdff0fa 100644
  # Target tools.
  AC_ARG_WITH([build-time-tools], 
    [AS_HELP_STRING([--with-build-time-tools=PATH],
-diff --git a/libiberty/Makefile.in b/libiberty/Makefile.in
-index 895f701bcd..0ffcdc1c53 100644
 --- a/libiberty/Makefile.in
 +++ b/libiberty/Makefile.in
-@@ -49,13 +49,13 @@ mkinstalldirs = $(SHELL) $(libiberty_topdir)/mkinstalldirs
+@@ -49,13 +49,13 @@ mkinstalldirs = $(SHELL) $(libiberty_top
  # Some compilers can't handle cc -c blah.c -o foo/blah.o.
  OUTPUT_OPTION = @OUTPUT_OPTION@
  
@@ -257,8 +245,6 @@ index 895f701bcd..0ffcdc1c53 100644
  	$(srcdir)/../config/no-executables.m4 \
  	$(srcdir)/../config/override.m4 \
  	$(srcdir)/../config/picflag.m4 \
-diff --git a/libiberty/aclocal.m4 b/libiberty/aclocal.m4
-index 34c0a5bab6..b2e54d9e32 100644
 --- a/libiberty/aclocal.m4
 +++ b/libiberty/aclocal.m4
 @@ -1,6 +1,7 @@
@@ -269,8 +255,6 @@ index 34c0a5bab6..b2e54d9e32 100644
  sinclude(../config/no-executables.m4)
  sinclude(../config/override.m4)
  sinclude(../config/picflag.m4)
-diff --git a/libiberty/configure b/libiberty/configure
-index ff93c9ee9a..4406ccb35a 100755
 --- a/libiberty/configure
 +++ b/libiberty/configure
 @@ -645,6 +645,8 @@ CPPFLAGS
@@ -324,8 +308,6 @@ index ff93c9ee9a..4406ccb35a 100755
  # Add --enable-multilib to configure.
  # Default to --enable-multilib
  # Check whether --enable-multilib was given.
-diff --git a/libiberty/configure.ac b/libiberty/configure.ac
-index 4e2599c14a..38ae8ab3a6 100644
 --- a/libiberty/configure.ac
 +++ b/libiberty/configure.ac
 @@ -108,6 +108,18 @@ dnl to call AC_CHECK_PROG.
@@ -347,8 +329,6 @@ index 4e2599c14a..38ae8ab3a6 100644
  dnl When switching to automake, replace the following with AM_ENABLE_MULTILIB.
  # Add --enable-multilib to configure.
  # Default to --enable-multilib
-diff --git a/libtool.m4 b/libtool.m4
-index 434530059f..c24453fc75 100644
 --- a/libtool.m4
 +++ b/libtool.m4
 @@ -1323,8 +1323,26 @@ need_locks="$enable_libtool_lock"
@@ -379,7 +359,7 @@ index 434530059f..c24453fc75 100644
  test -z "$AR_FLAGS" && AR_FLAGS=cru
  _LT_DECL([], [AR], [1], [The archiver])
  _LT_DECL([], [AR_FLAGS], [1])
-@@ -1335,6 +1353,11 @@ _LT_DECL([], [STRIP], [1], [A symbol stripping program])
+@@ -1335,6 +1353,11 @@ _LT_DECL([], [STRIP], [1], [A symbol str
  
  AC_CHECK_TOOL(RANLIB, ranlib, :)
  test -z "$RANLIB" && RANLIB=:
@@ -391,22 +371,69 @@ index 434530059f..c24453fc75 100644
  _LT_DECL([], [RANLIB], [1],
      [Commands used to install an old-style archive])
  
-diff --git a/zlib/configure b/zlib/configure
-index de6fa7e996..0d7763b104 100755
 --- a/zlib/configure
 +++ b/zlib/configure
-@@ -5407,6 +5407,19 @@ test -z "$deplibs_check_method" && deplibs_check_method=unknown
+@@ -740,6 +740,7 @@ infodir
+ docdir
+ oldincludedir
+ includedir
++runstatedir
+ localstatedir
+ sharedstatedir
+ sysconfdir
+@@ -820,6 +821,7 @@ datadir='${datarootdir}'
+ sysconfdir='${prefix}/etc'
+ sharedstatedir='${prefix}/com'
+ localstatedir='${prefix}/var'
++runstatedir='${localstatedir}/run'
+ includedir='${prefix}/include'
+ oldincludedir='/usr/include'
+ docdir='${datarootdir}/doc/${PACKAGE_TARNAME}'
+@@ -1072,6 +1074,15 @@ do
+   | -silent | --silent | --silen | --sile | --sil)
+     silent=yes ;;
+ 
++  -runstatedir | --runstatedir | --runstatedi | --runstated \
++  | --runstate | --runstat | --runsta | --runst | --runs \
++  | --run | --ru | --r)
++    ac_prev=runstatedir ;;
++  -runstatedir=* | --runstatedir=* | --runstatedi=* | --runstated=* \
++  | --runstate=* | --runstat=* | --runsta=* | --runst=* | --runs=* \
++  | --run=* | --ru=* | --r=*)
++    runstatedir=$ac_optarg ;;
++
+   -sbindir | --sbindir | --sbindi | --sbind | --sbin | --sbi | --sb)
+     ac_prev=sbindir ;;
+   -sbindir=* | --sbindir=* | --sbindi=* | --sbind=* | --sbin=* \
+@@ -1209,7 +1220,7 @@ fi
+ for ac_var in	exec_prefix prefix bindir sbindir libexecdir datarootdir \
+ 		datadir sysconfdir sharedstatedir localstatedir includedir \
+ 		oldincludedir docdir infodir htmldir dvidir pdfdir psdir \
+-		libdir localedir mandir
++		libdir localedir mandir runstatedir
+ do
+   eval ac_val=\$$ac_var
+   # Remove trailing slashes.
+@@ -1362,6 +1373,7 @@ Fine tuning of the installation director
+   --sysconfdir=DIR        read-only single-machine data [PREFIX/etc]
+   --sharedstatedir=DIR    modifiable architecture-independent data [PREFIX/com]
+   --localstatedir=DIR     modifiable single-machine data [PREFIX/var]
++  --runstatedir=DIR       modifiable per-process data [LOCALSTATEDIR/run]
+   --libdir=DIR            object code libraries [EPREFIX/lib]
+   --includedir=DIR        C header files [PREFIX/include]
+   --oldincludedir=DIR     C header files for non-gcc [/usr/include]
+@@ -5407,6 +5419,19 @@ test -z "$deplibs_check_method" && depli
  
  
  
 +plugin_option=
 +plugin_names="liblto_plugin.so liblto_plugin-0.dll cyglto_plugin-0.dll"
 +for plugin in $plugin_names; do
-+  plugin_so=`${CC} ${CFLAGS} --print-prog-name plugin`
-+  if  x$plugin_so = x$plugin ; then
-+    plugin_so=`${CC} ${CFLAGS} --print-file-name plugin`
++  plugin_so=`${CC} ${CFLAGS} --print-prog-name $plugin`
++  if test x$plugin_so = x$plugin; then
++    plugin_so=`${CC} ${CFLAGS} --print-file-name $plugin`
 +  fi
-+  if  x$plugin_so != x$plugin ; then
++  if test x$plugin_so != x$plugin; then
 +    plugin_option="--plugin $plugin_so"
 +    break
 +  fi
@@ -415,227 +442,54 @@ index de6fa7e996..0d7763b104 100755
  if test -n "$ac_tool_prefix"; then
    # Extract the first word of "${ac_tool_prefix}ar", so it can be a program name with args.
  set dummy ${ac_tool_prefix}ar; ac_word=$2
-@@ -5500,6 +5513,98 @@ else
+@@ -5500,6 +5525,11 @@ else
  fi
  
  test -z "$AR" && AR=ar
-+if test -n "$ac_tool_prefix"; then
-+  # Extract the first word of "${ac_tool_prefix}"$AR $plugin_option"", so it can be a program name with args.
-+set dummy ${ac_tool_prefix}"$AR $plugin_option"; ac_word=$2
-+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
-+$as_echo_n "checking for $ac_word... " >&6; }
-+if ${ac_cv_prog_AR+:} false; then :
-+  $as_echo_n "(cached) " >&6
-+else
-+  if test -n "$AR"; then
-+  ac_cv_prog_AR="$AR" # Let the user override the test.
-+else
-+as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-+for as_dir in $PATH
-+do
-+  IFS=$as_save_IFS
-+  test -z "$as_dir" && as_dir=.
-+    for ac_exec_ext in '' $ac_executable_extensions; do
-+  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
-+    ac_cv_prog_AR="${ac_tool_prefix}"$AR $plugin_option""
-+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
-+    break 2
++if test -n "$plugin_option"; then
++  if $AR --help 2>&1 | grep -q "\--plugin"; then
++    AR="$AR $plugin_option"
 +  fi
-+done
-+  done
-+IFS=$as_save_IFS
-+
 +fi
-+fi
-+AR=$ac_cv_prog_AR
-+if test -n "$AR"; then
-+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $AR" >&5
-+$as_echo "$AR" >&6; }
-+else
-+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-+$as_echo "no" >&6; }
-+fi
-+
-+
-+fi
-+if test -z "$ac_cv_prog_AR"; then
-+  ac_ct_AR=$AR
-+  # Extract the first word of ""$AR $plugin_option"", so it can be a program name with args.
-+set dummy "$AR $plugin_option"; ac_word=$2
-+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
-+$as_echo_n "checking for $ac_word... " >&6; }
-+if ${ac_cv_prog_ac_ct_AR+:} false; then :
-+  $as_echo_n "(cached) " >&6
-+else
-+  if test -n "$ac_ct_AR"; then
-+  ac_cv_prog_ac_ct_AR="$ac_ct_AR" # Let the user override the test.
-+else
-+as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-+for as_dir in $PATH
-+do
-+  IFS=$as_save_IFS
-+  test -z "$as_dir" && as_dir=.
-+    for ac_exec_ext in '' $ac_executable_extensions; do
-+  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
-+    ac_cv_prog_ac_ct_AR=""$AR $plugin_option""
-+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
-+    break 2
-+  fi
-+done
-+  done
-+IFS=$as_save_IFS
-+
-+fi
-+fi
-+ac_ct_AR=$ac_cv_prog_ac_ct_AR
-+if test -n "$ac_ct_AR"; then
-+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_ct_AR" >&5
-+$as_echo "$ac_ct_AR" >&6; }
-+else
-+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-+$as_echo "no" >&6; }
-+fi
-+
-+  if test "x$ac_ct_AR" = x; then
-+    AR="$AR"
-+  else
-+    case $cross_compiling:$ac_tool_warned in
-+yes:)
-+{ $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: using cross tools not prefixed with host triplet" >&5
-+$as_echo "$as_me: WARNING: using cross tools not prefixed with host triplet" >&2;}
-+ac_tool_warned=yes ;;
-+esac
-+    AR=$ac_ct_AR
-+  fi
-+else
-+  AR="$ac_cv_prog_AR"
-+fi
-+
  test -z "$AR_FLAGS" && AR_FLAGS=cru
  
  
-@@ -5703,7 +5808,102 @@ else
-   RANLIB="$ac_cv_prog_RANLIB"
+@@ -5704,6 +5734,11 @@ else
  fi
  
--test -z "$RANLIB" && RANLIB=:
-+if test -z "$RANLIB"; then
-+  RANLIB=:
-+else
-+  if test -n "$ac_tool_prefix"; then
-+  # Extract the first word of "${ac_tool_prefix}"$RANLIB $plugin_option"", so it can be a program name with args.
-+set dummy ${ac_tool_prefix}"$RANLIB $plugin_option"; ac_word=$2
-+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
-+$as_echo_n "checking for $ac_word... " >&6; }
-+if ${ac_cv_prog_RANLIB+:} false; then :
-+  $as_echo_n "(cached) " >&6
-+else
-+  if test -n "$RANLIB"; then
-+  ac_cv_prog_RANLIB="$RANLIB" # Let the user override the test.
-+else
-+as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-+for as_dir in $PATH
-+do
-+  IFS=$as_save_IFS
-+  test -z "$as_dir" && as_dir=.
-+    for ac_exec_ext in '' $ac_executable_extensions; do
-+  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
-+    ac_cv_prog_RANLIB="${ac_tool_prefix}"$RANLIB $plugin_option""
-+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
-+    break 2
+ test -z "$RANLIB" && RANLIB=:
++if test -n "$plugin_option" && test "$RANLIB" != ":"; then
++  if $RANLIB --help 2>&1 | grep -q "\--plugin"; then
++    RANLIB="$RANLIB $plugin_option"
 +  fi
-+done
-+  done
-+IFS=$as_save_IFS
-+
-+fi
-+fi
-+RANLIB=$ac_cv_prog_RANLIB
-+if test -n "$RANLIB"; then
-+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $RANLIB" >&5
-+$as_echo "$RANLIB" >&6; }
-+else
-+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-+$as_echo "no" >&6; }
-+fi
-+
-+
-+fi
-+if test -z "$ac_cv_prog_RANLIB"; then
-+  ac_ct_RANLIB=$RANLIB
-+  # Extract the first word of ""$RANLIB $plugin_option"", so it can be a program name with args.
-+set dummy "$RANLIB $plugin_option"; ac_word=$2
-+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
-+$as_echo_n "checking for $ac_word... " >&6; }
-+if ${ac_cv_prog_ac_ct_RANLIB+:} false; then :
-+  $as_echo_n "(cached) " >&6
-+else
-+  if test -n "$ac_ct_RANLIB"; then
-+  ac_cv_prog_ac_ct_RANLIB="$ac_ct_RANLIB" # Let the user override the test.
-+else
-+as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-+for as_dir in $PATH
-+do
-+  IFS=$as_save_IFS
-+  test -z "$as_dir" && as_dir=.
-+    for ac_exec_ext in '' $ac_executable_extensions; do
-+  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
-+    ac_cv_prog_ac_ct_RANLIB=""$RANLIB $plugin_option""
-+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
-+    break 2
-+  fi
-+done
-+  done
-+IFS=$as_save_IFS
-+
-+fi
-+fi
-+ac_ct_RANLIB=$ac_cv_prog_ac_ct_RANLIB
-+if test -n "$ac_ct_RANLIB"; then
-+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_ct_RANLIB" >&5
-+$as_echo "$ac_ct_RANLIB" >&6; }
-+else
-+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-+$as_echo "no" >&6; }
-+fi
-+
-+  if test "x$ac_ct_RANLIB" = x; then
-+    RANLIB="$RANLIB"
-+  else
-+    case $cross_compiling:$ac_tool_warned in
-+yes:)
-+{ $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: using cross tools not prefixed with host triplet" >&5
-+$as_echo "$as_me: WARNING: using cross tools not prefixed with host triplet" >&2;}
-+ac_tool_warned=yes ;;
-+esac
-+    RANLIB=$ac_ct_RANLIB
-+  fi
-+else
-+  RANLIB="$ac_cv_prog_RANLIB"
-+fi
-+
 +fi
  
  
  
-@@ -10644,7 +10844,7 @@ else
+@@ -10634,7 +10669,7 @@ else
    lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
    lt_status=$lt_dlunknown
    cat > conftest.$ac_ext <<_LT_EOF
--#line 10647 "configure"
-+#line 10847 "configure"
+-#line 10637 "configure"
++#line 10672 "configure"
  #include "confdefs.h"
  
  #if HAVE_DLFCN_H
-@@ -10750,7 +10950,7 @@ else
+@@ -10740,7 +10775,7 @@ else
    lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
    lt_status=$lt_dlunknown
    cat > conftest.$ac_ext <<_LT_EOF
--#line 10753 "configure"
-+#line 10953 "configure"
+-#line 10743 "configure"
++#line 10778 "configure"
  #include "confdefs.h"
  
  #if HAVE_DLFCN_H
--- 
-2.29.2
-
+@@ -11318,6 +11353,8 @@ main ()
+     if (*(data + i) != *(data3 + i))
+       return 14;
+   close (fd);
++  free (data);
++  free (data3);
+   return 0;
+ }
+ _ACEOF
