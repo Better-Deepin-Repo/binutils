@@ -1,6 +1,12 @@
+binutils (2.35.90.20210120-1) experimental; urgency=medium
+
+  * Snapshot, taken from the 2.36 branch (20210120).
+
+ -- Matthias Klose <doko@debian.org>  Wed, 20 Jan 2021 10:45:39 +0100
+
 binutils (2.35.90.20210113-1) experimental; urgency=medium
 
-  * Snapshot, taken from the 2.36 branch (20210106).
+  * Snapshot, taken from the 2.36 branch (20210113).
 
  -- Matthias Klose <doko@debian.org>  Wed, 13 Jan 2021 12:00:22 +0100
 
