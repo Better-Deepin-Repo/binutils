@@ -90,6 +90,7 @@ move-if-change
 multilib.am
 opcodes
 setup.com
+sha256.sum
 src-release.sh
 symlink-tree
 test-driver

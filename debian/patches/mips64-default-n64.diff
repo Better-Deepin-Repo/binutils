@@ -62,7 +62,7 @@
  			;;
 --- a/gas/configure
 +++ b/gas/configure
-@@ -12815,6 +12815,9 @@ _ACEOF
+@@ -12805,6 +12805,9 @@ _ACEOF
  	esac
  	# Decide which ABI to target by default.
  	case ${target} in
