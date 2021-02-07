@@ -1,5 +1,5 @@
-branch-updates.diff
-branch-version.diff
+#branch-updates.diff
+#branch-version.diff
 #branch-no-development.diff
 001_ld_makefile_patch.patch
 002_gprof_profile_arcs.patch
