@@ -21,6 +21,17 @@ DEB_HOST_GNU_CPU	?= $(call vafilt,$(DPKG_VARS),DEB_HOST_GNU_CPU)
 DEB_HOST_GNU_TYPE	?= $(call vafilt,$(DPKG_VARS),DEB_HOST_GNU_TYPE)
 DEB_HOST_MULTIARCH	?= $(call vafilt,$(DPKG_VARS),DEB_HOST_MULTIARCH)
 
+ifeq (,$(filter no, $(DEB_RULES_REQUIRES_ROOT)))
+  require_root = yes
+endif
+ifeq ($(require_root),yes)
+  CHOWN = chown
+  DPKG_DEB = dpkg-deb
+else
+  CHOWN = : chown
+  DPKG_DEB = dpkg-deb --root-owner-group
+endif
+
 ifeq (,$(filter $(distrelease),lenny etch squeeze wheezy jessie))
   ifeq ($(DEB_HOST_GNU_TYPE),i586-linux-gnu)
     DEB_BUILD_GNU_TYPE	= i686-linux-gnu
@@ -1388,11 +1399,11 @@ ifneq ($(BACKPORT),true)
 	gzip -9n $(d_doc)/$(PF)/share/info/*
 
 	dpkg-gencontrol -P$(d_doc) -p$(p_doc)
-	chown -R root:root $(d_doc)
+	$(CHOWN) -R root:root $(d_doc)
 	chmod -R go=rX  $(d_doc)
 	find $(d_doc) -depth -newermt '$(BUILD_DATE)' -print0 | \
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
-	dpkg --build $(d_doc) ..
+	$(DPKG_DEB) --build $(d_doc) ..
 
 	$(install_dir) $(d_src)/$(PF)/share/doc/$(p_src)/
 	$(install_file)	debian/changelog $(d_src)/$(PF)/share/doc/$(p_src)/changelog.Debian
@@ -1427,21 +1438,21 @@ endif # ifndef BACKPORT
 	chmod 755 $(d_src)/$(PF)/src/binutils/debian/test-suite-compare.py
 
 	dpkg-gencontrol -P$(d_src) -p$(p_src)
-	chown -R root:root $(d_src)
+	$(CHOWN) -R root:root $(d_src)
 	chmod -R go=rX  $(d_src)
 	find $(d_src) -depth -newermt '$(BUILD_DATE)' -print0 | \
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
-	dpkg --build $(d_src) ..
+	$(DPKG_DEB) --build $(d_src) ..
 
 
 	$(install_dir) $(d_bld)/DEBIAN $(d_bld)/$(PF)/share/doc/
 	ln -sf $(p_com) $(d_bld)/$(PF)/share/doc/$(p_bld)
 	dpkg-gencontrol -P$(d_bld) -p$(p_bld) -Vbinutils:minver=$(min_ver)
-	chown -R root:root $(d_bld)
+	$(CHOWN) -R root:root $(d_bld)
 	chmod -R go=rX $(d_bld)
 	find $(d_bld) -depth -newermt '$(BUILD_DATE)' -print0 | \
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
-	dpkg --build $(d_bld) ..
+	$(DPKG_DEB) --build $(d_bld) ..
 endif
 
 ###############################################################################
@@ -1501,12 +1512,12 @@ endif
 	cd $(D_CROSS) && find -type f  ! -regex './DEBIAN/.*' -printf '%P\n' | LC_ALL=C sort | xargs md5sum > DEBIAN/md5sums
 	dpkg-gencontrol -P$(D_CROSS)-dbg -p$(P_CROSS)-dbg
 	cd $(D_CROSS)-dbg && find -type f  ! -regex './DEBIAN/.*' -printf '%P\n' | LC_ALL=C sort | xargs md5sum > DEBIAN/md5sums
-	chown -R root:root $(D_CROSS) $(D_CROSS)-dbg
+	$(CHOWN) -R root:root $(D_CROSS) $(D_CROSS)-dbg
 	chmod -R go=rX  $(D_CROSS) $(D_CROSS)-dbg
 	find $(D_CROSS) $(D_CROSS)-dbg -depth -newermt '$(BUILD_DATE)' -print0 | \
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
-	dpkg --build $(D_CROSS) ..
-	dpkg --build $(D_CROSS)-dbg ..
+	$(DPKG_DEB) --build $(D_CROSS) ..
+	$(DPKG_DEB) --build $(D_CROSS)-dbg ..
 
 binary-for-host: checkroot
 	$(checkdir)
@@ -1520,12 +1531,12 @@ binary-for-host: checkroot
 		-Vbinutils:native=$(if $(TARGET),$(p_cross),$(p_nat)) \
 		-Vbinutils:minver=$(min_ver)
 
-	chown -R root:root $(d_hst)
+	$(CHOWN) -R root:root $(d_hst)
 	chmod -R go=rX $(d_hst)
 
 	find $(d_hst) -depth -newermt '$(BUILD_DATE)' -print0 | \
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
-	dpkg --build $(d_hst) ..
+	$(DPKG_DEB) --build $(d_hst) ..
 
 binary-arch: checkroot binary-native binary-for-host \
     $(if $(filter yes, $(with_cross)),$(foreach ca,$(CROSS_ARCHS), binary.$(ca)))
@@ -1558,7 +1569,7 @@ ifneq (,$(TARGET))
 		-VBuilt-Using="$(shell dpkg-query -f '$${source:Package} (= $${source:Version}), ' -W binutils-source)"
 	find $(d_cross) -depth -newermt '$(BUILD_DATE)' -print0 | \
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
-	dpkg --build $(d_cross) ..
+	$(DPKG_DEB) --build $(d_cross) ..
 
 else
 	: # generate some control & helper files
@@ -1815,66 +1826,66 @@ ifeq ($(with_hppa64),yes)
 	cd $(d_hppa64)-dbg && find -type f  ! -regex './DEBIAN/.*' -printf '%P\n' | LC_ALL=C sort | xargs md5sum > DEBIAN/md5sums
 endif
 
-	chown -R root:root $(d_bin) $(d_com) $(d_lib) $(d_lib)-dbg $(d_ctf) $(d_ctf)-dbg $(d_ctfn) $(d_ctfn)-dbg $(d_nat) $(d_nat)-dbg $(d_dev)
+	$(CHOWN) -R root:root $(d_bin) $(d_com) $(d_lib) $(d_lib)-dbg $(d_ctf) $(d_ctf)-dbg $(d_ctfn) $(d_ctfn)-dbg $(d_nat) $(d_nat)-dbg $(d_dev)
 	chmod -R go=rX  $(d_bin) $(d_com) $(d_lib) $(d_lib)-dbg $(d_ctf) $(d_ctf)-dbg $(d_ctfn) $(d_ctfn)-dbg $(d_nat) $(d_nat)-dbg $(d_dev)
 	find $(d_bin) -depth -newermt '$(BUILD_DATE)' -print0 | \
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
-	dpkg --build $(d_bin) ..
+	$(DPKG_DEB) --build $(d_bin) ..
 	find $(d_com) -depth -newermt '$(BUILD_DATE)' -print0 | \
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
-	dpkg --build $(d_com) ..
+	$(DPKG_DEB) --build $(d_com) ..
 	find $(d_ctf) -depth -newermt '$(BUILD_DATE)' -print0 | \
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
-	dpkg --build $(d_ctf) ..
+	$(DPKG_DEB) --build $(d_ctf) ..
 	find $(d_ctf)-dbg -depth -newermt '$(BUILD_DATE)' -print0 | \
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
-	dpkg --build $(d_ctf)-dbg ..
+	$(DPKG_DEB) --build $(d_ctf)-dbg ..
 	find $(d_ctfn) -depth -newermt '$(BUILD_DATE)' -print0 | \
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
-	dpkg --build $(d_ctfn) ..
+	$(DPKG_DEB) --build $(d_ctfn) ..
 	find $(d_ctfn)-dbg -depth -newermt '$(BUILD_DATE)' -print0 | \
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
-	dpkg --build $(d_ctfn)-dbg ..
+	$(DPKG_DEB) --build $(d_ctfn)-dbg ..
 	find $(d_lib) -depth -newermt '$(BUILD_DATE)' -print0 | \
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
-	dpkg --build $(d_lib) ..
+	$(DPKG_DEB) --build $(d_lib) ..
 	find $(d_lib)-dbg -depth -newermt '$(BUILD_DATE)' -print0 | \
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
-	dpkg --build $(d_lib)-dbg ..
+	$(DPKG_DEB) --build $(d_lib)-dbg ..
 	find $(d_nat) -depth -newermt '$(BUILD_DATE)' -print0 | \
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
-	dpkg --build $(d_nat) ..
+	$(DPKG_DEB) --build $(d_nat) ..
 	find $(d_nat)-dbg -depth -newermt '$(BUILD_DATE)' -print0 | \
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
-	dpkg --build $(d_nat)-dbg ..
+	$(DPKG_DEB) --build $(d_nat)-dbg ..
 	find $(d_dev) -depth -newermt '$(BUILD_DATE)' -print0 | \
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
-	dpkg --build $(d_dev) ..
+	$(DPKG_DEB) --build $(d_dev) ..
 ifeq ($(with_multiarch),yes)
-	chown -R root:root $(d_mul) $(d_mul)-dbg
+	$(CHOWN) -R root:root $(d_mul) $(d_mul)-dbg
 	chmod -R go=rX $(d_mul) $(d_mul)-dbg
 	find $(d_mul) -depth -newermt '$(BUILD_DATE)' -print0 | \
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
-	dpkg --build $(d_mul) ..
+	$(DPKG_DEB) --build $(d_mul) ..
 	find $(d_mul)-dbg -depth -newermt '$(BUILD_DATE)' -print0 | \
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
-	dpkg --build $(d_mul)-dbg ..
+	$(DPKG_DEB) --build $(d_mul)-dbg ..
 
-	chown -R root:root $(d_mdev)
+	$(CHOWN) -R root:root $(d_mdev)
 	chmod -R go=rX  $(d_mdev)
 	find $(d_mdev) -depth -newermt '$(BUILD_DATE)' -print0 | \
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
-	dpkg --build $(d_mdev) ..
+	$(DPKG_DEB) --build $(d_mdev) ..
 endif
 ifeq ($(with_hppa64),yes)
-	chown -R root:root $(d_hppa64)-dbg
+	$(CHOWN) -R root:root $(d_hppa64)-dbg
 	chmod -R go=rX  $(d_hppa64) $(d_hppa64)-dbg
 	find $(d_hppa64) -depth -newermt '$(BUILD_DATE)' -print0 | \
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
-	dpkg --build $(d_hppa64) ..
+	$(DPKG_DEB) --build $(d_hppa64) ..
 	find $(d_hppa64)-dbg -depth -newermt '$(BUILD_DATE)' -print0 | \
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
-	dpkg --build $(d_hppa64)-dbg ..
+	$(DPKG_DEB) --build $(d_hppa64)-dbg ..
 endif
 	@echo '==================== Build finished ===================='
 	ps aux
@@ -1964,7 +1975,9 @@ binary:         binary-indep binary-arch
 
 checkroot:
 	$(checkdir)
+ifeq ($(require_root),yes)
 	test root = "`whoami`"
+endif
 
 .PHONY: binary binary-arch binary-indep clean checkroot
 

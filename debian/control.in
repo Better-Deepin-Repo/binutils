@@ -3,7 +3,7 @@ Section: devel
 Priority: optional
 Maintainer: Matthias Klose <doko@debian.org>
 Uploaders: James Troup <binutils@elmo.tasta.io>
-Standards-Version: 4.5.0
+Standards-Version: 4.5.1
 Build-Depends: autoconf (>= 2.64), @dpkg_dev@
   bison, flex, gettext, texinfo, dejagnu, quilt, chrpath, dwz,
   python3:any, file, xz-utils, lsb-release, zlib1g-dev, procps,
@@ -24,6 +24,7 @@ Build-Depends: autoconf (>= 2.64), @dpkg_dev@
   g++-x86-64-linux-gnu [arm64 i386 ppc64el] <!nocheck>,
   g++-x86-64-linux-gnux32 [amd64 arm64 i386 ppc64el] <!nocheck>,
 Build-Conflicts: libelf-dev
+Rules-Requires-Root: no
 Homepage: https://www.gnu.org/software/binutils/
 Vcs-Browser: https://salsa.debian.org/toolchain-team/binutils
 Vcs-Git: https://salsa.debian.org/toolchain-team/binutils.git

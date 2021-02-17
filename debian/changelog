@@ -3,8 +3,10 @@ binutils (2.36.1-1) UNRELEASED; urgency=medium
   * binutils 2.36.1 release.
   * debian/patches/mips64-default-n64.diff: Update (YunQiang Su).
     Patch never forwarded upstream.
+  * Build with Rules-Requires-Root: no.
+  * Bump standards version.
 
- -- Matthias Klose <doko@debian.org>  Sun, 07 Feb 2021 13:21:30 +0100
+ -- Matthias Klose <doko@debian.org>  Wed, 17 Feb 2021 12:00:32 +0100
 
 binutils (2.36-2) experimental; urgency=medium
 
