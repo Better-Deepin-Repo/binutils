@@ -5,6 +5,7 @@ binutils (2.36.1-1) UNRELEASED; urgency=medium
     Patch never forwarded upstream.
   * Build with Rules-Requires-Root: no.
   * Bump standards version.
+  * Set unique build-ids for stripped files.
 
  -- Matthias Klose <doko@debian.org>  Wed, 17 Feb 2021 12:00:32 +0100
 

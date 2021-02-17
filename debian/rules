@@ -1930,6 +1930,7 @@ define strip_package
 	  dwz $$files; \
 	fi; \
 	for i in $$files; do \
+	  debugedit --build-id --build-id-seed='$(strip $1)-$(DEB_VERSION)' $$i; \
 	  b_id=$$(LC_ALL=C $(CROSS)readelf -n $$i | sed -n 's/ *Build ID: *\([0-9a-f][0-9a-f]*\)/\1/p'); \
 	  if [ -z "$$b_id" ]; then \
 	    id=$$(echo $$i | sed -r 's,debian/[^/]+,$2-dbg/usr/lib/debug,'); \
