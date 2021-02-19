@@ -1,6 +1,7 @@
 binutils (2.36.1-2) UNRELEASED; urgency=medium
 
   * Remove unused patch.
+  * Show available memory for autopkg tests.
 
  -- Matthias Klose <doko@debian.org>  Fri, 19 Feb 2021 17:16:43 +0100
 
