@@ -34,5 +34,4 @@ pgo+lto-3.diff
 
 # experimental ...
 #infinity-notes.diff
-#binutils-no-development.diff
 libctf-soname.diff
