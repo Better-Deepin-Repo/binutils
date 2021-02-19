@@ -1,13 +1,17 @@
-binutils (2.36.1-1) UNRELEASED; urgency=medium
+binutils (2.36.1-1) experimental; urgency=medium
 
   * binutils 2.36.1 release.
+  * Update from the binutils 2.36 branch:
+    - IBM Z: Implement instruction set extensions.
+    - PR27382, build failure if fileno() is a macro.
+    - ld: Remove x86 ISA level run-time tests.
   * debian/patches/mips64-default-n64.diff: Update (YunQiang Su).
     Patch never forwarded upstream.
   * Build with Rules-Requires-Root: no.
   * Bump standards version.
   * Set unique build-ids for stripped files.
 
- -- Matthias Klose <doko@debian.org>  Wed, 17 Feb 2021 12:00:32 +0100
+ -- Matthias Klose <doko@debian.org>  Fri, 19 Feb 2021 14:52:51 +0100
 
 binutils (2.36-2) experimental; urgency=medium
 
@@ -18,7 +22,7 @@ binutils (2.36-2) experimental; urgency=medium
 binutils (2.36-1) experimental; urgency=medium
 
   * binutils 2.36 release.
-  * Update from the binutils 2.35 branch:
+  * Update from the binutils 2.36 branch:
     - DWARF-5: Ignore empty range in DWARF-5 line number tables.
 
  -- Matthias Klose <doko@debian.org>  Mon, 25 Jan 2021 11:43:44 +0100

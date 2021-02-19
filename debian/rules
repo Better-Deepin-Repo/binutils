@@ -402,9 +402,9 @@ ifeq ($(distribution),Ubuntu)
 endif
 
 gfdl_toplevel_texinfo_files = \
-	bfd/doc/bfd.texinfo \
+	bfd/doc/bfd.texi \
 	bfd/doc/bfdint.texi \
-	ld/ldint.texinfo
+	ld/ldint.texi
 
 gfdl_generated_files = \
 	bfd/doc/bfd.info
