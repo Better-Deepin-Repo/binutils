@@ -1771,8 +1771,8 @@ endif
 	dpkg-gencontrol -P$(d_lib)-dbg -p$(p_lib)-dbg
 	cd $(d_lib)-dbg && find -type f  ! -regex './DEBIAN/.*' -printf '%P\n' | LC_ALL=C sort | xargs md5sum > DEBIAN/md5sums
 
-	dpkg-gensymbols -P$(d_ctf) -p$(p_ctf) -v2.33.50 -l$(d_lib)
-	dpkg-gensymbols -P$(d_ctfn) -p$(p_ctfn) -v2.33.50
+	dpkg-gensymbols -P$(d_ctf) -p$(p_ctf) -l$(d_lib)
+	dpkg-gensymbols -P$(d_ctfn) -p$(p_ctfn)
 
 	rm -f debian/substvars
 	find $(d_ctf) -type f | xargs file | grep ELF | cut -d: -f 1 | xargs dpkg-shlibdeps
