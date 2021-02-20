@@ -245,7 +245,7 @@ _gnu_type	= $(shell dpkg-architecture -a$(1) -qDEB_HOST_GNU_TYPE -f 2>/dev/null)
 _multiarch	= $(shell dpkg-architecture -a$(1) -qDEB_HOST_MULTIARCH -f 2>/dev/null)
 CROSS_GNU_TYPE	= $(subst i586,i686,$(call _gnu_type,$(CROSS_ARCH)))
 P_CROSS		= binutils-$(subst _,-,$(CROSS_GNU_TYPE))
-D_CROSS		= debian/binutils-$(subst _,-,$(CROSS_GNU_TYPE))
+D_CROSS		= debian/$(P_CROSS)
 
 # If $(TARGET) is not set, try reading debian/target
 ifeq (,$(TARGET))
