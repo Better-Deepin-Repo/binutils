@@ -609,9 +609,9 @@ clean:
 	$(foreach ca,$(CROSS_ARCHS), rm -rf debian/binutils-$(shell echo $(call _gnu_type,$(ca)) | sed 's/_/-/g;s/i586/i686/'){,-dbg}; )
 	rm -rf debian/tmp debian/files* debian/substvars
 	rm -f debian/*.orig debian/*.rej
-	rm -rf $(d_cross) debian/files debian/substvars
+	rm -f debian/files debian/substvars
 ifneq (,$(TARGET))
-	rm -rf builddir-$(TARGET)
+	rm -rf $(d_cross)
 endif
 	for i in debian/*.in; do \
 	    case "$$i" in debian/control*.in) continue; esac; \
