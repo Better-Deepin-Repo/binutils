@@ -129,9 +129,9 @@ ifneq ($(distribution)-$(CROSS_ARCHS),Ubuntu-)
   NATIVE_ARCHS += mipsn32r6 mipsn32r6el mipsr6 mipsr6el mips64r6 mips64r6el
 endif
 
+with_cross = yes
 ifeq ($(DEB_SOURCE),binutils)
   with_native	= yes
-  with_cross	= yes
   same_source	= yes
   ifeq (,$(CROSS_ARCHS))
     ifneq (,$(filter $(DEB_HOST_ARCH), amd64 i386 x32))
@@ -164,7 +164,6 @@ ifeq ($(DEB_SOURCE),binutils)
   endif
 else ifeq ($(DEB_SOURCE),binutils-mipsen)
   with_native	=
-  with_cross	= yes
   same_source	=
   ifeq (,$(CROSS_ARCHS))
     ifneq (,$(filter $(DEB_HOST_ARCH), amd64 i386 x32 arm64 ppc64el))
@@ -181,7 +180,6 @@ else ifeq ($(DEB_SOURCE),binutils-mipsen)
   endif
 else
   # binutils-ports ...
-  with_cross	= yes
   ifeq (,$(CROSS_ARCHS))
     CROSS_ARCHS ?= m68k sh4 mips64 mips64el
   endif
@@ -257,7 +255,7 @@ endif
 
 ifneq (,$(TARGET))
   with_native	=
-  with_cross	=
+  with_cross	= disabled by TARGET
   same_source	=
   # Support TARGET both as Debian architecture specification (e.g. arm),
   # and as the target name (e.g. arm-linux-gnu).
