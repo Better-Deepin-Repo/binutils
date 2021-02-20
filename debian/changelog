@@ -13,6 +13,7 @@ binutils (2.36.1-2) UNRELEASED; urgency=medium
     - Compute D_CROSS from P_CROSS.
     - Spare two subprocesses in control file generation.
     - Replace Make foreach function with addprefix when possible.
+    - Remove apparently redundant test.
 
  -- Matthias Klose <doko@debian.org>  Sat, 20 Feb 2021 13:30:54 +0100
 
