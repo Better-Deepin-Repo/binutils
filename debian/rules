@@ -1536,7 +1536,7 @@ ifneq (,$(TARGET))
 
 	rm -f debian/substvars
 	dpkg-shlibdeps $(d_cross)/$(PF)/bin/* \
-	  -ldebian/tmp/$(PF)/lib/$(call _multiarch,$*) -l$(d_lib)/$(PF)/lib/$(call _multiarch,$*)
+	  -ldebian/tmp/$(PF)/lib/$(DEB_TARGET_MULTIARCH) -l$(d_lib)/$(PF)/lib/$(DEB_TARGET_MULTIARCH)
 	dpkg-gencontrol -P$(d_cross) -p$(p_cross) \
 		-VBuilt-Using="$(shell dpkg-query -f '$${source:Package} (= $${source:Version}), ' -W binutils-source)"
 	find $(d_cross) -depth -newermt '$(BUILD_DATE)' -print0 | \
