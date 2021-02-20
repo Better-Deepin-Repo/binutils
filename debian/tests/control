@@ -5,7 +5,7 @@ Tests: build
 Depends: build-essential,
   fakeroot,
   autoconf (>= 2.64),
-  bison, flex, gettext, texinfo, dejagnu, quilt, chrpath, dwz,
+  bison, flex, gettext, texinfo, dejagnu, quilt, chrpath, dwz, debugedit (>= 4.16),
   python3:any, file, xz-utils, lsb-release, zlib1g-dev, procps, libstdc++-dev
 # build process emits warnings on stderr
 Restrictions: allow-stderr
