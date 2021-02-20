@@ -23,6 +23,7 @@ binutils (2.36.1-2) UNRELEASED; urgency=medium
     - Simplify a clean command.
     - Drop two unused variable definitions.
     - Distinguish TARGET, DEB_TARGET_ARCH and DEB_TARGET_GNU_TYPE.
+    - Improve the _gnu_type and _multiarch macros.
 
  -- Matthias Klose <doko@debian.org>  Sat, 20 Feb 2021 13:30:54 +0100
 
