@@ -43,62 +43,6 @@ zlib/
  zlib/configure         | 206 ++++++++++++++++++++++++++++++++++++++++-
  11 files changed, 368 insertions(+), 10 deletions(-)
 
---- a/Makefile.in
-+++ b/Makefile.in
-@@ -387,7 +387,7 @@ MAKEINFOFLAGS = --split-size=5000000
- # ---------------------------------------------
- 
- AS = @AS@
--AR = @AR@
-+AR = @AR@ @AR_PLUGIN_OPTION@
- AR_FLAGS = rc
- CC = @CC@
- CXX = @CXX@
-@@ -396,7 +396,7 @@ LD = @LD@
- LIPO = @LIPO@
- NM = @NM@
- OBJDUMP = @OBJDUMP@
--RANLIB = @RANLIB@
-+RANLIB = @RANLIB@ @RANLIB_PLUGIN_OPTION@
- READELF = @READELF@
- STRIP = @STRIP@
- WINDRES = @WINDRES@
-@@ -52646,6 +52646,7 @@ AUTOCONF = autoconf
- $(srcdir)/configure: @MAINT@ $(srcdir)/configure.ac $(srcdir)/config/acx.m4 \
- 	$(srcdir)/config/override.m4 $(srcdir)/config/proginstall.m4 \
- 	$(srcdir)/config/elf.m4 $(srcdir)/config/isl.m4 \
-+	$(srcdir)/config/gcc-plugin.m4 \
- 	$(srcdir)/libtool.m4 $(srcdir)/ltoptions.m4 $(srcdir)/ltsugar.m4 \
- 	$(srcdir)/ltversion.m4 $(srcdir)/lt~obsolete.m4
- 	cd $(srcdir) && $(AUTOCONF)
---- a/Makefile.tpl
-+++ b/Makefile.tpl
-@@ -390,7 +390,7 @@ MAKEINFOFLAGS = --split-size=5000000
- # ---------------------------------------------
- 
- AS = @AS@
--AR = @AR@
-+AR = @AR@ @AR_PLUGIN_OPTION@
- AR_FLAGS = rc
- CC = @CC@
- CXX = @CXX@
-@@ -399,7 +399,7 @@ LD = @LD@
- LIPO = @LIPO@
- NM = @NM@
- OBJDUMP = @OBJDUMP@
--RANLIB = @RANLIB@
-+RANLIB = @RANLIB@ @RANLIB_PLUGIN_OPTION@
- READELF = @READELF@
- STRIP = @STRIP@
- WINDRES = @WINDRES@
-@@ -1967,6 +1967,7 @@ AUTOCONF = autoconf
- $(srcdir)/configure: @MAINT@ $(srcdir)/configure.ac $(srcdir)/config/acx.m4 \
- 	$(srcdir)/config/override.m4 $(srcdir)/config/proginstall.m4 \
- 	$(srcdir)/config/elf.m4 $(srcdir)/config/isl.m4 \
-+	$(srcdir)/config/gcc-plugin.m4 \
- 	$(srcdir)/libtool.m4 $(srcdir)/ltoptions.m4 $(srcdir)/ltsugar.m4 \
- 	$(srcdir)/ltversion.m4 $(srcdir)/lt~obsolete.m4
- 	cd $(srcdir) && $(AUTOCONF)
 --- a/config/gcc-plugin.m4
 +++ b/config/gcc-plugin.m4
 @@ -124,3 +124,31 @@ AC_DEFUN([GCC_ENABLE_PLUGINS],
@@ -219,32 +163,6 @@ zlib/
  # Target tools.
  AC_ARG_WITH([build-time-tools], 
    [AS_HELP_STRING([--with-build-time-tools=PATH],
---- a/libiberty/Makefile.in
-+++ b/libiberty/Makefile.in
-@@ -49,13 +49,13 @@ mkinstalldirs = $(SHELL) $(libiberty_top
- # Some compilers can't handle cc -c blah.c -o foo/blah.o.
- OUTPUT_OPTION = @OUTPUT_OPTION@
- 
--AR = @AR@
-+AR = @AR@ @AR_PLUGIN_OPTION@
- AR_FLAGS = rc
- 
- CC = @CC@
- CFLAGS = @CFLAGS@
- CPPFLAGS = @CPPFLAGS@
--RANLIB = @RANLIB@
-+RANLIB = @RANLIB@ @RANLIB_PLUGIN_OPTION@
- MAKEINFO = @MAKEINFO@
- PERL = @PERL@
- 
-@@ -485,6 +485,7 @@ configure_deps = $(srcdir)/aclocal.m4 \
- 	$(srcdir)/../config/acx.m4 \
- 	$(srcdir)/../config/cet.m4 \
- 	$(srcdir)/../config/enable.m4 \
-+	$(srcdir)/../config/gcc-plugin.m4 \
- 	$(srcdir)/../config/no-executables.m4 \
- 	$(srcdir)/../config/override.m4 \
- 	$(srcdir)/../config/picflag.m4 \
 --- a/libiberty/aclocal.m4
 +++ b/libiberty/aclocal.m4
 @@ -1,6 +1,7 @@
@@ -329,6 +247,32 @@ zlib/
  dnl When switching to automake, replace the following with AM_ENABLE_MULTILIB.
  # Add --enable-multilib to configure.
  # Default to --enable-multilib
+--- a/libiberty/Makefile.in
++++ b/libiberty/Makefile.in
+@@ -49,13 +49,13 @@ mkinstalldirs = $(SHELL) $(libiberty_top
+ # Some compilers can't handle cc -c blah.c -o foo/blah.o.
+ OUTPUT_OPTION = @OUTPUT_OPTION@
+ 
+-AR = @AR@
++AR = @AR@ @AR_PLUGIN_OPTION@
+ AR_FLAGS = rc
+ 
+ CC = @CC@
+ CFLAGS = @CFLAGS@
+ CPPFLAGS = @CPPFLAGS@
+-RANLIB = @RANLIB@
++RANLIB = @RANLIB@ @RANLIB_PLUGIN_OPTION@
+ MAKEINFO = @MAKEINFO@
+ PERL = @PERL@
+ 
+@@ -485,6 +485,7 @@ configure_deps = $(srcdir)/aclocal.m4 \
+ 	$(srcdir)/../config/acx.m4 \
+ 	$(srcdir)/../config/cet.m4 \
+ 	$(srcdir)/../config/enable.m4 \
++	$(srcdir)/../config/gcc-plugin.m4 \
+ 	$(srcdir)/../config/no-executables.m4 \
+ 	$(srcdir)/../config/override.m4 \
+ 	$(srcdir)/../config/picflag.m4 \
 --- a/libtool.m4
 +++ b/libtool.m4
 @@ -1323,8 +1323,26 @@ need_locks="$enable_libtool_lock"
@@ -371,6 +315,62 @@ zlib/
  _LT_DECL([], [RANLIB], [1],
      [Commands used to install an old-style archive])
  
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -387,7 +387,7 @@ MAKEINFOFLAGS = --split-size=5000000
+ # ---------------------------------------------
+ 
+ AS = @AS@
+-AR = @AR@
++AR = @AR@ @AR_PLUGIN_OPTION@
+ AR_FLAGS = rc
+ CC = @CC@
+ CXX = @CXX@
+@@ -396,7 +396,7 @@ LD = @LD@
+ LIPO = @LIPO@
+ NM = @NM@
+ OBJDUMP = @OBJDUMP@
+-RANLIB = @RANLIB@
++RANLIB = @RANLIB@ @RANLIB_PLUGIN_OPTION@
+ READELF = @READELF@
+ STRIP = @STRIP@
+ WINDRES = @WINDRES@
+@@ -52647,6 +52647,7 @@ AUTOCONF = autoconf
+ $(srcdir)/configure: @MAINT@ $(srcdir)/configure.ac $(srcdir)/config/acx.m4 \
+ 	$(srcdir)/config/override.m4 $(srcdir)/config/proginstall.m4 \
+ 	$(srcdir)/config/elf.m4 $(srcdir)/config/isl.m4 \
++	$(srcdir)/config/gcc-plugin.m4 \
+ 	$(srcdir)/libtool.m4 $(srcdir)/ltoptions.m4 $(srcdir)/ltsugar.m4 \
+ 	$(srcdir)/ltversion.m4 $(srcdir)/lt~obsolete.m4
+ 	cd $(srcdir) && $(AUTOCONF)
+--- a/Makefile.tpl
++++ b/Makefile.tpl
+@@ -390,7 +390,7 @@ MAKEINFOFLAGS = --split-size=5000000
+ # ---------------------------------------------
+ 
+ AS = @AS@
+-AR = @AR@
++AR = @AR@ @AR_PLUGIN_OPTION@
+ AR_FLAGS = rc
+ CC = @CC@
+ CXX = @CXX@
+@@ -399,7 +399,7 @@ LD = @LD@
+ LIPO = @LIPO@
+ NM = @NM@
+ OBJDUMP = @OBJDUMP@
+-RANLIB = @RANLIB@
++RANLIB = @RANLIB@ @RANLIB_PLUGIN_OPTION@
+ READELF = @READELF@
+ STRIP = @STRIP@
+ WINDRES = @WINDRES@
+@@ -1967,6 +1967,7 @@ AUTOCONF = autoconf
+ $(srcdir)/configure: @MAINT@ $(srcdir)/configure.ac $(srcdir)/config/acx.m4 \
+ 	$(srcdir)/config/override.m4 $(srcdir)/config/proginstall.m4 \
+ 	$(srcdir)/config/elf.m4 $(srcdir)/config/isl.m4 \
++	$(srcdir)/config/gcc-plugin.m4 \
+ 	$(srcdir)/libtool.m4 $(srcdir)/ltoptions.m4 $(srcdir)/ltsugar.m4 \
+ 	$(srcdir)/ltversion.m4 $(srcdir)/lt~obsolete.m4
+ 	cd $(srcdir) && $(AUTOCONF)
 --- a/zlib/configure
 +++ b/zlib/configure
 @@ -740,6 +740,7 @@ infodir

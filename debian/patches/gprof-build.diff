@@ -1,7 +1,5 @@
 # DP: Fix gprof build error.
 
-Index: b/gprof/gconfig.in
-===================================================================
 --- a/gprof/gconfig.in
 +++ b/gprof/gconfig.in
 @@ -96,9 +96,6 @@

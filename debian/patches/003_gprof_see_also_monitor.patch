@@ -1,10 +1,8 @@
 Author: Chris Chimelis <chris@debian.org>
 Description: Don't mention monitor(3) which doesn't exist in Debian. (#160654)
-Index: b/gprof/gprof.texi
-===================================================================
 --- a/gprof/gprof.texi
 +++ b/gprof/gprof.texi
-@@ -193,7 +193,7 @@
+@@ -193,7 +193,7 @@ summarized dynamic call graph and profil
  @c man end
  
  @c man begin SEEALSO

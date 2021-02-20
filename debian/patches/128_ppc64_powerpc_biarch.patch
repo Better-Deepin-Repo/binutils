@@ -1,5 +1,3 @@
-Index: b/ld/emulparams/elf32ppccommon.sh
-===================================================================
 --- a/ld/emulparams/elf32ppccommon.sh
 +++ b/ld/emulparams/elf32ppccommon.sh
 @@ -56,3 +56,12 @@ case `echo "$target" | sed -e 's/-.*//'`
