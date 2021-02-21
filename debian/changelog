@@ -25,6 +25,7 @@ binutils (2.36.1-2) UNRELEASED; urgency=medium
     - Drop two unused variable definitions.
     - Distinguish TARGET, DEB_TARGET_ARCH and DEB_TARGET_GNU_TYPE.
     - Improve the _gnu_type and _multiarch macros.
+  * README.cross: Document TARGET-driven cross build. Closes: #979516.
 
  -- Matthias Klose <doko@debian.org>  Sun, 21 Feb 2021 11:59:29 +0100
 
