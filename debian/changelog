@@ -1,4 +1,4 @@
-binutils (2.36.1-3) experimental; urgency=medium
+binutils (2.36.1-4) experimental; urgency=medium
 
   * Update from the binutils 2.36 branch:
     - binutils: Avoid renaming over existing files.
@@ -6,7 +6,7 @@ binutils (2.36.1-3) experimental; urgency=medium
   * When stripping packages, call debugedit before dwz to avoid warnings.
   * Add a README.source file.
 
- -- Matthias Klose <doko@debian.org>  Fri, 26 Feb 2021 10:15:11 +0100
+ -- Matthias Klose <doko@debian.org>  Fri, 26 Feb 2021 11:17:08 +0100
 
 binutils (2.36.1-2) experimental; urgency=medium
 
