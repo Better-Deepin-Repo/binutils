@@ -1894,7 +1894,7 @@ define strip_package
 	  nfiles=$$(expr $$nfiles + 1); \
 	done; \
 	for i in $$files; do \
-	  debugedit --build-id --build-id-seed='$(strip $1)-$(DEB_VERSION)' $$i; \
+	  id=$$(debugedit --build-id --build-id-seed='$(strip $1)-$(DEB_VERSION)' $$i); \
 	done; \
 	mkdir -p $(strip $2)-dbg/usr/lib/debug/.dwz/$(DEB_HOST_MULTIARCH); \
 	dwz=usr/lib/debug/.dwz/$(DEB_HOST_MULTIARCH)/$(strip $1).debug; \

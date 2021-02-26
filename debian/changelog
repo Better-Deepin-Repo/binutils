@@ -3,6 +3,7 @@ binutils (2.36.1-3) experimental; urgency=medium
   * Update from the binutils 2.36 branch:
     - binutils: Avoid renaming over existing files.
     - PR 26945, PR 27456.
+  * When stripping packages, call debugedit before dwz to avoid warnings.
 
  -- Matthias Klose <doko@debian.org>  Fri, 26 Feb 2021 10:15:11 +0100
 
