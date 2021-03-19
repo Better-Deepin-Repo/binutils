@@ -1,3 +1,9 @@
+binutils (2.36.1-6) UNRELEASED; urgency=medium
+
+  * Fix dangling symlinks in the cross packages. Closes: #985434.
+
+ -- Matthias Klose <doko@debian.org>  Fri, 19 Mar 2021 11:41:12 +0100
+
 binutils (2.36.1-5) experimental; urgency=medium
 
   * Update from the binutils 2.36 branch:

@@ -866,7 +866,7 @@ stamps/install.%: stamps/build.%
 	  mv $$d_src/$$lib.a $$d_dst/$${lib}-$(VERSION)-$*.a; \
 	  ln -sf ../../../lib/$(DEB_HOST_MULTIARCH)/$$lib-$(VERSION)-$*.a $$d_src/$$lib.a; \
 	done
-	mv $(D_CROSS)/$(PF)/lib/$(call _multiarch,$*)/libctf*.so.* \
+	mv $(D_CROSS)/$(PF)/lib/$(call _multiarch,$*)/libctf*.so* \
 	  $(D_CROSS)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/.
 
 	: # replace hard links with soft links
