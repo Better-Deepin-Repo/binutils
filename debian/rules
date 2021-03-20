@@ -543,7 +543,7 @@ ifneq (,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
 endif
 #with_check := disabled for this upload
 
-ifneq (,$(filter $(DEB_HOST_ARCH), amd64))
+ifneq (,$(filter $(DEB_HOST_ARCH), amd64 alpha ia64))
   ignore_regressions := regressions ignored on architecture $(DEB_HOST_ARCH)
 endif
 #ignore_regressions := regressions ignored on architecture $(DEB_HOST_ARCH)
