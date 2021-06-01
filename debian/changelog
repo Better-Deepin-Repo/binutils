@@ -1,11 +1,11 @@
-binutils (2.36.1-6) UNRELEASED; urgency=medium
+binutils (2.36.1-6) experimental; urgency=medium
 
   * Update from the binutils 2.36 branch:
     - Add install dependencies for ld -> bfd and libctf -> bfd.
   * Fix dangling symlinks in the cross packages. Closes: #985434.
   * Ignore bootstrap test regressions on alpha and ia64.
 
- -- Matthias Klose <doko@debian.org>  Sat, 20 Mar 2021 11:27:58 +0100
+ -- Matthias Klose <doko@debian.org>  Sat, 20 Mar 2021 15:59:45 +0100
 
 binutils (2.36.1-5) experimental; urgency=medium
 
