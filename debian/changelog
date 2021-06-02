@@ -1,3 +1,10 @@
+binutils (2.36.50.20210601-1) experimental; urgency=medium
+
+  * New upstream snapshot, taken from the trunk.
+  * Refresh patches.
+
+ -- Matthias Klose <doko@debian.org>  Tue, 01 Jun 2021 21:25:10 +0200
+
 binutils (2.36.1-6) experimental; urgency=medium
 
   * Update from the binutils 2.36 branch:

@@ -1,6 +1,6 @@
 --- a/bfd/config.bfd
 +++ b/bfd/config.bfd
-@@ -895,11 +895,21 @@ case "${targ}" in
+@@ -890,11 +890,21 @@ case "${targ}" in
      targ_defvec=mips_elf32_be_vec
      targ_selvecs="mips_elf32_le_vec mips_elf64_be_vec mips_elf64_le_vec mips_ecoff_be_vec mips_ecoff_le_vec"
      ;;
@@ -34,7 +34,7 @@
  #name: MIPS merge notes section (n32)
 --- a/gas/configure
 +++ b/gas/configure
-@@ -12805,6 +12805,9 @@ _ACEOF
+@@ -12127,6 +12127,9 @@ _ACEOF
  	esac
  	# Decide which ABI to target by default.
  	case ${target} in
@@ -46,7 +46,7 @@
  	    mips_default_abi=N32_ABI
 --- a/gas/configure.ac
 +++ b/gas/configure.ac
-@@ -384,6 +384,9 @@ changequote([,])dnl
+@@ -383,6 +383,9 @@ changequote([,])dnl
  	esac
  	# Decide which ABI to target by default.
  	case ${target} in
@@ -58,7 +58,7 @@
  	    mips_default_abi=N32_ABI
 --- a/ld/configure.tgt
 +++ b/ld/configure.tgt
-@@ -531,11 +531,19 @@ mips*-*-vxworks*)	targ_emul=elf32ebmipvx
+@@ -530,11 +530,19 @@ mips*-*-vxworks*)	targ_emul=elf32ebmipvx
  			;;
  mips*-*-windiss)	targ_emul=elf32mipswindiss
  			;;
