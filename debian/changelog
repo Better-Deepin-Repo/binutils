@@ -1,3 +1,16 @@
+binutils (2.36.50.20210628-1) experimental; urgency=medium
+
+  * New upstream snapshot, taken from the trunk.
+
+ -- Matthias Klose <doko@debian.org>  Mon, 28 Jun 2021 16:14:58 +0200
+
+binutils (2.36.50.20210618-1) experimental; urgency=medium
+
+  * New upstream snapshot, taken from the trunk.
+  * Apply a hack for mips. See #765710.
+
+ -- Matthias Klose <doko@debian.org>  Fri, 18 Jun 2021 11:54:54 +0200
+
 binutils (2.36.50.20210601-1) experimental; urgency=medium
 
   * New upstream snapshot, taken from the trunk.
