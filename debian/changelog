@@ -1,3 +1,9 @@
+binutils (2.36.90.20210705-1) experimental; urgency=medium
+
+  * New upstream snapshot, taken from the 2.37 branch.
+
+ -- Matthias Klose <doko@debian.org>  Mon, 05 Jul 2021 09:17:21 +0200
+
 binutils (2.36.50.20210628-1) experimental; urgency=medium
 
   * New upstream snapshot, taken from the trunk.
