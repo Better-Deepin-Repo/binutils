@@ -1,3 +1,21 @@
+binutils (2.37-2) experimental; urgency=medium
+
+  * Update from the binutils 2.37 branch:
+    - Fix PR ld/28138, close the file descriptor if there is no archive fd.
+    - Fix PR 28144, man page generation.
+    - Fix ld script expression parsing.
+    - Fix build failures with clang.
+    - Revert: PowerPC: Don't generate unused section symbols, blindly
+      following x86 broken linux kernel builds.
+
+ -- Matthias Klose <doko@debian.org>  Fri, 30 Jul 2021 13:49:51 +0200
+
+binutils (2.37-1) experimental; urgency=medium
+
+  * binutils 2.37 release.
+
+ -- Matthias Klose <doko@debian.org>  Mon, 19 Jul 2021 08:11:10 +0200
+
 binutils (2.36.90.20210712-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot, taken from the 2.37 branch.
