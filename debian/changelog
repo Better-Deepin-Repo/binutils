@@ -1,3 +1,10 @@
+binutils (2.37-4) unstable; urgency=medium
+
+  * Update from the binutils 2.37 branch:
+    - Revert the ld script expression parsing changes.
+
+ -- Matthias Klose <doko@debian.org>  Sun, 15 Aug 2021 16:51:18 +0200
+
 binutils (2.37-2) experimental; urgency=medium
 
   * Update from the binutils 2.37 branch:
