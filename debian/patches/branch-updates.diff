@@ -1,6 +1,6 @@
 # DP: updates from the binutils-2.37 branch
 
-# git diff 116a737f438d03a1bd6aa706b6ea0b4022f3b7e2 07270a9e781a2fe7c92dfe992d7bcbbe9ec9d708
+# git diff 116a737f438d03a1bd6aa706b6ea0b4022f3b7e2 2bde3fd6e702bc9e3ebc89c8a7bed54bab7d8eb5
 
 diff --git a/bfd/ChangeLog b/bfd/ChangeLog
 index 75ca29c09b9..b7ec6eafa23 100644
@@ -10287,7 +10287,7 @@ index 5e3211cfe78..ede20f1ecbc 100644
  #~ msgstr "%B: некорректный номер перемещения i960: %d"
  
 diff --git a/bfd/version.h b/bfd/version.h
-index d374ca5518f..a05d88bcdb8 100644
+index d374ca5518f..ca17321e2cc 100644
 --- a/bfd/version.h
 +++ b/bfd/version.h
 @@ -16,7 +16,7 @@
@@ -10295,7 +10295,7 @@ index d374ca5518f..a05d88bcdb8 100644
     In releases, the date is not included in either version strings or
     sonames.  */
 -#define BFD_VERSION_DATE 20210718
-+#define BFD_VERSION_DATE 20210813
++#define BFD_VERSION_DATE 20210830
  #define BFD_VERSION @bfd_version@
  #define BFD_VERSION_STRING  @bfd_version_package@ @bfd_version_string@
  #define REPORT_BUGS_TO @report_bugs_to@
@@ -10482,6 +10482,19 @@ index 6ebd81f3fd0..4a1368f5abe 100644
                (*symvec).push_back(gsym);
  	      (*addendvec).push_back(std::make_pair(
  					static_cast<long long>(symvalue),
+diff --git a/gold/powerpc.cc b/gold/powerpc.cc
+index 6b12ed8869b..11b98695e64 100644
+--- a/gold/powerpc.cc
++++ b/gold/powerpc.cc
+@@ -11201,6 +11201,8 @@ Target_powerpc<size, big_endian>::Relocate::relocate(
+ 		{
+ 		  if (ent->save_res_)
+ 		    value = (value - target->savres_section()->address()
++			     + stub_table->stub_address()
++			     + stub_table->plt_size()
+ 			     + stub_table->branch_size());
+ 		  else
+ 		    {
 diff --git a/ld/ChangeLog b/ld/ChangeLog
 index 79304e12103..5048b5b6a17 100644
 --- a/ld/ChangeLog

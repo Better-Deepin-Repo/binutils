@@ -1,5 +1,7 @@
 binutils (2.37-5) unstable; urgency=medium
 
+  * Update from the binutils 2.37 branch:
+    - [GOLD] PowerPC64 relocation overflow for -Os register save/restore funcs.
   * Update libctf0 and libctf-nobsd0 symbols files.
 
  -- Matthias Klose <doko@debian.org>  Thu, 26 Aug 2021 10:52:44 +0200
