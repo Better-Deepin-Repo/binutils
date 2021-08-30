@@ -648,6 +648,8 @@ endif
 	: # force regeneration, not needed for releases
 	rm -f ld/ldgram.c ld/ldgram.h ld/ldlex.c
 
+	find -name '*.[1-8]' -size 0 | xargs -r rm -f
+
 	rm -rf stamps/configure-single builddir-single
 	mkdir builddir-single
 	cd builddir-single && env CC="$(CC)" CXX="$(CXX)" CFLAGS="$(CFLAGS)" CXXFLAGS="$(CXXFLAGS)" LDFLAGS="$(LDFLAGS)" \
