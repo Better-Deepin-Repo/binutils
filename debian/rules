@@ -149,7 +149,7 @@ ifeq ($(DEB_SOURCE),binutils)
     CROSS_ARCHS ?= powerpc ppc64 amd64 i386 x32 arm64 armel armhf riscv64 s390x
   endif
 else ifeq ($(DEB_SOURCE),binutils-ports)
-  CROSS_ARCHS ?= m68k sh4 mips64 mips64el
+  CROSS_ARCHS ?= m68k sh4
 else ifeq ($(DEB_SOURCE),binutils-mipsen)
   with_native	=
   same_source	=
@@ -533,6 +533,8 @@ CONFARGS_TARGET_mips64r6	= --enable-targets=mipsisa64r6-linux-gnuabin32,mipsisa3
 CONFARGS_TARGET_mips64r6el	= --enable-targets=mipsisa64r6el-linux-gnuabin32,mipsisa32r6el-linux-gnu
 
 CONFARGS_TARGET_aarch64		= --enable-targets=aarch64_be-linux-gnu
+
+CONFARGS_TARGET_arc		= --with-cpu=hs38_linux
 
 with_check := yes
 ifneq (,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))

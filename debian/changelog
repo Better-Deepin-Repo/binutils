@@ -1,3 +1,16 @@
+binutils (2.37-7) unstable; urgency=medium
+
+  * Fix PR ld/28348, taken from the trunk. Closes: #994530.
+  * Revert the arc build, needs dpkg supporting this architecture.
+
+ -- Matthias Klose <doko@debian.org>  Sun, 19 Sep 2021 17:23:57 +0200
+
+binutils (2.37-6) unstable; urgency=medium
+
+  * Add support to build for arc-linux-gnu. Closes: #994190.
+
+ -- Matthias Klose <doko@debian.org>  Tue, 14 Sep 2021 08:41:56 +0200
+
 binutils (2.37-5) unstable; urgency=medium
 
   * Update from the binutils 2.37 branch:
