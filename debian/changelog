@@ -15,9 +15,9 @@ binutils (2.37-8) unstable; urgency=medium
     - [GOLD] Two GOT sections for PowerPC64.
     - Fix PR gold/27625, powerpc64 gold __tls_get_addr calls.
     - Fix PR28417, std::string no longer allows accepting nullptr_t.
-  * 
+  * Bump standards version.
 
- -- Matthias Klose <doko@z2>  Tue, 02 Nov 2021 11:17:11 +0000
+ -- Matthias Klose <doko@debian.org>  Tue, 02 Nov 2021 13:17:11 +0200
 
 binutils (2.37-7) unstable; urgency=medium
 
