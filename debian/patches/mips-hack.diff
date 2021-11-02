@@ -1,6 +1,6 @@
 --- a/gas/config/tc-mips.c
 +++ b/gas/config/tc-mips.c
-@@ -16741,6 +16741,9 @@ parse_code_option (char * name)
+@@ -16734,6 +16734,9 @@ parse_code_option (char * name)
    else
      return OPTION_TYPE_BAD;
  
