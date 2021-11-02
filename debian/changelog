@@ -1,3 +1,24 @@
+binutils (2.37-8) unstable; urgency=medium
+
+  * Update from the binutils 2.37 branch:
+    - PR28391, strip/objcopy --preserve-dates *.a: cannot set time.
+    - [GOLD] Got_offset_list: addend field.
+    - [GOLD] Remove addend from Local_got_entry_key.
+    - [GOLD] Output_data_got tidy.
+    - [GOLD] Output_data_got create entry method addends.
+    - [GOLD] Got_entry::write addends.
+    - [GOLD] PowerPC64 support for sym+addend GOT entries.
+    - ld: pru: Fix resource_table output section alignment.
+    - Fix PR28422, build_id use-after-free.
+    - Fix PR28459, readelf issues bogus warning.
+    - [GOLD] PowerPC64: Don't pretend to support multi-toc.
+    - [GOLD] Two GOT sections for PowerPC64.
+    - Fix PR gold/27625, powerpc64 gold __tls_get_addr calls.
+    - Fix PR28417, std::string no longer allows accepting nullptr_t.
+  * 
+
+ -- Matthias Klose <doko@z2>  Tue, 02 Nov 2021 11:17:11 +0000
+
 binutils (2.37-7) unstable; urgency=medium
 
   * Fix PR ld/28348, taken from the trunk. Closes: #994530.
