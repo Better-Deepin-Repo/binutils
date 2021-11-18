@@ -1,3 +1,16 @@
+binutils (2.37.50.20211118-1) experimental; urgency=medium
+
+  * New upstream snapshot.
+  * Configure --with-gold-ldflags=-static-libstdc++.
+
+ -- Matthias Klose <doko@debian.org>  Thu, 18 Nov 2021 09:20:55 +0100
+
+binutils (2.37.50.20211115-1) experimental; urgency=medium
+
+  * New upstream snapshot.
+
+ -- Matthias Klose <doko@debian.org>  Mon, 15 Nov 2021 11:17:26 +0100
+
 binutils (2.37.50.20211102-1) experimental; urgency=medium
 
   * New upstream snapshot.

@@ -403,6 +403,7 @@ CONFARGS = \
 	--disable-compressed-debug-sections \
 	--enable-new-dtags \
 	--disable-x86-used-note \
+	--with-gold-ldflags=-static-libstdc++ \
 	--build=$(DEB_BUILD_GNU_TYPE) \
 	--host=$(DEB_HOST_GNU_TYPE) \
 	--with-pkgversion="GNU Binutils for $(distribution)"
