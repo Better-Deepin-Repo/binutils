@@ -291,9 +291,9 @@ STRIP_LTO = $(CROSS)strip -R .gnu.lto_* -R .gnu.debuglto_* -N __gnu_lto_slim -N 
 
 ifeq (,$(findstring nopgo,$(DEB_BUILD_OPTIONS)))
   ifeq ($(DEB_BUILD_ARCH),$(DEB_HOST_ARCH))
-    #ifneq (,$(filter $(DEB_HOST_ARCH), amd64 i386 x32))
+    ifeq (,$(filter $(DEB_HOST_ARCH), mipsel))
       CONF_PGO = --enable-pgo-build=lto
-    #endif
+    endif
   endif
 endif
 
@@ -393,6 +393,7 @@ endif
 ########################################
 
 CONFARGS = \
+	--disable-silent-rules \
 	--enable-obsolete \
 	--enable-shared \
 	--enable-plugins \
@@ -546,7 +547,7 @@ ifneq (,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
 endif
 #with_check := disabled for this upload
 
-ifneq (,$(filter $(DEB_HOST_ARCH), amd64 alpha ia64))
+ifneq (,$(filter $(DEB_HOST_ARCH), mipsel riscv64 sparc64))
   ignore_regressions := regressions ignored on architecture $(DEB_HOST_ARCH)
 endif
 #ignore_regressions := regressions ignored on architecture $(DEB_HOST_ARCH)
