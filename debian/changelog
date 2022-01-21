@@ -1,3 +1,10 @@
+binutils (2.37.50.20220121-1) unstable; urgency=medium
+
+  * New upstream snapshot.
+  * Revert the last change, PR ld/28751 is fixed.
+
+ -- Matthias Klose <doko@debian.org>  Fri, 21 Jan 2022 09:36:36 +0100
+
 binutils (2.37.50.20220106-2) unstable; urgency=medium
 
   * Ignore known regressions on powerpc, ppc64, ppc64el, see PR ld/28751.
