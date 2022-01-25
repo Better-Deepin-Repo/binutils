@@ -1,3 +1,9 @@
+binutils (2.37.90.20220123-2) unstable; urgency=medium
+
+  * Apply proposed patch for PR ld/28819.
+
+ -- Matthias Klose <doko@debian.org>  Tue, 25 Jan 2022 16:57:38 +0100
+
 binutils (2.37.90.20220123-1) unstable; urgency=medium
 
   * New upstream snapshot, taken from the 2.38 release branch.

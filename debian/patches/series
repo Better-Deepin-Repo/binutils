@@ -33,3 +33,5 @@ gold-no-keep-files-mapped.diff
 libctf-soname.diff
 
 mips-hack.diff
+
+pr28819.diff
