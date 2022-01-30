@@ -4,6 +4,7 @@ binutils (2.37.90.20220130-1) UNRELEASED; urgency=medium
     - Fix PR ld/28743, PR ld/28819. Closes: #1004272. LP: #1958642.
   * Configure with --with-isa-spec=2.2 on riscv64. LP: #1959325. Only change
     to the new ISA when GCC 12 becomes the default.
+  * Fix PR ld/28827, taken from the trunk.
 
  -- Matthias Klose <doko@debian.org>  Sun, 30 Jan 2022 11:59:33 +0100
 
