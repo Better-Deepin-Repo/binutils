@@ -1,0 +1,26 @@
+# DP: Fix objcopy --only-keep-debug, taken from the trunk (7c4643efe7b)
+
+diff --git a/binutils/objcopy.c b/binutils/objcopy.c
+index d16d8ee67e4..d53aa5c6000 100644
+--- a/binutils/objcopy.c
++++ b/binutils/objcopy.c
+@@ -4085,9 +4085,6 @@ setup_section (bfd *ibfd, sec_ptr isection, void *obfdarg)
+       goto loser;
+     }
+ 
+-  if (make_nobits)
+-    elf_section_type (osection) = SHT_NOBITS;
+-
+   size = bfd_section_size (isection);
+   size = bfd_convert_section_size (ibfd, isection, obfd, size);
+   if (copy_byte >= 0)
+@@ -4181,6 +4178,9 @@ setup_section (bfd *ibfd, sec_ptr isection, void *obfdarg)
+       goto loser;
+     }
+ 
++  if (make_nobits)
++    elf_section_type (osection) = SHT_NOBITS;
++
+   /* All went well.  */
+   return;
+ 
