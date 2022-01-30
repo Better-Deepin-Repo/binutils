@@ -1,4 +1,4 @@
-binutils (2.37.90.20220130-1) UNRELEASED; urgency=medium
+binutils (2.37.90.20220130-1) unstable; urgency=medium
 
   * New upstream snapshot, taken from the 2.38 release branch.
     - Fix PR ld/28743, PR ld/28819. Closes: #1004272. LP: #1958642.
@@ -8,7 +8,7 @@ binutils (2.37.90.20220130-1) UNRELEASED; urgency=medium
   * Fix PR ld/28826 x86_64 ld segfaults building xen, taken from the trunk.
     Closes: #1004269. LP: #1958389.
 
- -- Matthias Klose <doko@debian.org>  Sun, 30 Jan 2022 11:59:33 +0100
+ -- Matthias Klose <doko@debian.org>  Sun, 30 Jan 2022 14:41:25 +0100
 
 binutils (2.37.90.20220123-2) unstable; urgency=medium
 
