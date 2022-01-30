@@ -769,6 +769,7 @@ stamps/configure-multi:
 	    && env CC="$(CC)" CXX="$(CXX)" CFLAGS="$(CFLAGS)" CXXFLAGS="$(CXXFLAGS)" LDFLAGS="$(LDFLAGS)" \
 	        $(call SET_MULTIARCH_ENV,$(DEB_HOST_ARCH)) \
 		../configure $(CONFARGS) $(CONF_PGO) \
+		  $(filter-out --enable-targets=%, $(CONFARGS_TARGET_$(DEB_HOST_ARCH))) \
 		  --with-sysroot=/ \
 		  --libdir=/$(PF)/lib/$(DEB_HOST_MULTIARCH) \
 		  --enable-targets=$(subst $(SPACE),$(COMMA),$(multiarch_targets))
