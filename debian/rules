@@ -509,6 +509,8 @@ CONFLICTS_TARGET_amd64		= -VextraConflicts="binutils-mingw-w64-i686 (<< 2.23.52.
 CONFLICTS_TARGET_i386 = $(CONFLICTS_TARGET_amd64)
 CONFLICTS_TARGET_x32  = $(CONFLICTS_TARGET_amd64)
 
+CONFARGS_TARGET_riscv64		= --with-isa-spec=2.2
+
 CONFARGS_TARGET_kfreebsd-i386	= --enable-targets=x86_64-kfreebsd-gnu
 
 CONFARGS_TARGET_mips		= --enable-targets=mips64-linux-gnuabi64,mips64-linux-gnuabin32
