@@ -1,0 +1,14 @@
+# DP: Fix PR ld/28826 x86_64 ld segfaults building xen, taken from the trunk
+
+diff --git a/bfd/coffgen.c b/bfd/coffgen.c
+index 293fce2baf3..bec1a424831 100644
+--- a/bfd/coffgen.c
++++ b/bfd/coffgen.c
+@@ -1092,6 +1092,7 @@ coff_write_alien_symbol (bfd *abfd,
+ 	memset (isym, 0, sizeof (*isym));
+       return true;
+     }
++  memset (dummy, 0, sizeof dummy);
+   native = dummy;
+   native->is_sym = true;
+   native[1].is_sym = false;
