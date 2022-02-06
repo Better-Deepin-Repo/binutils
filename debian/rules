@@ -550,7 +550,8 @@ ifneq (,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
 endif
 #with_check := disabled for this upload
 
-ifneq (,$(filter $(DEB_HOST_ARCH), mipsel riscv64 sparc64))
+regression_archs = mipsel riscv64 sparc64
+ifneq (,$(filter $(DEB_HOST_ARCH), $(regression_archs)))
   ignore_regressions := regressions ignored on architecture $(DEB_HOST_ARCH)
 endif
 #ignore_regressions := regressions ignored on architecture $(DEB_HOST_ARCH)
@@ -845,8 +846,8 @@ ifeq ($(with_check),yes)
 	  echo "Test results, compared with installed binutils:"; \
 	  if python3 debian/test-suite-compare.py $$tsi test-summary-$*; then \
 	    : ; \
-	  elif [ -n "$(ignore_regressions)" ]; then \
-	    echo "$(ignore_regressions)"; \
+	  elif echo $(regression_archs) | grep --word-regexp --silent "$*"; then \
+	    echo "regressions ignore for target $*"; \
 	  else \
 	    false; \
 	  fi; \
