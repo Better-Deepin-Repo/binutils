@@ -1,3 +1,9 @@
+binutils (2.37.90.20220206-1) unstable; urgency=medium
+
+  * New upstream snapshot, taken from the 2.38 release branch.
+
+ -- Matthias Klose <doko@debian.org>  Sun, 06 Feb 2022 09:59:41 +0100
+
 binutils (2.37.90.20220130-2) unstable; urgency=medium
 
   * Also ignore regressions for the cross packages.

@@ -27,10 +27,6 @@ gold-mips.diff
 gold-no-keep-files-mapped.diff
 
 # trunk backports
-pr28827-1.diff
-pr28827-2.diff
-7c4643efe7b.diff
-pr28826.diff
 
 # experimental ...
 #infinity-notes.diff
