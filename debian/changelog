@@ -1,3 +1,16 @@
+binutils (2.38-4) unstable; urgency=medium
+
+  * Update from the binutils 2.38 branch:
+    - Fix PR ld/29087, x86: invalid relocation against protected symbol.
+    - s390: Add DT_JMPREL pointing to .rela.[i]plt with static-pie.
+    - Fix PR ld/22263, s390: Avoid dynamic TLS relocs in PIE.
+    - Fix PR libctf/28933: ld: diagnose corrupted CTF header cth_strlen.
+    - Fix PR 28885.
+    - PR28959, obdump doesn't disassemble mftb instruction.
+    - PowerPC64 DT_RELR relative reloc addresses.
+
+ -- Matthias Klose <doko@debian.org>  Mon, 02 May 2022 22:50:25 +0200
+
 binutils (2.38-3) unstable; urgency=medium
 
   * Update from the binutils 2.38 branch:
