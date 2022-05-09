@@ -103,6 +103,31 @@ Description: Compact C Type Format library (debug symbols, BFD dependency)
  This package includes the libctf-nobfd shared library.  The Compact C Type
  Format (CTF) is a way of representing information about a binary program
 
+Package: libgprofng0
+Architecture: any
+Multi-Arch: same
+Depends: ${shlibs:Depends}, libbinutils (= ${binary:Version})
+Description: GNU Next Generation profiler (runtime library)
+ Gprofng is the GNU Next Generation profiler for analyzing the performance
+ of Linux applications.  Gprofng allows you to:
+ .
+ - Profile C / C++ / Java / Scala applications without needing to recompile
+ - Profile multi-threaded applications
+ - Analyze and compare multiple experiments 
+ - Use time-based sampling and / or hardware event counters
+ .
+ This package includes the libgprofng shared library.
+
+Package: libgprofng0-dbg
+Section: debug
+Architecture: any
+Multi-Arch: same
+Depends: libgprofng0 (= ${binary:Version})
+Description: GNU Next Generation profiler (debug symbols)
+ Gprofng is the GNU Next Generation profiler for analyzing the performance
+ of Linux applications.
+ This package includes the debug symbols for the libgprofng shared library.
+
 Package: libbinutils
 Architecture: any
 Multi-Arch: same

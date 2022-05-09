@@ -8,25 +8,25 @@
  EMULATION_VECTOR
  EMULATION
  OBJDUMP_PRIVATE_OFILES
-@@ -10971,7 +10972,7 @@ else
+@@ -10987,7 +10988,7 @@ else
    lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
    lt_status=$lt_dlunknown
    cat > conftest.$ac_ext <<_LT_EOF
--#line 10974 "configure"
-+#line 10975 "configure"
+-#line 10990 "configure"
++#line 10991 "configure"
  #include "confdefs.h"
  
  #if HAVE_DLFCN_H
-@@ -11077,7 +11078,7 @@ else
+@@ -11093,7 +11094,7 @@ else
    lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
    lt_status=$lt_dlunknown
    cat > conftest.$ac_ext <<_LT_EOF
--#line 11080 "configure"
-+#line 11081 "configure"
+-#line 11096 "configure"
++#line 11097 "configure"
  #include "confdefs.h"
  
  #if HAVE_DLFCN_H
-@@ -14732,6 +14733,9 @@ EMULATION_VECTOR=$targ_emul_vector
+@@ -14869,6 +14870,9 @@ EMULATION_VECTOR=$targ_emul_vector
  
  
  
@@ -38,7 +38,7 @@
  
 --- a/binutils/configure.ac
 +++ b/binutils/configure.ac
-@@ -529,6 +529,9 @@ EMULATION_VECTOR=$targ_emul_vector
+@@ -546,6 +546,9 @@ EMULATION_VECTOR=$targ_emul_vector
  AC_SUBST(EMULATION)
  AC_SUBST(EMULATION_VECTOR)
  
@@ -91,7 +91,7 @@
  CYGPATH_W = @CYGPATH_W@
  DATADIRNAME = @DATADIRNAME@
  DEBUGINFOD_CFLAGS = @DEBUGINFOD_CFLAGS@
-@@ -733,9 +736,9 @@ ELFLIBS = elfcomm.c
+@@ -735,9 +738,9 @@ ELFLIBS = elfcomm.c
  BFDLIB = ../bfd/libbfd.la
  OPCODES = ../opcodes/libopcodes.la
  @ENABLE_LIBCTF_FALSE@LIBCTF = 
@@ -113,25 +113,25 @@
  TESTCTFLIB
  TESTBFDLIB
  EMULATION_LIBPATH
-@@ -11454,7 +11455,7 @@ else
+@@ -11470,7 +11471,7 @@ else
    lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
    lt_status=$lt_dlunknown
    cat > conftest.$ac_ext <<_LT_EOF
--#line 11457 "configure"
-+#line 11458 "configure"
+-#line 11473 "configure"
++#line 11474 "configure"
  #include "confdefs.h"
  
  #if HAVE_DLFCN_H
-@@ -11560,7 +11561,7 @@ else
+@@ -11576,7 +11577,7 @@ else
    lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
    lt_status=$lt_dlunknown
    cat > conftest.$ac_ext <<_LT_EOF
--#line 11563 "configure"
-+#line 11564 "configure"
+-#line 11579 "configure"
++#line 11580 "configure"
  #include "confdefs.h"
  
  #if HAVE_DLFCN_H
-@@ -17030,6 +17031,9 @@ fi
+@@ -17107,6 +17108,9 @@ fi
  ac_config_commands="$ac_config_commands default"
  
  
@@ -143,7 +143,7 @@
  
 --- a/ld/configure.ac
 +++ b/ld/configure.ac
-@@ -591,6 +591,9 @@ sed -e '/^SRC-POTFILES =/r po/SRC-POTFIL
+@@ -643,6 +643,9 @@ sed -e '/^SRC-POTFILES =/r po/SRC-POTFIL
      -e "s,@GMOFILES@,$GMOFILES," \
      po/Makefile.in > po/Makefile]],[[]])
  
@@ -203,74 +203,25 @@
  VERSION_FLAGS_NOBFD
  VERSION_FLAGS
  TCL_TRY_FALSE
-@@ -771,7 +772,6 @@ infodir
- docdir
- oldincludedir
- includedir
--runstatedir
- localstatedir
- sharedstatedir
- sysconfdir
-@@ -856,7 +856,6 @@ datadir='${datarootdir}'
- sysconfdir='${prefix}/etc'
- sharedstatedir='${prefix}/com'
- localstatedir='${prefix}/var'
--runstatedir='${localstatedir}/run'
- includedir='${prefix}/include'
- oldincludedir='/usr/include'
- docdir='${datarootdir}/doc/${PACKAGE_TARNAME}'
-@@ -1109,15 +1108,6 @@ do
-   | -silent | --silent | --silen | --sile | --sil)
-     silent=yes ;;
- 
--  -runstatedir | --runstatedir | --runstatedi | --runstated \
--  | --runstate | --runstat | --runsta | --runst | --runs \
--  | --run | --ru | --r)
--    ac_prev=runstatedir ;;
--  -runstatedir=* | --runstatedir=* | --runstatedi=* | --runstated=* \
--  | --runstate=* | --runstat=* | --runsta=* | --runst=* | --runs=* \
--  | --run=* | --ru=* | --r=*)
--    runstatedir=$ac_optarg ;;
--
-   -sbindir | --sbindir | --sbindi | --sbind | --sbin | --sbi | --sb)
-     ac_prev=sbindir ;;
-   -sbindir=* | --sbindir=* | --sbindi=* | --sbind=* | --sbin=* \
-@@ -1255,7 +1245,7 @@ fi
- for ac_var in	exec_prefix prefix bindir sbindir libexecdir datarootdir \
- 		datadir sysconfdir sharedstatedir localstatedir includedir \
- 		oldincludedir docdir infodir htmldir dvidir pdfdir psdir \
--		libdir localedir mandir runstatedir
-+		libdir localedir mandir
- do
-   eval ac_val=\$$ac_var
-   # Remove trailing slashes.
-@@ -1408,7 +1398,6 @@ Fine tuning of the installation director
-   --sysconfdir=DIR        read-only single-machine data [PREFIX/etc]
-   --sharedstatedir=DIR    modifiable architecture-independent data [PREFIX/com]
-   --localstatedir=DIR     modifiable single-machine data [PREFIX/var]
--  --runstatedir=DIR       modifiable per-process data [LOCALSTATEDIR/run]
-   --libdir=DIR            object code libraries [EPREFIX/lib]
-   --includedir=DIR        C header files [PREFIX/include]
-   --oldincludedir=DIR     C header files for non-gcc [/usr/include]
-@@ -11641,7 +11630,7 @@ else
+@@ -11635,7 +11636,7 @@ else
    lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
    lt_status=$lt_dlunknown
    cat > conftest.$ac_ext <<_LT_EOF
--#line 11644 "configure"
-+#line 11633 "configure"
+-#line 11638 "configure"
++#line 11639 "configure"
  #include "confdefs.h"
  
  #if HAVE_DLFCN_H
-@@ -11747,7 +11736,7 @@ else
+@@ -11741,7 +11742,7 @@ else
    lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
    lt_status=$lt_dlunknown
    cat > conftest.$ac_ext <<_LT_EOF
--#line 11750 "configure"
-+#line 11739 "configure"
+-#line 11744 "configure"
++#line 11745 "configure"
  #include "confdefs.h"
  
  #if HAVE_DLFCN_H
-@@ -13697,6 +13686,9 @@ fi
+@@ -13691,6 +13692,9 @@ fi
  
  
  
@@ -492,7 +443,7 @@
  CYGPATH_W = @CYGPATH_W@
  DATADIRNAME = @DATADIRNAME@
  DEFS = @DEFS@
-@@ -537,17 +563,17 @@ BFDDIR = $(BASEDIR)/bfd
+@@ -536,17 +562,17 @@ BFDDIR = $(BASEDIR)/bfd
  INCDIR = $(srcdir)/../include
  AM_CPPFLAGS = -D_GNU_SOURCE -I$(srcdir) -I$(srcdir)/../include -I$(srcdir)/../bfd -I../bfd @INCINTL@
  AM_CFLAGS = -std=gnu99 @ac_libctf_warn_cflags@ @warn@ @c_warn@ @WARN_PEDANTIC@ @WERROR@ $(ZLIBINC)
@@ -515,7 +466,7 @@
  	ctf-string.c ctf-subr.c ctf-types.c ctf-util.c $(am__append_1)
  
  # @CTF_LIBADD@ appears here twice: once, to force libiberty to get searched before
-@@ -558,6 +584,14 @@ libctf_la_LIBADD = @CTF_LIBADD@ ../bfd/l
+@@ -557,6 +583,14 @@ libctf_la_LIBADD = @CTF_LIBADD@ ../bfd/l
  libctf_la_CPPFLAGS = $(AM_CPPFLAGS) -DNOBFD=0
  libctf_la_LDFLAGS = $(libctf_ldflags_nover) @VERSION_FLAGS@
  libctf_la_SOURCES = $(libctf_nobfd_la_SOURCES) ctf-open-bfd.c
@@ -530,7 +481,7 @@
  RUNTEST = runtest
  RUNTESTFLAGS = 
  @TCL_TRY_TRUE@CC_FOR_TARGET = ` \
-@@ -682,11 +716,11 @@ clean-noinstLTLIBRARIES:
+@@ -680,11 +714,11 @@ clean-noinstLTLIBRARIES:
  	  rm -f $${locs}; \
  	}
  
@@ -546,7 +497,7 @@
  
  mostlyclean-compile:
  	-rm -f *.$(OBJEXT)
-@@ -694,43 +728,43 @@ mostlyclean-compile:
+@@ -692,43 +726,43 @@ mostlyclean-compile:
  distclean-compile:
  	-rm -f *.tab.c
  
@@ -627,7 +578,7 @@
  
  .c.o:
  @am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
-@@ -753,264 +787,264 @@ distclean-compile:
+@@ -751,264 +785,264 @@ distclean-compile:
  @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
  @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
  

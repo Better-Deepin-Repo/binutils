@@ -1,3 +1,10 @@
+binutils (2.38.50.20220503-1) experimental; urgency=medium
+
+  * New upstream snapshot.
+  * Build libgprofng0 and libgprofng0-dbg packages.
+
+ -- Matthias Klose <doko@debian.org>  Wed, 04 May 2022 00:06:52 +0200
+
 binutils (2.38-4) unstable; urgency=medium
 
   * Update from the binutils 2.38 branch:

@@ -38,6 +38,10 @@ debian/libctf-nobfd0
 debian/libctf0-dbg
 debian/libctf0
 
+debian/libgprofng0-dbg
+debian/libgprofng0
+
+.editorconfig
 COPYING
 COPYING.LIB
 COPYING3
@@ -68,6 +72,7 @@ gas
 gnulib
 gold
 gprof
+gprofng
 include
 install-sh
 intl

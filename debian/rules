@@ -66,6 +66,7 @@ p_src = $(p_bin)-source
 
 p_ctf = libctf0
 p_ctfn = libctf-nobfd0
+p_gpng = libgprofng0
 
 p_hst = $(p_bin)-for-host
 p_bld = $(p_bin)-for-build
@@ -104,6 +105,7 @@ d_src = debian/$(p_src)
 
 d_ctf = debian/$(p_ctf)
 d_ctfn = debian/$(p_ctfn)
+d_gpng = debian/$(p_gpng)
 
 d_hst = debian/$(p_hst)
 d_bld = debian/$(p_bld)
@@ -180,6 +182,11 @@ ifneq (,$(ADT_TEST_TRIGGERS))
   with_hppa64 :=
   with_multiarch :=
 endif
+endif
+
+ifneq (,$(filter $(DEB_HOST_ARCH),aarch64 amd64 i386 x32))
+  with_gprofng = yes
+  CONF_GPROFNG = --enable-gprofng
 endif
 
 HOST_ARCHS_armhf = amd64 i386 x32 arm64 ppc64el
@@ -324,7 +331,7 @@ DEB_SVERSION	:= $(shell echo $(DEB_VERSION) | sed 's/+b[0-9][0-9]*$$//')
 VERSION		:= $(shell sed -n 's/^ *VERSION=\(.*\)/\1/p' bfd/configure | head -1 | tr -d \')
 DATE		:= $(shell sed -n 's/.* \([0-9]*\)$$/\1/p' bfd/version.h)
 ifneq (,$(DATE))
-#  DATE_EXT	:= .$(DATE)
+  DATE_EXT	:= .$(DATE)
 endif
 BUILD_DATE := $(shell dpkg-parsechangelog | sed -n -e 's/^Date: //p')
 BUILD_DAY  := $(shell date -Idate -u -d "$(BUILD_DATE)")
@@ -387,6 +394,8 @@ gfdl_generated_files = \
 
 programs = addr2line ar as c++filt elfedit gprof ld ld.bfd
 programs += nm objcopy objdump ranlib readelf size strings strip
+programs += gprofng gp-collect-app
+programs += gp-archive gp-display-html gp-display-src gp-display-text
 ifeq ($(with_gold),yes)
 programs += gold ld.gold dwp
 endif
@@ -588,7 +597,7 @@ clean:
 	rm -rf $(d_bin) $(d_com) $(d_lib) $(d_lib)-dbg $(d_nat) $(d_nat)-dbg \
 	  $(d_hst) $(d_dev) $(d_mul) $(d_mul)-dbg $(d_mdev) $(d_doc) \
 	  $(d_hppa64) $(d_hppa64)-dbg $(d_src) $(d_bld) \
-	  $(d_ctf) $(d_ctf)-dbg $(d_ctfn) $(d_ctfn)-dbg
+	  $(d_ctf) $(d_ctf)-dbg $(d_ctfn) $(d_ctfn)-dbg $(d_gpng) $(d_gpng)-dbg
 	rm -rf $(foreach ca,$(CROSS_ARCHS),debian/binutils-$(subst _,-,$(subst i586,i686,$(call _gnu_type,$(ca)))){,-dbg})
 	rm -rf debian/tmp debian/files* debian/substvars
 	rm -f debian/*.orig debian/*.rej
@@ -636,7 +645,7 @@ SINGLE_CONFARGS = $(CONFARGS) $(CONFARGS_TARGET_$(DEB_HOST_ARCH))
 ifeq ($(with_gold),yes)
 	SINGLE_CONFARGS += --enable-ld=default --enable-gold
 endif
-SINGLE_CONFARGS += $(CONF_PGO)
+SINGLE_CONFARGS += $(CONF_PGO) $(CONF_GPROFNG)
 
 stamps/configure-single:
 	$(checkdir)
@@ -769,7 +778,7 @@ stamps/configure-multi:
 	cd builddir-multi \
 	    && env CC="$(CC)" CXX="$(CXX)" CFLAGS="$(CFLAGS)" CXXFLAGS="$(CXXFLAGS)" LDFLAGS="$(LDFLAGS)" \
 	        $(call SET_MULTIARCH_ENV,$(DEB_HOST_ARCH)) \
-		../configure $(CONFARGS) $(CONF_PGO) \
+		../configure $(CONFARGS) $(CONF_PGO) $(CONF_GPROFNG) \
 		  $(filter-out --enable-targets=%, $(CONFARGS_TARGET_$(DEB_HOST_ARCH))) \
 		  --with-sysroot=/ \
 		  --libdir=/$(PF)/lib/$(DEB_HOST_MULTIARCH) \
@@ -793,6 +802,9 @@ stamps/build-multi: stamps/configure-multi
 #################
 
 CROSS_CONFARGS = $(CONFARGS) --enable-initfini-array
+# explicitly disable for the cross builds, see PR gprofng/29116
+CROSS_CONFARGS += --disable-gprofng
+
 ifeq ($(with_gold),yes)
 	CROSS_CONFARGS += --enable-ld=default --enable-gold
 endif
@@ -1049,7 +1061,7 @@ install: $(install_stamp)
 stamps/install: checkroot stamps/build $(install_stamps)
 	$(checkdir)
 
-	rm -fr $(d_bin) $(d_com) $(d_lib) $(d_nat) $(d_dev) $(d_mul) $(d_mdev) $(d_doc) $(d_src) $(d_bld) $(d_ctf) $(d_ctfn)
+	rm -fr $(d_bin) $(d_com) $(d_lib) $(d_nat) $(d_dev) $(d_mul) $(d_mdev) $(d_doc) $(d_src) $(d_bld) $(d_ctf) $(d_ctfn) $(d_gpng)
 	$(install_dir) $(d_bin) $(d_com) $(d_lib) $(d_nat) $(d_dev) $(d_mul) $(d_mdev) $(d_doc) $(d_src) $(d_bld)
 
 	: # install binutils and -dev stuff
@@ -1156,12 +1168,20 @@ endif
 	$(install_dir) $(d_ctfn)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
 	mv $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libctf-nobfd.so.* \
 		$(d_ctfn)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/.
+ifeq ($(with_gprofng),yes)
+	$(install_dir) $(d_gpng)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/gprofng
+	mv $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/gprofng/libgprofng.so.* \
+		$(d_gpng)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/.
+	mv $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/gprofng/libgp-*.so \
+		$(d_gpng)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/gprofng/.
+endif
 
 	$(install_dir) $(d_lib)/$(PF)/lib/$(DEB_HOST_MULTIARCH) $(d_dev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
 	mv $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.a \
 	   $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libbfd.so \
 	   $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libopcodes.so \
 	   $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libctf*.so \
+	   $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/gprofng/libgprofng.so \
 		$(d_dev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
 	mv $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so \
 	   $(d_lib)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
@@ -1185,10 +1205,17 @@ endif
 	chmod ugo-x $(d_lib)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so
 	chmod ugo-x $(d_ctf)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so.*
 	chmod ugo-x $(d_ctfn)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so.*
+ifeq ($(with_gprofng),yes)
+	chmod ugo-x $(d_gpng)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so.*
+	chmod ugo-x $(d_gpng)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/gprofng/*.so
+endif
 ifeq ($(with_native),yes)
 	$(call strip_package, $(p_lib), $(d_lib))
 	$(call strip_package, $(p_ctf), $(d_ctf))
 	$(call strip_package, $(p_ctfn), $(d_ctfn))
+  ifeq ($(with_gprofng),yes)
+	$(call strip_package, $(p_gpng), $(d_gpng))
+  endif
 endif
 ifeq ($(with_multiarch),yes)
 	chmod ugo-x $(d_mul)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so
@@ -1631,6 +1658,12 @@ endif
 	$(install_file) debian/binutils.triggers $(d_ctfn)/DEBIAN/triggers
 	$(install_file) debian/libctf-nobfd0.symbols $(d_ctfn)/DEBIAN/symbols
 
+ifeq ($(with_gprofng),yes)
+	$(install_dir) $(d_gpng)/DEBIAN $(d_gpng)-dbg/DEBIAN
+	$(install_file) debian/binutils.triggers $(d_gpng)/DEBIAN/triggers
+	$(install_file) debian/libctf-nobfd0.symbols $(d_gpng)/DEBIAN/symbols
+endif
+
 	$(install_dir) $(d_com)/DEBIAN
 
 	$(install_dir) $(d_nat)/DEBIAN $(d_nat)-dbg/DEBIAN
@@ -1671,6 +1704,11 @@ endif
 	$(install_dir) $(d_ctfn)/$(PF)/share/doc/$(p_ctfn)
 	$(install_file)	debian/changelog $(d_ctfn)/$(PF)/share/doc/$(p_ctfn)/changelog.Debian
 	$(install_file)	debian/copyright $(d_ctfn)/$(PF)/share/doc/$(p_ctfn)/
+
+ifeq ($(with_gprofng),yes)
+	$(install_dir) $(d_gpng)/$(PF)/share/doc/
+	ln -sf $(p_lib) $(d_gpng)/$(PF)/share/doc/$(p_gpng)
+endif
 
 	$(install_dir) $(d_nat)/$(PF)/share/doc/
 	ln -sf $(p_lib) $(d_nat)/$(PF)/share/doc/$(p_nat)
@@ -1760,6 +1798,9 @@ endif
 
 	dpkg-gensymbols -P$(d_ctf) -p$(p_ctf) -l$(d_lib)
 	dpkg-gensymbols -P$(d_ctfn) -p$(p_ctfn)
+ifeq ($(with_gprofng),yes)
+	dpkg-gensymbols -P$(d_gpng) -p$(p_gpng) -l$(d_lib)
+endif
 
 	rm -f debian/substvars
 	find $(d_ctf) -type f | xargs file | grep ELF | cut -d: -f 1 | xargs dpkg-shlibdeps
@@ -1774,6 +1815,15 @@ endif
 	cd $(d_ctfn) && find -type f  ! -regex './DEBIAN/.*' -printf '%P\n' | LC_ALL=C sort | xargs md5sum > DEBIAN/md5sums
 	dpkg-gencontrol -P$(d_ctfn)-dbg -p$(p_ctfn)-dbg
 	cd $(d_ctfn)-dbg && find -type f  ! -regex './DEBIAN/.*' -printf '%P\n' | LC_ALL=C sort | xargs md5sum > DEBIAN/md5sums
+
+ifeq ($(with_gprofng),yes)
+	rm -f debian/substvars
+	find $(d_gpng) -type f | xargs file | grep ELF | cut -d: -f 1 | xargs dpkg-shlibdeps
+	dpkg-gencontrol -P$(d_gpng) -p$(p_gpng)
+	cd $(d_gpng) && find -type f  ! -regex './DEBIAN/.*' -printf '%P\n' | LC_ALL=C sort | xargs md5sum > DEBIAN/md5sums
+	dpkg-gencontrol -P$(d_gpng)-dbg -p$(p_gpng)-dbg
+	cd $(d_gpng)-dbg && find -type f  ! -regex './DEBIAN/.*' -printf '%P\n' | LC_ALL=C sort | xargs md5sum > DEBIAN/md5sums
+endif
 
 	rm -f debian/substvars
 	dpkg-gencontrol -P$(d_com) -p$(p_com)
@@ -1813,8 +1863,8 @@ ifeq ($(with_hppa64),yes)
 	cd $(d_hppa64)-dbg && find -type f  ! -regex './DEBIAN/.*' -printf '%P\n' | LC_ALL=C sort | xargs md5sum > DEBIAN/md5sums
 endif
 
-	$(CHOWN) -R root:root $(d_bin) $(d_com) $(d_lib) $(d_lib)-dbg $(d_ctf) $(d_ctf)-dbg $(d_ctfn) $(d_ctfn)-dbg $(d_nat) $(d_nat)-dbg $(d_dev)
-	chmod -R go=rX  $(d_bin) $(d_com) $(d_lib) $(d_lib)-dbg $(d_ctf) $(d_ctf)-dbg $(d_ctfn) $(d_ctfn)-dbg $(d_nat) $(d_nat)-dbg $(d_dev)
+	$(CHOWN) -R root:root $(d_bin) $(d_com) $(d_lib) $(d_lib)-dbg $(d_ctf) $(d_ctf)-dbg $(d_ctfn) $(d_ctfn)-dbg $(d_gpng) $(d_gpng)-dbg $(d_nat) $(d_nat)-dbg $(d_dev)
+	chmod -R go=rX  $(d_bin) $(d_com) $(d_lib) $(d_lib)-dbg $(d_ctf) $(d_ctf)-dbg $(d_ctfn) $(d_ctfn)-dbg $(d_gpng) $(d_gpng)-dbg $(d_nat) $(d_nat)-dbg $(d_dev)
 	find $(d_bin) -depth -newermt '$(BUILD_DATE)' -print0 | \
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
 	$(DPKG_DEB) --build $(d_bin) ..
@@ -1833,6 +1883,14 @@ endif
 	find $(d_ctfn)-dbg -depth -newermt '$(BUILD_DATE)' -print0 | \
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
 	$(DPKG_DEB) --build $(d_ctfn)-dbg ..
+ifeq ($(with_gprofng),yes)
+	find $(d_gpng) -depth -newermt '$(BUILD_DATE)' -print0 | \
+		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
+	$(DPKG_DEB) --build $(d_gpng) ..
+	find $(d_gpng)-dbg -depth -newermt '$(BUILD_DATE)' -print0 | \
+		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
+	$(DPKG_DEB) --build $(d_gpng)-dbg ..
+endif
 	find $(d_lib) -depth -newermt '$(BUILD_DATE)' -print0 | \
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
 	$(DPKG_DEB) --build $(d_lib) ..
@@ -1902,6 +1960,8 @@ define strip_package
 	  $(strip $2)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libbfd-*so \
 	  $(strip $2)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libopcodes-*so \
 	  $(strip $2)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libctf*.so.0.0.0 \
+	  $(strip $2)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libgprofng.so.0.0.0 \
+	  $(strip $2)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/gprofng/libgp-*.so \
 	  $$(file $(strip $2)/$(PF)/bin/* |awk -F: '$$0 !~ /script/ {print $$1}'); \
 	do \
 	  test ! -h $$i || continue; test -f $$i || continue; \
