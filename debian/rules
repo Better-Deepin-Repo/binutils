@@ -394,10 +394,12 @@ gfdl_generated_files = \
 
 programs = addr2line ar as c++filt elfedit gprof ld ld.bfd
 programs += nm objcopy objdump ranlib readelf size strings strip
-programs += gprofng gp-collect-app
-programs += gp-archive gp-display-html gp-display-src gp-display-text
+ifeq ($(with_gprofng),yes)
+  programs += gprofng gp-collect-app
+  programs += gp-archive gp-display-html gp-display-src gp-display-text
+endif
 ifeq ($(with_gold),yes)
-programs += gold ld.gold dwp
+  programs += gold ld.gold dwp
 endif
 
 ########################################
@@ -802,8 +804,6 @@ stamps/build-multi: stamps/configure-multi
 #################
 
 CROSS_CONFARGS = $(CONFARGS) --enable-initfini-array
-# explicitly disable for the cross builds, see PR gprofng/29116
-CROSS_CONFARGS += --disable-gprofng
 
 ifeq ($(with_gold),yes)
 	CROSS_CONFARGS += --enable-ld=default --enable-gold
@@ -1181,10 +1181,13 @@ endif
 	   $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libbfd.so \
 	   $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libopcodes.so \
 	   $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libctf*.so \
-	   $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/gprofng/libgprofng.so \
 		$(d_dev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
 	mv $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so \
 	   $(d_lib)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
+ifeq ($(with_gprofng),yes)
+	mv $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/gprofng/libgprofng.so \
+		$(d_dev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
+endif
 
 ifeq ($(with_multiarch),yes)
 	$(install_dir) $(d_mul)/$(PF)/lib/$(DEB_HOST_MULTIARCH) $(d_mdev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
