@@ -184,7 +184,7 @@ ifneq (,$(ADT_TEST_TRIGGERS))
 endif
 endif
 
-ifneq (,$(filter $(DEB_HOST_ARCH),aarch64 amd64 i386 x32))
+ifneq (,$(filter $(DEB_HOST_ARCH),amd64 i386 arm64 x32))
   with_gprofng = yes
   CONF_GPROFNG = --enable-gprofng
 endif
@@ -1866,8 +1866,8 @@ ifeq ($(with_hppa64),yes)
 	cd $(d_hppa64)-dbg && find -type f  ! -regex './DEBIAN/.*' -printf '%P\n' | LC_ALL=C sort | xargs md5sum > DEBIAN/md5sums
 endif
 
-	$(CHOWN) -R root:root $(d_bin) $(d_com) $(d_lib) $(d_lib)-dbg $(d_ctf) $(d_ctf)-dbg $(d_ctfn) $(d_ctfn)-dbg $(d_gpng) $(d_gpng)-dbg $(d_nat) $(d_nat)-dbg $(d_dev)
-	chmod -R go=rX  $(d_bin) $(d_com) $(d_lib) $(d_lib)-dbg $(d_ctf) $(d_ctf)-dbg $(d_ctfn) $(d_ctfn)-dbg $(d_gpng) $(d_gpng)-dbg $(d_nat) $(d_nat)-dbg $(d_dev)
+	$(CHOWN) -R root:root $(d_bin) $(d_com) $(d_lib) $(d_lib)-dbg $(d_ctf) $(d_ctf)-dbg $(d_ctfn) $(d_ctfn)-dbg $(d_nat) $(d_nat)-dbg $(d_dev)
+	chmod -R go=rX  $(d_bin) $(d_com) $(d_lib) $(d_lib)-dbg $(d_ctf) $(d_ctf)-dbg $(d_ctfn) $(d_ctfn)-dbg $(d_nat) $(d_nat)-dbg $(d_dev)
 	find $(d_bin) -depth -newermt '$(BUILD_DATE)' -print0 | \
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
 	$(DPKG_DEB) --build $(d_bin) ..
@@ -1887,6 +1887,8 @@ endif
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
 	$(DPKG_DEB) --build $(d_ctfn)-dbg ..
 ifeq ($(with_gprofng),yes)
+	$(CHOWN) -R root:root $(d_gpng) $(d_gpng)-dbg
+	chmod -R go=rX  $(d_gpng) $(d_gpng)-dbg
 	find $(d_gpng) -depth -newermt '$(BUILD_DATE)' -print0 | \
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
 	$(DPKG_DEB) --build $(d_gpng) ..

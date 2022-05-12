@@ -1,3 +1,10 @@
+binutils (2.38.50.20220512-1) experimental; urgency=medium
+
+  * New upstream snapshot.
+  * Fix the build for architectures without gprofng support.
+
+ -- Matthias Klose <doko@debian.org>  Thu, 12 May 2022 11:01:50 +0200
+
 binutils (2.38.50.20220509-1) experimental; urgency=medium
 
   * New upstream snapshot.
