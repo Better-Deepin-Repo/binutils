@@ -3,8 +3,8 @@
 # Based on sample debian/rules file - for GNU Hello (1.3).
 # Copyright 1994,1995 by Ian Jackson.
 # Copyright 1998-2007 James Troup.
-# Portions Copyright 2008-2019 Canonical Ltd.
-# Portions Copyright 2008-2019 Matthias Klose.
+# Portions Copyright 2008-2022 Canonical Ltd.
+# Portions Copyright 2008-2022 Matthias Klose.
 # I hereby give you perpetual unlimited permission to copy,
 # modify and relicense this file, provided that you do not remove
 # my name from the file itself.  (I assert my moral right of
@@ -412,6 +412,7 @@ CONFARGS = \
 	--enable-threads \
 	--with-system-zlib \
 	--prefix=/$(PF) \
+	--sysconfdir=/etc \
 	--enable-deterministic-archives \
 	--disable-compressed-debug-sections \
 	--enable-new-dtags \
@@ -881,6 +882,9 @@ stamps/install.%: stamps/build.%
 		$(D_CROSS)/$(PF)/share/info \
 		$(D_CROSS)/$(PF)/share/locale
 
+	rm -rf \
+		$(D_CROSS)/$(PF)/etc $(D_CROSS)/etc
+
 	mkdir -p $(D_CROSS)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
 	set -e; \
 	d_src=$(D_CROSS)/$(PF)/$(DEB_HOST_GNU_TYPE)/$(CROSS_GNU_TYPE)/lib; \
@@ -1132,6 +1136,7 @@ ifeq ($(with_multiarch),yes)
 	: # Now get rid of just about everything in binutils-multiarch
 	rm -rf $(d_mul)/$(PF)/man $(d_mul)/$(PF)/info $(d_mul)/$(PF)/include
 	rm -rf $(d_mul)/$(PF)/share/man $(d_mul)/$(PF)/share/info $(d_mul)/$(PF)/share/locale
+	rm -rf $(d_mul)/$(PF)/etc $(d_mul)/etc
 
 	: # elfedit (even with its --input-mach option)
 	: # is the same for all targets.
@@ -1273,6 +1278,11 @@ ifeq ($(with_gold),yes)
 	cp debian/dwp.1 $(d_com)/$(PF)/share/man/man1/
 	cp debian/ld.gold.1 $(d_com)/$(PF)/share/man/man1/
 	ln -s ld.gold.1.gz $(d_com)/$(PF)/share/man/man1/gold.1.gz
+
+ifeq ($(with_gprofng),yes)
+	$(install_dir) $(d_com)/etc
+	mv $(d_bin)/$(PF)/etc/gprofng.rc $(d_com)/etc/.
+endif
 
 	: # install a symlink for the gold linker
 	$(install_dir) $(d_bin)/$(PF)/lib/gold-ld
