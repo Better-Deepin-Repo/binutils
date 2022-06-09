@@ -953,6 +953,7 @@ stamps/install.%: stamps/build.%
 	rm -f $(D_CROSS)/$(PF)/$(DEB_HOST_GNU_TYPE)/$(CROSS_GNU_TYPE)/lib/libctf*
 	rm -f $(D_CROSS)/$(PF)/lib/$(CROSS_GNU_TYPE)/libctf*
 	rm -f $(D_CROSS)/$(PF)/include/ctf*.h
+	rm -f $(D_CROSS)/$(PF)/include/*collector*.h
 
 	: # remove RPATH
 	chrpath -k -d $$(file $(D_CROSS)/usr/bin/*|awk -F: '/ ELF/ {print $$1}')
