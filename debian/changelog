@@ -1,3 +1,10 @@
+binutils (2.38.50.20220615-1) unstable; urgency=medium
+
+  * New upstream snapshot.
+  * Ignore the pr26580-4 regression on m68k and sh4.
+
+ -- Matthias Klose <doko@debian.org>  Wed, 15 Jun 2022 12:53:45 +0200
+
 binutils (2.38.50.20220609-2) experimental; urgency=medium
 
   * New upstream snapshot.
