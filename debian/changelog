@@ -1,3 +1,15 @@
+binutils (2.38.50.20220615-3) unstable; urgency=medium
+
+  * Don't install the gprofng binary in the binutils-multiarch package.
+
+ -- Matthias Klose <doko@debian.org>  Thu, 16 Jun 2022 06:16:02 +0200
+
+binutils (2.38.50.20220615-2) unstable; urgency=medium
+
+  * Don't install gp-* binaries in the binutils-multiarch package.
+
+ -- Matthias Klose <doko@debian.org>  Wed, 15 Jun 2022 19:28:52 +0200
+
 binutils (2.38.50.20220615-1) unstable; urgency=medium
 
   * New upstream snapshot.

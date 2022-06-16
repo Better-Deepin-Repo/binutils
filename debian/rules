@@ -1155,6 +1155,9 @@ ifeq ($(with_multiarch),yes)
 	rm -f $(d_mul)/$(PF)/bin/ld.bfd
 	rm -f $(d_mul)/$(PF)/bin/ld.gold
 
+	rm -f $(d_mul)/$(PF)/bin/gprofng
+	rm -f $(d_mul)/$(PF)/bin/gp-*
+
   ifneq (,$(filter $(DEB_HOST_ARCH),powerpc ppc64 ppc64el))
 	rm -f $(d_mul)/$(PF)/bin/embedspu
   endif
