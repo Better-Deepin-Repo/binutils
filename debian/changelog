@@ -1,3 +1,9 @@
+binutils (2.38.50.20220629-1) unstable; urgency=medium
+
+  * New upstream snapshot.
+
+ -- Matthias Klose <doko@debian.org>  Wed, 29 Jun 2022 14:48:40 +0200
+
 binutils (2.38.50.20220627-1) unstable; urgency=medium
 
   * New upstream snapshot.
