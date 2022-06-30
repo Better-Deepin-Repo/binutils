@@ -1286,7 +1286,7 @@ ifeq ($(with_gold),yes)
 
 ifeq ($(with_gprofng),yes)
 	$(install_dir) $(d_com)/etc
-	mv $(d_bin)/$(PF)/etc/gprofng.rc $(d_com)/etc/.
+	mv $(d_bin)/etc/gprofng.rc $(d_com)/etc/.
 endif
 
 	: # install a symlink for the gold linker

@@ -1,3 +1,9 @@
+binutils (2.38.50.20220629-2) unstable; urgency=medium
+
+  * Fix installation of the gprofng.rc config file.
+
+ -- Matthias Klose <doko@debian.org>  Thu, 30 Jun 2022 09:05:34 +0200
+
 binutils (2.38.50.20220629-1) unstable; urgency=medium
 
   * New upstream snapshot.
