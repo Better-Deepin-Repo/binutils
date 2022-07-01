@@ -1,3 +1,9 @@
+binutils (2.38.50.20220629-3) unstable; urgency=medium
+
+  * Revert patches for AArch64: Disallow copy relocations on protected data.
+
+ -- Matthias Klose <doko@debian.org>  Fri, 01 Jul 2022 15:39:02 +0200
+
 binutils (2.38.50.20220629-2) unstable; urgency=medium
 
   * Fix installation of the gprofng.rc config file.
