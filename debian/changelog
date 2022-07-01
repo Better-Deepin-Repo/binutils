@@ -1,4 +1,4 @@
-binutils (2.38.50.20220629-3) unstable; urgency=medium
+binutils (2.38.50.20220629-4) unstable; urgency=medium
 
   * Revert patches for AArch64: Disallow copy relocations on protected data.
 
