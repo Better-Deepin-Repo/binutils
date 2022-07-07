@@ -1,3 +1,10 @@
+binutils (2.38.50.20220707-1) unstable; urgency=medium
+
+  * New upstream snapshot.
+  * Undo the reversion from the last upload.
+
+ -- Matthias Klose <doko@debian.org>  Thu, 07 Jul 2022 12:29:59 +0200
+
 binutils (2.38.50.20220629-4) unstable; urgency=medium
 
   * Revert patches for AArch64: Disallow copy relocations on protected data.
