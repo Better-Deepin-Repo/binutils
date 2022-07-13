@@ -562,7 +562,7 @@ ifneq (,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
 endif
 #with_check := disabled for this upload
 
-regression_archs = i386 mipsel riscv64 sparc64 m68k sh4
+regression_archs =
 ifneq (,$(filter $(DEB_HOST_ARCH), $(regression_archs)))
   ignore_regressions := regressions ignored on architecture $(DEB_HOST_ARCH)
 endif

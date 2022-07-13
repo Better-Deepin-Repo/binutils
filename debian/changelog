@@ -1,3 +1,10 @@
+binutils (2.38.90.20220713-1) unstable; urgency=medium
+
+  * New upstream snapshot, taken from the 2.39 release branch.
+  * Don't ignore any regressions on any architecture.
+
+ -- Matthias Klose <doko@debian.org>  Wed, 13 Jul 2022 10:38:21 +0200
+
 binutils (2.38.50.20220707-1) unstable; urgency=medium
 
   * New upstream snapshot.
