@@ -1,3 +1,9 @@
+binutils (2.38.90.20220713-2) unstable; urgency=medium
+
+  * Regenerate gprofng/common/config.h.in.
+
+ -- Matthias Klose <doko@debian.org>  Thu, 14 Jul 2022 12:07:20 +0200
+
 binutils (2.38.90.20220713-1) unstable; urgency=medium
 
   * New upstream snapshot, taken from the 2.39 release branch.
