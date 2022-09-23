@@ -1,8 +1,9 @@
 binutils (2.39-1) unstable; urgency=medium
 
   * binutils 2.39 release.
+  * Update from the binutils 2.39 branch:
 
- -- Matthias Klose <doko@debian.org>  Mon, 08 Aug 2022 11:24:56 +0200
+ -- Matthias Klose <doko@debian.org>  Fri, 23 Sep 2022 16:40:37 +0200
 
 binutils (2.38.90.20220713-2) unstable; urgency=medium
 
