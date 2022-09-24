@@ -1,3 +1,9 @@
+binutils (2.39-2) unstable; urgency=medium
+
+  * Ignore two failing tests on amd64, some more on hurd-i386.
+
+ -- Matthias Klose <doko@debian.org>  Sat, 24 Sep 2022 07:03:00 +0200
+
 binutils (2.39-1) unstable; urgency=medium
 
   * binutils 2.39 release.
