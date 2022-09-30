@@ -563,7 +563,7 @@ ifneq (,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
 endif
 #with_check := disabled for this upload
 
-regression_archs = amd64 sh4 x32 hurd-i386
+regression_archs = alpha amd64 sh4 x32 hurd-i386
 ifneq (,$(filter $(DEB_HOST_ARCH), $(regression_archs)))
   ignore_regressions := regressions ignored on architecture $(DEB_HOST_ARCH)
 endif
@@ -1698,10 +1698,10 @@ ifeq ($(with_gprofng),yes)
 	$(install_dir) $(d_gpng)/DEBIAN $(d_gpng)-dbg/DEBIAN
 	$(install_file) debian/binutils.triggers $(d_gpng)/DEBIAN/triggers
 	$(install_file) debian/libgprofng0.shlibs $(d_gpng)/DEBIAN/shlibs
-endif
 
 	$(install_dir) $(d_com)/DEBIAN
 	$(install_file) debian/binutils-common.conffiles $(d_com)/DEBIAN/conffiles
+endif
 
 	$(install_dir) $(d_nat)/DEBIAN $(d_nat)-dbg/DEBIAN
 
