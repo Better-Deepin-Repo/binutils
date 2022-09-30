@@ -118,7 +118,7 @@ install_script = install -m 755
 install_binary = install -m 755 -s --strip-program="$(STRIP)"
 
 NATIVE_ARCHS ?= amd64 i386 arm64 armhf armel ppc64el s390x
-NATIVE_ARCHS += alpha hppa ia64 m68k powerpc ppc64 \
+NATIVE_ARCHS += alpha arc hppa ia64 m68k powerpc ppc64 \
 	riscv64 sh4 sparc64 x32
 NATIVE_ARCHS += hurd-i386 kfreebsd-amd64 kfreebsd-i386
 #NATIVE_ARCHS += nios2 or1k s390 sparc
@@ -139,12 +139,12 @@ ifeq ($(DEB_SOURCE),binutils)
     # DEB_HOST_ARCH is filtered-out later anyway, do not test here.
     CROSS_ARCHS ?= amd64 i386 x32 \
                    s390x ppc64el arm64 armhf armel \
-                   alpha hppa m68k \
+                   alpha arc hppa m68k \
                    powerpc ppc64 sh4 sparc64 \
                    ia64 riscv64 \
                    kfreebsd-amd64 kfreebsd-i386 hurd-i386
   else ifeq ($(DEB_HOST_ARCH),arm64)
-    CROSS_ARCHS ?= amd64 armel armhf i386 ppc64el riscv64 s390x x32
+    CROSS_ARCHS ?= amd64 armel armhf i386 ppc64el riscv64 s390x arc x32
   else ifeq ($(DEB_HOST_ARCH),ppc64)
     CROSS_ARCHS ?= ppc64el
   else ifeq ($(DEB_HOST_ARCH),ppc64el)
@@ -189,6 +189,7 @@ ifneq (,$(filter $(DEB_HOST_ARCH),amd64 i386 arm64 x32))
   CONF_GPROFNG = --enable-gprofng
 endif
 
+HOST_ARCHS_arc = amd64 i386 x32 arm64
 HOST_ARCHS_armhf = amd64 i386 x32 arm64 ppc64el
 HOST_ARCHS_armel = amd64 i386 x32 arm64 ppc64el
 HOST_ARCHS_arm64 = amd64 i386 x32 ppc64el
@@ -908,6 +909,7 @@ stamps/install.%: stamps/build.%
 	$(call strip_package, $(P_CROSS),$(D_CROSS),.)
 	chmod ugo-x $(D_CROSS)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so
 	chmod ugo-x $(D_CROSS)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so.*
+	chmod ugo-x $(D_CROSS)/$(PF)/lib/*/bfd-plugins/*.so
 
 	: # Get rid of .la files since libtool obviously has no idea about transient paths
 	rm -f $(D_CROSS)/$(PF)/$(DEB_HOST_GNU_TYPE)/$(CROSS_GNU_TYPE)/lib/*.la
@@ -923,6 +925,11 @@ stamps/install.%: stamps/build.%
 
 	: # no spu toolchain
 	rm -f $(D_CROSS)/$(PF)/bin/*embedspu
+
+	: # no gprofng in cross packages
+	rm -f $(D_CROSS)/$(PF)/bin/*-gprofng
+	rm -f $(D_CROSS)/$(PF)/bin/*-gp-*
+	rm -rf $(D_CROSS)/$(PF)/lib/*/gprofng
 
 	: # Remove windows related manpages
 	rm -f $(D_CROSS)/$(PF)/share/man/man1/$(CROSS_GNU_TYPE)-{dlltool,nlmconv,windmc,windres}.1
@@ -957,6 +964,7 @@ stamps/install.%: stamps/build.%
 
 	: # remove RPATH
 	chrpath -k -d $$(file $(D_CROSS)/usr/bin/*|awk -F: '/ ELF/ {print $$1}')
+	chrpath -k -d $$(file $(D_CROSS)/usr/lib/$(DEB_HOST_GNU_TYPE)/lib*.so*|awk -F: '/ ELF/ {print $$1}')
 
 ifneq (,$(filter $(distrelease),lenny etch squeeze wheezy jessie stretch))
 	: # temporary i586-* symlinks for stretch
@@ -1095,6 +1103,10 @@ stamps/install: checkroot stamps/build $(install_stamps)
 	  sed -i -e '/^\.TH /s/[0-9]*-[0-9]*-[0-9]*/$(BUILD_DAY)/' $$f; \
 	done
 
+ifeq ($(with_gprofng),yes)
+	chrpath -k -d $$(file $(d_bin)/usr/bin/{gprofng,gp-*}|awk -F: '/ ELF/ {print $$1}')
+endif
+
 ifeq ($(with_multiarch),yes)
 	: # now install binutils-multiarch stuff
 	env MAKE="$(MAKE) VERSION=$(MULTI_VERSION)" \
@@ -1218,6 +1230,7 @@ endif
 	chmod ugo-x $(d_lib)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so
 	chmod ugo-x $(d_ctf)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so.*
 	chmod ugo-x $(d_ctfn)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so.*
+	chmod ugo-x $(d_nat)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/bfd-plugins/*.so
 ifeq ($(with_gprofng),yes)
 	chmod ugo-x $(d_gpng)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so.*
 	chmod ugo-x $(d_gpng)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/gprofng/*.so
@@ -1390,9 +1403,11 @@ stamps/install-hppa64: checkroot stamps/build-hppa64
 	$(call strip_package, $(p_hppa64), $(d_hppa64))
 	chmod ugo-x $(d_hppa64)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so
 	chmod ugo-x $(d_hppa64)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so.*
+	chmod ugo-x $(d_hppa64)/$(PF)/lib/*/bfd-plugins/*.so
 
 	: # remove RPATH
 	chrpath -k -d $$(file $(d_hppa64)/usr/bin/*|awk -F: '/ ELF/ {print $$1}')
+	chrpath -k -d $$(file $(d_hppa64)/usr/lib/$(DEB_HOST_MULTIARCH)/lib*.so*|awk -F: '/ ELF/ {print $$1}')
 
 	: # Don't want /usr/<arch>-linux to exist in any package
 	rm -rf $(d_hppa64)/$(PF)/$(DEB_HOST_GNU_TYPE)
@@ -1450,7 +1465,7 @@ endif # ifndef BACKPORT
 	cd .. && find $(source_files) -depth -newermt '$(BUILD_DATE)' -print0 | \
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)' && \
 		find $(source_files) -type f -print0 | LC_ALL=C sort -z | \
-		tar --null -T - -c --xz --exclude=CVS --mode=go=rX,u+rw,a-s \
+		XZ_OPT=-9 tar --null -T - -c --xz --mode=go=rX,u+rw,a-s \
 		--owner=0 --group=0 --numeric-owner \
 		--xform='s=^[^/]*\/=binutils-$(VERSION)/=' \
 		-f $(pwd)/$(d_src)/$(PF)/src/binutils/binutils-$(VERSION).tar.xz \
@@ -1463,6 +1478,7 @@ endif # ifndef BACKPORT
 		-path './debian/libbinutils-dbg' -type d -prune -o \
 		-path './debian/patches' -prune -o \
 		-path './debian/libctf*' -type d -prune -o \
+		-path './debian/libgprofng*' -type d -prune -o \
 		-path './debian/tmp*' -prune -o \
 		-path './debian/.bzr*' -prune -o \
 		-path './debian/files' -prune -o \
@@ -1670,19 +1686,22 @@ endif
 
 	$(install_dir) $(d_ctf)/DEBIAN $(d_ctf)-dbg/DEBIAN
 	$(install_file) debian/binutils.triggers $(d_ctf)/DEBIAN/triggers
+	$(install_file) debian/libctf0.shlibs $(d_ctf)/DEBIAN/shlibs
 	$(install_file) debian/libctf0.symbols $(d_ctf)/DEBIAN/symbols
 
 	$(install_dir) $(d_ctfn)/DEBIAN $(d_ctfn)-dbg/DEBIAN
 	$(install_file) debian/binutils.triggers $(d_ctfn)/DEBIAN/triggers
+	$(install_file) debian/libctf-nobfd0.shlibs $(d_ctfn)/DEBIAN/shlibs
 	$(install_file) debian/libctf-nobfd0.symbols $(d_ctfn)/DEBIAN/symbols
 
 ifeq ($(with_gprofng),yes)
 	$(install_dir) $(d_gpng)/DEBIAN $(d_gpng)-dbg/DEBIAN
 	$(install_file) debian/binutils.triggers $(d_gpng)/DEBIAN/triggers
-	$(install_file) debian/libctf-nobfd0.symbols $(d_gpng)/DEBIAN/symbols
+	$(install_file) debian/libgprofng0.shlibs $(d_gpng)/DEBIAN/shlibs
 endif
 
 	$(install_dir) $(d_com)/DEBIAN
+	$(install_file) debian/binutils-common.conffiles $(d_com)/DEBIAN/conffiles
 
 	$(install_dir) $(d_nat)/DEBIAN $(d_nat)-dbg/DEBIAN
 
@@ -1979,9 +1998,11 @@ define strip_package
 	for i in \
 	  $(strip $2)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libbfd-*so \
 	  $(strip $2)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libopcodes-*so \
+	  $(strip $2)/$(PF)/lib/*/bfd-plugins/libdep.so \
 	  $(strip $2)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libctf*.so.0.0.0 \
 	  $(strip $2)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libgprofng.so.0.0.0 \
-	  $(strip $2)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/gprofng/libgp-*.so \
+	  $(strip $2)/$(PF)/lib/*/gprofng/libgp-*.so \
+	  $(strip $2)/$(PF)/lib/*/gprofng/libgprofng.so.0.0 \
 	  $$(file $(strip $2)/$(PF)/bin/* |awk -F: '$$0 !~ /script/ {print $$1}'); \
 	do \
 	  test ! -h $$i || continue; test -f $$i || continue; \

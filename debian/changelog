@@ -1,3 +1,12 @@
+binutils (2.39-4) unstable; urgency=medium
+
+  * Update from the binutils 2.39 branch:
+    - Fix PR gold/29542, PowerPC gold internal error.
+  * Build packages for arc-linux-gnu. Closes: #1002705.
+  * Fix some lintian errors and warnings.
+
+ -- Matthias Klose <doko@debian.org>  Wed, 28 Sep 2022 13:35:26 +0200
+
 binutils (2.39-3) unstable; urgency=medium
 
   * Ignore two failing tests on amd64, sh4 and x32, some more on hurd-i386.
@@ -8,6 +17,12 @@ binutils (2.39-1) unstable; urgency=medium
 
   * binutils 2.39 release.
   * Update from the binutils 2.39 branch:
+    - Fix PR gas/29451, properly skip zero-size functions.
+    - Fix PR 29462, internal error in relocate (POWER).
+    - Fix PR29466, APP/NO_APP with .linefile.
+    - LoongArch:ld: Fix relocation error of pcrel.
+    - PowerPC64 pcrel got relocs against local symbols.
+    - Fix PR ld/29435, elf: Reset alignment for each PT_LOAD segment.
   * Bump standards version.
 
  -- Matthias Klose <doko@debian.org>  Fri, 23 Sep 2022 16:40:37 +0200

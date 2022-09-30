@@ -6,7 +6,7 @@ Uploaders: James Troup <binutils@elmo.tasta.io>
 Standards-Version: 4.6.1
 Build-Depends: autoconf (>= 2.64), @dpkg_dev@
   bison, flex, gettext, texinfo, dejagnu, quilt, chrpath, dwz, debugedit (>= 4.16),
-  python3:any, file, xz-utils, lsb-release, zlib1g-dev, procps,
+  python3:any, file, xz-utils, lsb-release, zlib1g-dev, procps, help2man,
   g++-aarch64-linux-gnu [amd64 i386 x32] <!nocheck>,
   g++-arm-linux-gnueabi [amd64 arm64 i386 x32] <!nocheck>,
   g++-arm-linux-gnueabihf [amd64 arm64 i386 x32] <!nocheck>,
@@ -111,10 +111,10 @@ Description: GNU Next Generation profiler (runtime library)
  Gprofng is the GNU Next Generation profiler for analyzing the performance
  of Linux applications.  Gprofng allows you to:
  .
- - Profile C / C++ / Java / Scala applications without needing to recompile
- - Profile multi-threaded applications
- - Analyze and compare multiple experiments 
- - Use time-based sampling and / or hardware event counters
+  - Profile C / C++ / Java / Scala applications without needing to recompile
+  - Profile multi-threaded applications
+  - Analyze and compare multiple experiments
+  - Use time-based sampling and / or hardware event counters
  .
  This package includes the libgprofng shared library.
 

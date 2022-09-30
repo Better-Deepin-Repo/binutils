@@ -6,7 +6,7 @@ Uploaders: James Troup <binutils@elmo.tasta.io>
 Standards-Version: 4.6.1
 Build-Depends: autoconf (>= 2.64), dpkg-dev (>= 1.19.0.5),
   bison, flex, gettext, texinfo, dejagnu, quilt, chrpath, dwz, debugedit (>= 4.16),
-  python3:any, file, xz-utils, lsb-release, zlib1g-dev, procps,
+  python3:any, file, xz-utils, lsb-release, zlib1g-dev, procps, help2man,
   g++-aarch64-linux-gnu [amd64 i386 x32] <!nocheck>,
   g++-arm-linux-gnueabi [amd64 arm64 i386 x32] <!nocheck>,
   g++-arm-linux-gnueabihf [amd64 arm64 i386 x32] <!nocheck>,
@@ -111,10 +111,10 @@ Description: GNU Next Generation profiler (runtime library)
  Gprofng is the GNU Next Generation profiler for analyzing the performance
  of Linux applications.  Gprofng allows you to:
  .
- - Profile C / C++ / Java / Scala applications without needing to recompile
- - Profile multi-threaded applications
- - Analyze and compare multiple experiments 
- - Use time-based sampling and / or hardware event counters
+  - Profile C / C++ / Java / Scala applications without needing to recompile
+  - Profile multi-threaded applications
+  - Analyze and compare multiple experiments
+  - Use time-based sampling and / or hardware event counters
  .
  This package includes the libgprofng shared library.
 
@@ -456,6 +456,32 @@ Multi-Arch: foreign
 Depends: binutils-alpha-linux-gnu (= ${binary:Version})
 Description: GNU binary utilities, for alpha-linux-gnu target (debug symbols)
  This package provides debug symbols for binutils-alpha-linux-gnu.
+
+Package: binutils-arc-linux-gnu
+Priority: optional
+Architecture: arc amd64 i386 x32 arm64
+Multi-Arch: allowed
+Depends: binutils-common (= ${binary:Version}),
+  ${shlibs:Depends}, ${extraDepends}
+Suggests: binutils-doc (= ${source:Version})
+Provides: 
+Breaks: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
+Replaces: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
+Description: GNU binary utilities, for arc-linux-gnu target
+ This package provides GNU assembler, linker and binary utilities
+ for the arc-linux-gnu target.
+ .
+ You don't need this package unless you plan to cross-compile programs
+ for arc-linux-gnu and arc-linux-gnu is not your native platform.
+
+Package: binutils-arc-linux-gnu-dbg
+Section: debug
+Priority: optional
+Architecture: arc amd64 i386 x32 arm64
+Multi-Arch: foreign
+Depends: binutils-arc-linux-gnu (= ${binary:Version})
+Description: GNU binary utilities, for arc-linux-gnu target (debug symbols)
+ This package provides debug symbols for binutils-arc-linux-gnu.
 
 Package: binutils-hppa-linux-gnu
 Priority: optional
