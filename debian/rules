@@ -1863,6 +1863,7 @@ ifeq ($(with_gprofng),yes)
 endif
 
 	rm -f debian/substvars
+	mkdir -p $(d_com)/DEBIAN
 	dpkg-gencontrol -P$(d_com) -p$(p_com)
 	cd $(d_com) && find -type f ! -regex './DEBIAN/.*' -printf '%P\n' | LC_ALL=C sort | xargs md5sum > DEBIAN/md5sums
 
