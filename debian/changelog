@@ -1,8 +1,8 @@
-binutils (2.39.50.20221003-1) experimental; urgency=medium
+binutils (2.39.50.20221004-1) experimental; urgency=medium
 
   * New upstream snapshot.
 
- -- Matthias Klose <doko@debian.org>  Mon, 03 Oct 2022 20:15:29 +0200
+ -- Matthias Klose <doko@debian.org>  Tue, 04 Oct 2022 12:14:31 +0200
 
 binutils (2.39-6) unstable; urgency=medium
 
