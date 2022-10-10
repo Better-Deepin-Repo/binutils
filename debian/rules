@@ -1285,6 +1285,8 @@ ifeq ($(with_gold),yes)
 	    $(d_bin)/$(PF)/bin/ld.gold \
 	    | sed -e 's,debian/.*-ld.gold,ld.gold,g' \
 		-e 's/$(DEB_HOST_GNU_TYPE)-//g' \
+		-e '/supported emulations/d' \
+		-e '/supported targets/s/.*/Run gold --help for a list of supported targets and emulations./' \
 		> debian/ld.gold.1; \
 	  help2man -N -n 'The DWARF packaging utility' \
 	    $(d_bin)/$(PF)/bin/dwp \

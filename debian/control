@@ -91,7 +91,7 @@ Architecture: any
 Multi-Arch: same
 Depends: ${shlibs:Depends}, libbinutils (= ${binary:Version})
 Description: Compact C Type Format library (runtime, BFD dependency)
- This package includes the libctf-nobfd shared library.  The Compact C Type
+ This package includes the libctf shared library.  The Compact C Type
  Format (CTF) is a way of representing information about a binary program
 
 Package: libctf0-dbg
@@ -100,7 +100,7 @@ Architecture: any
 Multi-Arch: same
 Depends: libctf0 (= ${binary:Version})
 Description: Compact C Type Format library (debug symbols, BFD dependency)
- This package includes the libctf-nobfd shared library.  The Compact C Type
+ This package includes the libctf shared library.  The Compact C Type
  Format (CTF) is a way of representing information about a binary program
 
 Package: libgprofng0
