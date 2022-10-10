@@ -1,5 +1,6 @@
-binutils (2.39.50.20221004-2) UNRELEASED; urgency=medium
+binutils (2.39.50.20221010-1) experimental; urgency=medium
 
+  * New upstream snapshot.
   * Make the gold man page target independent. Closes: #1021506.
   * Fix libctf0 package description. Closes: #1004621.
 
