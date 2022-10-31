@@ -4,7 +4,6 @@ stamps
 
 debian/files
 debian/tmp
-debian/*.shlibs
 debian/substvars
 debian/binutils-multiarch.postinst
 debian/binutils-multiarch.postrm
