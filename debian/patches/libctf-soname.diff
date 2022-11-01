@@ -8,25 +8,25 @@
  EMULATION_VECTOR
  EMULATION
  OBJDUMP_PRIVATE_OFILES
-@@ -10813,7 +10814,7 @@ else
+@@ -10817,7 +10818,7 @@ else
    lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
    lt_status=$lt_dlunknown
    cat > conftest.$ac_ext <<_LT_EOF
--#line 10816 "configure"
-+#line 10817 "configure"
+-#line 10820 "configure"
++#line 10821 "configure"
  #include "confdefs.h"
  
  #if HAVE_DLFCN_H
-@@ -10919,7 +10920,7 @@ else
+@@ -10923,7 +10924,7 @@ else
    lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
    lt_status=$lt_dlunknown
    cat > conftest.$ac_ext <<_LT_EOF
--#line 10922 "configure"
-+#line 10923 "configure"
+-#line 10926 "configure"
++#line 10927 "configure"
  #include "confdefs.h"
  
  #if HAVE_DLFCN_H
-@@ -14750,6 +14751,9 @@ EMULATION_VECTOR=$targ_emul_vector
+@@ -14776,6 +14777,9 @@ EMULATION_VECTOR=$targ_emul_vector
  
  
  
@@ -38,7 +38,7 @@
  
 --- a/binutils/configure.ac
 +++ b/binutils/configure.ac
-@@ -539,6 +539,9 @@ EMULATION_VECTOR=$targ_emul_vector
+@@ -554,6 +554,9 @@ EMULATION_VECTOR=$targ_emul_vector
  AC_SUBST(EMULATION)
  AC_SUBST(EMULATION_VECTOR)
  
@@ -113,25 +113,25 @@
  TESTCTFLIB
  TESTBFDLIB
  EMULATION_LIBPATH
-@@ -11620,7 +11621,7 @@ else
+@@ -11624,7 +11625,7 @@ else
    lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
    lt_status=$lt_dlunknown
    cat > conftest.$ac_ext <<_LT_EOF
--#line 11623 "configure"
-+#line 11624 "configure"
+-#line 11627 "configure"
++#line 11628 "configure"
  #include "confdefs.h"
  
  #if HAVE_DLFCN_H
-@@ -11726,7 +11727,7 @@ else
+@@ -11730,7 +11731,7 @@ else
    lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
    lt_status=$lt_dlunknown
    cat > conftest.$ac_ext <<_LT_EOF
--#line 11729 "configure"
-+#line 11730 "configure"
+-#line 11733 "configure"
++#line 11734 "configure"
  #include "confdefs.h"
  
  #if HAVE_DLFCN_H
-@@ -17499,6 +17500,9 @@ fi
+@@ -17518,6 +17519,9 @@ fi
  ac_config_commands="$ac_config_commands default"
  
  
@@ -143,7 +143,7 @@
  
 --- a/ld/configure.ac
 +++ b/ld/configure.ac
-@@ -661,6 +661,9 @@ sed -e '/^SRC-POTFILES =/r po/SRC-POTFIL
+@@ -673,6 +673,9 @@ sed -e '/^SRC-POTFILES =/r po/SRC-POTFIL
      -e "s,@GMOFILES@,$GMOFILES," \
      po/Makefile.in > po/Makefile]],[[]])
  
@@ -167,7 +167,7 @@
 --- a/ld/Makefile.in
 +++ b/ld/Makefile.in
 @@ -215,7 +215,8 @@ am_ld_new_OBJECTS = ldgram.$(OBJEXT) ldl
- 	plugin.$(OBJEXT) ldbuildid.$(OBJEXT)
+ 	plugin.$(OBJEXT) ldbuildid.$(OBJEXT) pdb.$(OBJEXT)
  ld_new_OBJECTS = $(am_ld_new_OBJECTS)
  am__DEPENDENCIES_1 =
 -@ENABLE_LIBCTF_TRUE@am__DEPENDENCIES_2 = ../libctf/libctf.la
