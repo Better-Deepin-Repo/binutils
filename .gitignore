@@ -79,6 +79,7 @@ ld
 libbacktrace
 libctf
 libiberty
+libsframe
 libtool.m4
 ltgcc.m4
 ltmain.sh

@@ -563,7 +563,7 @@ ifneq (,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
 endif
 #with_check := disabled for this upload
 
-regression_archs = alpha amd64 armel armhf riscv64 sh4 x32 hurd-i386
+regression_archs = alpha amd64 armel armhf m68k riscv64 sh4 x32 hurd-i386
 ifneq (,$(filter $(DEB_HOST_ARCH), $(regression_archs)))
   ignore_regressions := regressions ignored on architecture $(DEB_HOST_ARCH)
 endif
@@ -930,6 +930,7 @@ stamps/install.%: stamps/build.%
 	rm -f $(D_CROSS)/$(PF)/bin/*-gprofng
 	rm -f $(D_CROSS)/$(PF)/bin/*-gp-*
 	rm -rf $(D_CROSS)/$(PF)/lib/*/gprofng
+	rm -f $(D_CROSS)/$(PF)/lib/libsframe*
 
 	: # Remove windows related manpages
 	rm -f $(D_CROSS)/$(PF)/share/man/man1/$(CROSS_GNU_TYPE)-{dlltool,nlmconv,windmc,windres}.1
@@ -1204,7 +1205,11 @@ endif
 	   $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libopcodes.so \
 	   $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libctf*.so \
 		$(d_dev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
+	mv $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libsframe.so \
+		$(d_dev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
 	mv $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so \
+	   $(d_lib)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
+	mv $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libsframe.so.* \
 	   $(d_lib)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
 ifeq ($(with_gprofng),yes)
 	mv $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/gprofng/libgprofng.so \
@@ -1219,6 +1224,7 @@ ifeq ($(with_multiarch),yes)
 	   $(d_mdev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libopcodes-multiarch.so
 	mv $(d_mul)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libctf-*.so \
 	   $(d_mdev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/.
+	rm -f $(d_mul)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libsframe.so*
 	rm -f $(d_mul)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.la \
 	  $(d_mul)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.a
 	rm -f $(d_mul)/$(PF)/lib*/$(DEB_HOST_MULTIARCH)/libiberty*
@@ -1228,6 +1234,7 @@ endif
 	rm -f $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.la
 
 	chmod ugo-x $(d_lib)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so
+	chmod ugo-x $(d_lib)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so.*
 	chmod ugo-x $(d_ctf)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so.*
 	chmod ugo-x $(d_ctfn)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so.*
 	chmod ugo-x $(d_nat)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/bfd-plugins/*.so
@@ -1395,6 +1402,7 @@ stamps/install-hppa64: checkroot stamps/build-hppa64
 	rm -rf $(d_hppa64)/$(PF)/hppa-linux-gnu
 	rm -rf $(d_hppa64)/$(PF)/lib/libiberty.a
 	rm -rf $(d_hppa64)/$(PF)/lib/hppa64-linux-gnu/libctf*
+	rm -rf $(d_hppa64)/$(PF)/lib/hppa64-linux-gnu/libsframe*
 
 	: # replace hard links with soft links
 	for i in $(d_hppa64)/usr/hppa64-linux-gnu/bin/*; do \
