@@ -1,4 +1,4 @@
-binutils (2.39.50.20221208-1) unstable; urgency=medium
+binutils (2.39.50.20221208-2) unstable; urgency=medium
 
   * New upstream snapshot.
   * Build gold with jansson support.
