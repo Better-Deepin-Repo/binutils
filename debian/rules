@@ -411,6 +411,7 @@ CONFARGS = \
 	--enable-shared \
 	--enable-plugins \
 	--enable-threads \
+	--enable-jansson \
 	--with-system-zlib \
 	--prefix=/$(PF) \
 	--sysconfdir=/etc \
@@ -1294,6 +1295,9 @@ ifeq ($(with_gold),yes)
 		-e 's/$(DEB_HOST_GNU_TYPE)-//g' \
 		-e '/supported emulations/d' \
 		-e '/supported targets/s/.*/Run gold --help for a list of supported targets and emulations./' \
+		-e '/Keep files mapped across passes/s/passes.*$$/passes (default on 64bit architectures)/' \
+		-e '/Map whole files to memory/s/memory.*$$/memory (default on 64bit architectures)/' \
+		-e '/Map relevant file parts to memory/s/memory.*$$/memory (default on 32bit architectures)/' \
 		> debian/ld.gold.1; \
 	  help2man -N -n 'The DWARF packaging utility' \
 	    $(d_bin)/$(PF)/bin/dwp \
