@@ -1,3 +1,23 @@
+binutils (2.39.50.20221208-5) unstable; urgency=medium
+
+  * More mangling of the ld.gold man page. Closes: #1023198.
+  * Run again the tests during the build.
+
+ -- Matthias Klose <doko@debian.org>  Sat, 10 Dec 2022 11:57:23 +0100
+
+binutils (2.39.50.20221208-4) unstable; urgency=medium
+
+  * Don't ship header files in cross binutils. Closes: #1025794, #1025797.
+  * Disable running the tests for this upload.
+
+ -- Matthias Klose <doko@ubuntu.com>  Fri, 09 Dec 2022 14:41:10 +0100
+
+binutils (2.39.50.20221208-3) unstable; urgency=medium
+
+  * Update autopkg test dependencies.
+
+ -- Matthias Klose <doko@debian.org>  Fri, 09 Dec 2022 09:01:46 +0100
+
 binutils (2.39.50.20221208-2) unstable; urgency=medium
 
   * New upstream snapshot.

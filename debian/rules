@@ -961,8 +961,7 @@ stamps/install.%: stamps/build.%
 	rm -f $(D_CROSS)/$(PF)/$(DEB_HOST_GNU_TYPE)/$(CROSS_GNU_TYPE)/lib/*.a
 	rm -f $(D_CROSS)/$(PF)/$(DEB_HOST_GNU_TYPE)/$(CROSS_GNU_TYPE)/lib/libctf*
 	rm -f $(D_CROSS)/$(PF)/lib/$(CROSS_GNU_TYPE)/libctf*
-	rm -f $(D_CROSS)/$(PF)/include/ctf*.h
-	rm -f $(D_CROSS)/$(PF)/include/*collector*.h
+	rm -f $(D_CROSS)/$(PF)/include/*.h
 
 	: # remove RPATH
 	chrpath -k -d $$(file $(D_CROSS)/usr/bin/*|awk -F: '/ ELF/ {print $$1}')
@@ -1298,6 +1297,7 @@ ifeq ($(with_gold),yes)
 		-e '/Keep files mapped across passes/s/passes.*$$/passes (default on 64bit architectures)/' \
 		-e '/Map whole files to memory/s/memory.*$$/memory (default on 64bit architectures)/' \
 		-e '/Map relevant file parts to memory/s/memory.*$$/memory (default on 32bit architectures)/' \
+		-e '/Release mapped files after each pass/s/pass.*$$/pass (default on 32bit architectures)/' \
 		> debian/ld.gold.1; \
 	  help2man -N -n 'The DWARF packaging utility' \
 	    $(d_bin)/$(PF)/bin/dwp \
