@@ -961,6 +961,7 @@ stamps/install.%: stamps/build.%
 	rm -f $(D_CROSS)/$(PF)/$(DEB_HOST_GNU_TYPE)/$(CROSS_GNU_TYPE)/lib/*.a
 	rm -f $(D_CROSS)/$(PF)/$(DEB_HOST_GNU_TYPE)/$(CROSS_GNU_TYPE)/lib/libctf*
 	rm -f $(D_CROSS)/$(PF)/lib/$(CROSS_GNU_TYPE)/libctf*
+	rm -f $(D_CROSS)/$(PF)/lib/$(CROSS_GNU_TYPE)/libsframe*
 	rm -f $(D_CROSS)/$(PF)/include/*.h
 
 	: # remove RPATH

@@ -39,3 +39,5 @@ mips-hack.diff
 #aarch64-copy-reloc-revert-2.diff
 
 perl-shebang.diff
+
+link-jansson.diff

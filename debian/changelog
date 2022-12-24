@@ -1,3 +1,11 @@
+binutils (2.39.50.20221224-1) unstable; urgency=medium
+
+  * New upstream snapshot.
+  * Don't link ld with libjansson explicitly. Closes: #1025796.
+  * Don't ship libsframe in cross binutils. Closes: #1026779.
+
+ -- Matthias Klose <doko@debian.org>  Sat, 24 Dec 2022 10:11:11 +0100
+
 binutils (2.39.50.20221208-5) unstable; urgency=medium
 
   * More mangling of the ld.gold man page. Closes: #1023198.
