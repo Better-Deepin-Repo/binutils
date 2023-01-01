@@ -3,6 +3,7 @@ binutils (2.39.90.20221231-1) unstable; urgency=medium
   * New upstream snapshot, taken from the 2.40 branch.
   * Revert part of "RISC-V: re-arrange opcode table for consistent alias
     handling", see PR gas/29940. Closes: #1026979.
+  * Fix typo in README (Antonio Terceiro).
 
  -- Matthias Klose <doko@debian.org>  Sun, 01 Jan 2023 13:08:36 +0100
 
