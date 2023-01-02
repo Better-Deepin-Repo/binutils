@@ -2065,7 +2065,7 @@ endef
 endif
 
 remove-gfdl-files:
-	rm -rf .git* .cvs* gdb* libdecnumber readline sim
+	rm -rf .git* .cvs* gdb* libbacktrace libdecnumber readline sim
 ifeq ($(GFDL_INVARIANT_FREE),yes)
 	for i in $(gfdl_toplevel_texinfo_files); do \
 	  if [ -f $$i ]; then \
