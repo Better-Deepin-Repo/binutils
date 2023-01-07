@@ -7,7 +7,7 @@ Standards-Version: 4.6.1
 Build-Depends: autoconf (>= 2.64), @dpkg_dev@
   bison, flex, gettext, texinfo, dejagnu, quilt, chrpath, dwz, debugedit (>= 4.16),
   python3:any, file, xz-utils, lsb-release, zlib1g-dev, procps, help2man,
-  libjansson-dev, pkg-config,
+  libjansson-dev, pkg-config, libzstd-dev,
   g++-aarch64-linux-gnu [amd64 i386 x32] <!nocheck>,
   g++-arm-linux-gnueabi [amd64 arm64 i386 x32] <!nocheck>,
   g++-arm-linux-gnueabihf [amd64 arm64 i386 x32] <!nocheck>,
@@ -235,7 +235,8 @@ Package: binutils-source
 Architecture: all
 Multi-Arch: foreign
 Priority: optional
-Depends: texinfo, zlib1g-dev, make, python3
+Depends: texinfo, zlib1g-dev, make, python3,
+  libjansson-dev, pkg-config, libzstd-dev,
 Description: GNU assembler, linker and binary utilities (source)
  This package contains the sources and patches which are needed to
  build binutils.

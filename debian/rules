@@ -931,7 +931,7 @@ stamps/install.%: stamps/build.%
 	rm -f $(D_CROSS)/$(PF)/bin/*-gprofng
 	rm -f $(D_CROSS)/$(PF)/bin/*-gp-*
 	rm -rf $(D_CROSS)/$(PF)/lib/*/gprofng
-	rm -f $(D_CROSS)/$(PF)/lib/libsframe*
+	rm -f $(D_CROSS)/$(PF)/lib/$(call _multiarch,$*)/libsframe*
 
 	: # Remove windows related manpages
 	rm -f $(D_CROSS)/$(PF)/share/man/man1/$(CROSS_GNU_TYPE)-{dlltool,nlmconv,windmc,windres}.1

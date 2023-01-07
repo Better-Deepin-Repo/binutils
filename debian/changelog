@@ -1,6 +1,8 @@
 binutils (2.40.50.20230102-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot.
+  * Build-depend on libzstd-dev.
+  * binutils-source: Depend on libjansson-dev, pkg-config, libzstd-dev.
 
  -- Matthias Klose <doko@debian.org>  Mon, 02 Jan 2023 14:21:38 +0100
 
