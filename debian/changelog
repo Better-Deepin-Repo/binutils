@@ -1,10 +1,32 @@
-binutils (2.40.50.20230102-1) UNRELEASED; urgency=medium
+binutils (2.40.50.20230110-1) experimental; urgency=medium
 
   * New upstream snapshot.
-  * Build-depend on libzstd-dev.
-  * binutils-source: Depend on libjansson-dev, pkg-config, libzstd-dev.
 
  -- Matthias Klose <doko@debian.org>  Mon, 02 Jan 2023 14:21:38 +0100
+
+binutils (2.39.90.20230110-1) unstable; urgency=medium
+
+  * New upstream snapshot, taken from the 2.40 branch.
+    - libsframe: adjust an incorrect check in flip_sframe.
+    - sframe: fix the defined SFRAME_FRE_TYPE_*_LIMIT constants.
+    - Fix PR ld/18841, ifunc relocation ordering on ARM.
+    - Skip PR ld/23169 test on ARM.
+    - Fix PR 29972, inconsistent format specification in singular form.
+    - Avoid unaligned pointer reads in PEP idata section.
+    - Update translations.
+  * Build-depend on libzstd-dev.
+  * binutils-source: Depend on libjansson-dev, pkg-config, libzstd-dev.
+  * debian/copyright: Update years.
+  * Bump standards version.
+
+ -- Matthias Klose <doko@debian.org>  Tue, 10 Jan 2023 06:31:47 +0100
+
+binutils (2.39.90.20230104-1) unstable; urgency=medium
+
+  * New upstream snapshot, taken from the 2.40 branch.
+  * Also don't ship libsframe in i386 cross binutils. Closes: #1026779.
+
+ -- Matthias Klose <doko@debian.org>  Wed, 04 Jan 2023 08:44:08 +0100
 
 binutils (2.39.90.20221231-1) unstable; urgency=medium
 
