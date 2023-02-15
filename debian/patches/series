@@ -41,4 +41,3 @@ mips-hack.diff
 perl-shebang.diff
 
 link-jansson.diff
-pr29940-workaround.diff

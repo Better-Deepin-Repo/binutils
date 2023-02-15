@@ -565,6 +565,7 @@ endif
 #with_check := disabled for this upload
 
 regression_archs = alpha amd64 armel armhf m68k riscv64 sh4 x32 hurd-i386
+regression_archs =
 ifneq (,$(filter $(DEB_HOST_ARCH), $(regression_archs)))
   ignore_regressions := regressions ignored on architecture $(DEB_HOST_ARCH)
 endif
@@ -931,6 +932,7 @@ stamps/install.%: stamps/build.%
 	rm -f $(D_CROSS)/$(PF)/bin/*-gprofng
 	rm -f $(D_CROSS)/$(PF)/bin/*-gp-*
 	rm -rf $(D_CROSS)/$(PF)/lib/*/gprofng
+	rm -f $(D_CROSS)/$(PF)/lib/$(call _multiarch,$*)/libgprofng*
 	rm -f $(D_CROSS)/$(PF)/lib/$(call _multiarch,$*)/libsframe*
 
 	: # Remove windows related manpages
@@ -1194,7 +1196,7 @@ endif
 		$(d_ctfn)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/.
 ifeq ($(with_gprofng),yes)
 	$(install_dir) $(d_gpng)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/gprofng
-	mv $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/gprofng/libgprofng.so.* \
+	mv $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libgprofng.so.* \
 		$(d_gpng)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/.
 	mv $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/gprofng/libgp-*.so \
 		$(d_gpng)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/gprofng/.
@@ -1208,14 +1210,14 @@ endif
 		$(d_dev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
 	mv $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libsframe.so \
 		$(d_dev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
+ifeq ($(with_gprofng),yes)
+	mv $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libgprofng.so \
+		$(d_dev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
+endif
 	mv $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so \
 	   $(d_lib)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
 	mv $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libsframe.so.* \
 	   $(d_lib)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
-ifeq ($(with_gprofng),yes)
-	mv $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/gprofng/libgprofng.so \
-		$(d_dev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
-endif
 
 ifeq ($(with_multiarch),yes)
 	$(install_dir) $(d_mul)/$(PF)/lib/$(DEB_HOST_MULTIARCH) $(d_mdev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
@@ -1226,6 +1228,7 @@ ifeq ($(with_multiarch),yes)
 	mv $(d_mul)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libctf-*.so \
 	   $(d_mdev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/.
 	rm -f $(d_mul)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libsframe.so*
+	rm -f $(d_mul)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libgprofng.so*
 	rm -f $(d_mul)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.la \
 	  $(d_mul)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.a
 	rm -f $(d_mul)/$(PF)/lib*/$(DEB_HOST_MULTIARCH)/libiberty*
@@ -2018,7 +2021,7 @@ define strip_package
 	  $(strip $2)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libctf*.so.0.0.0 \
 	  $(strip $2)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libgprofng.so.0.0.0 \
 	  $(strip $2)/$(PF)/lib/*/gprofng/libgp-*.so \
-	  $(strip $2)/$(PF)/lib/*/gprofng/libgprofng.so.0.0 \
+	  $(strip $2)/$(PF)/lib/*/libgprofng.so.0.0 \
 	  $$(file $(strip $2)/$(PF)/bin/* |awk -F: '$$0 !~ /script/ {print $$1}'); \
 	do \
 	  test ! -h $$i || continue; test -f $$i || continue; \
