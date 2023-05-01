@@ -52,6 +52,7 @@ Makefile.in
 Makefile.tpl
 README
 README-maintainer-mode
+SECURITY.txt
 ar-lib
 bfd
 binutils

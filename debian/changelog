@@ -1,3 +1,10 @@
+binutils (2.40.50.20230501-1) experimental; urgency=medium
+
+  * New upstream snapshot, taken from the trunk.
+  * Refresh patches.
+
+ -- Matthias Klose <doko@debian.org>  Mon, 01 May 2023 15:45:35 +0200
+
 binutils (2.40.50.20230215-1) experimental; urgency=medium
 
   * New upstream snapshot, taken from the trunk.
