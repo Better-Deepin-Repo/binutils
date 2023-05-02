@@ -925,6 +925,12 @@ stamps/install.%: stamps/build.%
 	  fi; \
 	done
 
+	: # gold symlinks
+	$(if $(filter $*, $(gold_targets)), \
+	  ln -sf $(CROSS_GNU_TYPE)-ld.gold $(D_CROSS)/usr/bin/$(CROSS_GNU_TYPE)-gold; \
+	  ln -sf ../../bin/$(CROSS_GNU_TYPE)-gold $(D_CROSS)/usr/$(CROSS_GNU_TYPE)/bin/gold \
+	)
+
 	: # no spu toolchain
 	rm -f $(D_CROSS)/$(PF)/bin/*embedspu
 
