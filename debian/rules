@@ -289,8 +289,8 @@ ifneq (,$(filter $(DEB_HOST_ARCH), $(gold_targets)))
   gold_provides = -Vgold:Provides=binutils-gold
 endif
 
-CFLAGS = -g -O2
-CXXFLAGS = -g -O2
+CFLAGS = -g -O2 -ffile-prefix-map=$(CURDIR)=.
+CXXFLAGS = -g -O2 -ffile-prefix-map=$(CURDIR)=.
 LDFLAGS =
 CROSS := $(DEB_HOST_GNU_TYPE)-
 CC     = $(CROSS)gcc

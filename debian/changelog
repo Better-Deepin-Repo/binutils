@@ -1,3 +1,10 @@
+binutils (2.40.50.20230501-2) UNRELEASED; urgency=medium
+
+  * Pass -ffile-prefix-map to CFLAGS and CXXFLAGS (Vagrant Cascadian).
+    Closes: #1033959.
+
+ -- Matthias Klose <doko@debian.org>  Tue, 02 May 2023 09:03:24 +0200
+
 binutils (2.40.50.20230501-1) experimental; urgency=medium
 
   * New upstream snapshot, taken from the trunk.
