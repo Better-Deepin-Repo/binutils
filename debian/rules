@@ -120,7 +120,7 @@ install_binary = install -m 755 -s --strip-program="$(STRIP)"
 NATIVE_ARCHS ?= amd64 i386 arm64 armhf armel ppc64el s390x
 NATIVE_ARCHS += alpha arc hppa ia64 m68k powerpc ppc64 \
 	riscv64 sh4 sparc64 x32
-NATIVE_ARCHS += hurd-i386 kfreebsd-amd64 kfreebsd-i386
+NATIVE_ARCHS += hurd-amd64 hurd-i386 kfreebsd-amd64 kfreebsd-i386
 #NATIVE_ARCHS += nios2 or1k s390 sparc
 
 # don't generate the control file entries for native packages which are never
