@@ -40,3 +40,4 @@ mips-hack.diff
 perl-shebang.diff
 
 link-jansson.diff
+lto-wrapper-warnings.diff
