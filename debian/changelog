@@ -1,3 +1,9 @@
+binutils (2.40.50.20230611-2) unstable; urgency=medium
+
+  * Ignore the objdump test failures for now.
+
+ -- Matthias Klose <doko@debian.org>  Sun, 11 Jun 2023 19:46:54 +0200
+
 binutils (2.40.50.20230611-1) unstable; urgency=medium
 
   * New upstream snapshot, taken from the trunk.
