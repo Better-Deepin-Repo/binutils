@@ -569,7 +569,7 @@ regression_archs =
 ifneq (,$(filter $(DEB_HOST_ARCH), $(regression_archs)))
   ignore_regressions := regressions ignored on architecture $(DEB_HOST_ARCH)
 endif
-ignore_regressions := regressions ignored on architecture $(DEB_HOST_ARCH)
+#ignore_regressions := regressions ignored on architecture $(DEB_HOST_ARCH)
 
 with_strip := yes
 ifneq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
