@@ -40,6 +40,9 @@ debian/libctf0
 debian/libgprofng0-dbg
 debian/libgprofng0
 
+debian/libsframe1-dbg
+debian/libsframe1
+
 .editorconfig
 COPYING
 COPYING.LIB

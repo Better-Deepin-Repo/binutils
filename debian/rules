@@ -3,8 +3,8 @@
 # Based on sample debian/rules file - for GNU Hello (1.3).
 # Copyright 1994,1995 by Ian Jackson.
 # Copyright 1998-2007 James Troup.
-# Portions Copyright 2008-2022 Canonical Ltd.
-# Portions Copyright 2008-2022 Matthias Klose.
+# Portions Copyright 2008-2023 Canonical Ltd.
+# Portions Copyright 2008-2023 Matthias Klose.
 # I hereby give you perpetual unlimited permission to copy,
 # modify and relicense this file, provided that you do not remove
 # my name from the file itself.  (I assert my moral right of
@@ -67,6 +67,7 @@ p_src = $(p_bin)-source
 p_ctf = libctf0
 p_ctfn = libctf-nobfd0
 p_gpng = libgprofng0
+p_sfrm = libsframe1
 
 p_hst = $(p_bin)-for-host
 p_bld = $(p_bin)-for-build
@@ -106,6 +107,7 @@ d_src = debian/$(p_src)
 d_ctf = debian/$(p_ctf)
 d_ctfn = debian/$(p_ctfn)
 d_gpng = debian/$(p_gpng)
+d_sfrm = debian/$(p_sfrm)
 
 d_hst = debian/$(p_hst)
 d_bld = debian/$(p_bld)
@@ -603,7 +605,8 @@ clean:
 	rm -rf $(d_bin) $(d_com) $(d_lib) $(d_lib)-dbg $(d_nat) $(d_nat)-dbg \
 	  $(d_hst) $(d_dev) $(d_mul) $(d_mul)-dbg $(d_mdev) $(d_doc) \
 	  $(d_hppa64) $(d_hppa64)-dbg $(d_src) $(d_bld) \
-	  $(d_ctf) $(d_ctf)-dbg $(d_ctfn) $(d_ctfn)-dbg $(d_gpng) $(d_gpng)-dbg
+	  $(d_ctf) $(d_ctf)-dbg $(d_ctfn) $(d_ctfn)-dbg $(d_gpng) $(d_gpng)-dbg \
+	  $(d_sfrm) $(d_sfrm)-dbg
 	rm -rf $(foreach ca,$(CROSS_ARCHS),debian/binutils-$(subst _,-,$(subst i586,i686,$(call _gnu_type,$(ca)))){,-dbg})
 	rm -rf debian/tmp debian/files* debian/substvars
 	rm -f debian/*.orig debian/*.rej
@@ -695,9 +698,18 @@ ifeq ($(with_check),yes)
 	-env MAKE="$(MAKE) VERSION=$(SINGLE_VERSION)" \
 	  $(call SET_MULTIARCH_ENV,$(DEB_HOST_ARCH)) \
 	    $(MAKE) -C builddir-single -k check
-	cat builddir-single/binutils/binutils.sum \
-	    builddir-single/gas/testsuite/gas.sum \
-	    builddir-single/ld/ld.sum >> $(pwd)/test-summary
+	rm -f $(pwd)/test-summary
+	for f in \
+	  builddir-single/binutils/binutils.sum \
+	  builddir-single/gas/testsuite/gas.sum \
+	  builddir-single/ld/ld.sum \
+	  builddir-single/libctf/libctf.sum \
+	  builddir-single/gprofng/gprofng.sum \
+	  builddir-single/libsframe/libsframe.sum \
+	; do \
+	  [ -f $$f ] || continue; \
+	  cat $$f >> $(pwd)/test-summary; \
+	done
 	set -e; \
 	tsi=test-summary-installed; \
 	rm -f $$tsi; \
@@ -845,9 +857,18 @@ ifeq ($(with_check),yes)
 	-env MAKE="$(MAKE) VERSION=$(VERSION)-$*" \
 	  $(call SET_MULTIARCH_ENV,$*) \
 	    $(MAKE) -C builddir-$* -k check
-	cat builddir-$*/binutils/binutils.sum \
-	    builddir-$*/gas/testsuite/gas.sum \
-	    builddir-$*/ld/ld.sum >> test-summary-$*
+	rm -f $(pwd)/test-summary-$*
+	for f in \
+	  builddir-$*/binutils/binutils.sum \
+	  builddir-$*/gas/testsuite/gas.sum \
+	  builddir-$*/ld/ld.sum \
+	  builddir-$*/libctf/libctf.sum \
+	  builddir-$*/gprofng/gprofng.sum \
+	  builddir-$*/libsframe/libsframe.sum \
+	; do \
+	  [ -f $$f ] || continue; \
+	  cat $$f >> $(pwd)/test-summary-$*; \
+	done
 	set -e; \
 	tsi=test-summary-$*-installed; \
 	rm -f $$tsi; \
@@ -1222,8 +1243,9 @@ ifeq ($(with_gprofng),yes)
 endif
 	mv $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so \
 	   $(d_lib)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
+	$(install_dir) $(d_sfrm)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
 	mv $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libsframe.so.* \
-	   $(d_lib)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
+	   $(d_sfrm)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
 
 ifeq ($(with_multiarch),yes)
 	$(install_dir) $(d_mul)/$(PF)/lib/$(DEB_HOST_MULTIARCH) $(d_mdev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
@@ -1244,7 +1266,6 @@ endif
 	rm -f $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.la
 
 	chmod ugo-x $(d_lib)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so
-	chmod ugo-x $(d_lib)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so.*
 	chmod ugo-x $(d_ctf)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so.*
 	chmod ugo-x $(d_ctfn)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so.*
 	chmod ugo-x $(d_nat)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/bfd-plugins/*.so
@@ -1252,6 +1273,7 @@ ifeq ($(with_gprofng),yes)
 	chmod ugo-x $(d_gpng)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so.*
 	chmod ugo-x $(d_gpng)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/gprofng/*.so
 endif
+	chmod ugo-x $(d_sfrm)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so.*
 ifeq ($(with_native),yes)
 	$(call strip_package, $(p_lib), $(d_lib))
 	$(call strip_package, $(p_ctf), $(d_ctf))
@@ -1259,6 +1281,7 @@ ifeq ($(with_native),yes)
   ifeq ($(with_gprofng),yes)
 	$(call strip_package, $(p_gpng), $(d_gpng))
   endif
+	$(call strip_package, $(p_sfrm), $(d_sfrm))
 endif
 ifeq ($(with_multiarch),yes)
 	chmod ugo-x $(d_mul)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so
@@ -1503,6 +1526,7 @@ endif # ifndef BACKPORT
 		-path './debian/patches' -prune -o \
 		-path './debian/libctf*' -type d -prune -o \
 		-path './debian/libgprofng*' -type d -prune -o \
+		-path './debian/libsframe*' -type d -prune -o \
 		-path './debian/tmp*' -prune -o \
 		-path './debian/.bzr*' -prune -o \
 		-path './debian/files' -prune -o \
@@ -1726,6 +1750,10 @@ ifeq ($(with_gprofng),yes)
 	$(install_dir) $(d_com)/DEBIAN
 	$(install_file) debian/binutils-common.conffiles $(d_com)/DEBIAN/conffiles
 endif
+	$(install_dir) $(d_sfrm)/DEBIAN $(d_sfrm)-dbg/DEBIAN
+	$(install_file) debian/binutils.triggers $(d_sfrm)/DEBIAN/triggers
+	$(install_file) debian/libsframe1.shlibs $(d_sfrm)/DEBIAN/shlibs
+	$(install_file) debian/libsframe1.symbols $(d_sfrm)/DEBIAN/symbols
 
 	$(install_dir) $(d_nat)/DEBIAN $(d_nat)-dbg/DEBIAN
 
@@ -1770,6 +1798,9 @@ ifeq ($(with_gprofng),yes)
 	$(install_dir) $(d_gpng)/$(PF)/share/doc/
 	ln -sf $(p_lib) $(d_gpng)/$(PF)/share/doc/$(p_gpng)
 endif
+	$(install_dir) $(d_sfrm)/$(PF)/share/doc/$(p_sfrm)
+	$(install_file) debian/changelog $(d_sfrm)/$(PF)/share/doc/$(p_sfrm)/changelog.Debian
+	$(install_file) debian/copyright $(d_sfrm)/$(PF)/share/doc/$(p_sfrm)/
 
 	$(install_dir) $(d_nat)/$(PF)/share/doc/
 	ln -sf $(p_lib) $(d_nat)/$(PF)/share/doc/$(p_nat)
@@ -1844,6 +1875,8 @@ endif
 	gzip -9n $(d_com)/$(PF)/share/doc/$(p_com)/changelog.Debian
 	gzip -9n $(d_com)/$(PF)/share/man/man1/*.1
 
+	gzip -9n $(d_sfrm)/$(PF)/share/doc/$(p_sfrm)/changelog.Debian
+
 	: # Finish it all up
 	dpkg-gencontrol -P$(d_bin) -p$(p_bin) \
 		$(CONFLICTS_TARGET_$(DEB_HOST_ARCH)) $(gold_provides) \
@@ -1862,6 +1895,7 @@ endif
 ifeq ($(with_gprofng),yes)
 	dpkg-gensymbols -P$(d_gpng) -p$(p_gpng) -l$(d_lib)
 endif
+	dpkg-gensymbols -P$(d_sfrm) -p$(p_sfrm)
 
 	rm -f debian/substvars
 	find $(d_ctf) -type f | xargs file | grep ELF | cut -d: -f 1 | xargs dpkg-shlibdeps
@@ -1885,6 +1919,13 @@ ifeq ($(with_gprofng),yes)
 	dpkg-gencontrol -P$(d_gpng)-dbg -p$(p_gpng)-dbg
 	cd $(d_gpng)-dbg && find -type f  ! -regex './DEBIAN/.*' -printf '%P\n' | LC_ALL=C sort | xargs md5sum > DEBIAN/md5sums
 endif
+
+	rm -f debian/substvars
+	find $(d_sfrm) -type f | xargs file | grep ELF | cut -d: -f 1 | xargs dpkg-shlibdeps
+	dpkg-gencontrol -P$(d_sfrm) -p$(p_sfrm)
+	cd $(d_sfrm) && find -type f  ! -regex './DEBIAN/.*' -printf '%P\n' | LC_ALL=C sort | xargs md5sum > DEBIAN/md5sums
+	dpkg-gencontrol -P$(d_sfrm)-dbg -p$(p_sfrm)-dbg
+	cd $(d_sfrm)-dbg && find -type f  ! -regex './DEBIAN/.*' -printf '%P\n' | LC_ALL=C sort | xargs md5sum > DEBIAN/md5sums
 
 	rm -f debian/substvars
 	mkdir -p $(d_com)/DEBIAN
@@ -1925,8 +1966,8 @@ ifeq ($(with_hppa64),yes)
 	cd $(d_hppa64)-dbg && find -type f  ! -regex './DEBIAN/.*' -printf '%P\n' | LC_ALL=C sort | xargs md5sum > DEBIAN/md5sums
 endif
 
-	$(CHOWN) -R root:root $(d_bin) $(d_com) $(d_lib) $(d_lib)-dbg $(d_ctf) $(d_ctf)-dbg $(d_ctfn) $(d_ctfn)-dbg $(d_nat) $(d_nat)-dbg $(d_dev)
-	chmod -R go=rX  $(d_bin) $(d_com) $(d_lib) $(d_lib)-dbg $(d_ctf) $(d_ctf)-dbg $(d_ctfn) $(d_ctfn)-dbg $(d_nat) $(d_nat)-dbg $(d_dev)
+	$(CHOWN) -R root:root $(d_bin) $(d_com) $(d_lib) $(d_lib)-dbg $(d_ctf) $(d_ctf)-dbg $(d_ctfn) $(d_ctfn)-dbg $(d_nat) $(d_nat)-dbg $(d_dev) $(d_sfrm) $(d_sfrm)-dbg
+	chmod -R go=rX  $(d_bin) $(d_com) $(d_lib) $(d_lib)-dbg $(d_ctf) $(d_ctf)-dbg $(d_ctfn) $(d_ctfn)-dbg $(d_nat) $(d_nat)-dbg $(d_dev) $(d_sfrm) $(d_sfrm)-dbg
 	find $(d_bin) -depth -newermt '$(BUILD_DATE)' -print0 | \
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
 	$(DPKG_DEB) --build $(d_bin) ..
@@ -1955,6 +1996,12 @@ ifeq ($(with_gprofng),yes)
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
 	$(DPKG_DEB) --build $(d_gpng)-dbg ..
 endif
+	find $(d_sfrm) -depth -newermt '$(BUILD_DATE)' -print0 | \
+		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
+	$(DPKG_DEB) --build $(d_sfrm) ..
+	find $(d_sfrm)-dbg -depth -newermt '$(BUILD_DATE)' -print0 | \
+		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
+	$(DPKG_DEB) --build $(d_sfrm)-dbg ..
 	find $(d_lib) -depth -newermt '$(BUILD_DATE)' -print0 | \
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
 	$(DPKG_DEB) --build $(d_lib) ..
@@ -2028,6 +2075,7 @@ define strip_package
 	  $(strip $2)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libgprofng.so.0.0.0 \
 	  $(strip $2)/$(PF)/lib/*/gprofng/libgp-*.so \
 	  $(strip $2)/$(PF)/lib/*/libgprofng.so.0.0 \
+	  $(strip $2)/$(PF)/lib/*/libsframe.so.1.0.0 \
 	  $$(file $(strip $2)/$(PF)/bin/* |awk -F: '$$0 !~ /script/ {print $$1}'); \
 	do \
 	  test ! -h $$i || continue; test -f $$i || continue; \
