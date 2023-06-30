@@ -2,6 +2,7 @@ binutils (2.40.50.20230630-1) unstable; urgency=medium
 
   * New upstream snapshot, taken from the trunk.
   * Split-out libsframe1 and libsframe1-dbg packages.
+  * Build hurd-amd64 cross packages.
 
  -- Matthias Klose <doko@debian.org>  Fri, 30 Jun 2023 10:42:05 +0200
 

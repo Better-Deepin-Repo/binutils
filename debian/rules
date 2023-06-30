@@ -144,7 +144,7 @@ ifeq ($(DEB_SOURCE),binutils)
                    alpha arc hppa m68k \
                    powerpc ppc64 sh4 sparc64 \
                    ia64 riscv64 \
-                   kfreebsd-amd64 kfreebsd-i386 hurd-i386
+                   kfreebsd-amd64 kfreebsd-i386 hurd-amd64 hurd-i386
   else ifeq ($(DEB_HOST_ARCH),arm64)
     CROSS_ARCHS ?= amd64 armel armhf i386 ppc64el riscv64 s390x arc x32
   else ifeq ($(DEB_HOST_ARCH),ppc64)
@@ -228,6 +228,7 @@ HOST_ARCHS_mips64r6el = amd64 i386 x32
 
 HOST_ARCHS_kfreebsd-amd64 = amd64 i386 x32
 HOST_ARCHS_kfreebsd-i386 = amd64 i386 x32
+HOST_ARCHS_hurd-amd64 = amd64 i386 x32
 HOST_ARCHS_hurd-i386 = amd64 i386 x32
 
 # Map a Debian architecture alias to a GNU type or a multiarch path component.

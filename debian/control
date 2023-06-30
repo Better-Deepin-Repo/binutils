@@ -744,7 +744,7 @@ Description: GNU binary utilities, for x86-64-linux-gnux32 target (debug symbols
 
 Package: binutils-x86-64-gnu
 Priority: optional
-Architecture: hurd-amd64
+Architecture: hurd-amd64 amd64 i386 x32
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
@@ -762,7 +762,7 @@ Description: GNU binary utilities, for x86-64-gnu target
 Package: binutils-x86-64-gnu-dbg
 Section: debug
 Priority: optional
-Architecture: hurd-amd64
+Architecture: hurd-amd64 amd64 i386 x32
 Multi-Arch: foreign
 Depends: binutils-x86-64-gnu (= ${binary:Version})
 Description: GNU binary utilities, for x86-64-gnu target (debug symbols)
