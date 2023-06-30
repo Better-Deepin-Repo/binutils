@@ -29,7 +29,7 @@ debian/binutils-*-linux-gnuabin32
 debian/binutils-*-linux-gnux32
 debian/binutils-arm-linux-gnueabi
 debian/binutils-arm-linux-gnueabihf
-debian/binutils-i686-gnu
+debian/binutils-*-gnu
 debian/binutils-*-kfreebsd-gnu
 
 debian/libctf-nobfd0-dbg
