@@ -565,6 +565,9 @@ ifneq (,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
     with_check := disabled through DEB_BUILD_OPTIONS
   endif
 endif
+ifneq (,$(filter $(DEB_HOST_ARCH), i386))
+  with_check := disabled for architecture $(DEB_HOST_ARCH)
+endif
 #with_check := disabled for this upload
 
 regression_archs = alpha armel armhf m68k riscv64 sh4 x32 hurd-i386

@@ -1,3 +1,10 @@
+binutils (2.40.50.20230701-1) UNRELEASED; urgency=medium
+
+  * New upstream snapshot, taken from the trunk.
+  * Disable running tests on i386, testsuite hangs, see PR gprofng/30602.
+
+ -- Matthias Klose <doko@debian.org>  Sun, 02 Jul 2023 06:55:18 +0200
+
 binutils (2.40.50.20230630-1) unstable; urgency=medium
 
   * New upstream snapshot, taken from the trunk.
