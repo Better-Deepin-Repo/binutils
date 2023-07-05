@@ -570,8 +570,7 @@ ifneq (,$(filter $(DEB_HOST_ARCH), i386))
 endif
 #with_check := disabled for this upload
 
-regression_archs = mipsel mips64el
-#regression_archs =
+regression_archs =
 ifneq (,$(filter $(DEB_HOST_ARCH), $(regression_archs)))
   ignore_regressions := regressions ignored on architecture $(DEB_HOST_ARCH)
 endif

@@ -1,3 +1,9 @@
+binutils (2.40.90.20230705-2) UNRELEASED; urgency=medium
+
+  * Stop ignoring new regressions on mipsel and mips64el.
+
+ -- Matthias Klose <doko@debian.org>  Wed, 05 Jul 2023 20:40:12 +0200
+
 binutils (2.40.90.20230705-1) unstable; urgency=medium
 
   * New upstream snapshot, taken from the binutils 2.41 release branch.
