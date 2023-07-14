@@ -484,7 +484,7 @@ Description: GNU binary utilities, for alpha-linux-gnu target (debug symbols)
 
 Package: binutils-arc-linux-gnu
 Priority: optional
-Architecture: arc amd64 i386 x32 arm64
+Architecture: arc amd64 arm64 i386 x32
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
@@ -502,7 +502,7 @@ Description: GNU binary utilities, for arc-linux-gnu target
 Package: binutils-arc-linux-gnu-dbg
 Section: debug
 Priority: optional
-Architecture: arc amd64 i386 x32 arm64
+Architecture: arc amd64 arm64 i386 x32
 Multi-Arch: foreign
 Depends: binutils-arc-linux-gnu (= ${binary:Version})
 Description: GNU binary utilities, for arc-linux-gnu target (debug symbols)
@@ -588,7 +588,7 @@ Description: GNU binary utilities, for m68k-linux-gnu target (debug symbols)
 
 Package: binutils-powerpc-linux-gnu
 Priority: optional
-Architecture: powerpc amd64 i386 x32 ppc64el
+Architecture: powerpc amd64 arm64 i386 x32 ppc64el
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
@@ -606,7 +606,7 @@ Description: GNU binary utilities, for powerpc-linux-gnu target
 Package: binutils-powerpc-linux-gnu-dbg
 Section: debug
 Priority: optional
-Architecture: powerpc amd64 i386 x32 ppc64el
+Architecture: powerpc amd64 arm64 i386 x32 ppc64el
 Multi-Arch: foreign
 Depends: binutils-powerpc-linux-gnu (= ${binary:Version})
 Description: GNU binary utilities, for powerpc-linux-gnu target (debug symbols)
