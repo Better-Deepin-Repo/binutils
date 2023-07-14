@@ -1,0 +1,311 @@
+--- a/gprofng/configure
++++ b/gprofng/configure
+@@ -657,8 +657,6 @@ PTHREAD_CFLAGS
+ PTHREAD_LIBS
+ PTHREAD_CC
+ ax_pthread_config
+-RUN_TESTS_FALSE
+-RUN_TESTS_TRUE
+ subdirs
+ BUILD_SRC_FALSE
+ BUILD_SRC_TRUE
+@@ -12223,7 +12221,7 @@ else
+   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
+   lt_status=$lt_dlunknown
+   cat > conftest.$ac_ext <<_LT_EOF
+-#line 12226 "configure"
++#line 12224 "configure"
+ #include "confdefs.h"
+ 
+ #if HAVE_DLFCN_H
+@@ -12329,7 +12327,7 @@ else
+   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
+   lt_status=$lt_dlunknown
+   cat > conftest.$ac_ext <<_LT_EOF
+-#line 12332 "configure"
++#line 12330 "configure"
+ #include "confdefs.h"
+ 
+ #if HAVE_DLFCN_H
+@@ -15762,28 +15760,16 @@ else
+ fi
+ 
+ 
+-run_tests=false
+ if test x$build_collector = xtrue; then
+ 
+ 
+ subdirs="$subdirs libcollector"
+ 
+-  if test x${host} = x${target}; then
+-    run_tests=true
+-  fi
+-fi
+- if test x$run_tests = xtrue; then
+-  RUN_TESTS_TRUE=
+-  RUN_TESTS_FALSE='#'
+-else
+-  RUN_TESTS_TRUE='#'
+-  RUN_TESTS_FALSE=
+ fi
+ 
+ 
+ 
+ 
+-
+ ac_ext=c
+ ac_cpp='$CPP $CPPFLAGS'
+ ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+@@ -16710,7 +16696,11 @@ fi`
+ fi
+ { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_libctf_tcl_try" >&5
+ $as_echo "$ac_cv_libctf_tcl_try" >&6; }
+- if test "${ac_cv_libctf_tcl_try}" = yes; then
++
++# Only native testing and only on supported platforms:
++ if test "${ac_cv_libctf_tcl_try}" = yes \
++	-a "x${build_src}" = xtrue -a "x${build_collector}" = xtrue \
++	-a "x${host}" = "x${target}"; then
+   TCL_TRY_TRUE=
+   TCL_TRY_FALSE='#'
+ else
+@@ -17115,10 +17105,6 @@ if test -z "${BUILD_SRC_TRUE}" && test -z "${BUILD_SRC_FALSE}"; then
+   as_fn_error $? "conditional \"BUILD_SRC\" was never defined.
+ Usually this means the macro was only invoked conditionally." "$LINENO" 5
+ fi
+-if test -z "${RUN_TESTS_TRUE}" && test -z "${RUN_TESTS_FALSE}"; then
+-  as_fn_error $? "conditional \"RUN_TESTS\" was never defined.
+-Usually this means the macro was only invoked conditionally." "$LINENO" 5
+-fi
+ if test -z "${TCL_TRY_TRUE}" && test -z "${TCL_TRY_FALSE}"; then
+   as_fn_error $? "conditional \"TCL_TRY\" was never defined.
+ Usually this means the macro was only invoked conditionally." "$LINENO" 5
+--- a/gprofng/configure.ac
++++ b/gprofng/configure.ac
+@@ -74,14 +74,9 @@ build_src=
+ AM_CONDITIONAL([BUILD_COLLECTOR], [test x$build_collector = xtrue])
+ AM_CONDITIONAL([BUILD_SRC], [test x$build_src = xtrue])
+ 
+-run_tests=false
+ if test x$build_collector = xtrue; then
+   AC_CONFIG_SUBDIRS([libcollector])
+-  if test x${host} = x${target}; then
+-    run_tests=true
+-  fi
+ fi
+-AM_CONDITIONAL([RUN_TESTS], [test x$run_tests = xtrue])
+ AX_PTHREAD
+ 
+ # Specify a location for JDK
+@@ -204,7 +199,11 @@ if @<:@llength @<:@info commands try@:>@@:>@ then { puts yes } else { puts no }
+ EOF
+ fi`
+ ])
+-AM_CONDITIONAL(TCL_TRY, test "${ac_cv_libctf_tcl_try}" = yes)
++
++# Only native testing and only on supported platforms:
++AM_CONDITIONAL(TCL_TRY, [test "${ac_cv_libctf_tcl_try}" = yes \
++	-a "x${build_src}" = xtrue -a "x${build_collector}" = xtrue \
++	-a "x${host}" = "x${target}"])
+ 
+ AM_ZLIB
+ 
+--- a/gprofng/testsuite/config/default.exp
++++ b/gprofng/testsuite/config/default.exp
+@@ -38,6 +38,8 @@ if { "$CHECK_TARGET" == "check-install" } {
+     set ::env(GPROFNG) "$BUILDDIR/src/gprofng"
+ }
+ 
++set TEST_TIMEOUT 300
++
+ # Create directories where gprofng can find libraries and binaries:
+ remote_exec host "sh -c \"rm -rf tmpdir; mkdir -p tmpdir\""
+ remote_exec host "sh -c \"mkdir -p lib; rm -f lib/gprofng; ln -s ../libcollector/.libs lib/gprofng\""
+--- a/gprofng/testsuite/gprofng.display/display.exp
++++ b/gprofng/testsuite/gprofng.display/display.exp
+@@ -24,13 +24,6 @@ if {[info exists env(LC_ALL)]} {
+ set env(LC_ALL) "C"
+ 
+ set pltf [exec uname -i]
+-
+-# Native testing only for now.
+-if { ![istarget $pltf-*-*]
+-     && (![string match i?86 $pltf] || ![istarget i?86-*-*]) } then {
+-    return
+-}
+-
+ if { "$pltf" == "aarch64" } {
+ # Use a filter for not leaf functions due to the unwind problem in libgp-collector.so
+     set ::env(ACCT_FILTER) [join { "|egrep -vw 'gpf|tailcallopt|"
+--- a/gprofng/testsuite/gprofng.display/gp-archive.exp
++++ b/gprofng/testsuite/gprofng.display/gp-archive.exp
+@@ -32,7 +32,7 @@ proc check_gp_archive { a_opt } {
+     set out [lindex $output 1]
+     send_log "'$cmd' failed\n"
+     fail $tdir
+-    exit 1
++    return -code break
+   }
+ 
+   run_native_host_cmd "mv $tdir/t.c $tdir/t.c.1"
+@@ -42,7 +42,7 @@ proc check_gp_archive { a_opt } {
+     set out [lindex $output 1]
+     send_log "CORRECTSOURCE is not found aafter '$cmd'\n"
+     fail $tdir
+-    exit 1
++    return -code break
+   }
+ }
+ 
+@@ -58,7 +58,7 @@ if { [lindex $output 0] != 0 } then {
+   set out [lindex $output 1]
+   send_log "Experiment is not created in $tdir\n"
+   fail $tdir
+-  exit 1
++  return
+ }
+ 
+ 
+@@ -67,4 +67,4 @@ check_gp_archive src
+ run_native_host_cmd "rm -rf $tdir/exp.er/archives/*; mv $tdir/t.c.1 $tdir/t.c"
+ check_gp_archive usedsrc
+ 
+-pass $dir
++pass $tdir
+--- a/gprofng/testsuite/gprofng.display/gp-collect-app_F.exp
++++ b/gprofng/testsuite/gprofng.display/gp-collect-app_F.exp
+@@ -37,7 +37,13 @@ proc run_gp_collect_app { subExpCnt F_opt } {
+     set out [lindex $output 1]
+     send_log "Experiment is not created in $tdir\n"
+     fail $tdir
+-    exit 1
++    return -code break
++  }
++  if {[regexp "ERROR:.*LD_PRELOAD" [lindex $output 1] match]} {
++    set out [lindex $output 1]
++    send_log "Experiment is not created in $tdir\n"
++    xfail $tdir
++    return -code break
+   }
+ 
+   set output [run_native_host_cmd "find $tdir -name '*x1.er' | wc -l"]
+@@ -46,7 +52,7 @@ proc run_gp_collect_app { subExpCnt F_opt } {
+     set out [lindex $output 1]
+     send_log "Test failed for -F $F_opt. subExp=$subExp. Shold be $subExpCnt\n"
+     fail $tdir
+-    exit 1
++    return -code break
+   }
+   return $output
+ }
+@@ -58,5 +64,5 @@ run_gp_collect_app 3 "on"
+ run_gp_collect_app 1 "=mkd.r"
+ run_gp_collect_app 2 "=mkdir|touch"
+ 
+-pass $dir
++pass $tdir
+ 
+--- a/gprofng/testsuite/gprofng.display/setpath_map.exp
++++ b/gprofng/testsuite/gprofng.display/setpath_map.exp
+@@ -36,7 +36,7 @@ if { [lindex $output 0] != 0 } then {
+   set out [lindex $output 1]
+   send_log "Experiment is not created in $tdir\n"
+   fail $tdir
+-  exit 1
++  return
+ }
+ 
+ # Copy the "good" file to $tdir/src. Mark old file as "wrong":
+@@ -49,7 +49,7 @@ if { [string first "CORRECTSOURCE" [lindex $output 1]] < 0 } then {
+   set out [lindex $output 1]
+   send_log "CORRECTSOURCE is not found in $gprofng display text -setpath $tdir/src -source main $tdir/exp.er\n"
+   fail $tdir
+-  exit 1
++  return
+ }
+ 
+ # Test -pathmap:
+@@ -59,7 +59,7 @@ if { [string first "CORRECTSOURCE" [lindex $output 1]] < 0 } then {
+   set out [lindex $output 1]
+   send_log "CORRECTSOURCE is not found in $gprofng display text -pathmap $tdir $tdir/src -source main $tdir/exp.er\n"
+   fail $tdir
+-  exit 1
++  return
+ }
+ 
+ pass $dir
+--- a/gprofng/testsuite/lib/display-lib.exp
++++ b/gprofng/testsuite/lib/display-lib.exp
+@@ -21,28 +21,26 @@
+ # Run the COMMAND on the host and return a list of the form
+ # { exit-status OUTPUT }.
+ proc run_native_host_cmd { command } {
+-    global link_output
+-    global ld
++    global TEST_TIMEOUT
+ 
+     verbose -log "$command"
+     set run_output ""
+     try {
+-	set run_output [exec "sh" "-c" "$command" "2>@1"]
++	send_log "% timeout $TEST_TIMEOUT sh -c '$command' 2>&1\n"
++	set run_output [exec "timeout" $TEST_TIMEOUT "sh" "-c" "$command" "2>&1"]
+ 	set status 0
+     } trap CHILDSTATUS {results options} {
+ 	set status [lindex [dict get $options -errorcode] 2]
+-	set run_output $results
++	set run_output "$results"
++	if { $status == 124 ||  $status == 133 } {
++	    send_log "  ERROR: TIMEOUT($TEST_TIMEOUT sec.)\n"
++	}
+     }
+     regsub "\n$" $run_output "" run_output
+     if { [lindex $status 0] != 0 && [string match "" $run_output] } then {
+ 	append run_output "child process exited abnormally"
+     }
+-
+-    if [string match "" $run_output] then {
+-	return ""
+-    }
+-
+-    return [list [lindex $status 0] $run_output]
++    return [list [lindex $status 0] "$run_output"]
+ }
+ 
+ # Run a display test in DIR.
+--- a/gprofng/testsuite/lib/smalltest.c
++++ b/gprofng/testsuite/lib/smalltest.c
+@@ -1,11 +1,13 @@
+ #include <stdio.h>
+ #include <time.h>
+ 
+-time_t
++typedef long long hrtime_t;
++
++hrtime_t
+ gethrtime (void)
+ {
+   struct timespec tp;
+-  time_t rc = 0;
++  hrtime_t rc = 0;
+ #ifdef CLOCK_MONOTONIC_RAW
+   int r = clock_gettime (CLOCK_MONOTONIC_RAW, &tp);
+ #else
+@@ -13,7 +15,7 @@ gethrtime (void)
+ #endif
+ 
+   if (r == 0)
+-    rc = ((time_t) tp.tv_sec) * 1e9 + (time_t) tp.tv_nsec;
++    rc = ((hrtime_t) tp.tv_sec) * 1e9 + (hrtime_t) tp.tv_nsec;
+   return rc;
+ }
+ 
+@@ -23,7 +25,7 @@ int
+ main (int argc, char **argv)
+ {
+   long long count = 0;
+-  time_t start = gethrtime ();
++  hrtime_t start = gethrtime ();
+ 
+   do
+     {

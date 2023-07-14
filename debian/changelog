@@ -1,9 +1,24 @@
-binutils (2.40.50.20230701-1) UNRELEASED; urgency=medium
+binutils (2.40.90.20230714-1) unstable; urgency=medium
 
-  * New upstream snapshot, taken from the trunk.
+  * New upstream snapshot, taken from the binutils 2.41 release branch.
+  * Stop ignoring new regressions on mipsel and mips64el.
+  * Build alpha hppa m68k powerpc sh4 sparc64 cross packages on arm64.
+    Addresses: #969195.
+  * Fix PR gprofng/30602, taken from the trunk.
+  * Run the testsuite on i386 again.
+
+ -- Matthias Klose <doko@debian.org>  Fri, 14 Jul 2023 12:42:55 +0200
+
+binutils (2.40.90.20230705-1) unstable; urgency=medium
+
+  * New upstream snapshot, taken from the binutils 2.41 release branch.
   * Disable running tests on i386, testsuite hangs, see PR gprofng/30602.
+  * Ignore regressions on mipsel and mips64el. These were introduced by
+    the upstream mips maintainer by reverting some commits. His promise
+    is these "will be sorted in the coming weeks, resources permitting".
+    See PR 30607.  Don't wait for this promise.
 
- -- Matthias Klose <doko@debian.org>  Sun, 02 Jul 2023 06:55:18 +0200
+ -- Matthias Klose <doko@debian.org>  Wed, 05 Jul 2023 13:50:30 +0200
 
 binutils (2.40.50.20230630-1) unstable; urgency=medium
 
