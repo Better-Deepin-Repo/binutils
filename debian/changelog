@@ -1,6 +1,7 @@
 binutils (2.40.90.20230714-3) UNRELEASED; urgency=medium
 
   * Stop ignoring new regressions again.
+  * binutils: Suggest gprofng-gui.
 
  -- Matthias Klose <doko@debian.org>  Sun, 16 Jul 2023 07:49:14 +0200
 
