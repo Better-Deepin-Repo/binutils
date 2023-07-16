@@ -570,7 +570,7 @@ ifneq (,$(filter $(DEB_HOST_ARCH), none))
 endif
 #with_check := disabled for this upload
 
-regression_archs = amd64 arm64 ppc64el riscv64 sh4
+regression_archs =
 ifneq (,$(filter $(DEB_HOST_ARCH), $(regression_archs)))
   ignore_regressions := regressions ignored on architecture $(DEB_HOST_ARCH)
 endif
