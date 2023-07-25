@@ -1,4 +1,4 @@
-# SymbolsHelper-Confirmed: 2.40.90 amd64 i386
+# SymbolsHelper-Confirmed: 2.40.90 amd64 arm64 i386
 libgprofng.so.0 libgprofng #MINVER#
  ABS_PP_CODES@Base 2.40.90
  ABS_RT_CODES@Base 2.40.90
@@ -590,7 +590,7 @@ libgprofng.so.0 libgprofng #MINVER#
  (optional=templinst)_ZN10DbeSyncMapI10LoadObjectE16sync_create_itemEPKcl@Base 2.40.90
  (optional=templinst|arch=i386)_ZN10DbeSyncMapI10LoadObjectE16sync_create_itemEPKcx@Base 2.40.90
  (optional=templinst)_ZN10DbeSyncMapI10LoadObjectE4dumpEv@Base 2.40.90
- (optional=templinst)_ZN10DbeSyncMapI10LoadObjectE5resetEv@Base 2.40.90
+ (optional=templinst|arch=!arm64)_ZN10DbeSyncMapI10LoadObjectE5resetEv@Base 2.40.90
  (optional=templinst)_ZN10DbeSyncMapI10LoadObjectED0Ev@Base 2.40.90
  (optional=templinst)_ZN10DbeSyncMapI10LoadObjectED1Ev@Base 2.40.90
  (optional=templinst)_ZN10DbeSyncMapI10LoadObjectED2Ev@Base 2.40.90
@@ -2825,6 +2825,7 @@ libgprofng.so.0 libgprofng #MINVER#
  (optional=templinst)_ZN6VectorIxE4typeEv@Base 2.40.90
  (optional=templinst)_ZN6VectorIxE5storeElx@Base 2.40.90
  (optional=templinst)_ZN6VectorIxE6appendEx@Base 2.40.90
+ (optional=templinst|arch=arm64)_ZN6VectorIxE6insertElx@Base 2.40.90
  (optional=templinst)_ZN6VectorIxE6resizeEl@Base 2.40.90
  (optional=templinst)_ZN6VectorIxED0Ev@Base 2.40.90
  (optional=templinst)_ZN6VectorIxED1Ev@Base 2.40.90
