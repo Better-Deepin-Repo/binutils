@@ -5,6 +5,7 @@ binutils (2.40.90.20230725-1) unstable; urgency=medium
     Taken from the trunk, closes: #1040450.
   * Fix some lintian warnings.
   * Ignore bootstrap regressions on m68k.
+  * Add libgprofng0 symbols file.
 
  -- Matthias Klose <doko@debian.org>  Tue, 25 Jul 2023 11:06:12 +0200
 

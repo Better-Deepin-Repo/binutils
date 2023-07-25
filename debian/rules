@@ -1898,7 +1898,7 @@ endif
 	dpkg-gensymbols -P$(d_ctf) -p$(p_ctf) -l$(d_lib)
 	dpkg-gensymbols -P$(d_ctfn) -p$(p_ctfn)
 ifeq ($(with_gprofng),yes)
-	dpkg-gensymbols -P$(d_gpng) -p$(p_gpng) -l$(d_lib)
+	-dpkg-gensymbols -P$(d_gpng) -p$(p_gpng) -l$(d_lib)
 endif
 	dpkg-gensymbols -P$(d_sfrm) -p$(p_sfrm)
 
