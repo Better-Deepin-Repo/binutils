@@ -981,6 +981,7 @@ stamps/install.%: stamps/build.%
 
 	: # gold man pages
 	$(if $(filter $*, $(gold_targets)), \
+	  ln -sf ld.gold.1.gz $(D_CROSS)/$(PF)/share/man/man1/$(CROSS_GNU_TYPE)-gold.1.gz; \
 	  ln -sf ld.gold.1.gz $(D_CROSS)/$(PF)/share/man/man1/$(CROSS_GNU_TYPE)-ld.gold.1.gz; \
 	  ln -sf dwp.1.gz $(D_CROSS)/$(PF)/share/man/man1/$(CROSS_GNU_TYPE)-dwp.1.gz; \
 	)
