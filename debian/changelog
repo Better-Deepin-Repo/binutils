@@ -2,6 +2,7 @@ binutils (2.40.90.20230720-2) UNRELEASED; urgency=medium
 
   * Let objcopy honor the SOURCE_DATE_EPOCH env (Johannes Schauer).
     Taken from the trunk, closes: #1040450.
+  * Fix some lintian warnings.
 
  -- Matthias Klose <doko@debian.org>  Tue, 25 Jul 2023 10:17:01 +0200
 

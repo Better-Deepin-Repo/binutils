@@ -998,7 +998,7 @@ stamps/install.%: stamps/build.%
 
 	: # remove RPATH
 	chrpath -k -d $$(file $(D_CROSS)/usr/bin/*|awk -F: '/ ELF/ {print $$1}')
-	chrpath -k -d $$(file $(D_CROSS)/usr/lib/$(DEB_HOST_GNU_TYPE)/lib*.so*|awk -F: '/ ELF/ {print $$1}')
+	chrpath -k -d $$(file $(D_CROSS)/usr/lib/$(DEB_HOST_MULTIARCH)/lib*.so*|awk -F: '/ ELF/ {print $$1}')
 
 ifneq (,$(filter $(distrelease),lenny etch squeeze wheezy jessie stretch))
 	: # temporary i586-* symlinks for stretch
@@ -1267,6 +1267,7 @@ endif
 
 	: # Get rid of .la files since libtool obviously has no idea about transient paths
 	rm -f $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.la
+	rm -f $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/gprofng/*.la
 
 	chmod ugo-x $(d_lib)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so
 	chmod ugo-x $(d_ctf)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so.*
