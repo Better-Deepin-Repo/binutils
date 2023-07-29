@@ -1,3 +1,9 @@
+binutils (2.40.90.20230729-2) unstable; urgency=medium
+
+  * Fix typo in libgprofng0 symbols file (Sven Joachim). Closes: #1042498.
+
+ -- Matthias Klose <doko@debian.org>  Sat, 29 Jul 2023 12:47:21 +0200
+
 binutils (2.40.90.20230729-1) unstable; urgency=medium
 
   * New upstream snapshot, taken from the binutils 2.41 release branch.

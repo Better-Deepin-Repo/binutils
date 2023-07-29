@@ -1,5 +1,5 @@
 # SymbolsHelper-Confirmed: 2.40.90 amd64 arm64 i386
-libgprofng.so.0 libgprofng #MINVER#
+libgprofng.so.0 libgprofng0 #MINVER#
  ABS_PP_CODES@Base 2.40.90
  ABS_RT_CODES@Base 2.40.90
  DOBJ_ANON@Base 2.40.90
