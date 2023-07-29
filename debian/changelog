@@ -1,4 +1,4 @@
-binutils (2.40.90.20230725-1) unstable; urgency=medium
+binutils (2.40.90.20230729-1) unstable; urgency=medium
 
   * New upstream snapshot, taken from the binutils 2.41 release branch.
   * Let objcopy honor the SOURCE_DATE_EPOCH env (Johannes Schauer).
@@ -7,7 +7,7 @@ binutils (2.40.90.20230725-1) unstable; urgency=medium
   * Ignore bootstrap regressions on m68k.
   * Add libgprofng0 symbols file.
 
- -- Matthias Klose <doko@debian.org>  Tue, 25 Jul 2023 11:06:12 +0200
+ -- Matthias Klose <doko@debian.org>  Sat, 29 Jul 2023 04:14:55 +0200
 
 binutils (2.40.90.20230720-1) unstable; urgency=medium
 

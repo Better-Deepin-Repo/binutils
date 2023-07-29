@@ -11,7 +11,7 @@
  
 --- a/ld/Makefile.in
 +++ b/ld/Makefile.in
-@@ -1022,7 +1022,7 @@ ld_new_SOURCES = ldgram.y ldlex-wrapper.
+@@ -1023,7 +1023,7 @@ ld_new_SOURCES = ldgram.y ldlex-wrapper.
  	ldbuildid.c
  
  ld_new_DEPENDENCIES = $(EMULATION_OFILES) $(EMUL_EXTRA_OFILES) \

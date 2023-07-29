@@ -9,7 +9,7 @@ gold/
  
 --- a/gold/configure.tgt
 +++ b/gold/configure.tgt
-@@ -160,6 +160,13 @@ mips*64*el*-*-*|mips*64*le*-*-*)
+@@ -153,6 +153,13 @@ aarch64*-*)
   targ_big_endian=false
   targ_extra_big_endian=true
   ;;
@@ -23,17 +23,17 @@ gold/
  mips*el*-*-*|mips*le*-*-*)
   targ_obj=mips
   targ_machine=EM_MIPS_RS3_LE
-@@ -169,6 +176,13 @@ mips*el*-*-*|mips*le*-*-*)
-  ;;
- mips*64*-*-*)
+@@ -163,6 +170,13 @@ mips*el*-*-*|mips*le*-*-*)
+ mips*-*-*)
   targ_obj=mips
-+ targ_machine=EM_MIPS
+  targ_machine=EM_MIPS
 + targ_size=64
 + targ_big_endian=true
 + targ_extra_big_endian=false
 + ;;
 +mips*64*-*-*)
 + targ_obj=mips
-  targ_machine=EM_MIPS
-  targ_size=64
++ targ_machine=EM_MIPS
+  targ_size=32
   targ_big_endian=true
+  targ_extra_big_endian=false
