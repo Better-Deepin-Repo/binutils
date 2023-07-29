@@ -1,3 +1,9 @@
+binutils (2.40.90.20230729-3) UNRELEASED; urgency=medium
+
+  * Update libgprofng0 symbols file for x32.
+
+ -- Matthias Klose <doko@debian.org>  Sun, 30 Jul 2023 01:32:24 +0200
+
 binutils (2.40.90.20230729-2) unstable; urgency=medium
 
   * Fix typo in libgprofng0 symbols file (Sven Joachim). Closes: #1042498.
