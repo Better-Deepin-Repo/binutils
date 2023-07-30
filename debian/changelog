@@ -1,8 +1,9 @@
-binutils (2.40.90.20230729-3) UNRELEASED; urgency=medium
+binutils (2.41-1) unstable; urgency=medium
 
+  * binutils 2.41 release.
   * Update libgprofng0 symbols file for x32.
 
- -- Matthias Klose <doko@debian.org>  Sun, 30 Jul 2023 01:32:24 +0200
+ -- Matthias Klose <doko@debian.org>  Sun, 30 Jul 2023 18:01:13 +0200
 
 binutils (2.40.90.20230729-2) unstable; urgency=medium
 
