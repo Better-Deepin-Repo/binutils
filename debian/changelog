@@ -1,6 +1,7 @@
 binutils (2.41.50.20230731-2) UNRELEASED; urgency=medium
 
   * Build alpha arc hppa m68k sh4 sparc64 cross packages on ppc64el.
+  * Ignore gprofng and bootstrap test regressions.
 
  -- Matthias Klose <doko@debian.org>  Wed, 02 Aug 2023 12:00:23 +0200
 
