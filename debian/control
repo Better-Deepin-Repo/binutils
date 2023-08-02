@@ -458,7 +458,7 @@ Description: GNU binary utilities, for s390x-linux-gnu target (debug symbols)
 
 Package: binutils-alpha-linux-gnu
 Priority: optional
-Architecture: alpha amd64 i386 x32 arm64
+Architecture: alpha amd64 i386 x32 arm64 ppc64el
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
@@ -476,7 +476,7 @@ Description: GNU binary utilities, for alpha-linux-gnu target
 Package: binutils-alpha-linux-gnu-dbg
 Section: debug
 Priority: optional
-Architecture: alpha amd64 i386 x32 arm64
+Architecture: alpha amd64 i386 x32 arm64 ppc64el
 Multi-Arch: foreign
 Depends: binutils-alpha-linux-gnu (= ${binary:Version})
 Description: GNU binary utilities, for alpha-linux-gnu target (debug symbols)
@@ -484,7 +484,7 @@ Description: GNU binary utilities, for alpha-linux-gnu target (debug symbols)
 
 Package: binutils-arc-linux-gnu
 Priority: optional
-Architecture: arc amd64 i386 x32 arm64
+Architecture: arc amd64 i386 x32 arm64 ppc64el
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
@@ -502,7 +502,7 @@ Description: GNU binary utilities, for arc-linux-gnu target
 Package: binutils-arc-linux-gnu-dbg
 Section: debug
 Priority: optional
-Architecture: arc amd64 i386 x32 arm64
+Architecture: arc amd64 i386 x32 arm64 ppc64el
 Multi-Arch: foreign
 Depends: binutils-arc-linux-gnu (= ${binary:Version})
 Description: GNU binary utilities, for arc-linux-gnu target (debug symbols)
@@ -510,7 +510,7 @@ Description: GNU binary utilities, for arc-linux-gnu target (debug symbols)
 
 Package: binutils-hppa-linux-gnu
 Priority: optional
-Architecture: hppa amd64 i386 x32 arm64
+Architecture: hppa amd64 i386 x32 arm64 ppc64el
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
@@ -528,7 +528,7 @@ Description: GNU binary utilities, for hppa-linux-gnu target
 Package: binutils-hppa-linux-gnu-dbg
 Section: debug
 Priority: optional
-Architecture: hppa amd64 i386 x32 arm64
+Architecture: hppa amd64 i386 x32 arm64 ppc64el
 Multi-Arch: foreign
 Depends: binutils-hppa-linux-gnu (= ${binary:Version})
 Description: GNU binary utilities, for hppa-linux-gnu target (debug symbols)
@@ -562,7 +562,7 @@ Description: GNU binary utilities, for ia64-linux-gnu target (debug symbols)
 
 Package: binutils-m68k-linux-gnu
 Priority: optional
-Architecture: m68k amd64 i386 x32 arm64
+Architecture: m68k amd64 i386 x32 arm64 ppc64el
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
@@ -580,7 +580,7 @@ Description: GNU binary utilities, for m68k-linux-gnu target
 Package: binutils-m68k-linux-gnu-dbg
 Section: debug
 Priority: optional
-Architecture: m68k amd64 i386 x32 arm64
+Architecture: m68k amd64 i386 x32 arm64 ppc64el
 Multi-Arch: foreign
 Depends: binutils-m68k-linux-gnu (= ${binary:Version})
 Description: GNU binary utilities, for m68k-linux-gnu target (debug symbols)
@@ -666,7 +666,7 @@ Description: GNU binary utilities, for riscv64-linux-gnu target (debug symbols)
 
 Package: binutils-sh4-linux-gnu
 Priority: optional
-Architecture: sh4 amd64 i386 x32 arm64
+Architecture: sh4 amd64 i386 x32 arm64 ppc64el
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
@@ -684,7 +684,7 @@ Description: GNU binary utilities, for sh4-linux-gnu target
 Package: binutils-sh4-linux-gnu-dbg
 Section: debug
 Priority: optional
-Architecture: sh4 amd64 i386 x32 arm64
+Architecture: sh4 amd64 i386 x32 arm64 ppc64el
 Multi-Arch: foreign
 Depends: binutils-sh4-linux-gnu (= ${binary:Version})
 Description: GNU binary utilities, for sh4-linux-gnu target (debug symbols)
@@ -692,7 +692,7 @@ Description: GNU binary utilities, for sh4-linux-gnu target (debug symbols)
 
 Package: binutils-sparc64-linux-gnu
 Priority: optional
-Architecture: sparc64 amd64 i386 x32 arm64
+Architecture: sparc64 amd64 i386 x32 arm64 ppc64el
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
@@ -710,7 +710,7 @@ Description: GNU binary utilities, for sparc64-linux-gnu target
 Package: binutils-sparc64-linux-gnu-dbg
 Section: debug
 Priority: optional
-Architecture: sparc64 amd64 i386 x32 arm64
+Architecture: sparc64 amd64 i386 x32 arm64 ppc64el
 Multi-Arch: foreign
 Depends: binutils-sparc64-linux-gnu (= ${binary:Version})
 Description: GNU binary utilities, for sparc64-linux-gnu target (debug symbols)
