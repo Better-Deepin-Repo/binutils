@@ -1,3 +1,10 @@
+binutils (2.41.50.20231010-1) experimental; urgency=medium
+
+  * New upstream snapshot, taken from the trunk.
+  * Build packages for loong64. Addresses: #1034633.
+
+ -- Matthias Klose <doko@debian.org>  Tue, 10 Oct 2023 12:19:36 +0200
+
 binutils (2.41.50.20230905-1) experimental; urgency=medium
 
   * New upstream snapshot, taken from the trunk.
