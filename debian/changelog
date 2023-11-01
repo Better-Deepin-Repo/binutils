@@ -1,3 +1,9 @@
+binutils (2.41.50.20231101-1) experimental; urgency=medium
+
+  * New upstream snapshot, taken from the trunk.
+
+ -- Matthias Klose <doko@debian.org>  Wed, 01 Nov 2023 08:19:21 +0100
+
 binutils (2.41.50.20231010-1) experimental; urgency=medium
 
   * New upstream snapshot, taken from the trunk.
