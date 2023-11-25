@@ -276,7 +276,7 @@ Description: Common files for the GNU assembler, linker and binary utilities
 
 Package: binutils-x86-64-linux-gnu
 Priority: optional
-Architecture: amd64 arm64 i386 ppc64el x32
+Architecture: amd64 arm64 i386 ppc64el x32 s390x
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
@@ -294,7 +294,7 @@ Description: GNU binary utilities, for x86-64-linux-gnu target
 Package: binutils-x86-64-linux-gnu-dbg
 Section: debug
 Priority: optional
-Architecture: amd64 arm64 i386 ppc64el x32
+Architecture: amd64 arm64 i386 ppc64el x32 s390x
 Multi-Arch: foreign
 Depends: binutils-x86-64-linux-gnu (= ${binary:Version})
 Description: GNU binary utilities, for x86-64-linux-gnu target (debug symbols)
@@ -302,7 +302,7 @@ Description: GNU binary utilities, for x86-64-linux-gnu target (debug symbols)
 
 Package: binutils-i686-linux-gnu
 Priority: optional
-Architecture: i386 amd64 arm64 ppc64el x32
+Architecture: i386 amd64 arm64 ppc64el x32 s390x
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
@@ -320,7 +320,7 @@ Description: GNU binary utilities, for i686-linux-gnu target
 Package: binutils-i686-linux-gnu-dbg
 Section: debug
 Priority: optional
-Architecture: i386 amd64 arm64 ppc64el x32
+Architecture: i386 amd64 arm64 ppc64el x32 s390x
 Multi-Arch: foreign
 Depends: binutils-i686-linux-gnu (= ${binary:Version})
 Description: GNU binary utilities, for i686-linux-gnu target (debug symbols)
@@ -328,7 +328,7 @@ Description: GNU binary utilities, for i686-linux-gnu target (debug symbols)
 
 Package: binutils-aarch64-linux-gnu
 Priority: optional
-Architecture: arm64 amd64 i386 x32 ppc64el
+Architecture: arm64 amd64 i386 x32 ppc64el s390x
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
@@ -346,7 +346,7 @@ Description: GNU binary utilities, for aarch64-linux-gnu target
 Package: binutils-aarch64-linux-gnu-dbg
 Section: debug
 Priority: optional
-Architecture: arm64 amd64 i386 x32 ppc64el
+Architecture: arm64 amd64 i386 x32 ppc64el s390x
 Multi-Arch: foreign
 Depends: binutils-aarch64-linux-gnu (= ${binary:Version})
 Description: GNU binary utilities, for aarch64-linux-gnu target (debug symbols)
@@ -354,7 +354,7 @@ Description: GNU binary utilities, for aarch64-linux-gnu target (debug symbols)
 
 Package: binutils-arm-linux-gnueabihf
 Priority: optional
-Architecture: armhf amd64 i386 x32 arm64 ppc64el
+Architecture: armhf amd64 i386 x32 arm64 ppc64el s390x
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
@@ -372,7 +372,7 @@ Description: GNU binary utilities, for arm-linux-gnueabihf target
 Package: binutils-arm-linux-gnueabihf-dbg
 Section: debug
 Priority: optional
-Architecture: armhf amd64 i386 x32 arm64 ppc64el
+Architecture: armhf amd64 i386 x32 arm64 ppc64el s390x
 Multi-Arch: foreign
 Depends: binutils-arm-linux-gnueabihf (= ${binary:Version})
 Description: GNU binary utilities, for arm-linux-gnueabihf target (debug symbols)
@@ -406,7 +406,7 @@ Description: GNU binary utilities, for arm-linux-gnueabi target (debug symbols)
 
 Package: binutils-powerpc64le-linux-gnu
 Priority: optional
-Architecture: ppc64el amd64 i386 x32 ppc64 arm64
+Architecture: ppc64el amd64 i386 x32 ppc64 arm64 s390x
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
@@ -424,7 +424,7 @@ Description: GNU binary utilities, for powerpc64le-linux-gnu target
 Package: binutils-powerpc64le-linux-gnu-dbg
 Section: debug
 Priority: optional
-Architecture: ppc64el amd64 i386 x32 ppc64 arm64
+Architecture: ppc64el amd64 i386 x32 ppc64 arm64 s390x
 Multi-Arch: foreign
 Depends: binutils-powerpc64le-linux-gnu (= ${binary:Version})
 Description: GNU binary utilities, for powerpc64le-linux-gnu target (debug symbols)
@@ -614,7 +614,7 @@ Description: GNU binary utilities, for m68k-linux-gnu target (debug symbols)
 
 Package: binutils-powerpc-linux-gnu
 Priority: optional
-Architecture: powerpc amd64 i386 x32 arm64 ppc64el
+Architecture: powerpc amd64 i386 x32 arm64 ppc64el s390x
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
@@ -632,7 +632,7 @@ Description: GNU binary utilities, for powerpc-linux-gnu target
 Package: binutils-powerpc-linux-gnu-dbg
 Section: debug
 Priority: optional
-Architecture: powerpc amd64 i386 x32 arm64 ppc64el
+Architecture: powerpc amd64 i386 x32 arm64 ppc64el s390x
 Multi-Arch: foreign
 Depends: binutils-powerpc-linux-gnu (= ${binary:Version})
 Description: GNU binary utilities, for powerpc-linux-gnu target (debug symbols)
@@ -640,7 +640,7 @@ Description: GNU binary utilities, for powerpc-linux-gnu target (debug symbols)
 
 Package: binutils-powerpc64-linux-gnu
 Priority: optional
-Architecture: ppc64 amd64 i386 x32 ppc64el
+Architecture: ppc64 amd64 i386 x32 ppc64el s390x
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
@@ -658,7 +658,7 @@ Description: GNU binary utilities, for powerpc64-linux-gnu target
 Package: binutils-powerpc64-linux-gnu-dbg
 Section: debug
 Priority: optional
-Architecture: ppc64 amd64 i386 x32 ppc64el
+Architecture: ppc64 amd64 i386 x32 ppc64el s390x
 Multi-Arch: foreign
 Depends: binutils-powerpc64-linux-gnu (= ${binary:Version})
 Description: GNU binary utilities, for powerpc64-linux-gnu target (debug symbols)
@@ -666,7 +666,7 @@ Description: GNU binary utilities, for powerpc64-linux-gnu target (debug symbols
 
 Package: binutils-riscv64-linux-gnu
 Priority: optional
-Architecture: riscv64 amd64 i386 x32 arm64 ppc64el
+Architecture: riscv64 amd64 i386 x32 arm64 ppc64el s390x
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
   ${shlibs:Depends}, ${extraDepends}
@@ -684,7 +684,7 @@ Description: GNU binary utilities, for riscv64-linux-gnu target
 Package: binutils-riscv64-linux-gnu-dbg
 Section: debug
 Priority: optional
-Architecture: riscv64 amd64 i386 x32 arm64 ppc64el
+Architecture: riscv64 amd64 i386 x32 arm64 ppc64el s390x
 Multi-Arch: foreign
 Depends: binutils-riscv64-linux-gnu (= ${binary:Version})
 Description: GNU binary utilities, for riscv64-linux-gnu target (debug symbols)
