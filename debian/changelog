@@ -1,8 +1,9 @@
-binutils (2.41.50.20231101-2) UNRELEASED; urgency=medium
+binutils (2.41.50.20231125-1) experimental; urgency=medium
 
+  * New upstream snapshot, taken from the trunk.
   * Build cross packages on s390x.
 
- -- Matthias Klose <doko@debian.org>  Sat, 25 Nov 2023 08:55:23 +0100
+ -- Matthias Klose <doko@debian.org>  Sat, 25 Nov 2023 10:44:41 +0100
 
 binutils (2.41.50.20231101-1) experimental; urgency=medium
 

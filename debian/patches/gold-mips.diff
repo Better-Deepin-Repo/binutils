@@ -22,8 +22,8 @@ gold/
 + ;;
  mips*el*-*-*|mips*le*-*-*)
   targ_obj=mips
-  targ_machine=EM_MIPS_RS3_LE
-@@ -163,6 +170,13 @@ mips*el*-*-*|mips*le*-*-*)
+  targ_machine=EM_MIPS
+@@ -164,6 +171,13 @@ mips*el*-*-*|mips*le*-*-*)
  mips*-*-*)
   targ_obj=mips
   targ_machine=EM_MIPS
@@ -35,5 +35,5 @@ gold/
 + targ_obj=mips
 + targ_machine=EM_MIPS
   targ_size=32
+  targ_extra_size=64
   targ_big_endian=true
-  targ_extra_big_endian=false
