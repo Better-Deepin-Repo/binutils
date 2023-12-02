@@ -1,10 +1,12 @@
-binutils (2.41.50.20231125-2) UNRELEASED; urgency=medium
+binutils (2.41.50.20231202-1) unstable; urgency=medium
 
+  * New upstream snapshot, taken from the trunk.
+    - Fix generation of gprofng man pages. Closes: #1042966.
   * Split out some macros into debian/rules.defs.
   * Ignore regressions compared to 2.41, See PR ld/31100, PR ld/31101,
     PR ld/31102.
 
- -- Matthias Klose <doko@debian.org>  Fri, 01 Dec 2023 17:33:28 +0100
+ -- Matthias Klose <doko@debian.org>  Sat, 02 Dec 2023 11:15:23 +0100
 
 binutils (2.41.50.20231125-1) experimental; urgency=medium
 
