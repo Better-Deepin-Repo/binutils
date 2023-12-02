@@ -1,3 +1,9 @@
+binutils (2.41.50.20231202-2) UNRELEASED; urgency=medium
+
+  * Add more GCC test dependencies for builds on ppc64el and s390x.
+
+ -- Matthias Klose <doko@debian.org>  Sat, 02 Dec 2023 17:36:33 +0100
+
 binutils (2.41.50.20231202-1) unstable; urgency=medium
 
   * New upstream snapshot, taken from the trunk.
