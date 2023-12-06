@@ -1,5 +1,6 @@
 binutils (2.41.50.20231206-1) unstable; urgency=medium
 
+  * New upstream snapshot, taken from the trunk.
   * Add more GCC test dependencies for builds on ppc64el and s390x.
   * Update libgprofng symbols file.
   * Reset the ignored-regression list.
