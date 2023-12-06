@@ -33,6 +33,7 @@ ignored_regressions = {
     'ld-loongarch-elf/pic.exp':  ('nopic link exec test',),
     'ld-x86-64/x86-64.exp':  ('*',),
     }
+ignored_regressions = {}
 
 def ignore_regression(section, test):
     ign_tests = ignored_regressions.get(section)
