@@ -298,7 +298,7 @@ STRIP_LTO = $(CROSS)strip -R .gnu.lto_* -R .gnu.debuglto_* -N __gnu_lto_slim -N 
 ifeq (,$(findstring nopgo,$(DEB_BUILD_OPTIONS)))
   ifeq ($(DEB_BUILD_ARCH),$(DEB_HOST_ARCH))
     ifeq (,$(filter $(DEB_HOST_ARCH), mipsel))
-      CONF_PGO = --enable-pgo-build=lto
+#      CONF_PGO = --enable-pgo-build=lto
     endif
   endif
 endif
@@ -415,7 +415,7 @@ endif
 ifneq (,$(filter $(DEB_HOST_ARCH), none))
   with_check := disabled for architecture $(DEB_HOST_ARCH)
 endif
-#with_check := disabled for this upload
+with_check := disabled for this upload
 
 regression_archs = m68k
 ifneq (,$(filter $(DEB_HOST_ARCH), $(regression_archs)))

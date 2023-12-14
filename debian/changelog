@@ -1,9 +1,9 @@
-binutils (2.41.50.20231206-2) UNRELEASED; urgency=medium
+binutils (2.41.50.20231214-1) unstable; urgency=medium
 
   * New upstream snapshot, taken from the trunk.
     - Fixes a memory leak. Closes: #1057962. 
 
- -- Matthias Klose <doko@debian.org>  Wed, 13 Dec 2023 09:02:02 +0100
+ -- Matthias Klose <doko@debian.org>  Thu, 14 Dec 2023 17:33:06 +0100
 
 binutils (2.41.50.20231206-1) unstable; urgency=medium
 
