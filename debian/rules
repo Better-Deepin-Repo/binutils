@@ -408,7 +408,7 @@ CONFARGS += --disable-werror
 with_check := yes
 ifneq (,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
   # override buildd admins to run the testsuite anyway ...
-  ifeq (,$(filter $(DEB_HOST_ARCH), m68k powerpc sh4 sparc64))
+  ifeq (,$(filter $(DEB_HOST_ARCH), m68k sh4))
     with_check := disabled through DEB_BUILD_OPTIONS
   endif
 endif

@@ -5,6 +5,7 @@ binutils (2.41.90.20240115-1) UNRELEASED; urgency=medium
   * Enabled gold on amd64-hurd. Closes: #1060419.
   * Configure hppa binutils with --enable-targets=hppa64-linux-gnu.
     Closes: #1059674.
+  * Drop nocheck override for powerpc and sparc64. Closes: #1059703.
   * Refresh patches.
 
  -- Matthias Klose <doko@debian.org>  Mon, 15 Jan 2024 16:43:24 +0100
