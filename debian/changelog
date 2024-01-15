@@ -2,6 +2,7 @@ binutils (2.41.90.20240115-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot, taken from the 2.42 branch.
   * Drop the gold-mips patch. Closes: #1049455.
+  * Enabled gold on amd64-hurd. Closes: #1060419.
   * Refresh patches.
 
  -- Matthias Klose <doko@debian.org>  Mon, 15 Jan 2024 16:43:24 +0100
