@@ -1,4 +1,4 @@
-binutils (2.41.90.20240115-1) UNRELEASED; urgency=medium
+binutils (2.41.90.20240115-1) unstable; urgency=medium
 
   * New upstream snapshot, taken from the 2.42 branch.
   * Drop the gold-mips patch. Closes: #1049455.
