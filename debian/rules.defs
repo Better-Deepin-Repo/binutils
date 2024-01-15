@@ -181,6 +181,8 @@ CONFARGS_TARGET_aarch64		= --enable-targets=aarch64_be-linux-gnu
 
 CONFARGS_TARGET_arc		= --with-cpu=hs38_linux
 
+CONFARGS_TARGET_hppa		= --enable-targets=hppa64-linux-gnu
+
 BINUTILS_GCCCONF = $(BINUTILS_BASECONF) $(CONFARGS_TARGET_$(DEB_HOST_ARCH))
 ifeq ($(with_gold),yes)
   BINUTILS_GCCCONF += --enable-ld=default --enable-gold
