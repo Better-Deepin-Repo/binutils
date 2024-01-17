@@ -1,4 +1,4 @@
-# SymbolsHelper-Confirmed: 2.41.50.20231202 amd64 arm64 i386 x32
+# SymbolsHelper-Confirmed: 2.41.90.20240115 amd64 arm64 i386 x32
 libgprofng.so.0 libgprofng0 #MINVER#
  ABS_PP_CODES@Base 2.41
  ABS_RT_CODES@Base 2.41
@@ -12,7 +12,6 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _Z10dbeGetNameii@Base 2.41
  _Z10dbeSetSortii10MetricTypeb@Base 2.41
  _Z10getStackPCi5VModeP8DataViewl@Base 2.41
- _Z10get_fstypePc@Base 2.41
  _Z10out_of_memv@Base 2.41
  _Z11dbeGetAliasPc@Base 2.41
  _Z11dbeGetClockii@Base 2.41
@@ -37,6 +36,7 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _Z12dbeSetSelObjixii@Base 2.41
  _Z12dbeWriteFilePKcS0_@Base 2.41
  _Z12print_headerP10ExperimentP8_IO_FILE@Base 2.41
+ _Z12read_cpuinfov@Base 2.41.90.20240115
  _Z13dbeAddPathmapiPcS_@Base 2.41
  _Z13dbeDeleteFilePKc@Base 2.41
  _Z13dbeDeleteViewi@Base 2.41
@@ -1223,7 +1223,6 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _ZN3Elf15get_bfd_symbolsEv@Base 2.41.50.20231202
  _ZN3Elf16elf_getancillaryEP8Elf_DatajP17S_Elf64_Ancillary@Base 2.41
  _ZN3Elf16get_related_fileEPKcS1_@Base 2.41
- (subst)_ZN3Elf19get_funcname_in_pltE{uint64_t}@Base 2.41.50.20231202
  _ZN3Elf20find_ancillary_filesEPc@Base 2.41
  _ZN3Elf4dumpEv@Base 2.41
  _ZN3Elf8elf_initEv@Base 2.41
@@ -1340,9 +1339,7 @@ libgprofng.so.0 libgprofng0 #MINVER#
  (arch=!i386 !x32)_ZN6Disasm12set_addr_endEm@Base 2.41
  (arch=i386 x32)_ZN6Disasm12set_addr_endEy@Base 2.41
  _ZN6Disasm12set_img_nameEPc@Base 2.41
- (subst)_ZN6Disasm14map_PC_to_funcE{uint64_t}@Base 2.41.50.20231202
  _ZN6Disasm18remove_disasm_hndlEPv@Base 2.41
- (subst)_ZN6Disasm19get_funcname_in_pltE{uint64_t}@Base 2.41.50.20231202
  _ZN6DisasmC1E10Platform_tP5Stabs@Base 2.41
  _ZN6DisasmC1EPc@Base 2.41
  _ZN6DisasmC2E10Platform_tP5Stabs@Base 2.41
@@ -2633,21 +2630,7 @@ libgprofng.so.0 libgprofng0 #MINVER#
  dbe_strndup@Base 2.41
  dbe_write@Base 2.41
  dbe_xml2str@Base 2.41
- events_fam6_mod23@Base 2.41
- events_fam6_mod26@Base 2.41
- events_fam6_mod28@Base 2.41
- events_fam6_mod37@Base 2.41
- events_fam6_mod42@Base 2.41
- events_fam6_mod45@Base 2.41
- events_fam6_mod46@Base 2.41
- events_fam6_mod47@Base 2.41
- events_fam6_mod58@Base 2.41
- events_fam6_mod60@Base 2.41
- events_fam6_mod61@Base 2.41
- events_fam6_mod62@Base 2.41
- events_fam6_mod78@Base 2.41
- events_fam6_unknown@Base 2.41
- events_fam_arm@Base 2.41
+ events_generic@Base 2.41.90.20240115
  free@Base 2.41
  get_cksum@Base 2.41
  get_clock_rate@Base 2.41
