@@ -2,6 +2,7 @@ binutils (2.41.90.20240122-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot, taken from the 2.42 branch.
   * Update libgprofng symbols file.
+  * Explicitly add i686-linux-gnu for the amd64 binutils.
 
  -- Matthias Klose <doko@debian.org>  Mon, 22 Jan 2024 16:01:28 +0100
 
