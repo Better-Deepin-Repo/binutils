@@ -1,8 +1,9 @@
-binutils (2.41.90.20240115-2) UNRELEASED; urgency=medium
+binutils (2.41.90.20240122-1) UNRELEASED; urgency=medium
 
+  * New upstream snapshot, taken from the 2.42 branch.
   * Update libgprofng symbols file.
 
- -- Matthias Klose <doko@debian.org>  Wed, 17 Jan 2024 10:17:24 +0100
+ -- Matthias Klose <doko@debian.org>  Mon, 22 Jan 2024 16:01:28 +0100
 
 binutils (2.41.90.20240115-1) unstable; urgency=medium
 

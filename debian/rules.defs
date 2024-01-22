@@ -139,11 +139,11 @@ CONFARGS_TARGET_s390		= --enable-targets=s390x-linux-gnu
 
 CONFARGS_TARGET_s390x		= --enable-targets=s390-linux-gnu
 
-CONFARGS_TARGET_amd64		= --enable-targets=x86_64-linux-gnux32,x86_64-pep
+CONFARGS_TARGET_amd64		= --enable-targets=i686-linux-gnu,x86_64-linux-gnux32,x86_64-pep
 
 CONFARGS_TARGET_i386		= --enable-targets=x86_64-linux-gnu,x86_64-linux-gnux32,x86_64-pep
 
-CONFARGS_TARGET_x32		= --enable-targets=x86_64-linux-gnu,x86_64-pep
+CONFARGS_TARGET_x32		= --enable-targets=i686-linux-gnu,x86_64-linux-gnu,x86_64-pep
 
 CONFLICTS_TARGET_amd64		= -VextraConflicts="binutils-mingw-w64-i686 (<< 2.23.52.20130612-1+3), binutils-mingw-w64-x86-64 (<< 2.23.52.20130612-1+3)"
 CONFLICTS_TARGET_i386 = $(CONFLICTS_TARGET_amd64)
