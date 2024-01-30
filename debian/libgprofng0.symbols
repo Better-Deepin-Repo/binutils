@@ -1,4 +1,4 @@
-# SymbolsHelper-Confirmed: 2.41.90.20240115 amd64 arm64 i386 x32
+# SymbolsHelper-Confirmed: 2.42 amd64 arm64 i386 x32
 libgprofng.so.0 libgprofng0 #MINVER#
  ABS_PP_CODES@Base 2.41
  ABS_RT_CODES@Base 2.41
@@ -1223,6 +1223,7 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _ZN3Elf15get_bfd_symbolsEv@Base 2.41.50.20231202
  _ZN3Elf16elf_getancillaryEP8Elf_DatajP17S_Elf64_Ancillary@Base 2.41
  _ZN3Elf16get_related_fileEPKcS1_@Base 2.41
+ (subst)_ZN3Elf19get_funcname_in_pltE{uint64_t}@Base 2.42
  _ZN3Elf20find_ancillary_filesEPc@Base 2.41
  _ZN3Elf4dumpEv@Base 2.41
  _ZN3Elf8elf_initEv@Base 2.41
@@ -1339,7 +1340,9 @@ libgprofng.so.0 libgprofng0 #MINVER#
  (arch=!i386 !x32)_ZN6Disasm12set_addr_endEm@Base 2.41
  (arch=i386 x32)_ZN6Disasm12set_addr_endEy@Base 2.41
  _ZN6Disasm12set_img_nameEPc@Base 2.41
+ (subst)_ZN6Disasm14map_PC_to_funcE{uint64_t}@Base 2.42
  _ZN6Disasm18remove_disasm_hndlEPv@Base 2.41
+ (subst)_ZN6Disasm19get_funcname_in_pltE{uint64_t}@Base 2.42
  _ZN6DisasmC1E10Platform_tP5Stabs@Base 2.41
  _ZN6DisasmC1EPc@Base 2.41
  _ZN6DisasmC2E10Platform_tP5Stabs@Base 2.41
