@@ -1,3 +1,21 @@
+binutils (2.42-3) unstable; urgency=medium
+
+  * New upstream snapshot, taken from the 2.42 branch.
+    - PR31124: Addendum: Remove PROVIDE of __flmap_init_label, __flmap (AVR).
+    - Mention support for AMD/znver5 in GAS.
+    - x86: Disallow instructions with length > 15 bytes.
+    - LoongArch: gas: Fix the types of symbols referred with %le_*_r
+      in the symtab.
+    - Link x86-64 mark-plt-1.so testcase with --no-as-needed.
+    - PR 31283 windmc: Parse input correctly on big endian hosts.
+    - PR31208, strip can break ELF alignment requirements.
+    - x86/APX: VROUND{P,S}{S,D} encodings require AVX512{F,VL}.
+    - x86-64: Add R_X86_64_CODE_6_GOTTPOFF.
+    - PowerPC: Add support for Power11 options.
+    - x86: Display -msse-check= default as none.
+
+ -- Matthias Klose <doko@debian.org>  Wed, 21 Feb 2024 23:41:40 +0100
+
 binutils (2.42-2) unstable; urgency=medium
 
   * New upstream snapshot, taken from the 2.42 branch.
