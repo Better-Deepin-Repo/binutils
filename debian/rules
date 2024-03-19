@@ -591,6 +591,39 @@ endif
 
 ###############################################################################
 
+#######################
+# pic build           #
+#######################
+
+PIC_CONFARGS = $(CONFARGS) $(CONFARGS_TARGET_$(DEB_HOST_ARCH))
+PIC_CONFARGS += --enable-ld=default --disable-gold
+
+stamps/configure-pic:
+	$(checkdir)
+	find -name '*.[1-8]' -size 0 | xargs -r rm -f
+
+	rm -rf stamps/configure-pic builddir-pic
+	mkdir builddir-pic
+	cd builddir-pic && env CC="$(CC)" CXX="$(CXX)" CFLAGS="-fPIC $(CFLAGS)" CXXFLAGS="-fPIC $(CXXFLAGS)" LDFLAGS="$(LDFLAGS)" \
+		$(call SET_BINUTILS_MULTIARCH_ENV,$(DEB_HOST_ARCH)) \
+		../configure --with-sysroot=/ \
+			--libdir=/$(PF)/lib/$(DEB_HOST_MULTIARCH) \
+			$(PIC_CONFARGS)
+	@mkdir -p stamps
+	touch $@
+
+stamps/build-pic: stamps/configure-pic
+	$(checkdir)
+	@echo BEGIN $@
+	env BFD_SOVER_EXT="$(SINGLE_VERSION)" CTF_SOVER_EXT="" \
+	  $(call SET_BINUTILS_MULTIARCH_ENV,$(DEB_HOST_ARCH)) \
+	    $(MAKE) $(NJOBS) -C builddir-pic \
+		LDFLAGS="-Wl,-z,relro"
+	touch $@
+
+
+###############################################################################
+
 #####################
 # multiarch targets #
 #####################
@@ -900,6 +933,7 @@ pre-build:
 #endif
 
 build_stamps = stamps/build-single
+build_stamps += stamps/build-pic
 ifeq ($(with_multiarch),yes)
        build_stamps += stamps/build-multi
 endif
@@ -1089,6 +1123,10 @@ endif
 		$(d_dev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
 	mv $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libsframe.so \
 		$(d_dev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
+	cp builddir-pic/opcodes/.libs/libopcodes.a \
+		$(d_dev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libopcodes_pic.a
+	cp builddir-pic/bfd/.libs/libbfd.a \
+		$(d_dev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libbfd_pic.a
 ifeq ($(with_gprofng),yes)
 	mv $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libgprofng.so \
 		$(d_dev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
