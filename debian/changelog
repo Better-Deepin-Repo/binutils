@@ -1,5 +1,8 @@
 binutils (2.42-4) UNRELEASED; urgency=medium
 
+  * New upstream snapshot, taken from the 2.42 branch.
+    - AArch64: Fix the 2nd operand in gcsstr and gcssttr instructions.
+    - AArch64: Remove B16B16, SVE2p1 and SME2p1.
   * binutils-dev: Install libopcodes_pic.a and libbfd_pic.a.
 
  -- Matthias Klose <doko@debian.org>  Tue, 19 Mar 2024 16:08:43 +0100
