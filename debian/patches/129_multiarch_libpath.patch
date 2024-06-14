@@ -10,7 +10,7 @@
  HAVE_CXX11
  DLOPEN_LIBS
  CXXCPP
-@@ -13753,6 +13754,14 @@ $as_echo "#define HAVE_LC_MESSAGES 1" >>
+@@ -13751,6 +13752,14 @@ $as_echo "#define HAVE_LC_MESSAGES 1" >>
    fi
  
  
@@ -27,7 +27,7 @@
  $as_echo_n "checking whether to enable maintainer-specific portions of Makefiles... " >&6; }
 --- a/gold/configure.ac
 +++ b/gold/configure.ac
-@@ -738,6 +738,14 @@ AC_CHECK_HEADERS(locale.h)
+@@ -736,6 +736,14 @@ AC_CHECK_HEADERS(locale.h)
  AC_CHECK_FUNCS(setlocale)
  AM_LC_MESSAGES
  

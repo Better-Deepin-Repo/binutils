@@ -2,6 +2,7 @@ binutils (2.42.50.20240614-1) experimental; urgency=medium
 
   * New upstream snapshot, taken from the trunk.
   * Update the libctf-soname patch for the trunk.
+  * Refresh patches.
 
  -- Matthias Klose <doko@debian.org>  Fri, 14 Jun 2024 09:14:30 +0200
 
