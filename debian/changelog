@@ -1,3 +1,15 @@
+binutils (2.42.50.20240614-1) experimental; urgency=medium
+
+  * New upstream snapshot, taken from the trunk.
+
+ -- Matthias Klose <doko@debian.org>  Fri, 14 Jun 2024 09:14:30 +0200
+
+binutils (2.42-5) unstable; urgency=medium
+
+  * No-change rebuild.
+
+ -- Matthias Klose <doko@ubuntu.com>  Fri, 29 Mar 2024 18:55:30 +0100
+
 binutils (2.42-4) unstable; urgency=medium
 
   * New upstream snapshot, taken from the 2.42 branch.
