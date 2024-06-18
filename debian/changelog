@@ -1,4 +1,4 @@
-binutils (2.42.50.20240614-1) experimental; urgency=medium
+binutils (2.42.50.20240618-1) unstable; urgency=medium
 
   * New upstream snapshot, taken from the trunk.
   * Update the libctf-soname patch for the trunk.
@@ -6,7 +6,7 @@ binutils (2.42.50.20240614-1) experimental; urgency=medium
   * Build with -fno-omit-frame-pointer if it's enabled in dpkg-buildflags.
   * Allow to disable tests using LOCAL_BUILD_OPTIONS.
 
- -- Matthias Klose <doko@debian.org>  Fri, 14 Jun 2024 09:14:30 +0200
+ -- Matthias Klose <doko@debian.org>  Tue, 18 Jun 2024 14:38:10 +0200
 
 binutils (2.42-5) unstable; urgency=medium
 
