@@ -33,5 +33,3 @@ libctf-soname.diff
 mips-hack.diff
 
 perl-shebang.diff
-
-link-jansson.diff
