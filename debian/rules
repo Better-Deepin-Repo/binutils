@@ -338,6 +338,19 @@ endif
 BUILD_DATE := $(shell dpkg-parsechangelog | sed -n -e 's/^Date: //p')
 BUILD_DAY  := $(shell date -Idate -u -d "$(BUILD_DATE)")
 
+# package metadata information
+ifeq (,$(ELF_PACKAGE_METADATA))
+  ELF_PACKAGE_METADATA := $(subst $(SPACE),,{ \
+	"type":"deb", \
+	"os":"$(shell awk -F= '/^ID=/ {print $$2}' /etc/os-release)", \
+	"name":"$(DEB_SOURCE)", \
+	"version":"$(DEB_VERSION)", \
+	"architecture":"$(DEB_HOST_ARCH)" \
+	$(if $(DEB_BUILD_DEBUG_INFO_URL),$(COMMA)"debugInfoUrl":"$(DEB_BUILD_DEBUG_INFO_URL)") \
+    })
+  export ELF_PACKAGE_METADATA
+endif
+
 is_rc = yes
 is_rc =
 
