@@ -36,7 +36,6 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _Z12dbeSetSelObjixii@Base 2.41
  _Z12dbeWriteFilePKcS0_@Base 2.41
  _Z12print_headerP10ExperimentP8_IO_FILE@Base 2.41
- _Z12read_cpuinfov@Base 2.41.90.20240115
  _Z13dbeAddPathmapiPcS_@Base 2.41
  _Z13dbeDeleteFilePKc@Base 2.41
  _Z13dbeDeleteViewi@Base 2.41
@@ -1223,7 +1222,7 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _ZN3Elf15get_bfd_symbolsEv@Base 2.41.50.20231202
  _ZN3Elf16elf_getancillaryEP8Elf_DatajP17S_Elf64_Ancillary@Base 2.41
  _ZN3Elf16get_related_fileEPKcS1_@Base 2.41
- (subst)_ZN3Elf19get_funcname_in_pltE{uint64_t}@Base 2.42
+ (regex)_ZN3Elf19get_funcname_in_pltE\w@Base 2.42
  _ZN3Elf20find_ancillary_filesEPc@Base 2.41
  _ZN3Elf4dumpEv@Base 2.41
  _ZN3Elf8elf_initEv@Base 2.41
@@ -1340,9 +1339,9 @@ libgprofng.so.0 libgprofng0 #MINVER#
  (arch=!i386 !x32)_ZN6Disasm12set_addr_endEm@Base 2.41
  (arch=i386 x32)_ZN6Disasm12set_addr_endEy@Base 2.41
  _ZN6Disasm12set_img_nameEPc@Base 2.41
- (subst)_ZN6Disasm14map_PC_to_funcE{uint64_t}@Base 2.42
+ (regex)_ZN6Disasm14map_PC_to_funcE\w@Base 2.42
  _ZN6Disasm18remove_disasm_hndlEPv@Base 2.41
- (subst)_ZN6Disasm19get_funcname_in_pltE{uint64_t}@Base 2.42
+ (regex)_ZN6Disasm19get_funcname_in_pltE\w@Base 2.42
  _ZN6DisasmC1E10Platform_tP5Stabs@Base 2.41
  _ZN6DisasmC1EPc@Base 2.41
  _ZN6DisasmC2E10Platform_tP5Stabs@Base 2.41
@@ -2670,18 +2669,11 @@ libgprofng.so.0 libgprofng0 #MINVER#
  hwc_usage@Base 2.41
  hwc_usage_f@Base 2.41
  hwc_validate_ctrs@Base 2.41
- hwcdrv_assign_all_regnos@Base 2.41
- hwcdrv_drivers@Base 2.41
- hwcdrv_get_x86_eventnum@Base 2.41
- hwcdrv_lookup_cpuver@Base 2.41
  hwcdrv_pcl_api@Base 2.41
- hwcfuncs_assign_regnos@Base 2.41
  hwcfuncs_bind_descriptor@Base 2.41
  hwcfuncs_bind_hwcentry@Base 2.41
  hwcfuncs_errmsg_get@Base 2.41
  hwcfuncs_get_ctrs@Base 2.41
- hwcfuncs_get_x86_eventsel@Base 2.41
- hwcfuncs_int_capture_errmsg@Base 2.41
  hwcfuncs_int_logerr@Base 2.41
  hwcfuncs_parse_attrs@Base 2.41
  hwcfuncs_parse_ctr@Base 2.41
@@ -2723,10 +2715,10 @@ libgprofng.so.0 libgprofng0 #MINVER#
  popCnt@Base 2.41
  pushCnt3@Base 2.41
  pushCnt@Base 2.41
+ read_cpuinfo@Base 2.42.90
  read_from_file@Base 2.41
  read_line@Base 2.41
  realloc@Base 2.41
- regno_is_valid@Base 2.41
  show_regs@Base 2.41
  signo_max@Base 2.41
  strrpbrk@Base 2.41

@@ -2,8 +2,9 @@ binutils (2.42.90.20240720-1) unstable; urgency=medium
 
   * New upstream snapshot, taken from the 2.43 branch.
   * Set ELF_PACKAGE_METADATA in the environment.
+  * Update symbols files. Closes: #1064181.
 
- -- Matthias Klose <doko@debian.org>  Sat, 20 Jul 2024 14:26:24 +0200
+ -- Matthias Klose <doko@debian.org>  Sun, 21 Jul 2024 15:35:10 +0200
 
 binutils (2.42.50.20240710-1) unstable; urgency=medium
 
