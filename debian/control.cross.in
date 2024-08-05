@@ -15,7 +15,8 @@ Description: GNU binary utilities, for @target@ target
  for the @target@ target.
  .
  You don't need this package unless you plan to cross-compile programs
- for @target@ and @target@ is not your native platform.
+ for @target@ and @target@ is not your native
+ platform.
 
 Package: binutils-@target@-dbg
 Section: debug

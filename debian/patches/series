@@ -1,11 +1,10 @@
-#branch-updates.diff
-#branch-version.diff
+branch-updates.diff
+branch-version.diff
 001_ld_makefile_patch.patch
 002_gprof_profile_arcs.patch
 003_gprof_see_also_monitor.patch
 006_better_file_error.patch
 013_bash_in_ld_testsuite.patch
-#014_hash_style-both.patch
 128_ppc64_powerpc_biarch.patch
 129_multiarch_libpath.patch
 130_gold_disable_testsuite_build.patch

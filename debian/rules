@@ -292,9 +292,13 @@ LDFLAGS =
 CROSS := $(DEB_HOST_GNU_TYPE)-
 CC     = $(CROSS)gcc
 CXX    = $(CROSS)g++
-ifneq (,$(shell dpkg-buildflags | grep '^CFLAGS=..*-fno-omit-frame-pointer'))
+ifneq (,$(shell dpkg-buildflags | grep '^CFLAGS=.*-fno-omit-frame-pointer'))
   CFLAGS += -fno-omit-frame-pointer
   CXXFLAGS += -fno-omit-frame-pointer
+endif
+ifneq (,$(shell dpkg-buildflags | grep '^CFLAGS=.*-mbackchain'))
+  CFLAGS += -mbackchain
+  CXXFLAGS += -mbackchain
 endif
 STRIP  = $(CROSS)strip -R .comment -R .note
 STRIP_LTO = $(CROSS)strip -R .gnu.lto_* -R .gnu.debuglto_* -N __gnu_lto_slim -N __gnu_lto_v1
@@ -333,7 +337,7 @@ DEB_SVERSION	:= $(shell echo $(DEB_VERSION) | sed 's/+b[0-9][0-9]*$$//')
 VERSION		:= $(shell sed -n 's/^ *VERSION=\(.*\)/\1/p' bfd/configure | head -1 | tr -d \')
 DATE		:= $(shell sed -n 's/.* \([0-9]*\)$$/\1/p' bfd/version.h)
 ifneq (,$(DATE))
-  DATE_EXT	:= .$(DATE)
+#  DATE_EXT	:= .$(DATE)
 endif
 BUILD_DATE := $(shell dpkg-parsechangelog | sed -n -e 's/^Date: //p')
 BUILD_DAY  := $(shell date -Idate -u -d "$(BUILD_DATE)")

@@ -3,11 +3,11 @@ Section: devel
 Priority: optional
 Maintainer: Matthias Klose <doko@debian.org>
 Uploaders: James Troup <binutils@elmo.tasta.io>
-Standards-Version: 4.6.2
+Standards-Version: 4.7.0
 Build-Depends: autoconf (>= 2.64), dpkg-dev (>= 1.19.0.5),
   bison, flex, gettext, texinfo, dejagnu, quilt, chrpath, dwz, debugedit (>= 4.16),
   python3:any, file, xz-utils, lsb-release, zlib1g-dev, procps, help2man,
-  libjansson-dev, pkg-config, libzstd-dev,
+  libjansson-dev, pkgconf, libzstd-dev,
   g++-aarch64-linux-gnu [amd64 i386 ppc64el s390x x32] <!nocheck>,
   g++-arm-linux-gnueabi [amd64 arm64 i386 x32] <!nocheck>,
   g++-arm-linux-gnueabihf [amd64 arm64 i386 ppc64el s390x x32] <!nocheck>,
@@ -259,7 +259,7 @@ Architecture: all
 Multi-Arch: foreign
 Priority: optional
 Depends: texinfo, zlib1g-dev, make, python3,
-  libjansson-dev, pkg-config, libzstd-dev,
+  libjansson-dev, pkgconf, libzstd-dev,
 Description: GNU assembler, linker and binary utilities (source)
  This package contains the sources and patches which are needed to
  build binutils.
@@ -289,7 +289,8 @@ Description: GNU binary utilities, for x86-64-linux-gnu target
  for the x86-64-linux-gnu target.
  .
  You don't need this package unless you plan to cross-compile programs
- for x86-64-linux-gnu and x86-64-linux-gnu is not your native platform.
+ for x86-64-linux-gnu and x86-64-linux-gnu is not your native
+ platform.
 
 Package: binutils-x86-64-linux-gnu-dbg
 Section: debug
@@ -315,7 +316,8 @@ Description: GNU binary utilities, for i686-linux-gnu target
  for the i686-linux-gnu target.
  .
  You don't need this package unless you plan to cross-compile programs
- for i686-linux-gnu and i686-linux-gnu is not your native platform.
+ for i686-linux-gnu and i686-linux-gnu is not your native
+ platform.
 
 Package: binutils-i686-linux-gnu-dbg
 Section: debug
@@ -341,7 +343,8 @@ Description: GNU binary utilities, for aarch64-linux-gnu target
  for the aarch64-linux-gnu target.
  .
  You don't need this package unless you plan to cross-compile programs
- for aarch64-linux-gnu and aarch64-linux-gnu is not your native platform.
+ for aarch64-linux-gnu and aarch64-linux-gnu is not your native
+ platform.
 
 Package: binutils-aarch64-linux-gnu-dbg
 Section: debug
@@ -367,7 +370,8 @@ Description: GNU binary utilities, for arm-linux-gnueabihf target
  for the arm-linux-gnueabihf target.
  .
  You don't need this package unless you plan to cross-compile programs
- for arm-linux-gnueabihf and arm-linux-gnueabihf is not your native platform.
+ for arm-linux-gnueabihf and arm-linux-gnueabihf is not your native
+ platform.
 
 Package: binutils-arm-linux-gnueabihf-dbg
 Section: debug
@@ -393,7 +397,8 @@ Description: GNU binary utilities, for arm-linux-gnueabi target
  for the arm-linux-gnueabi target.
  .
  You don't need this package unless you plan to cross-compile programs
- for arm-linux-gnueabi and arm-linux-gnueabi is not your native platform.
+ for arm-linux-gnueabi and arm-linux-gnueabi is not your native
+ platform.
 
 Package: binutils-arm-linux-gnueabi-dbg
 Section: debug
@@ -419,7 +424,8 @@ Description: GNU binary utilities, for powerpc64le-linux-gnu target
  for the powerpc64le-linux-gnu target.
  .
  You don't need this package unless you plan to cross-compile programs
- for powerpc64le-linux-gnu and powerpc64le-linux-gnu is not your native platform.
+ for powerpc64le-linux-gnu and powerpc64le-linux-gnu is not your native
+ platform.
 
 Package: binutils-powerpc64le-linux-gnu-dbg
 Section: debug
@@ -445,7 +451,8 @@ Description: GNU binary utilities, for s390x-linux-gnu target
  for the s390x-linux-gnu target.
  .
  You don't need this package unless you plan to cross-compile programs
- for s390x-linux-gnu and s390x-linux-gnu is not your native platform.
+ for s390x-linux-gnu and s390x-linux-gnu is not your native
+ platform.
 
 Package: binutils-s390x-linux-gnu-dbg
 Section: debug
@@ -471,7 +478,8 @@ Description: GNU binary utilities, for alpha-linux-gnu target
  for the alpha-linux-gnu target.
  .
  You don't need this package unless you plan to cross-compile programs
- for alpha-linux-gnu and alpha-linux-gnu is not your native platform.
+ for alpha-linux-gnu and alpha-linux-gnu is not your native
+ platform.
 
 Package: binutils-alpha-linux-gnu-dbg
 Section: debug
@@ -497,7 +505,8 @@ Description: GNU binary utilities, for arc-linux-gnu target
  for the arc-linux-gnu target.
  .
  You don't need this package unless you plan to cross-compile programs
- for arc-linux-gnu and arc-linux-gnu is not your native platform.
+ for arc-linux-gnu and arc-linux-gnu is not your native
+ platform.
 
 Package: binutils-arc-linux-gnu-dbg
 Section: debug
@@ -523,7 +532,8 @@ Description: GNU binary utilities, for hppa-linux-gnu target
  for the hppa-linux-gnu target.
  .
  You don't need this package unless you plan to cross-compile programs
- for hppa-linux-gnu and hppa-linux-gnu is not your native platform.
+ for hppa-linux-gnu and hppa-linux-gnu is not your native
+ platform.
 
 Package: binutils-hppa-linux-gnu-dbg
 Section: debug
@@ -549,7 +559,8 @@ Description: GNU binary utilities, for ia64-linux-gnu target
  for the ia64-linux-gnu target.
  .
  You don't need this package unless you plan to cross-compile programs
- for ia64-linux-gnu and ia64-linux-gnu is not your native platform.
+ for ia64-linux-gnu and ia64-linux-gnu is not your native
+ platform.
 
 Package: binutils-ia64-linux-gnu-dbg
 Section: debug
@@ -575,7 +586,8 @@ Description: GNU binary utilities, for loongarch64-linux-gnu target
  for the loongarch64-linux-gnu target.
  .
  You don't need this package unless you plan to cross-compile programs
- for loongarch64-linux-gnu and loongarch64-linux-gnu is not your native platform.
+ for loongarch64-linux-gnu and loongarch64-linux-gnu is not your native
+ platform.
 
 Package: binutils-loongarch64-linux-gnu-dbg
 Section: debug
@@ -601,7 +613,8 @@ Description: GNU binary utilities, for m68k-linux-gnu target
  for the m68k-linux-gnu target.
  .
  You don't need this package unless you plan to cross-compile programs
- for m68k-linux-gnu and m68k-linux-gnu is not your native platform.
+ for m68k-linux-gnu and m68k-linux-gnu is not your native
+ platform.
 
 Package: binutils-m68k-linux-gnu-dbg
 Section: debug
@@ -627,7 +640,8 @@ Description: GNU binary utilities, for powerpc-linux-gnu target
  for the powerpc-linux-gnu target.
  .
  You don't need this package unless you plan to cross-compile programs
- for powerpc-linux-gnu and powerpc-linux-gnu is not your native platform.
+ for powerpc-linux-gnu and powerpc-linux-gnu is not your native
+ platform.
 
 Package: binutils-powerpc-linux-gnu-dbg
 Section: debug
@@ -653,7 +667,8 @@ Description: GNU binary utilities, for powerpc64-linux-gnu target
  for the powerpc64-linux-gnu target.
  .
  You don't need this package unless you plan to cross-compile programs
- for powerpc64-linux-gnu and powerpc64-linux-gnu is not your native platform.
+ for powerpc64-linux-gnu and powerpc64-linux-gnu is not your native
+ platform.
 
 Package: binutils-powerpc64-linux-gnu-dbg
 Section: debug
@@ -679,7 +694,8 @@ Description: GNU binary utilities, for riscv64-linux-gnu target
  for the riscv64-linux-gnu target.
  .
  You don't need this package unless you plan to cross-compile programs
- for riscv64-linux-gnu and riscv64-linux-gnu is not your native platform.
+ for riscv64-linux-gnu and riscv64-linux-gnu is not your native
+ platform.
 
 Package: binutils-riscv64-linux-gnu-dbg
 Section: debug
@@ -705,7 +721,8 @@ Description: GNU binary utilities, for sh4-linux-gnu target
  for the sh4-linux-gnu target.
  .
  You don't need this package unless you plan to cross-compile programs
- for sh4-linux-gnu and sh4-linux-gnu is not your native platform.
+ for sh4-linux-gnu and sh4-linux-gnu is not your native
+ platform.
 
 Package: binutils-sh4-linux-gnu-dbg
 Section: debug
@@ -731,7 +748,8 @@ Description: GNU binary utilities, for sparc64-linux-gnu target
  for the sparc64-linux-gnu target.
  .
  You don't need this package unless you plan to cross-compile programs
- for sparc64-linux-gnu and sparc64-linux-gnu is not your native platform.
+ for sparc64-linux-gnu and sparc64-linux-gnu is not your native
+ platform.
 
 Package: binutils-sparc64-linux-gnu-dbg
 Section: debug
@@ -757,7 +775,8 @@ Description: GNU binary utilities, for x86-64-linux-gnux32 target
  for the x86-64-linux-gnux32 target.
  .
  You don't need this package unless you plan to cross-compile programs
- for x86-64-linux-gnux32 and x86-64-linux-gnux32 is not your native platform.
+ for x86-64-linux-gnux32 and x86-64-linux-gnux32 is not your native
+ platform.
 
 Package: binutils-x86-64-linux-gnux32-dbg
 Section: debug
@@ -783,7 +802,8 @@ Description: GNU binary utilities, for x86-64-gnu target
  for the x86-64-gnu target.
  .
  You don't need this package unless you plan to cross-compile programs
- for x86-64-gnu and x86-64-gnu is not your native platform.
+ for x86-64-gnu and x86-64-gnu is not your native
+ platform.
 
 Package: binutils-x86-64-gnu-dbg
 Section: debug
@@ -809,7 +829,8 @@ Description: GNU binary utilities, for i686-gnu target
  for the i686-gnu target.
  .
  You don't need this package unless you plan to cross-compile programs
- for i686-gnu and i686-gnu is not your native platform.
+ for i686-gnu and i686-gnu is not your native
+ platform.
 
 Package: binutils-i686-gnu-dbg
 Section: debug
@@ -835,7 +856,8 @@ Description: GNU binary utilities, for x86-64-kfreebsd-gnu target
  for the x86-64-kfreebsd-gnu target.
  .
  You don't need this package unless you plan to cross-compile programs
- for x86-64-kfreebsd-gnu and x86-64-kfreebsd-gnu is not your native platform.
+ for x86-64-kfreebsd-gnu and x86-64-kfreebsd-gnu is not your native
+ platform.
 
 Package: binutils-x86-64-kfreebsd-gnu-dbg
 Section: debug
@@ -861,7 +883,8 @@ Description: GNU binary utilities, for i686-kfreebsd-gnu target
  for the i686-kfreebsd-gnu target.
  .
  You don't need this package unless you plan to cross-compile programs
- for i686-kfreebsd-gnu and i686-kfreebsd-gnu is not your native platform.
+ for i686-kfreebsd-gnu and i686-kfreebsd-gnu is not your native
+ platform.
 
 Package: binutils-i686-kfreebsd-gnu-dbg
 Section: debug
@@ -887,7 +910,8 @@ Description: GNU binary utilities, for mips-linux-gnu target
  for the mips-linux-gnu target.
  .
  You don't need this package unless you plan to cross-compile programs
- for mips-linux-gnu and mips-linux-gnu is not your native platform.
+ for mips-linux-gnu and mips-linux-gnu is not your native
+ platform.
 
 Package: binutils-mips-linux-gnu-dbg
 Section: debug
@@ -913,7 +937,8 @@ Description: GNU binary utilities, for mipsel-linux-gnu target
  for the mipsel-linux-gnu target.
  .
  You don't need this package unless you plan to cross-compile programs
- for mipsel-linux-gnu and mipsel-linux-gnu is not your native platform.
+ for mipsel-linux-gnu and mipsel-linux-gnu is not your native
+ platform.
 
 Package: binutils-mipsel-linux-gnu-dbg
 Section: debug
@@ -939,7 +964,8 @@ Description: GNU binary utilities, for mips64-linux-gnuabi64 target
  for the mips64-linux-gnuabi64 target.
  .
  You don't need this package unless you plan to cross-compile programs
- for mips64-linux-gnuabi64 and mips64-linux-gnuabi64 is not your native platform.
+ for mips64-linux-gnuabi64 and mips64-linux-gnuabi64 is not your native
+ platform.
 
 Package: binutils-mips64-linux-gnuabi64-dbg
 Section: debug
@@ -965,7 +991,8 @@ Description: GNU binary utilities, for mips64el-linux-gnuabi64 target
  for the mips64el-linux-gnuabi64 target.
  .
  You don't need this package unless you plan to cross-compile programs
- for mips64el-linux-gnuabi64 and mips64el-linux-gnuabi64 is not your native platform.
+ for mips64el-linux-gnuabi64 and mips64el-linux-gnuabi64 is not your native
+ platform.
 
 Package: binutils-mips64el-linux-gnuabi64-dbg
 Section: debug
@@ -991,7 +1018,8 @@ Description: GNU binary utilities, for mips64-linux-gnuabin32 target
  for the mips64-linux-gnuabin32 target.
  .
  You don't need this package unless you plan to cross-compile programs
- for mips64-linux-gnuabin32 and mips64-linux-gnuabin32 is not your native platform.
+ for mips64-linux-gnuabin32 and mips64-linux-gnuabin32 is not your native
+ platform.
 
 Package: binutils-mips64-linux-gnuabin32-dbg
 Section: debug
@@ -1017,7 +1045,8 @@ Description: GNU binary utilities, for mips64el-linux-gnuabin32 target
  for the mips64el-linux-gnuabin32 target.
  .
  You don't need this package unless you plan to cross-compile programs
- for mips64el-linux-gnuabin32 and mips64el-linux-gnuabin32 is not your native platform.
+ for mips64el-linux-gnuabin32 and mips64el-linux-gnuabin32 is not your native
+ platform.
 
 Package: binutils-mips64el-linux-gnuabin32-dbg
 Section: debug
@@ -1043,7 +1072,8 @@ Description: GNU binary utilities, for mipsisa64r6-linux-gnuabin32 target
  for the mipsisa64r6-linux-gnuabin32 target.
  .
  You don't need this package unless you plan to cross-compile programs
- for mipsisa64r6-linux-gnuabin32 and mipsisa64r6-linux-gnuabin32 is not your native platform.
+ for mipsisa64r6-linux-gnuabin32 and mipsisa64r6-linux-gnuabin32 is not your native
+ platform.
 
 Package: binutils-mipsisa64r6-linux-gnuabin32-dbg
 Section: debug
@@ -1069,7 +1099,8 @@ Description: GNU binary utilities, for mipsisa64r6el-linux-gnuabin32 target
  for the mipsisa64r6el-linux-gnuabin32 target.
  .
  You don't need this package unless you plan to cross-compile programs
- for mipsisa64r6el-linux-gnuabin32 and mipsisa64r6el-linux-gnuabin32 is not your native platform.
+ for mipsisa64r6el-linux-gnuabin32 and mipsisa64r6el-linux-gnuabin32 is not your native
+ platform.
 
 Package: binutils-mipsisa64r6el-linux-gnuabin32-dbg
 Section: debug
@@ -1095,7 +1126,8 @@ Description: GNU binary utilities, for mipsisa32r6-linux-gnu target
  for the mipsisa32r6-linux-gnu target.
  .
  You don't need this package unless you plan to cross-compile programs
- for mipsisa32r6-linux-gnu and mipsisa32r6-linux-gnu is not your native platform.
+ for mipsisa32r6-linux-gnu and mipsisa32r6-linux-gnu is not your native
+ platform.
 
 Package: binutils-mipsisa32r6-linux-gnu-dbg
 Section: debug
@@ -1121,7 +1153,8 @@ Description: GNU binary utilities, for mipsisa32r6el-linux-gnu target
  for the mipsisa32r6el-linux-gnu target.
  .
  You don't need this package unless you plan to cross-compile programs
- for mipsisa32r6el-linux-gnu and mipsisa32r6el-linux-gnu is not your native platform.
+ for mipsisa32r6el-linux-gnu and mipsisa32r6el-linux-gnu is not your native
+ platform.
 
 Package: binutils-mipsisa32r6el-linux-gnu-dbg
 Section: debug
@@ -1147,7 +1180,8 @@ Description: GNU binary utilities, for mipsisa64r6-linux-gnuabi64 target
  for the mipsisa64r6-linux-gnuabi64 target.
  .
  You don't need this package unless you plan to cross-compile programs
- for mipsisa64r6-linux-gnuabi64 and mipsisa64r6-linux-gnuabi64 is not your native platform.
+ for mipsisa64r6-linux-gnuabi64 and mipsisa64r6-linux-gnuabi64 is not your native
+ platform.
 
 Package: binutils-mipsisa64r6-linux-gnuabi64-dbg
 Section: debug
@@ -1173,7 +1207,8 @@ Description: GNU binary utilities, for mipsisa64r6el-linux-gnuabi64 target
  for the mipsisa64r6el-linux-gnuabi64 target.
  .
  You don't need this package unless you plan to cross-compile programs
- for mipsisa64r6el-linux-gnuabi64 and mipsisa64r6el-linux-gnuabi64 is not your native platform.
+ for mipsisa64r6el-linux-gnuabi64 and mipsisa64r6el-linux-gnuabi64 is not your native
+ platform.
 
 Package: binutils-mipsisa64r6el-linux-gnuabi64-dbg
 Section: debug

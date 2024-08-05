@@ -47,6 +47,7 @@ BINUTILS_BASECONF = \
 	--enable-plugins \
 	--enable-threads \
 	--enable-jansson \
+	--enable-default-hash-style=gnu \
 	--enable-deterministic-archives \
 	--disable-compressed-debug-sections \
 	--enable-new-dtags \

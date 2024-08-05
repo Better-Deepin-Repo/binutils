@@ -1,3 +1,16 @@
+binutils (2.43-1) unstable; urgency=medium
+
+  * New upstream release.
+  * New upstream snapshot, taken from the 2.43 branch.
+    - Fix PR ld/31956, LTO: Restore the wrapper symbol check for
+      standard function.
+  * Refresh patches.
+  * Build-depend on pkgconf instead of pkg-config.
+  * Configure with --enable-default-hash-style=gnu.
+  * Bump standards version.
+
+ -- Matthias Klose <doko@debian.org>  Mon, 05 Aug 2024 06:54:19 +0200
+
 binutils (2.42.90.20240720-2) unstable; urgency=medium
 
   * Package gprofng on riscv64.
