@@ -25,7 +25,7 @@ gold_targets = \
 	mips mipsel mipsn32 mipsn32el mips64 mips64el \
 	mipsr6 mipsr6el mipsn32r6 mipsn32r6el mips64r6 mips64r6el \
 	powerpc ppc64 ppc64el sparc sparc64 s390x \
-	x32 kfreebsd-amd64 kfreebsd-i386 hurd-amd64 hurd-i386
+	x32 hurd-amd64 hurd-i386
 
 ifneq (,$(filter $(DEB_HOST_ARCH), $(gold_targets)))
   with_gold = yes
@@ -66,8 +66,6 @@ DEB_TARGET_MULTIARCH32_s390x		= s390-linux-gnu
 
 DEB_TARGET_MULTIARCH32_sparc64		= sparc-linux-gnu
 
-DEB_TARGET_MULTIARCH32_kfreebsd-amd64	= i386-kfreebsd-gnu
-
 DEB_TARGET_MULTIARCH64_i386		= x86_64-linux-gnu
 DEB_TARGET_MULTIARCHX32_i386		= x86_64-linux-gnux32
 
@@ -76,8 +74,6 @@ DEB_TARGET_MULTIARCH64_powerpc		= powerpc64-linux-gnu
 DEB_TARGET_MULTIARCH64_sparc		= sparc64-linux-gnu
 
 DEB_TARGET_MULTIARCH64_s390		= s390x-linux-gnu
-
-DEB_TARGET_MULTIARCH64_kfreebsd-i386	= x86_64-kfreebsd-gnu
 
 DEB_TARGET_MULTIARCH64_mips		= mips64-linux-gnuabi64
 DEB_TARGET_MULTIARCHN32_mips		= mips64-linux-gnuabin32
@@ -151,8 +147,6 @@ CONFLICTS_TARGET_i386 = $(CONFLICTS_TARGET_amd64)
 CONFLICTS_TARGET_x32  = $(CONFLICTS_TARGET_amd64)
 
 CONFARGS_TARGET_riscv64		= --with-isa-spec=2.2
-
-CONFARGS_TARGET_kfreebsd-i386	= --enable-targets=x86_64-kfreebsd-gnu
 
 CONFARGS_TARGET_mips		= --enable-targets=mips64-linux-gnuabi64,mips64-linux-gnuabin32
 
