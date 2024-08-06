@@ -32,3 +32,4 @@ libctf-soname.diff
 mips-hack.diff
 
 perl-shebang.diff
+env-package-metadata.diff
