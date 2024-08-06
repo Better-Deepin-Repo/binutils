@@ -1,6 +1,7 @@
 binutils (2.43-2) UNRELEASED; urgency=medium
 
   * Stop building packages for kfreebsd.
+  * Stop providing i586/i486 symlinks for backports.
 
  -- Matthias Klose <doko@debian.org>  Tue, 06 Aug 2024 06:04:59 +0200
 

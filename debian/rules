@@ -36,25 +36,6 @@ else
   DPKG_DEB = dpkg-deb --root-owner-group
 endif
 
-ifeq (,$(filter $(distrelease),lenny etch squeeze wheezy jessie))
-  ifeq ($(DEB_HOST_GNU_TYPE),i586-linux-gnu)
-    DEB_BUILD_GNU_TYPE	= i686-linux-gnu
-    DEB_HOST_GNU_CPU	= i686
-    DEB_HOST_GNU_TYPE	= i686-linux-gnu
-    TRIPLET_SYMLINK	= i586-linux-gnu
-  else ifeq ($(DEB_HOST_GNU_TYPE),i586-kfreebsd-gnu)
-    DEB_BUILD_GNU_TYPE	= i686-kfreebsd-gnu
-    DEB_HOST_GNU_CPU	= i686
-    DEB_HOST_GNU_TYPE	= i686-kfreebsd-gnu
-    TRIPLET_SYMLINK	= i586-kfreebsd-gnu
-  else ifeq ($(DEB_HOST_GNU_TYPE),i586-gnu)
-    DEB_BUILD_GNU_TYPE	= i686-gnu
-    DEB_HOST_GNU_CPU	= i686
-    DEB_HOST_GNU_TYPE	= i686-gnu
-    TRIPLET_SYMLINK	= i586-gnu
-  endif
-endif
-
 p_bin = binutils
 p_com = $(p_bin)-common
 p_lib = lib$(p_bin)
@@ -232,7 +213,7 @@ HOST_ARCHS_hurd-i386 = amd64 i386 x32
 
 # Convenient shortcuts for {configure,build,install,binary}.%: generic recipes.
 CROSS_ARCH	= $(subst .,,$(suffix $@))
-CROSS_GNU_TYPE	= $(subst i586,i686,$(call _gnu_type,$(CROSS_ARCH)))
+CROSS_GNU_TYPE	= $(call _gnu_type,$(CROSS_ARCH))
 P_CROSS		= binutils-$(subst _,-,$(CROSS_GNU_TYPE))
 D_CROSS		= debian/$(P_CROSS)
 
@@ -480,7 +461,7 @@ clean:
 	  $(d_hppa64) $(d_hppa64)-dbg $(d_src) $(d_bld) \
 	  $(d_ctf) $(d_ctf)-dbg $(d_ctfn) $(d_ctfn)-dbg $(d_gpng) $(d_gpng)-dbg \
 	  $(d_sfrm) $(d_sfrm)-dbg
-	rm -rf $(foreach ca,$(CROSS_ARCHS),debian/binutils-$(subst _,-,$(subst i586,i686,$(call _gnu_type,$(ca)))){,-dbg})
+	rm -rf $(foreach ca,$(CROSS_ARCHS),debian/binutils-$(subst _,-,$(call _gnu_type,$(ca))){,-dbg})
 	rm -rf debian/tmp debian/files* debian/substvars
 	rm -f debian/*.orig debian/*.rej
 	rm -f debian/files debian/substvars
@@ -510,8 +491,8 @@ else
 	$(foreach ca,$(NATIVE_ARCHS), \
 	  sed \
 	    -e 's/@host_archs@/$(ca)$(if $(and $(filter yes,$(with_cross)),$(filter $(ca),$(DEB_HOST_ARCH) $(CROSS_ARCHS))), $(HOST_ARCHS_$(ca)))/g' \
-	    -e 's/@target@/$(subst _,-,$(subst i586,i686,$(call _gnu_type,$(ca))))/g' \
-	    -e 's/@binutils_alt_triplet@/$(if $(findstring i386,$(ca)),binutils-$(subst i686,i586,$(call _gnu_type,$(ca))))/g' \
+	    -e 's/@target@/$(subst _,-,$(call _gnu_type,$(ca)))/g' \
+	    -e 's/@binutils_alt_triplet@/$(if $(findstring i386,$(ca)),binutils-$(call _gnu_type,$(ca)))/g' \
 	    -e '$(if $(filter yes,$(same_source)),/^Built-Using/d)' \
 	    debian/control.cross.in >> debian/control; \
 	)
@@ -905,16 +886,6 @@ stamps/install.%: stamps/build.%
 	chrpath -k -d $$(file $(D_CROSS)/usr/bin/*|awk -F: '/ ELF/ {print $$1}')
 	chrpath -k -d $$(file $(D_CROSS)/usr/lib/$(DEB_HOST_MULTIARCH)/lib*.so*|awk -F: '/ ELF/ {print $$1}')
 
-ifneq (,$(filter $(distrelease),lenny etch squeeze wheezy jessie stretch))
-	: # temporary i586-* symlinks for stretch
-	compat=$$(echo $(CROSS_GNU_TYPE) | sed 's/i686/i586/'); \
-	case "$(CROSS_GNU_TYPE)" in i686-*) \
-	  for i in $(binutils_programs); do \
-	    ln -sf $(CROSS_GNU_TYPE)-$$i $(D_CROSS)/$(PF)/bin/$$compat-$$i; \
-	    ln -sf $(CROSS_GNU_TYPE)-$$i.1.gz $(D_CROSS)/$(PF)/share/man/man1/$$compat-$$i.1.gz; \
-	  done; \
-	esac
-endif
 	touch $@
 
 ###############################################################################
@@ -1297,32 +1268,6 @@ ifeq ($(with_multiarch),yes)
 	  mv $(d_mul)/$(PF)/bin/$$i $(d_mul)/$(PF)/bin/$(DEB_HOST_GNU_TYPE)-$$i; \
 	done
 	rm -f $(d_mul)/$(PF)/bin/embedspu
-endif
-
-ifneq (,$(filter $(DEB_HOST_ARCH),i386 kfreebsd-i386 hurd-i386))
-# temporary i586-* symlinks for stretch/sid
-  ifneq (,$(TRIPLET_SYMLINK))
-	for i in $(binutils_programs); do \
-	  ln -sf $(DEB_HOST_GNU_TYPE)-$$i $(d_nat)/$(PF)/bin/$(TRIPLET_SYMLINK)-$$i; \
-	  ln -sf $(DEB_HOST_GNU_TYPE)-$$i.1.gz $(d_nat)/$(PF)/share/man/man1/$(TRIPLET_SYMLINK)-$$i.1.gz; \
-	done
-  endif
-# temporary i486-* symlinks for jessie/sid
-  ifeq ($(DEB_HOST_GNU_CPU),i586)
-	gnutype=$(subst i586,i486,$(DEB_HOST_GNU_TYPE)); \
-	for i in $(binutils_programs); do \
-	  ln -sf $(DEB_HOST_GNU_TYPE)-$$i $(d_nat)/$(PF)/bin/$$gnutype-$$i; \
-	  ln -sf $(DEB_HOST_GNU_TYPE)-$$i.1.gz $(d_nat)/$(PF)/share/man/man1/$$gnutype-$$i.1.gz; \
-	done
-  endif
-# for backports to wheezy and squeeze
-  ifeq ($(DEB_HOST_GNU_CPU),i486)
-	gnutype=$(subst i486,i586,$(DEB_HOST_GNU_TYPE)); \
-	for i in $(binutils_programs); do \
-	  ln -sf $(DEB_HOST_GNU_TYPE)-$$i $(d_nat)/$(PF)/bin/$$gnutype-$$i; \
-	  ln -sf $(DEB_HOST_GNU_TYPE)-$$i.1.gz $(d_nat)/$(PF)/share/man/man1/$$gnutype-$$i.1.gz; \
-	done
-  endif
 endif
 	touch $@
 
