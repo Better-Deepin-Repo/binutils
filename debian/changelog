@@ -1,3 +1,19 @@
+binutils (2.43.1-1) unstable; urgency=medium
+
+  * New upstream release.
+    - LTO: Restore the wrapper symbol check for standard function.
+    - RISC-V: Add support for Zimop extension.
+    - RISC-V: Add support for Zcmop extension.
+    - gas: sparc: Fix faligndatai assembly and disassembly.
+    - PR32067, ld -Wl,--oformat,binary crash in _bfd_elf_link_keep_memory.
+    - ld: Add PR ld/32067 tests.
+    - x86: correct .insn with opcode extension and VEX/XOP/EVEX encoding.
+    - gas: correct .irpc handling with empty string.
+    - lto: Don't include unused LTO archive members in output.
+    - gprofng: fix typo in src/collctrl.cc.
+
+ -- Matthias Klose <doko@debian.org>  Sun, 18 Aug 2024 11:49:40 +0200
+
 binutils (2.43-2) unstable; urgency=medium
 
   * New upstream snapshot, taken from the 2.43 branch.
