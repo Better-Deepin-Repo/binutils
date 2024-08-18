@@ -1124,6 +1124,9 @@ endif
 ifeq ($(with_gprofng),yes)
 	mv $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libgprofng.so \
 		$(d_dev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
+	$(install_dir) $(d_dev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/gprofng
+	mv $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/gprofng/*.a \
+		$(d_dev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/gprofng
 endif
 	mv $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so \
 	   $(d_lib)/$(PF)/lib/$(DEB_HOST_MULTIARCH)

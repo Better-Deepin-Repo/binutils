@@ -1,4 +1,4 @@
-# SymbolsHelper-Confirmed: 2.42 amd64 arm64 i386 x32
+# SymbolsHelper-Confirmed: 2.42 amd64 arm64 i386 riscv64 x32
 libgprofng.so.0 libgprofng0 #MINVER#
  ABS_PP_CODES@Base 2.41
  ABS_RT_CODES@Base 2.41

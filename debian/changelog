@@ -11,8 +11,10 @@ binutils (2.43.1-1) unstable; urgency=medium
     - gas: correct .irpc handling with empty string.
     - lto: Don't include unused LTO archive members in output.
     - gprofng: fix typo in src/collctrl.cc.
+  * gprofng: Build with jdk support.
+  * Move static gprofng library into the binutils-dev package.
 
- -- Matthias Klose <doko@debian.org>  Sun, 18 Aug 2024 11:49:40 +0200
+ -- Matthias Klose <doko@debian.org>  Sun, 18 Aug 2024 13:35:14 +0200
 
 binutils (2.43-2) unstable; urgency=medium
 

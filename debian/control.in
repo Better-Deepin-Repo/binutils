@@ -8,6 +8,7 @@ Build-Depends: autoconf (>= 2.64), @dpkg_dev@
   bison, flex, gettext, texinfo, dejagnu, quilt, chrpath, dwz, debugedit (>= 4.16),
   python3:any, file, xz-utils, lsb-release, zlib1g-dev, procps, help2man,
   libjansson-dev, pkgconf, libzstd-dev,
+  default-jdk-headless [amd64 arm64 i386 riscv64 x32],
   g++-aarch64-linux-gnu [amd64 i386 ppc64el s390x x32] <!nocheck>,
   g++-arm-linux-gnueabi [amd64 arm64 i386 x32] <!nocheck>,
   g++-arm-linux-gnueabihf [amd64 arm64 i386 ppc64el s390x x32] <!nocheck>,
@@ -174,9 +175,10 @@ Priority: optional
 Depends: binutils (= ${binary:Version}), libbinutils (= ${binary:Version}),
   libctf0 (= ${binary:Version}), libctf-nobfd0 (= ${binary:Version}),
   libsframe1 (= ${binary:Version}),
-Conflicts: libbfd-dev
+  libgprofng0 (= ${binary:Version}) [amd64 arm64 i386 riscv64 x32],
+Conflicts: libbfd-dev, binutils (<< 2.43.1)
 Provides: libbfd-dev
-Replaces: libbfd-dev, libc5-dev
+Replaces: libbfd-dev, libc5-dev, binutils (<< 2.43.1)
 Description: GNU binary utilities (BFD development files)
  This package includes header files and static libraries necessary to build
  programs which use the GNU BFD library, which is part of binutils.  Note
