@@ -2648,7 +2648,6 @@ libgprofng.so.0 libgprofng0 #MINVER#
  hwc_get_cpc_cpuver@Base 2.41
  hwc_get_cpuname@Base 2.41
  hwc_get_default_cntrs2@Base 2.41
- hwc_get_default_cntrs@Base 2.41
  hwc_get_docref@Base 2.41
  hwc_get_max_concurrent@Base 2.41
  hwc_get_max_regs@Base 2.41
