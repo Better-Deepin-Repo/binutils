@@ -17,7 +17,10 @@ _multiarch = $(call vafilt,$(run_dpkg_arch),DEB_HOST_MULTIARCH)
 
 ifneq (,$(filter $(DEB_HOST_ARCH),amd64 i386 arm64 x32 riscv64))
   with_gprofng = yes
-  CONF_GPROFNG = --enable-gprofng --with-jdk=/usr/lib/jvm/default-java
+  CONF_GPROFNG = --enable-gprofng
+  ifeq (,$(findstring pkg.binutils.nojava, $(DEB_BUILD_PROFILES)))
+    CONF_GPROFNG += --with-jdk=/usr/lib/jvm/default-java
+  endif
 endif
 
 gold_targets = \
