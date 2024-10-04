@@ -1,3 +1,10 @@
+binutils (2.43.50.20241004-1) experimental; urgency=medium
+
+  * New upstream snapshot, taken from the trunk.
+  * Make the jdk configury dependent on the pkg.binutils.nojava profile.
+
+ -- Matthias Klose <doko@debian.org>  Fri, 04 Oct 2024 08:32:52 +0200
+
 binutils (2.43.50.20240909-1) experimental; urgency=medium
 
   * New upstream snapshot, taken from the trunk.
