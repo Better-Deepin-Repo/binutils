@@ -546,33 +546,6 @@ Depends: binutils-hppa-linux-gnu (= ${binary:Version})
 Description: GNU binary utilities, for hppa-linux-gnu target (debug symbols)
  This package provides debug symbols for binutils-hppa-linux-gnu.
 
-Package: binutils-ia64-linux-gnu
-Priority: optional
-Architecture: ia64 amd64 i386 x32
-Multi-Arch: allowed
-Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
-Provides: 
-Breaks: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
-Replaces: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
-Description: GNU binary utilities, for ia64-linux-gnu target
- This package provides GNU assembler, linker and binary utilities
- for the ia64-linux-gnu target.
- .
- You don't need this package unless you plan to cross-compile programs
- for ia64-linux-gnu and ia64-linux-gnu is not your native
- platform.
-
-Package: binutils-ia64-linux-gnu-dbg
-Section: debug
-Priority: optional
-Architecture: ia64 amd64 i386 x32
-Multi-Arch: foreign
-Depends: binutils-ia64-linux-gnu (= ${binary:Version})
-Description: GNU binary utilities, for ia64-linux-gnu target (debug symbols)
- This package provides debug symbols for binutils-ia64-linux-gnu.
-
 Package: binutils-loongarch64-linux-gnu
 Priority: optional
 Architecture: loong64 amd64 i386 x32 arm64 ppc64el
@@ -734,6 +707,33 @@ Multi-Arch: foreign
 Depends: binutils-sh4-linux-gnu (= ${binary:Version})
 Description: GNU binary utilities, for sh4-linux-gnu target (debug symbols)
  This package provides debug symbols for binutils-sh4-linux-gnu.
+
+Package: binutils-sparc-linux-gnu
+Priority: optional
+Architecture: sparc amd64 i386 x32 arm64 ppc64el
+Multi-Arch: allowed
+Depends: binutils-common (= ${binary:Version}),
+  ${shlibs:Depends}, ${extraDepends}
+Suggests: binutils-doc (= ${source:Version})
+Provides: 
+Breaks: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
+Replaces: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
+Description: GNU binary utilities, for sparc-linux-gnu target
+ This package provides GNU assembler, linker and binary utilities
+ for the sparc-linux-gnu target.
+ .
+ You don't need this package unless you plan to cross-compile programs
+ for sparc-linux-gnu and sparc-linux-gnu is not your native
+ platform.
+
+Package: binutils-sparc-linux-gnu-dbg
+Section: debug
+Priority: optional
+Architecture: sparc amd64 i386 x32 arm64 ppc64el
+Multi-Arch: foreign
+Depends: binutils-sparc-linux-gnu (= ${binary:Version})
+Description: GNU binary utilities, for sparc-linux-gnu target (debug symbols)
+ This package provides debug symbols for binutils-sparc-linux-gnu.
 
 Package: binutils-sparc64-linux-gnu
 Priority: optional
