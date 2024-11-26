@@ -33,3 +33,4 @@ mips-hack.diff
 
 perl-shebang.diff
 env-package-metadata.diff
+pr32392-workaround.diff
