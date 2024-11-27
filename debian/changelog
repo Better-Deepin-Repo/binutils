@@ -1,3 +1,10 @@
+binutils (2.43.50.20241126-3) unstable; urgency=medium
+
+  * Don't install gprofng examples in multilib and cross packages.
+    Closes: #1088319.
+
+ -- Matthias Klose <doko@debian.org>  Wed, 27 Nov 2024 10:18:02 +0100
+
 binutils (2.43.50.20241126-2) unstable; urgency=medium
 
   * Work-around PR gprofng/32392.

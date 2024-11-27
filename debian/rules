@@ -848,6 +848,8 @@ stamps/install.%: stamps/build.%
 	rm -f $(D_CROSS)/$(PF)/bin/*-gprofng-*
 	rm -rf $(D_CROSS)/$(PF)/lib/*/gprofng
 	rm -f $(D_CROSS)/$(PF)/lib/$(call _multiarch,$*)/libgprofng*
+	rm -rf $(D_CROSS)/$(PF)/share/doc/gprofng
+
 	rm -f $(D_CROSS)/$(PF)/lib/$(call _multiarch,$*)/libsframe*
 	: # symlinks installed without prefix ...
 	rm -f $(D_CROSS)/$(PF)/bin/gp-*
@@ -1017,6 +1019,11 @@ stamps/install: checkroot stamps/build $(install_stamps)
 	done
 
 ifeq ($(with_gprofng),yes)
+	$(install_dir) $(d_doc)/$(PF)/share/doc/binutils
+	mv $(d_bin)/$(PF)/share/doc/gprofng $(d_doc)/$(PF)/share/doc/binutils/.
+	$(install_dir) $(d_doc)/$(PF)/share/doc/binutils-doc
+	ln -sf ../binutils/gprofng $(d_doc)/$(PF)/share/doc/binutils-doc/gprofng
+
 	chrpath -k -d $$(file $(d_bin)/usr/bin/{gprofng,gprofng-*}|awk -F: '/ ELF/ {print $$1}')
 endif
 
@@ -1051,7 +1058,7 @@ endif
 	cp -f include/plugin-api.h $(d_bin)/$(PF)/include
 
 	: # We don't need to distribute everything in binutils and -dev
-	rm -rf $(d_bin)/$(PF)/include/obstack.h
+	rm -f $(d_bin)/$(PF)/include/obstack.h
 	rm -f $(d_doc)/$(PF)/share/info/configure.* $(d_doc)/$(PF)/share/info/standards.*
 
 ifneq (,$(filter $(DEB_HOST_ARCH),powerpc ppc64 ppc64el))
@@ -1084,6 +1091,7 @@ ifeq ($(with_multiarch),yes)
 	rm -f $(d_mul)/$(PF)/bin/gp-*
 	rm -f $(d_mul)/$(PF)/bin/gprofng-*
 	rm -rf $(d_mul)/$(PF)/lib/*/gprofng
+	rm -rf $(d_mul)/$(PF)/share/doc/gprofng
 
   ifneq (,$(filter $(DEB_HOST_ARCH),powerpc ppc64 ppc64el))
 	rm -f $(d_mul)/$(PF)/bin/embedspu
