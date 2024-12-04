@@ -60,3 +60,25 @@
  
  #ifdef HAVE_JANSSON
    json_error_t json_error;
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -2823,6 +2823,8 @@ do-check:
+ 	@: $(MAKE); $(unstage)
+ 	@r=`${PWD_COMMAND}`; export r; \
+ 	s=`cd $(srcdir); ${PWD_COMMAND}`; export s; \
++	echo "Unset ELF_PACKAGE_METADATA for tests"; \
++	export -n ELF_PACKAGE_METADATA; \
+ 	$(MAKE) $(RECURSE_FLAGS_TO_PASS) check-host check-target
+ 
+ # Automated reporting of test results.
+--- a/Makefile.tpl
++++ b/Makefile.tpl
+@@ -1008,6 +1008,8 @@ do-check:
+ 	@: $(MAKE); $(unstage)
+ 	@r=`${PWD_COMMAND}`; export r; \
+ 	s=`cd $(srcdir); ${PWD_COMMAND}`; export s; \
++	echo "Unset ELF_PACKAGE_METADATA for tests"; \
++	export -n ELF_PACKAGE_METADATA; \
+ 	$(MAKE) $(RECURSE_FLAGS_TO_PASS) check-host check-target
+ 
+ # Automated reporting of test results.
