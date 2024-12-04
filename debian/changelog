@@ -1,3 +1,10 @@
+binutils (2.43.50.20241204-1) unstable; urgency=medium
+
+  * New upstream snapshot, taken from the trunk.
+  * Disable the pgo build on armel and armhf for now.
+
+ -- Matthias Klose <doko@debian.org>  Wed, 04 Dec 2024 10:13:16 +0100
+
 binutils (2.43.50.20241126-3) unstable; urgency=medium
 
   * Don't install gprofng examples in multilib and cross packages.
