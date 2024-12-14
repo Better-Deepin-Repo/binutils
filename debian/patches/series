@@ -34,3 +34,6 @@ mips-hack.diff
 perl-shebang.diff
 env-package-metadata.diff
 pr32392-workaround.diff
+
+# https://sourceware.org/bugzilla/show_bug.cgi?id=30033
+armhf-64k-alignment.diff
