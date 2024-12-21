@@ -35,3 +35,5 @@ pr32392-workaround.diff
 
 # https://sourceware.org/bugzilla/show_bug.cgi?id=30033
 armhf-64k-alignment.diff
+
+gold-package-metadata.diff
