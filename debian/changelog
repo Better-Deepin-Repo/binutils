@@ -1,4 +1,4 @@
-binutils (2.43.50.20241230-1) UNRELEASED; urgency=medium
+binutils (2.43.50.20241230-1) unstable; urgency=medium
 
   * New upstream snapshot, taken from the trunk.
   * Revert the fix for PR gas/32391. Closes: #1090999, #1091488.
