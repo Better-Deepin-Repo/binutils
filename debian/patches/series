@@ -37,3 +37,5 @@ pr32392-workaround.diff
 armhf-64k-alignment.diff
 
 gold-package-metadata.diff
+
+pr32391-revert.diff

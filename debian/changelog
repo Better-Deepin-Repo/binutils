@@ -1,3 +1,10 @@
+binutils (2.43.50.20241230-1) UNRELEASED; urgency=medium
+
+  * New upstream snapshot, taken from the trunk.
+  * Revert the fix for PR gas/32391. Closes: #1090999, #1091488.
+
+ -- Matthias Klose <doko@debian.org>  Mon, 30 Dec 2024 12:18:11 +0100
+
 binutils (2.43.50.20241221-1) unstable; urgency=medium
 
   * New upstream snapshot, taken from the trunk.
