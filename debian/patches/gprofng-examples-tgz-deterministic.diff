@@ -1,0 +1,26 @@
+Author: James Addison <jay@jp-hosting.net>
+Description: Generate a deterministic gprofng example documentation tarball
+Bug-Debian: https://bugs.debian.org/1090395
+
+--- a/gprofng/doc/Makefile.am
++++ b/gprofng/doc/Makefile.am
+@@ -61,7 +61,7 @@ EXTRA_DIST = $(man_MANS) version.texi
+ info: $(man_MANS)
+ 
+ examples.tar.gz:
+-	$(AM_V_at)( tar czf $@ $(srcdir)/../examples )
++	$(AM_V_at)( tar czf $@ --owner=0 --group=0 --numeric-owner $(srcdir)/../examples )
+ 
+ .PHONY: install-data-local
+ 
+--- a/gprofng/doc/Makefile.in
++++ b/gprofng/doc/Makefile.in
+@@ -895,7 +895,7 @@ gprofng-display-text.1: $(srcdir)/gprofn
+ info: $(man_MANS)
+ 
+ examples.tar.gz:
+-	$(AM_V_at)( tar czf $@ $(srcdir)/../examples )
++	$(AM_V_at)( tar czf $@ --owner=0 --group=0 --numeric-owner $(srcdir)/../examples )
+ 
+ .PHONY: install-data-local
+ 
