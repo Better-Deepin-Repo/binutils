@@ -1,3 +1,10 @@
+binutils (2.43.50.20241230-2) UNRELEASED; urgency=medium
+
+  * Avoid warning in env-package-metadata.diff patch (Nicolas Boulenguez).
+    Closes: #1090761.
+
+ -- Matthias Klose <doko@debian.org>  Thu, 02 Jan 2025 10:07:10 +0100
+
 binutils (2.43.50.20241230-1) unstable; urgency=medium
 
   * New upstream snapshot, taken from the trunk.

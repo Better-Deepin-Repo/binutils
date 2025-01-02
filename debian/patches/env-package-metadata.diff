@@ -11,9 +11,9 @@
 +
 +      if (package_metadata)
 +	{
-+	  ldelf_emit_note_fdo_package_metadata =
-+	    xmalloc (strlen (package_metadata) + 1);
-+	  strcpy (ldelf_emit_note_fdo_package_metadata, package_metadata);
++	  char * const p = xmalloc (strlen (package_metadata) + 1);
++	  strcpy (p, package_metadata);
++	  ldelf_emit_note_fdo_package_metadata = (const char *)p;
 +	}
 +    }
  }
