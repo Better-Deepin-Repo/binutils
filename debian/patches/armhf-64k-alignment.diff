@@ -16,7 +16,7 @@ kernels.
 
 --- a/bfd/elf32-arm.c
 +++ b/bfd/elf32-arm.c
-@@ -20355,7 +20355,11 @@ elf32_arm_backend_symbol_processing (bfd *abfd, asymbol *sym)
+@@ -20347,7 +20347,11 @@ elf32_arm_backend_symbol_processing (bfd
  #define ELF_ARCH			bfd_arch_arm
  #define ELF_TARGET_ID			ARM_ELF_DATA
  #define ELF_MACHINE_CODE		EM_ARM
@@ -28,4 +28,3 @@ kernels.
  #define ELF_COMMONPAGESIZE		0x1000
  
  #define bfd_elf32_mkobject			elf32_arm_mkobject
-

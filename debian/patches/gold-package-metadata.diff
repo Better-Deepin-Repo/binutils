@@ -42,11 +42,9 @@ Signed-off-by: Benjamin Drung <benjamin.drung@canonical.com>
  gold/testsuite/Makefile.in | 82 +++++++++++++++++++++++++++++++++-----
  4 files changed, 174 insertions(+), 13 deletions(-)
 
-diff --git a/gold/options.cc b/gold/options.cc
-index 46f067fa72f..4f615d44e28 100644
 --- a/gold/options.cc
 +++ b/gold/options.cc
-@@ -255,6 +255,78 @@ parse_string(const char* option_name, const char* arg, const char** retval)
+@@ -255,6 +255,78 @@ parse_string(const char* option_name, co
    *retval = arg;
  }
  
@@ -125,28 +123,23 @@ index 46f067fa72f..4f615d44e28 100644
  void
  parse_optional_string(const char*, const char* arg, const char** retval)
  {
-diff --git a/gold/options.h b/gold/options.h
-index 446e8d42614..78766c1fc6b 100644
 --- a/gold/options.h
 +++ b/gold/options.h
-@@ -108,6 +108,10 @@ parse_percent(const char* option_name, const char* arg, double* retval);
- extern void
+@@ -109,6 +109,10 @@ extern void
  parse_string(const char* option_name, const char* arg, const char** retval);
  
-+extern void
+ extern void
 +parse_optional_encoded_string(const char* option_name, const char* arg,
 +			      const char** retval);
 +
- extern void
++extern void
  parse_optional_string(const char* option_name, const char* arg,
  		      const char** retval);
-@@ -589,6 +593,17 @@ struct Struct_special : public Struct_var
-   };                                                                    \
-   Struct_##varname__ varname__##_initializer_
  
-+// An option that takes an optional string argument.  If the option is
-+// used with no argument, the value will be the default, and
-+// user_set_via_option will be true.
+@@ -592,6 +596,17 @@ struct Struct_special : public Struct_va
+ // An option that takes an optional string argument.  If the option is
+ // used with no argument, the value will be the default, and
+ // user_set_via_option will be true.
 +#define DEFINE_optional_encoded_string(varname__, dashes__,		\
 +				       shortname__, default_value__,	\
 +				       helpstring__, helparg__)		\
@@ -155,10 +148,13 @@ index 446e8d42614..78766c1fc6b 100644
 +	     const char*, const char*,					\
 +	     options::parse_optional_encoded_string, false)
 +
- // An option that takes an optional string argument.  If the option is
- // used with no argument, the value will be the default, and
- // user_set_via_option will be true.
-@@ -1106,7 +1121,7 @@ class General_options
++// An option that takes an optional string argument.  If the option is
++// used with no argument, the value will be the default, and
++// user_set_via_option will be true.
+ #define DEFINE_optional_string(varname__, dashes__, shortname__,	\
+ 			       default_value__,				\
+ 			       helpstring__, helparg__)			\
+@@ -1107,7 +1122,7 @@ class General_options
    DEFINE_bool(p, options::ONE_DASH, 'p', false,
  	      N_("Ignored for ARM compatibility"), NULL);
  
@@ -167,8 +163,6 @@ index 446e8d42614..78766c1fc6b 100644
  			 N_("Generate package metadata note"),
  			 N_("[=JSON]"));
  
-diff --git a/gold/testsuite/Makefile.am b/gold/testsuite/Makefile.am
-index 8f158ba20cc..d7f496c75c1 100644
 --- a/gold/testsuite/Makefile.am
 +++ b/gold/testsuite/Makefile.am
 @@ -4470,9 +4470,21 @@ retain_2.o: retain_2.s
@@ -195,11 +189,9 @@ index 8f158ba20cc..d7f496c75c1 100644
 +package_metadata_test2b$(EXEEXT): package_metadata_test.o gcctestdir/ld
 +	$(CXXLINK) package_metadata_test.o -Wl,--package-metadata='{%[quot]name%[quot]:%[quot]binutils%[quot]%[comma]%[quot]ver%[quot]:%[quot]x%[space]%%[quot]}'
 +	$(TEST_READELF) --notes $@ | grep -q '{"name":"binutils","ver":"x %"}'
-diff --git a/gold/testsuite/Makefile.in b/gold/testsuite/Makefile.in
-index 357dec0d4f9..6cf619fd974 100644
 --- a/gold/testsuite/Makefile.in
 +++ b/gold/testsuite/Makefile.in
-@@ -110,7 +110,11 @@ check_PROGRAMS = $(am__EXEEXT_1) $(am__EXEEXT_2) $(am__EXEEXT_3) \
+@@ -110,7 +110,11 @@ check_PROGRAMS = $(am__EXEEXT_1) $(am__E
  	$(am__EXEEXT_40) $(am__EXEEXT_41) $(am__EXEEXT_42) \
  	$(am__EXEEXT_43) $(am__EXEEXT_44) $(am__EXEEXT_45) \
  	$(am__EXEEXT_46) $(am__EXEEXT_47) $(am__EXEEXT_48) \
@@ -212,7 +204,7 @@ index 357dec0d4f9..6cf619fd974 100644
  @NATIVE_OR_CROSS_LINKER_TRUE@am__append_1 = object_unittest \
  @NATIVE_OR_CROSS_LINKER_TRUE@	binary_unittest leb128_unittest \
  @NATIVE_OR_CROSS_LINKER_TRUE@	overflow_unittest
-@@ -1799,9 +1803,21 @@ overflow_unittest_OBJECTS = $(am_overflow_unittest_OBJECTS)
+@@ -1799,9 +1803,21 @@ overflow_unittest_OBJECTS = $(am_overflo
  @NATIVE_OR_CROSS_LINKER_TRUE@	$(am__DEPENDENCIES_1)
  overflow_unittest_LINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) \
  	$(overflow_unittest_LDFLAGS) $(LDFLAGS) -o $@
@@ -237,7 +229,7 @@ index 357dec0d4f9..6cf619fd974 100644
  permission_test_SOURCES = permission_test.c
  permission_test_OBJECTS = permission_test.$(OBJEXT)
  permission_test_LDADD = $(LDADD)
-@@ -2355,7 +2371,9 @@ SOURCES = $(libgoldtest_a_SOURCES) $(aarch64_pr23870_SOURCES) \
+@@ -2355,7 +2371,9 @@ SOURCES = $(libgoldtest_a_SOURCES) $(aar
  	$(large_symbol_alignment_SOURCES) $(leb128_unittest_SOURCES) \
  	local_labels_test.c many_sections_r_test.c \
  	$(many_sections_test_SOURCES) $(object_unittest_SOURCES) \
@@ -261,7 +253,7 @@ index 357dec0d4f9..6cf619fd974 100644
  @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/permission_test.Po@am__quote@
  @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pie_copyrelocs_test-pie_copyrelocs_test.Po@am__quote@
  @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/plugin_test_1.Po@am__quote@
-@@ -7854,9 +7876,37 @@ aarch64_pr23870.log: aarch64_pr23870$(EXEEXT)
+@@ -7854,9 +7876,37 @@ aarch64_pr23870.log: aarch64_pr23870$(EX
  	--log-file $$b.log --trs-file $$b.trs \
  	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
  	"$$tst" $(AM_TESTS_FD_REDIRECT)
@@ -325,6 +317,3 @@ index 357dec0d4f9..6cf619fd974 100644
  
  # Tell versions [3.59,3.63) of GNU make to not export all variables.
  # Otherwise a system limit (for SysV at least) may be exceeded.
--- 
-2.45.2
-
