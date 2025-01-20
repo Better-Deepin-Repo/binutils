@@ -1,6 +1,8 @@
 Author: James Addison <jay@jp-hosting.net>
 Description: Generate a deterministic gprofng example documentation tarball
 Bug-Debian: https://bugs.debian.org/1090395
+Bug-Debian: https://bugs.debian.org/1092870
+Last-Update: 2025-01-13
 
 --- a/gprofng/doc/Makefile.am
 +++ b/gprofng/doc/Makefile.am
@@ -9,7 +11,7 @@ Bug-Debian: https://bugs.debian.org/1090395
  
  examples.tar.gz:
 -	$(AM_V_at)( tar czf $@ $(srcdir)/../examples )
-+	$(AM_V_at)( tar czf $@ --owner=0 --group=0 --numeric-owner $(srcdir)/../examples )
++	$(AM_V_at)( tar czf $@ --sort=name --mtime="@${SOURCE_DATE_EPOCH}" --owner=0 --group=0 --numeric-owner --pax-option=exthdr.name=%d/PaxHeaders/%f,delete=atime,delete=ctime --mode=a=rX,u+w $(srcdir)/../examples )
  
  .PHONY: install-data-local
  
@@ -20,7 +22,7 @@ Bug-Debian: https://bugs.debian.org/1090395
  
  examples.tar.gz:
 -	$(AM_V_at)( tar czf $@ $(srcdir)/../examples )
-+	$(AM_V_at)( tar czf $@ --owner=0 --group=0 --numeric-owner $(srcdir)/../examples )
++	$(AM_V_at)( tar czf $@ --sort=name --mtime="@${SOURCE_DATE_EPOCH}" --owner=0 --group=0 --numeric-owner --pax-option=exthdr.name=%d/PaxHeaders/%f,delete=atime,delete=ctime --mode=a=rX,u+w $(srcdir)/../examples )
  
  .PHONY: install-data-local
  

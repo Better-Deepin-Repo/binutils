@@ -2,6 +2,7 @@ binutils (2.43.90.20250120-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot, taken from the 2.44 release branch..
   * Refresh patches.
+  * binutils-doc: Make package more reproducible. Closes: #1092870.
 
  -- Matthias Klose <doko@debian.org>  Mon, 20 Jan 2025 11:25:19 +0100
 
