@@ -66,10 +66,29 @@ Conflicts: modutils (<< 2.4.19-1), ${extraConflicts},
   binutils-multiarch (<< 2.27-8)
 Provides: elf-binutils, ${gold:Provides}
 Suggests: binutils-doc (>= ${source:Version}), gprofng-gui, ${gold:Suggests},
+Breaks:
+ binutils-aarch64-linux-gnu (<< 2.43.90),
+ binutils-i686-linux-gnu (<< 2.43.90),
+ binutils-riscv64-linux-gnu (<< 2.43.90),
+ binutils-x86-64-linux-gnu (<< 2.43.90),
+Replaces:
+ binutils-common (<< 2.43.90),
+ binutils-aarch64-linux-gnu (<< 2.43.90),
+ binutils-i686-linux-gnu (<< 2.43.90),
+ binutils-riscv64-linux-gnu (<< 2.43.90),
+ binutils-x86-64-linux-gnu (<< 2.43.90),
 Description: GNU assembler, linker and binary utilities
  The programs in this package are used to assemble, link and manipulate
  binary and object files.  They may be used in conjunction with a compiler
  and various libraries to build programs.
+
+Package: binutils-dbg
+Section: debug
+Priority: optional
+Architecture: amd64 arm64 i386 riscv64
+Depends: binutils (= ${binary:Version}), ${binutils:native}-dbg (= ${binary:Version})
+Description: GNU assembler, linker and binary utilities(debug symbols)
+ This package provides debug symbols for binutils.
 
 Package: libctf-nobfd0
 Architecture: any

@@ -55,10 +55,6 @@ endif
 
 binutils_programs = addr2line ar as c++filt elfedit gprof ld ld.bfd
 binutils_programs += nm objcopy objdump ranlib readelf size strings strip
-ifeq ($(with_gprofng),yes)
-  binutils_programs += gprofng gprofng-collect-app gprofng-archive
-  binutils_programs += gprofng-display-html gprofng-display-src gprofng-display-text
-endif
 ifeq ($(with_gold),yes)
   binutils_programs += gold ld.gold dwp
 endif

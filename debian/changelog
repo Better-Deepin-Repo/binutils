@@ -5,6 +5,8 @@ binutils (2.43.90.20250121-1) UNRELEASED; urgency=medium
     final 2.44 release. For now, binutils depends on binutils-gold.
   * Refresh patches.
   * binutils-doc: Make package more reproducible. Closes: #1092870.
+  * Move gprofng from binutils-<triplet> into binutils, and introduce a
+    binutils-dbg package (Helmut Grohne). Closes: #1093594.
 
  -- Matthias Klose <doko@debian.org>  Tue, 21 Jan 2025 06:22:29 +0100
 

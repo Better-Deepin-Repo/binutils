@@ -445,7 +445,7 @@ clean:
 	rm -rf stamps
 	find . -name \*.gmo -o -name \*~ -o -name \*.info ! -name sysroff.info | xargs -r rm -f
 	rm -f test-summary*
-	rm -rf $(d_bin) $(d_com) $(d_lib) $(d_lib)-dbg $(d_nat) $(d_nat)-dbg \
+	rm -rf $(d_bin) $(d_bin)-dbg $(d_com) $(d_lib) $(d_lib)-dbg $(d_nat) $(d_nat)-dbg \
 	  $(d_hst) $(d_dev) $(d_mul) $(d_mul)-dbg $(d_mdev) $(d_doc) \
 	  $(d_hppa64) $(d_hppa64)-dbg $(d_src) $(d_bld) \
 	  $(d_ctf) $(d_ctf)-dbg $(d_ctfn) $(d_ctfn)-dbg $(d_gpng) $(d_gpng)-dbg \
@@ -1005,10 +1005,13 @@ stamps/install: checkroot stamps/build $(install_stamps)
 	mv $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/ldscripts \
 		$(d_nat)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/.
 
-	$(install_dir) $(d_com)/$(PF)/share/man
-	mv $(d_bin)/$(PF)/share/man/man1 $(d_com)/$(PF)/share/man/.
-	for f in $(d_com)/$(PF)/share/man/man1/*.1; do \
+	$(install_dir) $(d_com)/$(PF)/share/man/man1
+	set -e; for f in $(d_bin)/$(PF)/share/man/man1/*.1; do \
 	  sed -i -e '/^\.TH /s/[0-9]*-[0-9]*-[0-9]*/$(BUILD_DAY)/' $$f; \
+	  case "$$f" in \
+	    *gprofng*) ;; \
+	    *) mv "$$f" '$(d_com)/$(PF)/share/man/man1/' ;; \
+          esac;	\
 	done
 
 ifeq ($(with_gprofng),yes)
@@ -1247,11 +1250,6 @@ endif
 	rmdir $(d_bin)/$(PF)/include/
 
 ifeq ($(with_gprofng),yes)
-	$(install_dir) $(d_com)/etc
-	mv $(d_bin)/etc/gprofng.rc $(d_com)/etc/.
-endif
-
-ifeq ($(with_gprofng),yes)
 	: # Remove the gp-* compat symlinks
 	rm -f $(PF)/bin/gp-*
 endif
@@ -1270,6 +1268,9 @@ endif
 	done
 ifeq ($(with_native),yes)
 	$(call strip_package, $(p_nat), $(d_nat))
+  ifeq ($(with_gprofng),yes)
+	$(call strip_package, $(p_bin), $(d_bin))
+  endif
 endif
 ifeq ($(with_multiarch),yes)
 	for i in \
@@ -1598,7 +1599,8 @@ ifeq ($(with_hppa64),yes)
 endif
 
 	: # install maintainer scripts
-	$(install_dir) $(d_bin)/DEBIAN
+	$(install_dir) $(d_bin)/DEBIAN $(d_bin)-dbg/DEBIAN
+	$(install_script) debian/binutils.preinst $(d_bin)/DEBIAN/preinst
 
 	$(install_dir) $(d_lib)/DEBIAN $(d_lib)-dbg/DEBIAN
 	$(install_file) debian/binutils.triggers $(d_lib)/DEBIAN/triggers
@@ -1614,13 +1616,15 @@ endif
 	$(install_file) debian/libctf-nobfd0.shlibs $(d_ctfn)/DEBIAN/shlibs
 	$(install_file) debian/libctf-nobfd0.symbols $(d_ctfn)/DEBIAN/symbols
 
+	$(install_dir) $(d_com)/DEBIAN
+	$(install_file) debian/binutils-common.conffiles $(d_com)/DEBIAN/conffiles
+
 ifeq ($(with_gprofng),yes)
 	$(install_dir) $(d_gpng)/DEBIAN $(d_gpng)-dbg/DEBIAN
 	$(install_file) debian/binutils.triggers $(d_gpng)/DEBIAN/triggers
 	$(install_file) debian/libgprofng0.shlibs $(d_gpng)/DEBIAN/shlibs
 
-	$(install_dir) $(d_com)/DEBIAN
-	$(install_file) debian/binutils-common.conffiles $(d_com)/DEBIAN/conffiles
+	$(install_file) debian/binutils.conffiles $(d_bin)/DEBIAN/conffiles
 endif
 	$(install_dir) $(d_sfrm)/DEBIAN $(d_sfrm)-dbg/DEBIAN
 	$(install_file) debian/binutils.triggers $(d_sfrm)/DEBIAN/triggers
@@ -1746,10 +1750,16 @@ endif
 	find $(d_com)/$(PF)/share/doc/$(p_bin)/ -type f ! -name bbconv.pl | xargs gzip -9n
 	gzip -9n $(d_com)/$(PF)/share/doc/$(p_com)/changelog.Debian
 	gzip -9n $(d_com)/$(PF)/share/man/man1/*.1
+ifeq ($(with_gprofng),yes)
+	gzip -9n $(d_bin)/$(PF)/share/man/man1/*.1
+endif
 
 	gzip -9n $(d_sfrm)/$(PF)/share/doc/$(p_sfrm)/changelog.Debian
 
 	: # Finish it all up
+ifeq ($(with_gprofng),yes)
+	find $(d_bin) -type f | xargs file | grep ELF | cut -d: -f 1 | xargs dpkg-shlibdeps
+endif
 	dpkg-gencontrol -P$(d_bin) -p$(p_bin) \
 		$(CONFLICTS_TARGET_$(DEB_HOST_ARCH)) $(gold_substvars) \
 		-Vbinutils:native=$(p_nat)
@@ -1790,6 +1800,8 @@ ifeq ($(with_gprofng),yes)
 	cd $(d_gpng) && find -type f  ! -regex './DEBIAN/.*' -printf '%P\n' | LC_ALL=C sort | xargs md5sum > DEBIAN/md5sums
 	dpkg-gencontrol -P$(d_gpng)-dbg -p$(p_gpng)-dbg
 	cd $(d_gpng)-dbg && find -type f  ! -regex './DEBIAN/.*' -printf '%P\n' | LC_ALL=C sort | xargs md5sum > DEBIAN/md5sums
+	dpkg-gencontrol -P$(d_bin)-dbg -p$(p_bin)-dbg -Vbinutils:native=$(p_nat)
+	cd $(d_bin)-dbg && find -type f  ! -regex './DEBIAN/.*' -printf '%P\n' | LC_ALL=C sort | xargs md5sum > DEBIAN/md5sums
 endif
 
 	rm -f debian/substvars
@@ -1860,14 +1872,17 @@ endif
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
 	$(DPKG_DEB) --build $(d_ctfn)-dbg ..
 ifeq ($(with_gprofng),yes)
-	$(CHOWN) -R root:root $(d_gpng) $(d_gpng)-dbg
-	chmod -R go=rX  $(d_gpng) $(d_gpng)-dbg
+	$(CHOWN) -R root:root $(d_gpng) $(d_gpng)-dbg $(d_bin)-dbg
+	chmod -R go=rX  $(d_gpng) $(d_gpng)-dbg $(d_bin)-dbg
 	find $(d_gpng) -depth -newermt '$(BUILD_DATE)' -print0 | \
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
 	$(DPKG_DEB) --build $(d_gpng) ..
 	find $(d_gpng)-dbg -depth -newermt '$(BUILD_DATE)' -print0 | \
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
 	$(DPKG_DEB) --build $(d_gpng)-dbg ..
+	find $(d_bin)-dbg -depth -newermt '$(BUILD_DATE)' -print0 | \
+		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'
+	$(DPKG_DEB) --build $(d_bin)-dbg ..
 endif
 	find $(d_sfrm) -depth -newermt '$(BUILD_DATE)' -print0 | \
 		xargs -0r touch --no-dereference --date='$(BUILD_DATE)'

@@ -5,6 +5,7 @@ stamps
 
 debian/files
 debian/tmp
+debian/tmp-dbg
 debian/substvars
 debian/binutils-multiarch.postinst
 debian/binutils-multiarch.postrm
