@@ -254,17 +254,6 @@ endif
 
 export SHELL  = /bin/bash
 
-gold_targets = \
-	amd64 arm64 armel armhf i386 \
-	mips mipsel mipsn32 mipsn32el mips64 mips64el \
-	mipsr6 mipsr6el mipsn32r6 mipsn32r6el mips64r6 mips64r6el \
-	powerpc ppc64 ppc64el sparc sparc64 s390x \
-	x32 hurd-amd64 hurd-i386
-
-ifeq ($(with_gold),yes)
-  gold_provides = -Vgold:Provides=binutils-gold
-endif
-
 CFLAGS = -g -O2 -ffile-prefix-map=$(CURDIR)=.
 CXXFLAGS = -g -O2 -ffile-prefix-map=$(CURDIR)=.
 LDFLAGS =
@@ -507,6 +496,8 @@ endif
 SINGLE_CONFARGS = $(CONFARGS) $(CONFARGS_TARGET_$(DEB_HOST_ARCH))
 ifeq ($(with_gold),yes)
 	SINGLE_CONFARGS += --enable-ld=default --enable-gold
+else
+	SINGLE_CONFARGS += --enable-ld=default --disable-gold
 endif
 SINGLE_CONFARGS += $(CONF_PGO) $(CONF_GPROFNG)
 
@@ -600,7 +591,7 @@ endif
 #######################
 
 PIC_CONFARGS = $(CONFARGS) $(CONFARGS_TARGET_$(DEB_HOST_ARCH))
-PIC_CONFARGS += --enable-ld=default --disable-gold
+PIC_CONFARGS += --enable-ld=default --disable-gold --disable-gprofng
 
 stamps/configure-pic:
 	$(checkdir)
@@ -710,6 +701,8 @@ CROSS_CONFARGS = $(CONFARGS) --enable-initfini-array
 
 ifeq ($(with_gold),yes)
 	CROSS_CONFARGS += --enable-ld=default --enable-gold
+else
+	CROSS_CONFARGS += --enable-ld=default --disable-gold
 endif
 
 stamps/configure.%:
@@ -725,7 +718,7 @@ stamps/configure.%:
 		  $(CONFARGS_TARGET_$(*)) \
 		  --with-sysroot=/ \
 		  --libdir=/$(PF)/lib/$(call _multiarch,$*) \
-		  $(if $(filter $*, $(gold_targets)),--enable-ld=default --enable-gold,--disable-gold) \
+		  $(if $(filter $*, $(gold_targets)),--enable-ld=default $(if $(filter yes,$(with_gold)),--enable-gold,--disable-gold),--disable-gold) \
 		  --target=$(CROSS_GNU_TYPE)
 	@mkdir -p stamps
 	touch $@
@@ -834,10 +827,10 @@ stamps/install.%: stamps/build.%
 	done
 
 	: # gold symlinks
-	$(if $(filter $*, $(gold_targets)), \
+	$(if $(filter $*, $(gold_targets)),$(if $(filter yes,$(with_gold)), \
 	  ln -sf $(CROSS_GNU_TYPE)-ld.gold $(D_CROSS)/usr/bin/$(CROSS_GNU_TYPE)-gold; \
 	  ln -sf ../../bin/$(CROSS_GNU_TYPE)-gold $(D_CROSS)/usr/$(CROSS_GNU_TYPE)/bin/gold \
-	)
+	))
 
 	: # no spu toolchain
 	rm -f $(D_CROSS)/$(PF)/bin/*embedspu
@@ -869,11 +862,11 @@ stamps/install.%: stamps/build.%
 	  $(D_CROSS)/$(PF)/share/man/man1/$(CROSS_GNU_TYPE)-ld.1.gz
 
 	: # gold man pages
-	$(if $(filter $*, $(gold_targets)), \
+	$(if $(filter $*, $(gold_targets)),$(if $(filter yes,$(with_gold)), \
 	  ln -sf ld.gold.1.gz $(D_CROSS)/$(PF)/share/man/man1/$(CROSS_GNU_TYPE)-gold.1.gz; \
 	  ln -sf ld.gold.1.gz $(D_CROSS)/$(PF)/share/man/man1/$(CROSS_GNU_TYPE)-ld.gold.1.gz; \
 	  ln -sf dwp.1.gz $(D_CROSS)/$(PF)/share/man/man1/$(CROSS_GNU_TYPE)-dwp.1.gz; \
-	)
+	))
 
 	: # Don't want /usr/<arch>-linux to exist in any package, don't ship development files
 	rm -rf $(D_CROSS)/$(PF)/$(DEB_HOST_GNU_TYPE)
@@ -1758,7 +1751,7 @@ endif
 
 	: # Finish it all up
 	dpkg-gencontrol -P$(d_bin) -p$(p_bin) \
-		$(CONFLICTS_TARGET_$(DEB_HOST_ARCH)) $(gold_provides) \
+		$(CONFLICTS_TARGET_$(DEB_HOST_ARCH)) $(gold_substvars) \
 		-Vbinutils:native=$(p_nat)
 	cd $(d_bin) && find -type f  ! -regex './DEBIAN/.*' -printf '%P\n' | LC_ALL=C sort | xargs md5sum > DEBIAN/md5sums
 
@@ -1813,7 +1806,8 @@ endif
 
 	rm -f debian/substvars
 	find $(d_nat) -type f | xargs file | grep ELF | cut -d: -f 1 | xargs dpkg-shlibdeps -l$(d_lib)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
-	dpkg-gencontrol -P$(d_nat) -p$(p_nat) -VextraDepends='libbinutils (= $${binary:Version})'
+	dpkg-gencontrol -P$(d_nat) -p$(p_nat) $(goldnat_substvars) \
+		-VextraDepends='libbinutils (= $${binary:Version})'
 	cd $(d_nat) && find -type f  ! -regex './DEBIAN/.*' -printf '%P\n' | LC_ALL=C sort | xargs md5sum > DEBIAN/md5sums
 	dpkg-gencontrol -P$(d_nat)-dbg -p$(p_nat)-dbg -VextraDepends='libbinutils (= $${binary:Version})'
 	cd $(d_nat)-dbg && find -type f  ! -regex './DEBIAN/.*' -printf '%P\n' | LC_ALL=C sort | xargs md5sum > DEBIAN/md5sums

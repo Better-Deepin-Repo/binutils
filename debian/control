@@ -60,11 +60,12 @@ Description: GNU assembler, linker and binary utilities for the build architectu
 Package: binutils
 Architecture: any
 Depends: ${shlibs:Depends}, binutils-common (= ${binary:Version}),
-  libbinutils (= ${binary:Version}), ${binutils:native} (= ${binary:Version})
+  libbinutils (= ${binary:Version}), ${binutils:native} (= ${binary:Version}),
+  ${gold:Depends},
 Conflicts: modutils (<< 2.4.19-1), ${extraConflicts},
   binutils-multiarch (<< 2.27-8)
 Provides: elf-binutils, ${gold:Provides}
-Suggests: binutils-doc (>= ${source:Version}), gprofng-gui
+Suggests: binutils-doc (>= ${source:Version}), gprofng-gui, ${gold:Suggests},
 Description: GNU assembler, linker and binary utilities
  The programs in this package are used to assemble, link and manipulate
  binary and object files.  They may be used in conjunction with a compiler
@@ -282,8 +283,8 @@ Priority: optional
 Architecture: amd64 arm64 i386 ppc64el x32 s390x
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
+  ${shlibs:Depends}, ${extraDepends}, ${goldnat:Depends},
+Suggests: binutils-doc (= ${source:Version}), ${goldnat:Suggests},
 Provides: 
 Breaks: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
 Replaces: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
@@ -309,8 +310,8 @@ Priority: optional
 Architecture: i386 amd64 arm64 ppc64el x32 s390x
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
+  ${shlibs:Depends}, ${extraDepends}, ${goldnat:Depends},
+Suggests: binutils-doc (= ${source:Version}), ${goldnat:Suggests},
 Provides: binutils-i686-linux-gnu
 Breaks: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
 Replaces: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
@@ -336,8 +337,8 @@ Priority: optional
 Architecture: arm64 amd64 i386 x32 ppc64el s390x
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
+  ${shlibs:Depends}, ${extraDepends}, ${goldnat:Depends},
+Suggests: binutils-doc (= ${source:Version}), ${goldnat:Suggests},
 Provides: 
 Breaks: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
 Replaces: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
@@ -363,8 +364,8 @@ Priority: optional
 Architecture: armhf amd64 i386 x32 arm64 ppc64el s390x
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
+  ${shlibs:Depends}, ${extraDepends}, ${goldnat:Depends},
+Suggests: binutils-doc (= ${source:Version}), ${goldnat:Suggests},
 Provides: 
 Breaks: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
 Replaces: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
@@ -390,8 +391,8 @@ Priority: optional
 Architecture: armel amd64 i386 x32 arm64 ppc64el
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
+  ${shlibs:Depends}, ${extraDepends}, ${goldnat:Depends},
+Suggests: binutils-doc (= ${source:Version}), ${goldnat:Suggests},
 Provides: 
 Breaks: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
 Replaces: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
@@ -417,8 +418,8 @@ Priority: optional
 Architecture: ppc64el amd64 i386 x32 ppc64 arm64 s390x
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
+  ${shlibs:Depends}, ${extraDepends}, ${goldnat:Depends},
+Suggests: binutils-doc (= ${source:Version}), ${goldnat:Suggests},
 Provides: 
 Breaks: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
 Replaces: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
@@ -444,8 +445,8 @@ Priority: optional
 Architecture: s390x amd64 i386 x32 arm64 ppc64el
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
+  ${shlibs:Depends}, ${extraDepends}, ${goldnat:Depends},
+Suggests: binutils-doc (= ${source:Version}), ${goldnat:Suggests},
 Provides: 
 Breaks: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
 Replaces: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
@@ -471,8 +472,8 @@ Priority: optional
 Architecture: alpha amd64 i386 x32 arm64 ppc64el
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
+  ${shlibs:Depends}, ${extraDepends}, ${goldnat:Depends},
+Suggests: binutils-doc (= ${source:Version}), ${goldnat:Suggests},
 Provides: 
 Breaks: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
 Replaces: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
@@ -498,8 +499,8 @@ Priority: optional
 Architecture: arc amd64 i386 x32 arm64 ppc64el
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
+  ${shlibs:Depends}, ${extraDepends}, ${goldnat:Depends},
+Suggests: binutils-doc (= ${source:Version}), ${goldnat:Suggests},
 Provides: 
 Breaks: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
 Replaces: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
@@ -525,8 +526,8 @@ Priority: optional
 Architecture: hppa amd64 i386 x32 arm64 ppc64el
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
+  ${shlibs:Depends}, ${extraDepends}, ${goldnat:Depends},
+Suggests: binutils-doc (= ${source:Version}), ${goldnat:Suggests},
 Provides: 
 Breaks: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
 Replaces: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
@@ -552,8 +553,8 @@ Priority: optional
 Architecture: loong64 amd64 i386 x32 arm64 ppc64el
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
+  ${shlibs:Depends}, ${extraDepends}, ${goldnat:Depends},
+Suggests: binutils-doc (= ${source:Version}), ${goldnat:Suggests},
 Provides: 
 Breaks: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
 Replaces: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
@@ -579,8 +580,8 @@ Priority: optional
 Architecture: m68k amd64 i386 x32 arm64 ppc64el
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
+  ${shlibs:Depends}, ${extraDepends}, ${goldnat:Depends},
+Suggests: binutils-doc (= ${source:Version}), ${goldnat:Suggests},
 Provides: 
 Breaks: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
 Replaces: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
@@ -606,8 +607,8 @@ Priority: optional
 Architecture: powerpc amd64 i386 x32 arm64 ppc64el s390x
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
+  ${shlibs:Depends}, ${extraDepends}, ${goldnat:Depends},
+Suggests: binutils-doc (= ${source:Version}), ${goldnat:Suggests},
 Provides: 
 Breaks: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
 Replaces: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
@@ -633,8 +634,8 @@ Priority: optional
 Architecture: ppc64 amd64 i386 x32 ppc64el s390x
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
+  ${shlibs:Depends}, ${extraDepends}, ${goldnat:Depends},
+Suggests: binutils-doc (= ${source:Version}), ${goldnat:Suggests},
 Provides: 
 Breaks: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
 Replaces: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
@@ -660,8 +661,8 @@ Priority: optional
 Architecture: riscv64 amd64 i386 x32 arm64 ppc64el s390x
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
+  ${shlibs:Depends}, ${extraDepends}, ${goldnat:Depends},
+Suggests: binutils-doc (= ${source:Version}), ${goldnat:Suggests},
 Provides: 
 Breaks: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
 Replaces: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
@@ -687,8 +688,8 @@ Priority: optional
 Architecture: sh4 amd64 i386 x32 arm64 ppc64el
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
+  ${shlibs:Depends}, ${extraDepends}, ${goldnat:Depends},
+Suggests: binutils-doc (= ${source:Version}), ${goldnat:Suggests},
 Provides: 
 Breaks: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
 Replaces: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
@@ -714,8 +715,8 @@ Priority: optional
 Architecture: sparc amd64 i386 x32 arm64 ppc64el
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
+  ${shlibs:Depends}, ${extraDepends}, ${goldnat:Depends},
+Suggests: binutils-doc (= ${source:Version}), ${goldnat:Suggests},
 Provides: 
 Breaks: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
 Replaces: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
@@ -741,8 +742,8 @@ Priority: optional
 Architecture: sparc64 amd64 i386 x32 arm64 ppc64el
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
+  ${shlibs:Depends}, ${extraDepends}, ${goldnat:Depends},
+Suggests: binutils-doc (= ${source:Version}), ${goldnat:Suggests},
 Provides: 
 Breaks: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
 Replaces: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
@@ -768,8 +769,8 @@ Priority: optional
 Architecture: x32 amd64 arm64 i386 ppc64el
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
+  ${shlibs:Depends}, ${extraDepends}, ${goldnat:Depends},
+Suggests: binutils-doc (= ${source:Version}), ${goldnat:Suggests},
 Provides: 
 Breaks: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
 Replaces: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
@@ -795,8 +796,8 @@ Priority: optional
 Architecture: hurd-amd64 amd64 i386 x32
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
+  ${shlibs:Depends}, ${extraDepends}, ${goldnat:Depends},
+Suggests: binutils-doc (= ${source:Version}), ${goldnat:Suggests},
 Provides: 
 Breaks: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
 Replaces: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
@@ -822,8 +823,8 @@ Priority: optional
 Architecture: hurd-i386 amd64 i386 x32
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
+  ${shlibs:Depends}, ${extraDepends}, ${goldnat:Depends},
+Suggests: binutils-doc (= ${source:Version}), ${goldnat:Suggests},
 Provides: binutils-i686-gnu
 Breaks: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
 Replaces: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
@@ -849,8 +850,8 @@ Priority: optional
 Architecture: mips
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
+  ${shlibs:Depends}, ${extraDepends}, ${goldnat:Depends},
+Suggests: binutils-doc (= ${source:Version}), ${goldnat:Suggests},
 Provides: 
 Breaks: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
 Replaces: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
@@ -876,8 +877,8 @@ Priority: optional
 Architecture: mipsel
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
+  ${shlibs:Depends}, ${extraDepends}, ${goldnat:Depends},
+Suggests: binutils-doc (= ${source:Version}), ${goldnat:Suggests},
 Provides: 
 Breaks: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
 Replaces: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
@@ -903,8 +904,8 @@ Priority: optional
 Architecture: mips64
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
+  ${shlibs:Depends}, ${extraDepends}, ${goldnat:Depends},
+Suggests: binutils-doc (= ${source:Version}), ${goldnat:Suggests},
 Provides: 
 Breaks: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
 Replaces: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
@@ -930,8 +931,8 @@ Priority: optional
 Architecture: mips64el
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
+  ${shlibs:Depends}, ${extraDepends}, ${goldnat:Depends},
+Suggests: binutils-doc (= ${source:Version}), ${goldnat:Suggests},
 Provides: 
 Breaks: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
 Replaces: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
@@ -957,8 +958,8 @@ Priority: optional
 Architecture: mipsn32
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
+  ${shlibs:Depends}, ${extraDepends}, ${goldnat:Depends},
+Suggests: binutils-doc (= ${source:Version}), ${goldnat:Suggests},
 Provides: 
 Breaks: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
 Replaces: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
@@ -984,8 +985,8 @@ Priority: optional
 Architecture: mipsn32el
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
+  ${shlibs:Depends}, ${extraDepends}, ${goldnat:Depends},
+Suggests: binutils-doc (= ${source:Version}), ${goldnat:Suggests},
 Provides: 
 Breaks: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
 Replaces: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
@@ -1011,8 +1012,8 @@ Priority: optional
 Architecture: mipsn32r6
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
+  ${shlibs:Depends}, ${extraDepends}, ${goldnat:Depends},
+Suggests: binutils-doc (= ${source:Version}), ${goldnat:Suggests},
 Provides: 
 Breaks: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
 Replaces: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
@@ -1038,8 +1039,8 @@ Priority: optional
 Architecture: mipsn32r6el
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
+  ${shlibs:Depends}, ${extraDepends}, ${goldnat:Depends},
+Suggests: binutils-doc (= ${source:Version}), ${goldnat:Suggests},
 Provides: 
 Breaks: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
 Replaces: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
@@ -1065,8 +1066,8 @@ Priority: optional
 Architecture: mipsr6
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
+  ${shlibs:Depends}, ${extraDepends}, ${goldnat:Depends},
+Suggests: binutils-doc (= ${source:Version}), ${goldnat:Suggests},
 Provides: 
 Breaks: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
 Replaces: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
@@ -1092,8 +1093,8 @@ Priority: optional
 Architecture: mipsr6el
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
+  ${shlibs:Depends}, ${extraDepends}, ${goldnat:Depends},
+Suggests: binutils-doc (= ${source:Version}), ${goldnat:Suggests},
 Provides: 
 Breaks: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
 Replaces: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
@@ -1119,8 +1120,8 @@ Priority: optional
 Architecture: mips64r6
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
+  ${shlibs:Depends}, ${extraDepends}, ${goldnat:Depends},
+Suggests: binutils-doc (= ${source:Version}), ${goldnat:Suggests},
 Provides: 
 Breaks: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
 Replaces: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
@@ -1146,8 +1147,8 @@ Priority: optional
 Architecture: mips64r6el
 Multi-Arch: allowed
 Depends: binutils-common (= ${binary:Version}),
-  ${shlibs:Depends}, ${extraDepends}
-Suggests: binutils-doc (= ${source:Version})
+  ${shlibs:Depends}, ${extraDepends}, ${goldnat:Depends},
+Suggests: binutils-doc (= ${source:Version}), ${goldnat:Suggests},
 Provides: 
 Breaks: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)
 Replaces: binutils (<< 2.29-6), binutils-dev (<< 2.38.50.20220609-2)

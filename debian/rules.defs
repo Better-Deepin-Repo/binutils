@@ -27,9 +27,30 @@ gold_targets = \
 	amd64 arm64 armel armhf i386 \
 	powerpc ppc64 ppc64el sparc sparc64 s390x \
 	x32 hurd-amd64 hurd-i386
+gold_targets += \
+	mips mipsel mipsn32 mipsn32el mips64 mips64el \
+	mipsr6 mipsr6el mipsn32r6 mipsn32r6el mips64r6 mips64r6el
 
-ifneq (,$(filter $(DEB_HOST_ARCH), $(gold_targets)))
-  with_gold = yes
+gold_build = split
+
+ifeq ($(gold_build),included)
+  ifneq (,$(filter $(DEB_HOST_ARCH), $(gold_targets)))
+    with_gold = yes
+  endif
+  gold_substvars = -Vgold:Provides=binutils-gold
+  gold_natsubstvars =
+else ifeq ($(gold_build),split)
+  with_gold =
+  gold_substvars = -Vgold:Depends=binutils-gold
+  gold_natsubstvars = -Vgoldnat:Depends=binutils-gold-$(subst _,-,$(DEB_HOST_GNU_TYPE))
+else ifeq ($(gold_build),deprecated)
+  with_gold =
+  gold_substvars = -Vgold:Suggests=binutils-gold
+  gold_natsubstvars = -Vgoldnat:Suggests=binutils-gold-$(subst _,-,$(DEB_HOST_GNU_TYPE))
+else ifeq ($(gold_build),removed)
+  with_gold =
+  gold_substvars =
+  gold_natsubstvars =
 endif
 
 binutils_programs = addr2line ar as c++filt elfedit gprof ld ld.bfd

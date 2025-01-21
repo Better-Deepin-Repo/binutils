@@ -60,11 +60,12 @@ Description: GNU assembler, linker and binary utilities for the build architectu
 Package: binutils
 Architecture: any
 Depends: ${shlibs:Depends}, binutils-common (= ${binary:Version}),
-  libbinutils (= ${binary:Version}), ${binutils:native} (= ${binary:Version})
+  libbinutils (= ${binary:Version}), ${binutils:native} (= ${binary:Version}),
+  ${gold:Depends},
 Conflicts: modutils (<< 2.4.19-1), ${extraConflicts},
   binutils-multiarch (<< 2.27-8)
 Provides: elf-binutils, ${gold:Provides}
-Suggests: binutils-doc (>= ${source:Version}), gprofng-gui
+Suggests: binutils-doc (>= ${source:Version}), gprofng-gui, ${gold:Suggests},
 Description: GNU assembler, linker and binary utilities
  The programs in this package are used to assemble, link and manipulate
  binary and object files.  They may be used in conjunction with a compiler
