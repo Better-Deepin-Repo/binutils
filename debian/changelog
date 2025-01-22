@@ -1,14 +1,15 @@
-binutils (2.43.90.20250121-1) UNRELEASED; urgency=medium
+binutils (2.43.90.20250122-1) unstable; urgency=medium
 
   * New upstream snapshot, taken from the 2.44 release branch..
   * Split out gold, as the gold source code removal is planned for the
     final 2.44 release. For now, binutils depends on binutils-gold.
+  * Build-depend on binutils-gold where available.
   * Refresh patches.
   * binutils-doc: Make package more reproducible. Closes: #1092870.
   * Move gprofng from binutils-<triplet> into binutils, and introduce a
     binutils-dbg package (Helmut Grohne). Closes: #1093594.
 
- -- Matthias Klose <doko@debian.org>  Tue, 21 Jan 2025 06:22:29 +0100
+ -- Matthias Klose <doko@debian.org>  Wed, 22 Jan 2025 08:47:26 +0100
 
 binutils (2.43.50.20250108-1) unstable; urgency=medium
 
