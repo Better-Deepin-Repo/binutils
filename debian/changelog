@@ -1,6 +1,8 @@
 binutils (2.43.90.20250122-3) UNRELEASED; urgency=medium
 
   * Fix build failure on x32.
+  * Fix substitution of @gold_archs@ in targeted cross toolchains (Helmut
+    Grohne). Closes: #1093841.
 
  -- Matthias Klose <doko@ubuntu.com>  Thu, 23 Jan 2025 03:52:01 +0100
 
