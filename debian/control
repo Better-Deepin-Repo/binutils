@@ -86,7 +86,7 @@ Description: GNU assembler, linker and binary utilities
 Package: binutils-dbg
 Section: debug
 Priority: optional
-Architecture: amd64 arm64 i386 riscv64
+Architecture: amd64 i386 arm64 x32 riscv64
 Depends: binutils (= ${binary:Version}), ${binutils:native}-dbg (= ${binary:Version})
 Description: GNU assembler, linker and binary utilities(debug symbols)
  This package provides debug symbols for binutils.

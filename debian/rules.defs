@@ -15,7 +15,9 @@ run_dpkg_arch = $(or $(dpkg_arch_$1),$(eval \
 _gnu_type  = $(call vafilt,$(run_dpkg_arch),DEB_HOST_GNU_TYPE)
 _multiarch = $(call vafilt,$(run_dpkg_arch),DEB_HOST_MULTIARCH)
 
-ifneq (,$(filter $(DEB_HOST_ARCH),amd64 i386 arm64 x32 riscv64))
+gprofng_archs = amd64 i386 arm64 x32 riscv64
+
+ifneq (,$(filter $(DEB_HOST_ARCH), $(gprofng_archs)))
   with_gprofng = yes
   CONF_GPROFNG = --enable-gprofng
   ifeq (,$(findstring pkg.binutils.nojava, $(DEB_BUILD_PROFILES)))

@@ -1,3 +1,9 @@
+binutils (2.43.90.20250122-3) UNRELEASED; urgency=medium
+
+  * Fix build failure on x32.
+
+ -- Matthias Klose <doko@ubuntu.com>  Thu, 23 Jan 2025 03:52:01 +0100
+
 binutils (2.43.90.20250122-2) unstable; urgency=medium
 
   * Fix binutils-gold dependencies.
