@@ -1,3 +1,9 @@
+binutils (2.43.90.20250122-2) unstable; urgency=medium
+
+  * Fix binutils-gold dependencies.
+
+ -- Matthias Klose <doko@debian.org>  Thu, 23 Jan 2025 03:37:28 +0100
+
 binutils (2.43.90.20250122-1) unstable; urgency=medium
 
   * New upstream snapshot, taken from the 2.44 release branch..
@@ -9,7 +15,7 @@ binutils (2.43.90.20250122-1) unstable; urgency=medium
   * Move gprofng from binutils-<triplet> into binutils, and introduce a
     binutils-dbg package (Helmut Grohne). Closes: #1093594.
 
- -- Matthias Klose <doko@debian.org>  Wed, 22 Jan 2025 08:47:26 +0100
+ -- Matthias Klose <doko@debian.org>  Wed, 22 Jan 2025 12:46:27 +0100
 
 binutils (2.43.50.20250108-1) unstable; urgency=medium
 

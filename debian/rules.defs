@@ -37,17 +37,21 @@ gold_build = split
 ifeq ($(gold_build),included)
   ifneq (,$(filter $(DEB_HOST_ARCH), $(gold_targets)))
     with_gold = yes
+    gold_substvars = -Vgold:Provides=binutils-gold
+    gold_natsubstvars =
   endif
-  gold_substvars = -Vgold:Provides=binutils-gold
-  gold_natsubstvars =
 else ifeq ($(gold_build),split)
-  with_gold =
-  gold_substvars = -Vgold:Depends=binutils-gold
-  gold_natsubstvars = -Vgoldnat:Depends=binutils-gold-$(subst _,-,$(DEB_HOST_GNU_TYPE))
+  ifneq (,$(filter $(DEB_HOST_ARCH), $(gold_targets)))
+    with_gold =
+    gold_substvars = -Vgold:Depends=binutils-gold
+    gold_natsubstvars = -Vgoldnat:Depends=binutils-gold-$(subst _,-,$(DEB_HOST_GNU_TYPE))
+  endif
 else ifeq ($(gold_build),deprecated)
-  with_gold =
-  gold_substvars = -Vgold:Suggests=binutils-gold
-  gold_natsubstvars = -Vgoldnat:Suggests=binutils-gold-$(subst _,-,$(DEB_HOST_GNU_TYPE))
+  ifneq (,$(filter $(DEB_HOST_ARCH), $(gold_targets)))
+    with_gold =
+    gold_substvars = -Vgold:Suggests=binutils-gold
+    gold_natsubstvars = -Vgoldnat:Suggests=binutils-gold-$(subst _,-,$(DEB_HOST_GNU_TYPE))
+  endif
 else ifeq ($(gold_build),removed)
   with_gold =
   gold_substvars =
