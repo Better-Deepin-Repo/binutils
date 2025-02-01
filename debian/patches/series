@@ -39,4 +39,3 @@ armhf-64k-alignment.diff
 gold-package-metadata.diff
 
 gprofng-examples-tgz-deterministic.diff
-pr32599.diff
