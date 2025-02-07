@@ -1,7 +1,7 @@
 --- a/ld/ldelf.c
 +++ b/ld/ldelf.c
 @@ -98,6 +98,18 @@ ldelf_after_parse (void)
- 	einfo (_("%F%P: common page size (0x%v) > maximum page size (0x%v)\n"),
+ 	fatal (_("%P: common page size (0x%v) > maximum page size (0x%v)\n"),
  	       link_info.commonpagesize, link_info.maxpagesize);
      }
 +
