@@ -1,6 +1,7 @@
 binutils (2.44.50.20250218-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot, taken from the trunk.
+  * Configure with --disable-default-execstack --enable-warn-rwx-segments.
 
  -- Matthias Klose <doko@debian.org>  Tue, 18 Feb 2025 12:21:53 +0100
 

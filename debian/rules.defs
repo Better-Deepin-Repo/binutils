@@ -77,6 +77,8 @@ BINUTILS_BASECONF = \
 	--disable-compressed-debug-sections \
 	--enable-new-dtags \
 	--disable-x86-used-note \
+	--disable-default-execstack \
+	--enable-warn-rwx-segments \
 	--with-gold-ldflags=-static-libstdc++
 
 DEB_TARGET_MULTIARCH32_amd64		= i386-linux-gnu
