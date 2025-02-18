@@ -1,9 +1,15 @@
 binutils (2.44.50.20250218-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot, taken from the trunk.
-  * Drop the binutils-gold dependency.
 
  -- Matthias Klose <doko@debian.org>  Tue, 18 Feb 2025 12:21:53 +0100
+
+binutils (2.44.50.20250207-1) experimental; urgency=medium
+
+  * New upstream snapshot, taken from the trunk.
+  * Drop the binutils-gold dependency.
+
+ -- Matthias Klose <doko@debian.org>  Fri, 07 Feb 2025 13:07:54 +0100
 
 binutils (2.44.50.20250201-1) experimental; urgency=medium
 
