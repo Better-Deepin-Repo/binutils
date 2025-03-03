@@ -78,7 +78,6 @@ BINUTILS_BASECONF = \
 	--enable-new-dtags \
 	--disable-x86-used-note \
 	--disable-default-execstack \
-	--enable-warn-rwx-segments \
 	--with-gold-ldflags=-static-libstdc++
 
 DEB_TARGET_MULTIARCH32_amd64		= i386-linux-gnu
@@ -147,61 +146,84 @@ SET_BINUTILS_MULTIARCH_ENV = \
 	$(if $(DEB_TARGET_MULTIARCHX32_$1),DEB_TARGET_MULTIARCHX32=$(DEB_TARGET_MULTIARCHX32_$1)) \
 	$(if $(DEB_TARGET_MULTIARCHN32_$1),DEB_TARGET_MULTIARCHN32=$(DEB_TARGET_MULTIARCHN32_$1))
 
+# see https://bugs.debian.org/1098970,
+# --enable-warn-rwx-segments not enabled on hppa, sparc, sparc64
+
 CONFARGS_TARGET_sparc		= --enable-targets=sparc64-linux-gnu
 CONFLICTS_TARGET_sparc		= -VextraConflicts="libc6-dev-sparc64 (<< 2.2.5-7)"
 
 CONFARGS_TARGET_sparc64		= --enable-targets=sparc-linux-gnu
 CONFLICTS_TARGET_sparc64	= -VextraConflicts="libc6-dev-sparc64 (<< 2.2.5-7)"
 
-CONFARGS_TARGET_powerpc		= --enable-targets=powerpc64-linux-gnu
+CONFARGS_TARGET_powerpc		= --enable-targets=powerpc64-linux-gnu \
+				  --enable-warn-rwx-segments
 
-CONFARGS_TARGET_ppc64		= --enable-targets=powerpc-linux-gnu
+CONFARGS_TARGET_ppc64		= --enable-targets=powerpc-linux-gnu \
+				  --enable-warn-rwx-segments
 
-CONFARGS_TARGET_ppc64el		= --enable-targets=powerpc-linux-gnu
+CONFARGS_TARGET_ppc64el		= --enable-targets=powerpc-linux-gnu \
+				  --enable-warn-rwx-segments
 
-CONFARGS_TARGET_s390		= --enable-targets=s390x-linux-gnu
+CONFARGS_TARGET_s390		= --enable-targets=s390x-linux-gnu \
+				  --enable-warn-rwx-segments
 
-CONFARGS_TARGET_s390x		= --enable-targets=s390-linux-gnu
+CONFARGS_TARGET_s390x		= --enable-targets=s390-linux-gnu \
+				  --enable-warn-rwx-segments
 
-CONFARGS_TARGET_amd64		= --enable-targets=i686-linux-gnu,x86_64-linux-gnux32,x86_64-pep
+CONFARGS_TARGET_amd64		= --enable-targets=i686-linux-gnu,x86_64-linux-gnux32,x86_64-pep \
+				  --enable-warn-rwx-segments
 
-CONFARGS_TARGET_i386		= --enable-targets=x86_64-linux-gnu,x86_64-linux-gnux32,x86_64-pep
+CONFARGS_TARGET_i386		= --enable-targets=x86_64-linux-gnu,x86_64-linux-gnux32,x86_64-pep \
+				  --enable-warn-rwx-segments
 
-CONFARGS_TARGET_x32		= --enable-targets=i686-linux-gnu,x86_64-linux-gnu,x86_64-pep
+CONFARGS_TARGET_x32		= --enable-targets=i686-linux-gnu,x86_64-linux-gnu,x86_64-pep \
+				  --enable-warn-rwx-segments
 
 CONFLICTS_TARGET_amd64		= -VextraConflicts="binutils-mingw-w64-i686 (<< 2.23.52.20130612-1+3), binutils-mingw-w64-x86-64 (<< 2.23.52.20130612-1+3)"
 CONFLICTS_TARGET_i386 = $(CONFLICTS_TARGET_amd64)
 CONFLICTS_TARGET_x32  = $(CONFLICTS_TARGET_amd64)
 
-CONFARGS_TARGET_riscv64		= --with-isa-spec=2.2
+CONFARGS_TARGET_riscv64		= --with-isa-spec=2.2  --enable-warn-rwx-segments
 
-CONFARGS_TARGET_mips		= --enable-targets=mips64-linux-gnuabi64,mips64-linux-gnuabin32
+CONFARGS_TARGET_mips		= --enable-targets=mips64-linux-gnuabi64,mips64-linux-gnuabin32 \
+				  --enable-warn-rwx-segments
 
-CONFARGS_TARGET_mipsel		= --enable-targets=mips64el-linux-gnuabi64,mips64el-linux-gnuabin32 --enable-mips-fix-loongson3-llsc=yes
+CONFARGS_TARGET_mipsel		= --enable-targets=mips64el-linux-gnuabi64,mips64el-linux-gnuabin32 \
+				  --enable-mips-fix-loongson3-llsc=yes --enable-warn-rwx-segments
 
-CONFARGS_TARGET_mipsn32		= --enable-targets=mips64-linux-gnuabi64,mips-linux-gnu
+CONFARGS_TARGET_mipsn32		= --enable-targets=mips64-linux-gnuabi64,mips-linux-gnu \
+				  --enable-warn-rwx-segments
 
-CONFARGS_TARGET_mipsn32el	= --enable-targets=mips64el-linux-gnuabi64,mipsel-linux-gnu --enable-mips-fix-loongson3-llsc=yes
+CONFARGS_TARGET_mipsn32el	= --enable-targets=mips64el-linux-gnuabi64,mipsel-linux-gnu \
+				  --enable-mips-fix-loongson3-llsc=yes --enable-warn-rwx-segments
 
-CONFARGS_TARGET_mips64		= --enable-targets=mips64-linux-gnuabin32,mips-linux-gnu
+CONFARGS_TARGET_mips64		= --enable-targets=mips64-linux-gnuabin32,mips-linux-gnu \
+				  --enable-warn-rwx-segments
 
-CONFARGS_TARGET_mips64el	= --enable-targets=mips64el-linux-gnuabin32,mipsel-linux-gnu --enable-mips-fix-loongson3-llsc=yes
+CONFARGS_TARGET_mips64el	= --enable-targets=mips64el-linux-gnuabin32,mipsel-linux-gnu \
+				  --enable-mips-fix-loongson3-llsc=yes --enable-warn-rwx-segments
 
-CONFARGS_TARGET_mipsr6	= --enable-targets=mipsisa64r6-linux-gnuabi64,mipsisa64r6-linux-gnuabin32
+CONFARGS_TARGET_mipsr6		= --enable-targets=mipsisa64r6-linux-gnuabi64,mipsisa64r6-linux-gnuabin32 \
+				  --enable-warn-rwx-segments
 
-CONFARGS_TARGET_mipsr6el	= --enable-targets=mipsisa64r6el-linux-gnuabi64,mipsisa64r6el-linux-gnuabin32
+CONFARGS_TARGET_mipsr6el	= --enable-targets=mipsisa64r6el-linux-gnuabi64,mipsisa64r6el-linux-gnuabin32 \
+				  --enable-warn-rwx-segments
 
-CONFARGS_TARGET_mipsn32r6	= --enable-targets=mipsisa64r6-linux-gnuabi64,mipsisa32r6-linux-gnu
+CONFARGS_TARGET_mipsn32r6	= --enable-targets=mipsisa64r6-linux-gnuabi64,mipsisa32r6-linux-gnu \
+				  --enable-warn-rwx-segments
 
-CONFARGS_TARGET_mipsn32r6el	= --enable-targets=mipsisa64r6el-linux-gnuabi64,mipsisa32r6el-linux-gnu
+CONFARGS_TARGET_mipsn32r6el	= --enable-targets=mipsisa64r6el-linux-gnuabi64,mipsisa32r6el-linux-gnu \
+				  --enable-warn-rwx-segments
 
-CONFARGS_TARGET_mips64r6	= --enable-targets=mipsisa64r6-linux-gnuabin32,mipsisa32r6-linux-gnu
+CONFARGS_TARGET_mips64r6	= --enable-targets=mipsisa64r6-linux-gnuabin32,mipsisa32r6-linux-gnu \
+				  --enable-warn-rwx-segments
 
-CONFARGS_TARGET_mips64r6el	= --enable-targets=mipsisa64r6el-linux-gnuabin32,mipsisa32r6el-linux-gnu
+CONFARGS_TARGET_mips64r6el	= --enable-targets=mipsisa64r6el-linux-gnuabin32,mipsisa32r6el-linux-gnu \
+				  --enable-warn-rwx-segments
 
-CONFARGS_TARGET_aarch64		= --enable-targets=aarch64_be-linux-gnu
+CONFARGS_TARGET_aarch64		= --enable-targets=aarch64_be-linux-gnu --enable-warn-rwx-segments
 
-CONFARGS_TARGET_arc		= --with-cpu=hs38_linux
+CONFARGS_TARGET_arc		= --with-cpu=hs38_linux --enable-warn-rwx-segments
 
 CONFARGS_TARGET_hppa		= --enable-targets=hppa64-linux-gnu
 
