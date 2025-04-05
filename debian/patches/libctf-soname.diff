@@ -70,8 +70,8 @@
 -@ENABLE_LIBCTF_TRUE@am__DEPENDENCIES_2 = ../libctf/libctf.la
 +@ENABLE_LIBCTF_TRUE@am__DEPENDENCIES_2 =  \
 +@ENABLE_LIBCTF_TRUE@	../libctf/libctf@CTF_SOVER_EXT@.la
- am_ranlib_OBJECTS = ar.$(OBJEXT) is-ranlib.$(OBJEXT) arparse.$(OBJEXT) \
- 	arlex.$(OBJEXT) arsup.$(OBJEXT) rename.$(OBJEXT) \
+ am_ranlib_OBJECTS = arparse.$(OBJEXT) arlex.$(OBJEXT) \
+ 	is-ranlib.$(OBJEXT) arsup.$(OBJEXT) rename.$(OBJEXT) \
  	binemul.$(OBJEXT) emul_$(EMULATION).$(OBJEXT) $(am__objects_1)
 @@ -257,7 +258,8 @@ am_readelf_OBJECTS = readelf.$(OBJEXT) v
  	unwind-ia64.$(OBJEXT) dwarf.$(OBJEXT) demanguse.$(OBJEXT) \
