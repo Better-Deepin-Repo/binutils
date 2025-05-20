@@ -113,25 +113,25 @@
  TESTSFRAMELIB
  TESTCTFLIB
  TESTBFDLIB
-@@ -11688,7 +11689,7 @@ else
+@@ -11501,7 +11502,7 @@ else
    lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
    lt_status=$lt_dlunknown
    cat > conftest.$ac_ext <<_LT_EOF
--#line 11691 "configure"
-+#line 11692 "configure"
+-#line 11504 "configure"
++#line 11505 "configure"
  #include "confdefs.h"
  
  #if HAVE_DLFCN_H
-@@ -11794,7 +11795,7 @@ else
+@@ -11607,7 +11608,7 @@ else
    lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
    lt_status=$lt_dlunknown
    cat > conftest.$ac_ext <<_LT_EOF
--#line 11797 "configure"
-+#line 11798 "configure"
+-#line 11610 "configure"
++#line 11611 "configure"
  #include "confdefs.h"
  
  #if HAVE_DLFCN_H
-@@ -19589,6 +19590,9 @@ fi
+@@ -19372,6 +19373,9 @@ fi
  ac_config_commands="$ac_config_commands default"
  
  
