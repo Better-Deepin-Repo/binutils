@@ -1,3 +1,10 @@
+binutils (2.44.50.20250520-1) experimental; urgency=medium
+
+  * New upstream snapshot, taken from the trunk.
+  * Update libgprofng0 symbols file.
+
+ -- Matthias Klose <doko@debian.org>  Tue, 20 May 2025 13:53:19 +0200
+
 binutils (2.44.50.20250502-1) experimental; urgency=medium
 
   * New upstream snapshot, taken from the trunk.

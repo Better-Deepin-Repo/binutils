@@ -1,4 +1,4 @@
-# SymbolsHelper-Confirmed: 2.43.50.20241215 amd64 arm64 i386 riscv64 x32
+# SymbolsHelper-Confirmed: 2.44.50 amd64 arm64 i386
 libgprofng.so.0 libgprofng0 #MINVER#
  ABS_PP_CODES@Base 2.43.50.20241215
  ABS_RT_CODES@Base 2.43.50.20241215
@@ -685,7 +685,6 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _ZN10LoadObject11find_moduleEPc@Base 2.43.50.20241215
  _ZN10LoadObject12func_compareEPKvS1_@Base 2.43.50.20241215
  _ZN10LoadObject12get_checksumEv@Base 2.43.50.20241215
- _ZN10LoadObject12read_archiveEv@Base 2.43.50.20241215
  _ZN10LoadObject12set_platformE10Platform_ti@Base 2.43.50.20241215
  _ZN10LoadObject13append_moduleEP6Module@Base 2.43.50.20241215
  (arch=!i386 !x32)_ZN10LoadObject13find_dbeinstrEm@Base 2.43.50.20241215
@@ -1206,7 +1205,7 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _ZN3Elf10bfd_statusE@Base 2.43.50.20241215
  _ZN3Elf10elf_getdynEP17elf_internal_phdrjP11S_Elf64_Dyn@Base 2.43.50.20241215
  _ZN3Elf10elf_getrelEP8Elf_DatajP17elf_internal_rela@Base 2.43.50.20241215
- _ZN3Elf10elf_getsymEP8Elf_DatajP16elf_internal_sym@Base 2.43.50.20241215
+ _ZN3Elf10elf_getsymEjP16elf_internal_symb@Base 2.44.50
  (arch=!i386 !x32)_ZN3Elf10elf_strptrEjm@Base 2.43.50.20241215
  (arch=i386 x32)_ZN3Elf10elf_strptrEjy@Base 2.43.50.20241215
  _ZN3Elf11elf_getdataEj@Base 2.43.50.20241215
@@ -1218,6 +1217,7 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _ZN3Elf12get_baseAddrEv@Base 2.43.50.20241215
  _ZN3Elf12get_locationEv@Base 2.43.50.20241215
  _ZN3Elf12get_sec_nameEj@Base 2.43.50.20241215
+ _ZN3Elf15elf_getSymCountEb@Base 2.44.50
  _ZN3Elf15elf_get_sec_numEPKc@Base 2.43.50.20241215
  _ZN3Elf15get_bfd_symbolsEv@Base 2.43.50.20241215
  _ZN3Elf16elf_getancillaryEP8Elf_DatajP17S_Elf64_Ancillary@Base 2.43.50.20241215
@@ -1295,10 +1295,9 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _ZN5Stabs10check_CommEP6VectorIP4ComCE@Base 2.43.50.20241215
  _ZN5Stabs10check_InfoEP6VectorIP4ComCE@Base 2.43.50.20241215
  _ZN5Stabs10check_LoopEP6VectorIP4ComCE@Base 2.43.50.20241215
- _ZN5Stabs10readSymSecEjP3Elf@Base 2.43.50.20241215
+ _ZN5Stabs10readSymSecEP3Elfb@Base 2.44.50
  (arch=!i386 !x32)_ZN5Stabs10read_stabsEmP6ModuleP6VectorIP4ComCEb@Base 2.43.50.20241215
  (arch=i386 x32)_ZN5Stabs10read_stabsEyP6ModuleP6VectorIP4ComCEb@Base 2.43.50.20241215
- _ZN5Stabs12check_RelocsEv@Base 2.43.50.20241215
  _ZN5Stabs12check_SymtabEv@Base 2.43.50.20241215
  _ZN5Stabs12read_archiveEP10LoadObject@Base 2.43.50.20241215
  _ZN5Stabs12read_symbolsEP6VectorIP8FunctionE@Base 2.43.50.20241215
@@ -1307,6 +1306,7 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _ZN5Stabs13get_save_addrEb@Base 2.43.50.20241215
  (arch=!i386 !x32)_ZN5Stabs13map_PC_to_symEm@Base 2.43.50.20241215
  (arch=i386 x32)_ZN5Stabs13map_PC_to_symEy@Base 2.43.50.20241215
+ _ZN5Stabs13removeDupSymsEv@Base 2.44.50
  _ZN5Stabs13srcline_StabsEP6Modulejjb@Base 2.43.50.20241215
  _ZN5Stabs14createFunctionEP10LoadObjectP6ModuleP6Symbol@Base 2.43.50.20241215
  _ZN5Stabs14fixSymtabAliasEv@Base 2.43.50.20241215
