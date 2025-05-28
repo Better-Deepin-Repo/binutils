@@ -1,3 +1,11 @@
+binutils (2.44.50.20250528-1) experimental; urgency=medium
+
+  * New upstream snapshot, taken from the trunk.
+  * Ignore regressions on loong64, riscv64, s390x, sh4, x32 and hurd-i386;
+    Reported upstream.
+
+ -- Matthias Klose <doko@debian.org>  Wed, 28 May 2025 07:10:39 +0200
+
 binutils (2.44.50.20250520-1) experimental; urgency=medium
 
   * New upstream snapshot, taken from the trunk.
