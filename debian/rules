@@ -50,7 +50,7 @@ p_src = $(p_bin)-source
 p_ctf = libctf0
 p_ctfn = libctf-nobfd0
 p_gpng = libgprofng0
-p_sfrm = libsframe1
+p_sfrm = libsframe2
 
 p_hst = $(p_bin)-for-host
 p_bld = $(p_bin)-for-build
@@ -1635,8 +1635,8 @@ ifeq ($(with_gprofng),yes)
 endif
 	$(install_dir) $(d_sfrm)/DEBIAN $(d_sfrm)-dbg/DEBIAN
 	$(install_file) debian/binutils.triggers $(d_sfrm)/DEBIAN/triggers
-	$(install_file) debian/libsframe1.shlibs $(d_sfrm)/DEBIAN/shlibs
-	$(install_file) debian/libsframe1.symbols $(d_sfrm)/DEBIAN/symbols
+	$(install_file) debian/libsframe2.shlibs $(d_sfrm)/DEBIAN/shlibs
+	$(install_file) debian/libsframe2.symbols $(d_sfrm)/DEBIAN/symbols
 
 	$(install_dir) $(d_nat)/DEBIAN $(d_nat)-dbg/DEBIAN
 
@@ -1970,7 +1970,7 @@ define strip_package
 	  $(strip $2)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libgprofng.so.0.0.0 \
 	  $(strip $2)/$(PF)/lib/*/gprofng/libgp-*.so \
 	  $(strip $2)/$(PF)/lib/*/libgprofng.so.0.0 \
-	  $(strip $2)/$(PF)/lib/*/libsframe.so.1.0.0 \
+	  $(strip $2)/$(PF)/lib/*/libsframe.so.2.0.0 \
 	  $$(file $(strip $2)/$(PF)/bin/* |awk -F: '$$0 !~ /script/ {print $$1}'); \
 	do \
 	  test ! -h $$i || continue; test -f $$i || continue; \
