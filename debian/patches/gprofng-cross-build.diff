@@ -1,6 +1,6 @@
---- binutils-2.44.orig/gprofng/configure.ac
-+++ binutils-2.44/gprofng/configure.ac
-@@ -211,24 +211,22 @@
+--- a/gprofng/configure.ac
++++ b/gprofng/configure.ac
+@@ -212,24 +212,22 @@ AM_ZLIB
  # Generate manpages, if possible.
  build_man=false
  build_doc=false
@@ -41,9 +41,9 @@
  AM_CONDITIONAL([BUILD_MAN], [test x$build_man = xtrue])
  AM_CONDITIONAL([BUILD_DOC], [test x$build_doc = xtrue])
  
---- binutils-2.44.orig/gprofng/configure
-+++ binutils-2.44/gprofng/configure
-@@ -16787,7 +16787,7 @@
+--- a/gprofng/configure
++++ b/gprofng/configure
+@@ -17011,7 +17011,7 @@ fi
  # Generate manpages, if possible.
  build_man=false
  build_doc=false

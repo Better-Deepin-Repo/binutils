@@ -7,13 +7,11 @@
 013_bash_in_ld_testsuite.patch
 128_ppc64_powerpc_biarch.patch
 129_multiarch_libpath.patch
-130_gold_disable_testsuite_build.patch
 131_ld_bootstrap_testsuite.patch
 135_bfd_soversion.patch
 136_bfd_pic.patch
 157_ar_scripts_with_tilde.patch
 #158_ld_system_root.patch
-161_gold_dummy_zoption.diff
 
 # only applied for GFDL builds
 164_ld_doc_remove_xref.diff
@@ -21,7 +19,6 @@
 gprof-build.diff
 aarch64-libpath.diff
 #pr-ld-16428.diff
-gold-no-keep-files-mapped.diff
 
 # trunk backports
 
@@ -35,8 +32,6 @@ pr32392-workaround.diff
 
 # https://sourceware.org/bugzilla/show_bug.cgi?id=30033
 armhf-64k-alignment.diff
-
-gold-package-metadata.diff
 
 gprofng-examples-tgz-deterministic.diff
 gprofng-cross-build.diff

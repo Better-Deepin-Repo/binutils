@@ -1,3 +1,11 @@
+binutils (2.45-1) experimental; urgency=medium
+
+  * New upstream release.
+  * Remove gold related patches.
+  * Refresh patches.
+
+ -- Matthias Klose <doko@debian.org>  Sun, 27 Jul 2025 17:32:29 +0200
+
 binutils (2.44.90.20250719-1) experimental; urgency=medium
 
   * New upstream snapshot, taken from the 2.45 branch.
