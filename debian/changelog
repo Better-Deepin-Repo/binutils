@@ -1,6 +1,7 @@
 binutils (2.45-2) UNRELEASED; urgency=medium
 
   * Update libgprofng symbols file.
+  * Ignore regressions on loong64, m68k, riscv64, s390x, sh4 for now.
 
  -- Matthias Klose <doko@debian.org>  Tue, 29 Jul 2025 17:06:57 +0200
 
