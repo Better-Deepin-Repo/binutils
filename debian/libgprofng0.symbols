@@ -1,4 +1,4 @@
-# SymbolsHelper-Confirmed: 2.44.50 amd64 arm64 i386
+# SymbolsHelper-Confirmed: 2.45 amd64 arm64 i386 x32
 libgprofng.so.0 libgprofng0 #MINVER#
  ABS_PP_CODES@Base 2.43.50.20241215
  ABS_RT_CODES@Base 2.43.50.20241215
@@ -328,6 +328,7 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _ZN10DbeSession12getPropUNameEi@Base 2.43.50.20241215
  _ZN10DbeSession12get_pathmapsEv@Base 2.43.50.20241215
  _ZN10DbeSession12has_ompavailEv@Base 2.43.50.20241215
+ _ZN10DbeSession12is_bigendianEv@Base 2.45
  _ZN10DbeSession12set_pathmapsEP6VectorIP9pathmap_tE@Base 2.43.50.20241215
  _ZN10DbeSession13add_classpathEPc@Base 2.43.50.20241215
  _ZN10DbeSession13createJMethodEv@Base 2.43.50.20241215
@@ -632,7 +633,7 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _ZN10Experiment8dump_mapEP8_IO_FILE@Base 2.43.50.20241215
  _ZN10Experiment8frUidCmpEPKvS1_@Base 2.43.50.20241215
  _ZN10Experiment8get_j_loEPKcS1_@Base 2.43.50.20241215
- _ZN10Experiment9copy_fileEPcS0_iS0_i@Base 2.43.50.20241215
+ _ZN10Experiment9copy_fileEPKcS1_iS1_i@Base 2.45
  _ZN10Experiment9getTagObjE9Prop_typej@Base 2.43.50.20241215
  _ZN10Experiment9set_clockEi@Base 2.43.50.20241215
  _ZN10ExperimentC1Ev@Base 2.43.50.20241215
@@ -693,7 +694,7 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _ZN10LoadObject13find_functionEPcj@Base 2.43.50.20241215
  (arch=!i386 !x32)_ZN10LoadObject13find_functionEm@Base 2.43.50.20241215
  (arch=i386 x32)_ZN10LoadObject13find_functionEy@Base 2.43.50.20241215
- _ZN10LoadObject13openDebugInfoEPcPN5Stabs11Stab_statusE@Base 2.43.50.20241215
+ _ZN10LoadObject13openDebugInfoEPN5Stabs11Stab_statusE@Base 2.45
  _ZN10LoadObject14dump_functionsEP8_IO_FILE@Base 2.43.50.20241215
  _ZN10LoadObject14get_hide_instrEP8DbeInstr@Base 2.43.50.20241215
  _ZN10LoadObject15sync_read_stabsEv@Base 2.43.50.20241215
@@ -959,6 +960,12 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _ZN13DbeThreadPoolC2Ei@Base 2.43.50.20241215
  _ZN13DbeThreadPoolD1Ev@Base 2.43.50.20241215
  _ZN13DbeThreadPoolD2Ev@Base 2.43.50.20241215
+ _ZN13Dwr_rng_entry13rng_entry2strEi@Base 2.45
+ _ZN13Dwr_rng_entry4dumpEv@Base 2.45
+ _ZN13Dwr_rng_entryC1Ev@Base 2.45
+ _ZN13Dwr_rng_entryC2Ev@Base 2.45
+ _ZN13Dwr_rng_entryD1Ev@Base 2.45
+ _ZN13Dwr_rng_entryD2Ev@Base 2.45
  _ZN13FilterNumeric10get_statusEv@Base 2.43.50.20241215
  _ZN13FilterNumeric11get_patternEv@Base 2.43.50.20241215
  (arch=!i386 !x32)_ZN13FilterNumeric11is_selectedEm@Base 2.43.50.20241215
@@ -1204,13 +1211,11 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _ZN2QL6ParserclEv@Base 2.43.50.20241215
  _ZN3Elf10bfd_statusE@Base 2.43.50.20241215
  _ZN3Elf10elf_getdynEP17elf_internal_phdrjP11S_Elf64_Dyn@Base 2.43.50.20241215
- _ZN3Elf10elf_getrelEP8Elf_DatajP17elf_internal_rela@Base 2.43.50.20241215
  _ZN3Elf10elf_getsymEjP16elf_internal_symb@Base 2.44.50
  (arch=!i386 !x32)_ZN3Elf10elf_strptrEjm@Base 2.43.50.20241215
  (arch=i386 x32)_ZN3Elf10elf_strptrEjy@Base 2.43.50.20241215
  _ZN3Elf11elf_getdataEj@Base 2.43.50.20241215
  _ZN3Elf11elf_getehdrEv@Base 2.43.50.20241215
- _ZN3Elf11elf_getrelaEP8Elf_DatajP17elf_internal_rela@Base 2.43.50.20241215
  _ZN3Elf11elf_versionEj@Base 2.43.50.20241215
  _ZN3Elf12dump_elf_secEv@Base 2.43.50.20241215
  _ZN3Elf12elf_checksumEv@Base 2.43.50.20241215
@@ -1220,11 +1225,13 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _ZN3Elf15elf_getSymCountEb@Base 2.44.50
  _ZN3Elf15elf_get_sec_numEPKc@Base 2.43.50.20241215
  _ZN3Elf15get_bfd_symbolsEv@Base 2.43.50.20241215
+ _ZN3Elf15get_dwr_sectionEPKc@Base 2.45
  _ZN3Elf16elf_getancillaryEP8Elf_DatajP17S_Elf64_Ancillary@Base 2.43.50.20241215
  _ZN3Elf16get_related_fileEPKcS1_@Base 2.43.50.20241215
  (arch=!i386 !x32)_ZN3Elf19get_funcname_in_pltEm@Base 2.43.50.20241215
  (arch=i386 x32)_ZN3Elf19get_funcname_in_pltEy@Base 2.43.50.20241215
- _ZN3Elf20find_ancillary_filesEPc@Base 2.43.50.20241215
+ _ZN3Elf20find_ancillary_filesEPKc@Base 2.45
+ _ZN3Elf20find_gnu_debug_filesEv@Base 2.45
  _ZN3Elf4dumpEv@Base 2.43.50.20241215
  _ZN3Elf8elf_initEv@Base 2.43.50.20241215
  _ZN3Elf8get_phdrEj@Base 2.43.50.20241215
@@ -1245,9 +1252,11 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _ZN4EmsgD2Ev@Base 2.43.50.20241215
  _ZN5DbeEA8get_nameEN8Histable10NameFormatE@Base 2.43.50.20241215
  _ZN5DbeEA9converttoEN8Histable4TypeEPS0_@Base 2.43.50.20241215
+ (subst)_ZN5Dwarf10get_rangesE{uint64_t}@Base 2.45
  _ZN5Dwarf13archive_DwarfEP10LoadObject@Base 2.43.50.20241215
  _ZN5Dwarf13srcline_DwarfEP6Module@Base 2.43.50.20241215
  _ZN5Dwarf17read_hwcprof_infoEP6Module@Base 2.43.50.20241215
+ _ZN5Dwarf18get_debug_rnglistsEv@Base 2.45
  _ZN5Dwarf9dwrGetSecEPKc@Base 2.43.50.20241215
  _ZN5DwarfC1EP5Stabs@Base 2.43.50.20241215
  _ZN5DwarfC2EP5Stabs@Base 2.43.50.20241215
@@ -1257,21 +1266,29 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _ZN5DwrCU10Dwarf_dataEt@Base 2.43.50.20241215
  _ZN5DwrCU10Dwarf_langEv@Base 2.43.50.20241215
  _ZN5DwrCU10get_low_pcEv@Base 2.43.50.20241215
+ _ZN5DwrCU10get_rangesEv@Base 2.45
+ _ZN5DwrCU10get_sourceEi@Base 2.45
  _ZN5DwrCU10parseChildEP9Dwarf_cnt@Base 2.43.50.20241215
+ _ZN5DwrCU10set_sourceEP8Function@Base 2.45
  _ZN5DwrCU11Dwarf_blockEt@Base 2.43.50.20241215
  (arch=!i386 !x32)_ZN5DwrCU11get_high_pcEm@Base 2.43.50.20241215
  (arch=i386 x32)_ZN5DwrCU11get_high_pcEy@Base 2.43.50.20241215
+ _ZN5DwrCU11get_symbolsEP6VectorIP6SymbolE@Base 2.45
  _ZN5DwrCU12Dwarf_stringEt@Base 2.43.50.20241215
+ (subst)_ZN5DwrCU12inherit_propE{int64_t}P6Source@Base 2.45
+ (subst)_ZN5DwrCU12set_up_funcsE{int64_t}@Base 2.45
  (arch=!i386 !x32)_ZN5DwrCU13read_ref_attrEtPl@Base 2.43.50.20241215
  (arch=i386 x32)_ZN5DwrCU13read_ref_attrEtPx@Base 2.43.50.20241215
+ _ZN5DwrCU13update_sourceEP6SymbolP6Source@Base 2.45
  _ZN5DwrCU14Dwarf_locationEi@Base 2.43.50.20241215
  _ZN5DwrCU14get_dwrLineRegEv@Base 2.43.50.20241215
  (arch=!i386 !x32)_ZN5DwrCU14read_data_attrEtPl@Base 2.43.50.20241215
  (arch=i386 x32)_ZN5DwrCU14read_data_attrEtPx@Base 2.43.50.20241215
- _ZN5DwrCU15append_FunctionEP9Dwarf_cnt@Base 2.43.50.20241215
+ _ZN5DwrCU15append_FunctionEP6SymbolPKc@Base 2.45
  _ZN5DwrCU15map_dwarf_linesEP6Module@Base 2.43.50.20241215
  _ZN5DwrCU15parse_cu_headerEP10LoadObject@Base 2.43.50.20241215
  _ZN5DwrCU16dwr_get_locationEP6DwrSecP11DwrLocation@Base 2.43.50.20241215
+ (subst)_ZN5DwrCU16find_declarationE{int64_t}P6Source@Base 2.45
  _ZN5DwrCU16get_linkage_nameEv@Base 2.43.50.20241215
  (arch=!i386 !x32)_ZN5DwrCU17build_abbrevTableEP6DwrSecm@Base 2.43.50.20241215
  (arch=i386 x32)_ZN5DwrCU17build_abbrevTableEP6DwrSecy@Base 2.43.50.20241215
@@ -1288,10 +1305,6 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _ZN5DwrCUC2EP5Dwarf@Base 2.43.50.20241215
  _ZN5DwrCUD1Ev@Base 2.43.50.20241215
  _ZN5DwrCUD2Ev@Base 2.43.50.20241215
- _ZN5RelocC1Ev@Base 2.43.50.20241215
- _ZN5RelocC2Ev@Base 2.43.50.20241215
- _ZN5RelocD1Ev@Base 2.43.50.20241215
- _ZN5RelocD2Ev@Base 2.43.50.20241215
  _ZN5Stabs10check_CommEP6VectorIP4ComCE@Base 2.43.50.20241215
  _ZN5Stabs10check_InfoEP6VectorIP4ComCE@Base 2.43.50.20241215
  _ZN5Stabs10check_LoopEP6VectorIP4ComCE@Base 2.43.50.20241215
@@ -1313,8 +1326,6 @@ libgprofng.so.0 libgprofng0 #MINVER#
  (arch=!i386 !x32)_ZN5Stabs14map_PC_to_funcEmRmP6VectorIP8FunctionE@Base 2.43.50.20241215
  (arch=i386 x32)_ZN5Stabs14map_PC_to_funcEyRyP6VectorIP8FunctionE@Base 2.43.50.20241215
  _ZN5Stabs15append_FunctionEP6ModulePc@Base 2.43.50.20241215
- (arch=!i386 !x32)_ZN5Stabs15append_FunctionEP6ModulePcm@Base 2.43.50.20241215
- (arch=i386 x32)_ZN5Stabs15append_FunctionEP6ModulePcy@Base 2.43.50.20241215
  _ZN5Stabs15get_elf_symbolsEv@Base 2.43.50.20241215
  _ZN5Stabs17read_hwcprof_infoEP6Module@Base 2.43.50.20241215
  _ZN5Stabs18append_local_funcsEP6Modulei@Base 2.43.50.20241215
@@ -1323,15 +1334,11 @@ libgprofng.so.0 libgprofng0 #MINVER#
  (arch=i386 x32)_ZN5Stabs18mapOffsetToAddressEy@Base 2.43.50.20241215
  _ZN5Stabs21read_dwarf_from_dot_oEP6Module@Base 2.43.50.20241215
  _ZN5Stabs4dumpEv@Base 2.43.50.20241215
- _ZN5Stabs7openElfEPcRNS_11Stab_statusE@Base 2.43.50.20241215
  _ZN5Stabs7openElfEb@Base 2.43.50.20241215
- _ZN5Stabs8NewStabsEPcS0_@Base 2.43.50.20241215
- (arch=!i386 !x32)_ZN5Stabs8sym_nameEmmi@Base 2.43.50.20241215
- (arch=i386 x32)_ZN5Stabs8sym_nameEyyi@Base 2.43.50.20241215
  _ZN5Stabs9find_funcEPcP6VectorIP8FunctionEbb@Base 2.43.50.20241215
  _ZN5Stabs9openDwarfEv@Base 2.43.50.20241215
- _ZN5StabsC1EPcS0_@Base 2.43.50.20241215
- _ZN5StabsC2EPcS0_@Base 2.43.50.20241215
+ _ZN5StabsC1EP3ElfPc@Base 2.45
+ _ZN5StabsC2EP3ElfPc@Base 2.45
  _ZN5StabsD1Ev@Base 2.43.50.20241215
  _ZN5StabsD2Ev@Base 2.43.50.20241215
  (arch=!i386 !x32)_ZN6Disasm10get_disasmEmmmmRl@Base 2.43.50.20241215
@@ -1346,9 +1353,7 @@ libgprofng.so.0 libgprofng0 #MINVER#
  (arch=!i386 !x32)_ZN6Disasm19get_funcname_in_pltEm@Base 2.43.50.20241215
  (arch=i386 x32)_ZN6Disasm19get_funcname_in_pltEy@Base 2.43.50.20241215
  _ZN6DisasmC1E10Platform_tP5Stabs@Base 2.43.50.20241215
- _ZN6DisasmC1EPc@Base 2.43.50.20241215
  _ZN6DisasmC2E10Platform_tP5Stabs@Base 2.43.50.20241215
- _ZN6DisasmC2EPc@Base 2.43.50.20241215
  _ZN6DisasmD1Ev@Base 2.43.50.20241215
  _ZN6DisasmD2Ev@Base 2.43.50.20241215
  _ZN6DwrSec10GetADDR_32Ev@Base 2.43.50.20241215
@@ -1456,9 +1461,16 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _ZN6SampleC2Ei@Base 2.43.50.20241215
  _ZN6SampleD1Ev@Base 2.43.50.20241215
  _ZN6SampleD2Ev@Base 2.43.50.20241215
- _ZN6Symbol4dumpEP6VectorIPS_EPc@Base 2.43.50.20241215
+ _ZN6Symbol10get_symbolEP6VectorIPS_EPc@Base 2.45
+ (subst)_ZN6Symbol10get_symbolEP6VectorIPS_E{uint64_t}@Base 2.45
+ _ZN6Symbol12find_symbolsEP6VectorIPS_EPS0_IP5RangeES3_@Base 2.45
+ _ZN6Symbol12sort_by_nameEP6VectorIPS_E@Base 2.45
+ _ZN6Symbol14createFunctionEP6Module@Base 2.45
+ _ZN6Symbol4dumpEPKc@Base 2.45
  _ZN6SymbolC1EP6VectorIPS_E@Base 2.43.50.20241215
  _ZN6SymbolC2EP6VectorIPS_E@Base 2.43.50.20241215
+ _ZN6SymbolD1Ev@Base 2.45
+ _ZN6SymbolD2Ev@Base 2.45
  _ZN6TValue10make_deltaEPS_S0_@Base 2.43.50.20241215
  _ZN6TValue10make_ratioEPS_S0_@Base 2.43.50.20241215
  _ZN6TValue6to_intEv@Base 2.43.50.20241215
@@ -1467,8 +1479,12 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _ZN6TValue7compareEPS_@Base 2.43.50.20241215
  _ZN6TValue7get_lenEv@Base 2.43.50.20241215
  _ZN6TValue9to_doubleEv@Base 2.43.50.20241215
+ (optional=templinst)_ZN6VectorIP10bfd_symbolE4dumpEPKc@Base 2.45
  (optional=templinst)_ZN6VectorIP11DwrFileNameE4dumpEPKc@Base 2.43.50.20241215
+ (optional=templinst)_ZN6VectorIP13Dwr_rng_entryE4dumpEPKc@Base 2.45
  (optional=templinst)_ZN6VectorIP14DwrInlinedSubrE4dumpEPKc@Base 2.43.50.20241215
+ (optional=templinst)_ZN6VectorIP5RangeE4dumpEPKc@Base 2.45
+ (optional=templinst)_ZN6VectorIP6SymbolE4dumpEPKc@Base 2.45
  (optional=templinst)_ZN6VectorIP7DwrLineE4dumpEPKc@Base 2.43.50.20241215
  (optional=templinst)_ZN6VectorIP8ZipEntryE4dumpEPKc@Base 2.43.50.20241215
  (optional=templinst)_ZN6VectorIPS_IPcEE4typeEv@Base 2.43.50.20241215
@@ -1764,14 +1780,6 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _ZN8Dwr_type20get_dobj_for_membersEP9Dwarf_cnt@Base 2.43.50.20241215
  _ZN8Dwr_type4dumpEv@Base 2.43.50.20241215
  _ZN8Dwr_type8get_dobjEP9Dwarf_cnt@Base 2.43.50.20241215
- _ZN8ElfReloc13get_elf_relocEP3ElfPcPS_@Base 2.43.50.20241215
- _ZN8ElfReloc14get_reloc_addrEx@Base 2.43.50.20241215
- _ZN8ElfReloc19dump_rela_debug_secEi@Base 2.43.50.20241215
- _ZN8ElfReloc4dumpEv@Base 2.43.50.20241215
- _ZN8ElfRelocC1EP3Elf@Base 2.43.50.20241215
- _ZN8ElfRelocC2EP3Elf@Base 2.43.50.20241215
- _ZN8ElfRelocD1Ev@Base 2.43.50.20241215
- _ZN8ElfRelocD2Ev@Base 2.43.50.20241215
  _ZN8ExpGroup12get_foundersEv@Base 2.43.50.20241215
  _ZN8ExpGroup15drop_experimentEP10Experiment@Base 2.43.50.20241215
  _ZN8ExpGroup15phaseCompareIdxE@Base 2.43.50.20241215
@@ -2415,6 +2423,7 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _ZTS6VectorIP12ByteCodeInfoE@Base 2.43.50.20241215
  _ZTS6VectorIP12MemObjType_tE@Base 2.43.50.20241215
  _ZTS6VectorIP12memop_info_tE@Base 2.43.50.20241215
+ _ZTS6VectorIP13Dwr_rng_entryE@Base 2.45
  _ZTS6VectorIP13FilterNumericE@Base 2.43.50.20241215
  _ZTS6VectorIP13target_info_tE@Base 2.43.50.20241215
  _ZTS6VectorIP14DataDescriptorE@Base 2.43.50.20241215
@@ -2431,7 +2440,7 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _ZTS6VectorIP4EmsgE@Base 2.43.50.20241215
  _ZTS6VectorIP5DbeEAE@Base 2.43.50.20241215
  _ZTS6VectorIP5DwrCUE@Base 2.43.50.20241215
- _ZTS6VectorIP5RelocE@Base 2.43.50.20241215
+ _ZTS6VectorIP5RangeE@Base 2.45
  _ZTS6VectorIP6MemObjE@Base 2.43.50.20241215
  _ZTS6VectorIP6MetricE@Base 2.43.50.20241215
  _ZTS6VectorIP6ModuleE@Base 2.43.50.20241215
@@ -2452,6 +2461,7 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _ZTS6VectorIP8DbeInstrE@Base 2.43.50.20241215
  _ZTS6VectorIP8Dwr_typeE@Base 2.43.50.20241215
  _ZTS6VectorIP8ExpGroupE@Base 2.43.50.20241215
+ _ZTS6VectorIP8ExtRangeE@Base 2.45
  _ZTS6VectorIP8FileDataE@Base 2.43.50.20241215
  _ZTS6VectorIP8FunctionE@Base 2.43.50.20241215
  _ZTS6VectorIP8HeapDataE@Base 2.43.50.20241215
@@ -2504,7 +2514,6 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _ZTS6VectorIPN13FilterNumeric9RangePairEE@Base 2.43.50.20241215
  _ZTS6VectorIPN7Include11SrcFileInfoEE@Base 2.43.50.20241215
  _ZTS6VectorIPN7PRBTree4LMapEE@Base 2.43.50.20241215
- _ZTS6VectorIPN8ElfReloc6SrelocEE@Base 2.43.50.20241215
  _ZTS6VectorIPN8Ovw_data8Ovw_itemEE@Base 2.43.50.20241215
  _ZTS6VectorIPN9Hist_data8HistItemEE@Base 2.43.50.20241215
  _ZTS6VectorIPN9StringMapIP10DbeJarFileE5EntryEE@Base 2.43.50.20241215
