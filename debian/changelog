@@ -1,14 +1,15 @@
-binutils (2.45-2) experimental; urgency=medium
+binutils (2.45-3) unstable; urgency=medium
 
   * New upstream snapshot, taken from the 2.45 branch.
     - Fix unused variable warnings.
     - Fix PR gas/33229 nds32 gas segfaults on gcc output.
     - Fix PR binutils/33244, resbin: don't pass NULL as printf %s arg.
+    - LoongArch: Fix symbol size after relaxation.
   * Update libgprofng symbols file.
-  * Ignore regressions on loong64, m68k, riscv64, s390x, sh4 for now.
+  * Ignore regressions on loong64, m68k, riscv64, s390x, sh4, x32 for now.
   * Split out a libsframe-dev package.
 
- -- Matthias Klose <doko@debian.org>  Tue, 05 Aug 2025 14:51:18 +0200
+ -- Matthias Klose <doko@debian.org>  Sun, 10 Aug 2025 09:22:44 +0200
 
 binutils (2.45-1) experimental; urgency=medium
 

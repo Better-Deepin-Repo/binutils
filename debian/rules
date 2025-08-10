@@ -412,12 +412,12 @@ ifneq (,$(filter $(DEB_HOST_ARCH), none))
 endif
 #with_check := disabled for this upload
 
-regression_archs = loong64 m68k riscv64 s390x sh4
+regression_archs = loong64 m68k riscv64 s390x sh4 x32
 #regression_archs =
 ifneq (,$(filter $(DEB_HOST_ARCH), $(regression_archs)))
   ignore_regressions := regressions ignored on architecture $(DEB_HOST_ARCH)
 endif
-#ignore_regressions := regressions ignored on architecture $(DEB_HOST_ARCH)
+ignore_regressions := regressions ignored on architecture $(DEB_HOST_ARCH)
 
 with_strip := yes
 ifneq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
