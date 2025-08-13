@@ -1,10 +1,10 @@
-binutils (2.45.50.20250810-1) experimental; urgency=medium
+binutils (2.45.50.20250813-1) experimental; urgency=medium
 
   * New upstream snapshot.
   * Bump standards version.
   * Refresh patches.
 
- -- Matthias Klose <doko@debian.org>  Sun, 10 Aug 2025 12:29:36 +0200
+ -- Matthias Klose <doko@debian.org>  Wed, 13 Aug 2025 13:02:06 +0200
 
 binutils (2.45-3) unstable; urgency=medium
 
