@@ -1199,7 +1199,10 @@ ifeq ($(with_multiarch),yes)
 	$(call strip_package, $(p_mul), $(d_mul))
 endif
 
-	for i in $(d_dev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.a; do \
+	for i in \
+	  $(d_dev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.a \
+	  $(d_sfrd)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.a; \
+	do \
 	  echo "lto-stripping $(basename $$i) ..."; \
 	  $(STRIP_LTO) $$i; \
 	  if which strip-nondeterminism >/dev/null 2>&1; then \
