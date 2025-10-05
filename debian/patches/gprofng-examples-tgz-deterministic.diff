@@ -17,7 +17,7 @@ Last-Update: 2025-01-13
  
 --- a/gprofng/doc/Makefile.in
 +++ b/gprofng/doc/Makefile.in
-@@ -895,7 +895,7 @@ gprofng-display-text.1: $(srcdir)/gprofn
+@@ -901,7 +901,7 @@ gprofng-display-text.1: $(srcdir)/gprofn
  info: $(man_MANS)
  
  examples.tar.gz:

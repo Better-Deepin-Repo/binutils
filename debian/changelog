@@ -1,8 +1,10 @@
-binutils (2.45.50.20250903-2) UNRELEASED; urgency=medium
+binutils (2.45.50.20251005-1) experimental; urgency=medium
 
-  * Strip libsframe.a. Closes: #1114662.
+  * New upstream snapshot.
+  * Refresh patches.
+  * Strip libsframe.a. Addresses: #1114662.
 
- -- Matthias Klose <doko@debian.org>  Mon, 08 Sep 2025 10:29:12 +0200
+ -- Matthias Klose <doko@debian.org>  Sun, 05 Oct 2025 12:47:20 +0200
 
 binutils (2.45.50.20250903-1) experimental; urgency=medium
 

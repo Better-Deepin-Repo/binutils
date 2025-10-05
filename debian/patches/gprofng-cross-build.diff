@@ -43,7 +43,7 @@
  
 --- a/gprofng/configure
 +++ b/gprofng/configure
-@@ -17011,7 +17011,7 @@ fi
+@@ -17389,7 +17389,7 @@ fi
  # Generate manpages, if possible.
  build_man=false
  build_doc=false

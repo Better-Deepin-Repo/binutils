@@ -1,6 +1,6 @@
 --- a/gprofng/libcollector/Makefile.in
 +++ b/gprofng/libcollector/Makefile.in
-@@ -441,7 +441,7 @@ CSOURCES = \
+@@ -444,7 +444,7 @@ CSOURCES = \
  	collector.c \
  	$(NULL)
  
