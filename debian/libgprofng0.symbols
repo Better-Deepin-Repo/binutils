@@ -1,4 +1,4 @@
-# SymbolsHelper-Confirmed: 2.45 amd64 arm64 i386 x32
+# SymbolsHelper-Confirmed: 2.45.50 amd64 arm64 i386 x32
 libgprofng.so.0 libgprofng0 #MINVER#
  ABS_PP_CODES@Base 2.43.50.20241215
  ABS_RT_CODES@Base 2.43.50.20241215
@@ -1252,7 +1252,6 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _ZN4EmsgD2Ev@Base 2.43.50.20241215
  _ZN5DbeEA8get_nameEN8Histable10NameFormatE@Base 2.43.50.20241215
  _ZN5DbeEA9converttoEN8Histable4TypeEPS0_@Base 2.43.50.20241215
- (subst)_ZN5Dwarf10get_rangesE{uint64_t}@Base 2.45
  _ZN5Dwarf13archive_DwarfEP10LoadObject@Base 2.43.50.20241215
  _ZN5Dwarf13srcline_DwarfEP6Module@Base 2.43.50.20241215
  _ZN5Dwarf17read_hwcprof_infoEP6Module@Base 2.43.50.20241215
@@ -1275,8 +1274,6 @@ libgprofng.so.0 libgprofng0 #MINVER#
  (arch=i386 x32)_ZN5DwrCU11get_high_pcEy@Base 2.43.50.20241215
  _ZN5DwrCU11get_symbolsEP6VectorIP6SymbolE@Base 2.45
  _ZN5DwrCU12Dwarf_stringEt@Base 2.43.50.20241215
- (subst)_ZN5DwrCU12inherit_propE{int64_t}P6Source@Base 2.45
- (subst)_ZN5DwrCU12set_up_funcsE{int64_t}@Base 2.45
  (arch=!i386 !x32)_ZN5DwrCU13read_ref_attrEtPl@Base 2.43.50.20241215
  (arch=i386 x32)_ZN5DwrCU13read_ref_attrEtPx@Base 2.43.50.20241215
  _ZN5DwrCU13update_sourceEP6SymbolP6Source@Base 2.45
@@ -1288,7 +1285,6 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _ZN5DwrCU15map_dwarf_linesEP6Module@Base 2.43.50.20241215
  _ZN5DwrCU15parse_cu_headerEP10LoadObject@Base 2.43.50.20241215
  _ZN5DwrCU16dwr_get_locationEP6DwrSecP11DwrLocation@Base 2.43.50.20241215
- (subst)_ZN5DwrCU16find_declarationE{int64_t}P6Source@Base 2.45
  _ZN5DwrCU16get_linkage_nameEv@Base 2.43.50.20241215
  (arch=!i386 !x32)_ZN5DwrCU17build_abbrevTableEP6DwrSecm@Base 2.43.50.20241215
  (arch=i386 x32)_ZN5DwrCU17build_abbrevTableEP6DwrSecy@Base 2.43.50.20241215
@@ -1462,7 +1458,6 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _ZN6SampleD1Ev@Base 2.43.50.20241215
  _ZN6SampleD2Ev@Base 2.43.50.20241215
  _ZN6Symbol10get_symbolEP6VectorIPS_EPc@Base 2.45
- (subst)_ZN6Symbol10get_symbolEP6VectorIPS_E{uint64_t}@Base 2.45
  _ZN6Symbol12find_symbolsEP6VectorIPS_EPS0_IP5RangeES3_@Base 2.45
  _ZN6Symbol12sort_by_nameEP6VectorIPS_E@Base 2.45
  _ZN6Symbol14createFunctionEP6Module@Base 2.45
