@@ -1,3 +1,13 @@
+binutils (2.45.50.20251005-2) UNRELEASED; urgency=medium
+
+  * d/p/env-package-metadata.diff: Enforce CLI arg precedence (LP: #2109333)
+    The initial implementation would only give precedence if the CLI arg is
+    not empty. The new implementation now simply loads the default value
+    into the appropriate static variable *before* the argument parsing,
+    where the --package-metadata handler will appropriately clear it.
+
+ -- Matthias Klose <doko@debian.org>  Wed, 22 Oct 2025 00:46:05 +0200
+
 binutils (2.45.50.20251005-1) experimental; urgency=medium
 
   * New upstream snapshot.
