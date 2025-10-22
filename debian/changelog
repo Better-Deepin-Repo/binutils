@@ -5,6 +5,7 @@ binutils (2.45.50.20251005-2) UNRELEASED; urgency=medium
     not empty. The new implementation now simply loads the default value
     into the appropriate static variable *before* the argument parsing,
     where the --package-metadata handler will appropriately clear it.
+  * binutils-dev: Drop the dependency on libsframe-dev.
 
  -- Matthias Klose <doko@debian.org>  Wed, 22 Oct 2025 00:46:05 +0200
 

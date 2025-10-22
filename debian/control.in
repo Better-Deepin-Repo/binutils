@@ -208,7 +208,6 @@ Architecture: any
 Priority: optional
 Depends: binutils (= ${binary:Version}), libbinutils (= ${binary:Version}),
   libctf0 (= ${binary:Version}), libctf-nobfd0 (= ${binary:Version}),
-  libsframe-dev (= ${binary:Version}),
   libgprofng0 (= ${binary:Version}) [amd64 arm64 i386 riscv64 x32],
 Conflicts: libbfd-dev, binutils (<< 2.43.50.20240819)
 Provides: libbfd-dev
