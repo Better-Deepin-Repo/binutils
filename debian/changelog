@@ -1,5 +1,6 @@
-binutils (2.45.50.20251005-2) UNRELEASED; urgency=medium
+binutils (2.45.50.20251023-1) experimental; urgency=medium
 
+  * New upstream snapshot.
   * d/p/env-package-metadata.diff: Enforce CLI arg precedence (LP: #2109333)
     The initial implementation would only give precedence if the CLI arg is
     not empty. The new implementation now simply loads the default value
