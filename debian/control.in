@@ -64,7 +64,8 @@ Depends: ${shlibs:Depends}, binutils-common (= ${binary:Version}),
 Conflicts: modutils (<< 2.4.19-1), ${extraConflicts},
   binutils-multiarch (<< 2.27-8)
 Provides: elf-binutils, ${gold:Provides}
-Suggests: binutils-doc (>= ${source:Version}), gprofng-gui, ${gold:Suggests},
+Suggests: binutils-doc (>= ${source:Version}),
+  gprofng-gui [@gprofng_archs@], ${gold:Suggests},
 Breaks:
  binutils-aarch64-linux-gnu (<< 2.43.90),
  binutils-i686-linux-gnu (<< 2.43.90),
@@ -84,7 +85,7 @@ Description: GNU assembler, linker and binary utilities
 Package: binutils-dbg
 Section: debug
 Priority: optional
-Architecture: @gprofng_archs@
+Architecture: any
 Depends: binutils (= ${binary:Version}), ${binutils:native}-dbg (= ${binary:Version})
 Description: GNU assembler, linker and binary utilities(debug symbols)
  This package provides debug symbols for binutils.
@@ -125,8 +126,22 @@ Description: Compact C Type Format library (debug symbols, BFD dependency)
  This package includes the libctf shared library.  The Compact C Type
  Format (CTF) is a way of representing information about a binary program
 
+Package: libgprofng-dev
+Architecture: @gprofng_archs@
+Multi-Arch: same
+Priority: optional
+Section: libdevel
+Depends: binutils-dev (= ${binary:Version}), libgprofng0 (= ${binary:Version}), ${shlibs:Depends}
+Conflicts: binutils-dev (<< 2.45.50.20251023-1~)
+Replaces: binutils-dev (<< 2.45.50.20251023-1~)
+Description: Library to handle the SFrame format (development files)
+ Gprofng is the GNU Next Generation profiler for analyzing the performance
+ of Linux applications.
+ .
+ This package includes the libsframe header files and static library.
+
 Package: libgprofng0
-Architecture: any
+Architecture: @gprofng_archs@
 Multi-Arch: same
 Depends: ${shlibs:Depends}, libbinutils (= ${binary:Version})
 Description: GNU Next Generation profiler (runtime library)
@@ -142,7 +157,7 @@ Description: GNU Next Generation profiler (runtime library)
 
 Package: libgprofng0-dbg
 Section: debug
-Architecture: any
+Architecture: @gprofng_archs@
 Multi-Arch: same
 Depends: libgprofng0 (= ${binary:Version})
 Description: GNU Next Generation profiler (debug symbols)
@@ -208,7 +223,6 @@ Architecture: any
 Priority: optional
 Depends: binutils (= ${binary:Version}), libbinutils (= ${binary:Version}),
   libctf0 (= ${binary:Version}), libctf-nobfd0 (= ${binary:Version}),
-  libgprofng0 (= ${binary:Version}) [amd64 arm64 i386 riscv64 x32],
 Conflicts: libbfd-dev, binutils (<< 2.43.50.20240819)
 Provides: libbfd-dev
 Replaces: libbfd-dev, libc5-dev, binutils (<< 2.43.50.20240819)
