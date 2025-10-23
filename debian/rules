@@ -1836,7 +1836,10 @@ ifeq ($(with_gprofng),yes)
 	cd $(d_gpng)-dbg && find -type f  ! -regex './DEBIAN/.*' -printf '%P\n' | LC_ALL=C sort | xargs md5sum > DEBIAN/md5sums
 endif
 
+	: # binutils only has binaries when gprofng is built
+ifeq ($(with_gprofng),yes)
 	find $(d_bin) -type f | xargs file | grep ELF | cut -d: -f 1 | xargs dpkg-shlibdeps
+endif
 	dpkg-gencontrol -P$(d_bin) -p$(p_bin) \
 		$(CONFLICTS_TARGET_$(DEB_HOST_ARCH)) $(gold_substvars) \
 		-Vbinutils:native=$(p_nat)
