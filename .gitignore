@@ -39,9 +39,11 @@ debian/libctf-nobfd0
 debian/libctf0-dbg
 debian/libctf0
 
+debian/libgprofng-dev
 debian/libgprofng0-dbg
 debian/libgprofng0
 
+debian/libsframe-dev
 debian/libsframe2-dbg
 debian/libsframe2
 
