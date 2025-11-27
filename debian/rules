@@ -1300,6 +1300,8 @@ ifeq ($(with_native),yes)
   ifeq ($(with_gprofng),yes)
 	$(call strip_package, $(p_bin), $(d_bin))
   endif
+	$(install_dir) $(d_bin)-dbg/usr/share/doc/
+	ln -sf binutils $(d_bin)-dbg/usr/share/doc/$(p_bin)-dbg
 endif
 ifeq ($(with_multiarch),yes)
 	for i in \
