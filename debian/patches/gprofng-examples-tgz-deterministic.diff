@@ -6,7 +6,7 @@ Last-Update: 2025-01-13
 
 --- a/gprofng/doc/Makefile.am
 +++ b/gprofng/doc/Makefile.am
-@@ -61,7 +61,7 @@ EXTRA_DIST = $(man_MANS) version.texi
+@@ -63,7 +63,7 @@ EXTRA_DIST = $(man_MANS) version.texi
  info: $(man_MANS)
  
  examples.tar.gz:
@@ -17,7 +17,7 @@ Last-Update: 2025-01-13
  
 --- a/gprofng/doc/Makefile.in
 +++ b/gprofng/doc/Makefile.in
-@@ -901,7 +901,7 @@ gprofng-display-text.1: $(srcdir)/gprofn
+@@ -905,7 +905,7 @@ gprofng-display-gmon.1: $(srcdir)/gprofn
  info: $(man_MANS)
  
  examples.tar.gz:
