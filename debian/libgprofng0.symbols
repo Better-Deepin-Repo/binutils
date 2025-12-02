@@ -15,6 +15,7 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _Z10getStackPCi5VModeP8DataViewl@Base 2.44
  _Z10get_symtabPKc@Base 2.45.50
  _Z10out_of_memv@Base 2.44
+ (arch=!i386|subst)_Z10sym_lookupP9Sym_Table{uint64_t}@Base 2.45.50
  _Z11bb_read_recP8_IO_FILEPKcbS2_@Base 2.45.50
  _Z11cg_read_recP8_IO_FILEPKcS2_@Base 2.45.50
  _Z11dbeGetAliasPc@Base 2.44
@@ -41,6 +42,7 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _Z12dbePrintDataiiiPcS_P8_IO_FILE@Base 2.44
  _Z12dbeSetSelObjixii@Base 2.44
  _Z12dbeWriteFilePKcS0_@Base 2.44
+ (arch=!i386|subst)_Z12gmon_io_readP8_IO_FILEPc{size_t}@Base 2.45.50
  _Z12print_headerP10ExperimentP8_IO_FILE@Base 2.44
  _Z13dbeAddPathmapiPcS_@Base 2.44
  _Z13dbeDeleteFilePKc@Base 2.44
@@ -141,6 +143,7 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _Z16dbeSetPrintLimitii@Base 2.44
  _Z16dbeSetSearchPathiP6VectorIPcE@Base 2.44
  _Z16dbeUpdateFiltersiP6VectorIbEPS_IPcE@Base 2.44
+ (arch=!i386|subst)_Z16gmon_io_read_vmaP8_IO_FILEP{uint64_t}PKc@Base 2.45.50
  _Z16print_html_labelP8_IO_FILEP10MetricList@Base 2.44
  _Z16print_html_titleP8_IO_FILEPc@Base 2.44
  _Z17dbeDropExperimentiP6VectorIiE@Base 2.44
@@ -247,6 +250,7 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _Z31dbeGetExperimentDataDescriptorsP6VectorIiE@Base 2.44
  _Z7arc_addP3symS0_m@Base 2.45.50
  _Z7destroyPv@Base 2.44
+ (arch=!i386|subst)_Z8cg_tally{uint64_t}{uint64_t}mPKc@Base 2.45.50
  _Z8getStack5VModeP8DataViewl@Base 2.44
  _Z8pr_mesgsP4EmsgPKcS2_@Base 2.44
  _Z8sym_initP3sym@Base 2.45.50
@@ -1268,6 +1272,7 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _ZN4EmsgD2Ev@Base 2.44
  _ZN5DbeEA8get_nameEN8Histable10NameFormatE@Base 2.44
  _ZN5DbeEA9converttoEN8Histable4TypeEPS0_@Base 2.44
+ (arch=!i386|subst)_ZN5Dwarf10get_rangesE{uint64_t}@Base 2.45.50
  _ZN5Dwarf13archive_DwarfEP10LoadObject@Base 2.44
  _ZN5Dwarf13srcline_DwarfEP6Module@Base 2.44
  _ZN5Dwarf17read_hwcprof_infoEP6Module@Base 2.44
@@ -1290,6 +1295,8 @@ libgprofng.so.0 libgprofng0 #MINVER#
  (arch=i386 x32)_ZN5DwrCU11get_high_pcEy@Base 2.44
  _ZN5DwrCU11get_symbolsEP6VectorIP6SymbolE@Base 2.45
  _ZN5DwrCU12Dwarf_stringEt@Base 2.44
+ (arch=!i386|subst)_ZN5DwrCU12inherit_propE{int64_t}P6Source@Base 2.45.50
+ (arch=!i386|subst)_ZN5DwrCU12set_up_funcsE{int64_t}@Base 2.45.50
  (arch=!i386 !x32)_ZN5DwrCU13read_ref_attrEtPl@Base 2.44
  (arch=i386 x32)_ZN5DwrCU13read_ref_attrEtPx@Base 2.44
  _ZN5DwrCU13update_sourceEP6SymbolP6Source@Base 2.45
@@ -1301,6 +1308,7 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _ZN5DwrCU15map_dwarf_linesEP6Module@Base 2.44
  _ZN5DwrCU15parse_cu_headerEP10LoadObject@Base 2.44
  _ZN5DwrCU16dwr_get_locationEP6DwrSecP11DwrLocation@Base 2.44
+ (arch=!i386|subst)_ZN5DwrCU16find_declarationE{int64_t}P6Source@Base 2.45.50
  _ZN5DwrCU16get_linkage_nameEv@Base 2.44
  (arch=!i386 !x32)_ZN5DwrCU17build_abbrevTableEP6DwrSecm@Base 2.44
  (arch=i386 x32)_ZN5DwrCU17build_abbrevTableEP6DwrSecy@Base 2.44
@@ -1474,6 +1482,7 @@ libgprofng.so.0 libgprofng0 #MINVER#
  _ZN6SampleD1Ev@Base 2.44
  _ZN6SampleD2Ev@Base 2.44
  _ZN6Symbol10get_symbolEP6VectorIPS_EPc@Base 2.45
+ (arch=!i386|subst)_ZN6Symbol10get_symbolEP6VectorIPS_E{uint64_t}@Base 2.45.50
  _ZN6Symbol12find_symbolsEP6VectorIPS_EPS0_IP5RangeES3_@Base 2.45
  _ZN6Symbol12sort_by_nameEP6VectorIPS_E@Base 2.45
  _ZN6Symbol14createFunctionEP6Module@Base 2.45
