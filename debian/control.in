@@ -134,11 +134,11 @@ Section: libdevel
 Depends: binutils-dev (= ${binary:Version}), libgprofng0 (= ${binary:Version}), ${shlibs:Depends}
 Conflicts: binutils-dev (<< 2.45.50.20251023-1~)
 Replaces: binutils-dev (<< 2.45.50.20251023-1~)
-Description: Library to handle the SFrame format (development files)
+Description: Library for the GNU Next Generation profiler (development files)
  Gprofng is the GNU Next Generation profiler for analyzing the performance
  of Linux applications.
  .
- This package includes the libsframe header files and static library.
+ This package includes the libgprofng header files and static library.
 
 Package: libgprofng0
 Architecture: @gprofng_archs@
@@ -171,7 +171,7 @@ Architecture: any
 Multi-Arch: same
 Priority: optional
 Section: libdevel
-Depends: libsframe2 (= ${binary:Version}), ${shlibs:Depends}
+Depends: libsframe3 (= ${binary:Version}), ${shlibs:Depends}
 Conflicts: binutils (<< 2.45-1~)
 Replaces: binutils (<< 2.45-1~)
 Description: Library to handle the SFrame format (development files)
@@ -180,7 +180,7 @@ Description: Library to handle the SFrame format (development files)
  .
  This package includes the libsframe header files and static library.
 
-Package: libsframe2
+Package: libsframe3
 Architecture: any
 Multi-Arch: same
 Depends: ${shlibs:Depends}
@@ -190,11 +190,11 @@ Description: Library to handle the SFrame format (runtime library)
  .
  This package includes the libsframe shared library.
 
-Package: libsframe2-dbg
+Package: libsframe3-dbg
 Section: debug
 Architecture: any
 Multi-Arch: same
-Depends: libsframe2 (= ${binary:Version})
+Depends: libsframe3 (= ${binary:Version})
 Description: Library to handle the SFrame format (debug symbols)
  SFrame stands for Simple Frame format.  SFrame format keeps track
  of the minimal necessary information needed for generating stack traces.

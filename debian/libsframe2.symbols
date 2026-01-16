@@ -1,4 +1,0 @@
-libsframe.so.2 libsframe2 #MINVER#
- (symver)LIBSFRAME_0.0 2.41
- (symver)LIBSFRAME_2.0 2.45
- (symver)LIBSFRAME_2.1 2.45.50
