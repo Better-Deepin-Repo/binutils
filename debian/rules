@@ -415,7 +415,7 @@ endif
 #with_check := disabled for this upload
 
 regression_archs = m68k sh4 x32
-regression_archs =
+regression_archs = amd64 arm64
 ifneq (,$(filter $(DEB_HOST_ARCH), $(regression_archs)))
   ignore_regressions := regressions ignored on architecture $(DEB_HOST_ARCH)
 endif
@@ -1654,7 +1654,7 @@ ifeq ($(with_gprofng),yes)
 	$(install_dir) $(d_gpng)/DEBIAN $(d_gpnd)/DEBIAN $(d_gpng)-dbg/DEBIAN
 	$(install_file) debian/binutils.triggers $(d_gpng)/DEBIAN/triggers
 	$(install_file) debian/$(p_gpng).shlibs $(d_gpng)/DEBIAN/shlibs
-	$(install_file) debian/$(p_gpng).symbols $(d_gpng)/DEBIAN/shlibs
+	$(install_file) debian/$(p_gpng).symbols $(d_gpng)/DEBIAN/symbols
 
 	$(install_file) debian/binutils.conffiles $(d_bin)/DEBIAN/conffiles
 endif
