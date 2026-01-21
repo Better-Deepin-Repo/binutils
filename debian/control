@@ -70,7 +70,7 @@ Breaks:
  binutils-aarch64-linux-gnu (<< 2.43.90),
  binutils-i686-linux-gnu (<< 2.43.90),
  binutils-riscv64-linux-gnu (<< 2.43.90),
- binutils-x86-64-linux-gnu (<< 2.43.90),
+ binutils-x86-64-linux-gnu (<< 2.43.90), ${sframe:breaks}
 Replaces:
  binutils-common (<< 2.43.90),
  binutils-aarch64-linux-gnu (<< 2.43.90),

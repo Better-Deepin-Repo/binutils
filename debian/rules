@@ -345,6 +345,14 @@ ifeq (,$(filter $(distrelease),squeeze wheezy stretch precise trusty xenial zest
   DPKG_DEV = dpkg-dev (>= 1.19.0.5),
 endif
 
+ifneq (,$(filter $(DEB_HOST_ARCH), amd64 arm64))
+  ifeq ($(distribution),Ubuntu)
+    SFRAME_BREAKS = '-Vsframe:breaks=libc6-dev (<< 2.42-2ubuntu4)'
+  else # Debian
+    SFRAME_BREAKS = '-Vsframe:breaks=libc6-dev (<< 2.42-10)'
+  endif
+endif
+
 NJOBS =
 # Support parallel=<n> in DEB_BUILD_OPTIONS (see #209008)
 ifneq (,$(filter parallel=%,$(subst $(COMMA), ,$(DEB_BUILD_OPTIONS))))
@@ -1844,7 +1852,7 @@ ifeq ($(with_gprofng),yes)
 endif
 	dpkg-gencontrol -P$(d_bin) -p$(p_bin) \
 		$(CONFLICTS_TARGET_$(DEB_HOST_ARCH)) $(gold_substvars) \
-		-Vbinutils:native=$(p_nat)
+		-Vbinutils:native=$(p_nat) $(SFRAME_BREAKS)
 	cd $(d_bin) && find -type f  ! -regex './DEBIAN/.*' -printf '%P\n' | LC_ALL=C sort | xargs md5sum > DEBIAN/md5sums
 
 	rm -f debian/substvars
