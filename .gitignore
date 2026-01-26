@@ -44,8 +44,8 @@ debian/libgprofng0-dbg
 debian/libgprofng0
 
 debian/libsframe-dev
-debian/libsframe2-dbg
-debian/libsframe2
+debian/libsframe3-dbg
+debian/libsframe3
 
 .editorconfig
 COPYING

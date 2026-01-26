@@ -34,3 +34,4 @@ armhf-64k-alignment.diff
 
 gprofng-examples-tgz-deterministic.diff
 gprofng-cross-build.diff
+pr33832.diff
