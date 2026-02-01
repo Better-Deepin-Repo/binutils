@@ -1,3 +1,12 @@
+binutils (2.45.90.20260201-1) unstable; urgency=medium
+
+  * New upstream snapshot, taken from the 2.46 branch.
+    - Fix PR ld/33851. Closes: #1126517.
+    - Fix PR gas/33852, GCC trunk bootstrap issue on s390x.
+  * Refresh patches.
+
+ -- Matthias Klose <doko@debian.org>  Sun, 01 Feb 2026 10:59:08 +0100
+
 binutils (2.45.90.20260125-1) unstable; urgency=medium
 
   * New upstream snapshot, taken from the 2.46 branch.
