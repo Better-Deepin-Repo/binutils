@@ -47,6 +47,7 @@ debian/libsframe-dev
 debian/libsframe3-dbg
 debian/libsframe3
 
+.clang-format
 .editorconfig
 COPYING
 COPYING.LIB

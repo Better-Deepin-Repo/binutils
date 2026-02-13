@@ -1,3 +1,17 @@
+binutils (2.46.50.20260213-1) UNRELEASED; urgency=medium
+
+  * New upstream snapshot, taken from the trunk.
+
+ -- Matthias Klose <doko@debian.org>  Fri, 13 Feb 2026 09:32:31 +0100
+
+binutils (2.46-1) unstable; urgency=medium
+
+  * binutils 2.46 release.
+  * Update VCS attributes.
+  * Bump standards version.
+
+ -- Matthias Klose <doko@debian.org>  Sun, 08 Feb 2026 14:26:28 +0100
+
 binutils (2.46.50.20260203-1) experimental; urgency=medium
 
   * New upstream snapshot.
