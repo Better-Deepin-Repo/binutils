@@ -1,6 +1,7 @@
 binutils (2.46.50.20260213-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot, taken from the trunk.
+  * Enable PAC/BTI/GCS on arm64 (Emanuele Rocca). Addresses: #1127747.
   * Ignore ld-bootstrap/bootstrap.exp test failures everywhere.
     Addresses: #1127603.
 
