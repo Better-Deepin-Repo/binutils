@@ -1,8 +1,10 @@
-binutils (2.46.50.20260216-2) UNRELEASED; urgency=medium
+binutils (2.46.50.20260508-1) experimental; urgency=medium
 
+  * New upstream snapshot, taken from the trunk.
   * Drop build dependency on quilt. Addresses: #1129263.
+  * Bump standards version.
 
- -- Matthias Klose <doko@debian.org>  Sun, 01 Mar 2026 08:48:26 +0100
+ -- Matthias Klose <doko@debian.org>  Fri, 08 May 2026 11:40:56 +0200
 
 binutils (2.46.50.20260216-1) experimental; urgency=medium
 

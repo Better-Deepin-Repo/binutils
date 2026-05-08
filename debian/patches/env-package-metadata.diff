@@ -414,7 +414,7 @@
  	  IF bootstrap +] $(EXTRA_BOOTSTRAP_FLAGS)[+ ENDIF bootstrap +] check)
 --- a/ld/emultempl/elf.em
 +++ b/ld/emultempl/elf.em
-@@ -100,8 +100,15 @@ fragment <<EOF
+@@ -99,8 +99,15 @@ fragment <<EOF
    link_info.error_execstack = DEFAULT_LD_ERROR_EXECSTACK;
    link_info.warn_is_error_for_rwx_segments = DEFAULT_LD_ERROR_RWX_SEGMENTS;
    link_info.memory_seal = DEFAULT_LD_Z_MEMORY_SEAL;
