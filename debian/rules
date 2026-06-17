@@ -1172,6 +1172,10 @@ endif
 		$(d_dev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libopcodes_pic.a
 	cp builddir-pic/bfd/.libs/libbfd.a \
 		$(d_dev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libbfd_pic.a
+	cp builddir-pic/libctf/.libs/libctf-nobfd.a \
+		$(d_dev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libctf-nobfd_pic.a
+	cp builddir-pic/libctf/.libs/libctf.a \
+		$(d_dev)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/libctf_pic.a
 
 	mv $(d_bin)/$(PF)/lib/$(DEB_HOST_MULTIARCH)/*.so \
 	   $(d_lib)/$(PF)/lib/$(DEB_HOST_MULTIARCH)
