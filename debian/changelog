@@ -1,3 +1,9 @@
+binutils (2.46.90.20260712-1) unstable; urgency=medium
+
+  * New upstream snapshot, taken from the 2.47 branch.
+
+ -- Matthias Klose <doko@debian.org>  Sun, 12 Jul 2026 17:30:43 +0200
+
 binutils (2.46.50.20260617-1) unstable; urgency=medium
 
   * New upstream snapshot, taken from the trunk.
