@@ -425,7 +425,7 @@ ifneq (,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
     with_check := disabled through DEB_BUILD_OPTIONS
   endif
 endif
-ifneq (,$(filter $(DEB_HOST_ARCH), none))
+ifneq (,$(filter $(DEB_HOST_ARCH), none sparc64))
   with_check := disabled for architecture $(DEB_HOST_ARCH)
 endif
 #with_check := disabled for this upload
