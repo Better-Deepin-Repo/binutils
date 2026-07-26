@@ -1,9 +1,11 @@
-binutils (2.46.90.20260712-2) UNRELEASED; urgency=medium
+binutils (2.47-1) unstable; urgency=medium
 
+  * New upstream release.
+    - Fixes build of kernel modules on loong64. Closes: #1142570.
   * Ignore tests results on sparc64 for now (Adrian Glaubitz).
   * Update libgprofng symbols file.
 
- -- Matthias Klose <doko@debian.org>  Fri, 24 Jul 2026 15:01:24 +0200
+ -- Matthias Klose <doko@debian.org>  Sun, 26 Jul 2026 19:48:55 +0200
 
 binutils (2.46.90.20260712-1) unstable; urgency=medium
 
