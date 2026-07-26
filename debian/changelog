@@ -4,6 +4,7 @@ binutils (2.47-1) unstable; urgency=medium
     - Fixes build of kernel modules on loong64. Closes: #1142570.
   * Ignore tests results on sparc64 for now (Adrian Glaubitz).
   * Update libgprofng symbols file.
+  * Refresh patches.
 
  -- Matthias Klose <doko@debian.org>  Sun, 26 Jul 2026 19:48:55 +0200
 

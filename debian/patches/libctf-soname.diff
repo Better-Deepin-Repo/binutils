@@ -26,7 +26,7 @@
  #include "confdefs.h"
  
  #if HAVE_DLFCN_H
-@@ -16702,6 +16703,9 @@ EMULATION_VECTOR=$targ_emul_vector
+@@ -16898,6 +16899,9 @@ EMULATION_VECTOR=$targ_emul_vector
  
  
  
@@ -38,7 +38,7 @@
  
 --- a/binutils/configure.ac
 +++ b/binutils/configure.ac
-@@ -554,6 +554,9 @@ EMULATION_VECTOR=$targ_emul_vector
+@@ -561,6 +561,9 @@ EMULATION_VECTOR=$targ_emul_vector
  AC_SUBST(EMULATION)
  AC_SUBST(EMULATION_VECTOR)
  
