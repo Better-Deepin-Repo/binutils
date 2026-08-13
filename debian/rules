@@ -317,7 +317,7 @@ DEB_SVERSION	:= $(shell echo $(DEB_VERSION) | sed 's/+b[0-9][0-9]*$$//')
 VERSION		:= $(shell sed -n 's/^ *VERSION=\(.*\)/\1/p' bfd/configure | head -1 | tr -d \')
 DATE		:= $(shell sed -n 's/.* \([0-9]*\)$$/\1/p' bfd/version.h)
 ifneq (,$(DATE))
-#  DATE_EXT	:= .$(DATE)
+  DATE_EXT	:= .$(DATE)
 endif
 BUILD_DATE := $(shell dpkg-parsechangelog | sed -n -e 's/^Date: //p')
 BUILD_DAY  := $(shell date -Idate -u -d "$(BUILD_DATE)")
@@ -435,7 +435,7 @@ regression_archs =
 ifneq (,$(filter $(DEB_HOST_ARCH), $(regression_archs)))
   ignore_regressions := regressions ignored on architecture $(DEB_HOST_ARCH)
 endif
-#ignore_regressions := regressions ignored on architecture $(DEB_HOST_ARCH)
+ignore_regressions := regressions ignored on architecture $(DEB_HOST_ARCH)
 
 with_strip := yes
 ifneq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
@@ -676,7 +676,6 @@ multiarch_targets = \
 	powerpc64-linux-gnu \
 	powerpc64le-linux-gnu \
 	riscv64-linux-gnu \
-	s390-linux-gnu \
 	s390x-linux-gnu \
 	sh-linux-gnu \
 	sparc-linux-gnu \
@@ -2090,7 +2089,7 @@ endef
 endif
 
 remove-gfdl-files:
-	rm -rf .git* .cvs* gdb* libbacktrace libdecnumber readline sim
+	rm -rf .git* .cvs* archive gdb* libbacktrace libdecnumber readline sim
 ifeq ($(GFDL_INVARIANT_FREE),yes)
 	for i in $(gfdl_toplevel_texinfo_files); do \
 	  if [ -f $$i ]; then \

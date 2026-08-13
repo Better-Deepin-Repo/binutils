@@ -88,8 +88,6 @@ DEB_TARGET_MULTIARCH64_x32		= x86_64-linux-gnu
 
 DEB_TARGET_MULTIARCH32_powerpc		= powerpc-linux-gnu
 
-DEB_TARGET_MULTIARCH32_s390x		= s390-linux-gnu
-
 DEB_TARGET_MULTIARCH32_sparc64		= sparc-linux-gnu
 
 DEB_TARGET_MULTIARCH64_i386		= x86_64-linux-gnu
@@ -98,8 +96,6 @@ DEB_TARGET_MULTIARCHX32_i386		= x86_64-linux-gnux32
 DEB_TARGET_MULTIARCH64_powerpc		= powerpc64-linux-gnu
 
 DEB_TARGET_MULTIARCH64_sparc		= sparc64-linux-gnu
-
-DEB_TARGET_MULTIARCH64_s390		= s390x-linux-gnu
 
 DEB_TARGET_MULTIARCH64_mips		= mips64-linux-gnuabi64
 DEB_TARGET_MULTIARCHN32_mips		= mips64-linux-gnuabin32
@@ -164,11 +160,7 @@ CONFARGS_TARGET_ppc64		= --enable-targets=powerpc-linux-gnu \
 CONFARGS_TARGET_ppc64el		= --enable-targets=powerpc-linux-gnu \
 				  --enable-warn-rwx-segments
 
-CONFARGS_TARGET_s390		= --enable-targets=s390x-linux-gnu \
-				  --enable-warn-rwx-segments
-
-CONFARGS_TARGET_s390x		= --enable-targets=s390-linux-gnu \
-				  --enable-warn-rwx-segments
+CONFARGS_TARGET_s390x		= --enable-warn-rwx-segments
 
 CONFARGS_TARGET_amd64		= --enable-targets=i686-linux-gnu,x86_64-linux-gnux32,x86_64-pep \
 				  --enable-warn-rwx-segments
