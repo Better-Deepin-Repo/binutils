@@ -35,4 +35,3 @@ armhf-64k-alignment.diff
 gprofng-examples-tgz-deterministic.diff
 gprofng-cross-build.diff
 sh-disable-tests.diff
-real-release.diff
