@@ -1,3 +1,9 @@
+binutils (2.47-4) unstable; urgency=medium
+
+  * Annotate the build autopkg test with the needs-root restriction.
+
+ -- Matthias Klose <doko@debian.org>  Sun, 06 Sep 2026 12:13:55 +0200
+
 binutils (2.47-3) unstable; urgency=medium
 
   * New upstream snapshot, taken from the 2.47 branch.
