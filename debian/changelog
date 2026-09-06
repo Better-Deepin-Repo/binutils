@@ -1,8 +1,9 @@
-binutils (2.47-3) UNRELEASED; urgency=medium
+binutils (2.47-3) unstable; urgency=medium
 
+  * New upstream snapshot, taken from the 2.47 branch.
   * Update VCS attributes.
 
- -- Matthias Klose <doko@debian.org>  Thu, 13 Aug 2026 06:04:21 +0200
+ -- Matthias Klose <doko@debian.org>  Sun, 06 Sep 2026 11:49:12 +0200
 
 binutils (2.47-2) unstable; urgency=medium
 

@@ -1,4 +1,188 @@
-# DP: updates from the binutils-2.45 branch
+# DP: updates from the binutils-2.47 branch
 
-# git diff 2bc7af1ff7732451b6a7b09462a815c3284f9613 f57c0f19710c6fb2052d3709da7081327918ddf9
+# git diff 85c8648d7f9c201195d9012494b461d2343502e1 cf9d144d5bdfcaebef7d67438f07f3e5cdf32142
 
+diff --git a/bfd/reloc.c b/bfd/reloc.c
+index 6b9e00da5d6..f49c1972b9b 100644
+--- a/bfd/reloc.c
++++ b/bfd/reloc.c
+@@ -8148,8 +8148,9 @@ bfd_generic_get_relocated_section_contents (bfd *abfd,
+ 	    {
+ 	      if ((symbol->flags & BSF_SECTION_SYM)
+ 		  && symbol->section->sec_info_type == SEC_INFO_TYPE_MERGE
+-		  /* This, while apparently necessary, feels bogus.  */
+-		  && !(symbol->section->flags & SEC_DEBUGGING))
++		  /* bfd_simple_get_relocated_section_contents() is special.  */
++		  && (!(input_section->flags & SEC_DEBUGGING)
++		      || link_info->input_bfds != link_info->output_bfd))
+ 		{
+ 		  asection *sec = symbol->section;
+ 
+diff --git a/bfd/version.h b/bfd/version.h
+index 6448f83fb5b..dcd87991f1b 100644
+--- a/bfd/version.h
++++ b/bfd/version.h
+@@ -16,7 +16,7 @@
+ 
+    In releases, the date is not included in either version strings or
+    sonames.  */
+-#define BFD_VERSION_DATE 20260726
++#define BFD_VERSION_DATE 20260906
+ #define BFD_VERSION @bfd_version@
+ #define BFD_VERSION_STRING  @bfd_version_package@ @bfd_version_string@
+ #define REPORT_BUGS_TO @report_bugs_to@
+diff --git a/gas/config/tc-arm.c b/gas/config/tc-arm.c
+index ba599ef1fda..c02d3101cc1 100644
+--- a/gas/config/tc-arm.c
++++ b/gas/config/tc-arm.c
+@@ -1141,6 +1141,8 @@ my_get_expression (expressionS * ep, char ** str, int prefix_mode)
+ {
+   char * save_in;
+ 
++  memset (ep, 0, sizeof (expressionS));
++
+   /* In unified syntax, all prefixes are optional.  */
+   if (unified_syntax)
+     prefix_mode = (prefix_mode == GE_OPT_PREFIX_BIG) ? prefix_mode
+@@ -1166,8 +1168,6 @@ my_get_expression (expressionS * ep, char ** str, int prefix_mode)
+       abort ();
+     }
+ 
+-  memset (ep, 0, sizeof (expressionS));
+-
+   save_in = input_line_pointer;
+   input_line_pointer = *str;
+   in_my_get_expression = true;
+diff --git a/include/same-inode.h b/include/same-inode.h
+index 9d9049843d1..d9aea7b006f 100644
+--- a/include/same-inode.h
++++ b/include/same-inode.h
+@@ -28,11 +28,12 @@
+      && (a).st_dev == (b).st_dev)
+ # elif defined _WIN32 && ! defined __CYGWIN__
+    /* Native Windows.  */
+-   /* stat() and fstat() set st_dev and st_ino to 0 if information about
++   /* stat() and fstat() set st_ino to 0 if information about
+       the inode is not available.  */
+ #  define SAME_INODE(a, b) \
+-    (!((a).st_ino == 0 && (a).st_dev == 0) \
+-     && (a).st_ino == (b).st_ino && (a).st_dev == (b).st_dev)
++    ((a).st_ino != 0			\
++     && (a).st_ino == (b).st_ino	\
++     && (a).st_dev == (b).st_dev)
+ # else
+ #  define SAME_INODE(a, b)    \
+     ((a).st_ino == (b).st_ino \
+diff --git a/opcodes/config.in b/opcodes/config.in
+index 64b3303d32d..36e654292b2 100644
+--- a/opcodes/config.in
++++ b/opcodes/config.in
+@@ -26,14 +26,30 @@
+    */
+ #undef HAVE_DCGETTEXT
+ 
++/* Define to 1 if you have the declaration of `asprintf', and to 0 if you
++   don't. */
++#undef HAVE_DECL_ASPRINTF
++
+ /* Define to 1 if you have the declaration of `basename', and to 0 if you
+    don't. */
+ #undef HAVE_DECL_BASENAME
+ 
++/* Define to 1 if you have the declaration of `snprintf', and to 0 if you
++   don't. */
++#undef HAVE_DECL_SNPRINTF
++
+ /* Define to 1 if you have the declaration of `stpcpy', and to 0 if you don't.
+    */
+ #undef HAVE_DECL_STPCPY
+ 
++/* Define to 1 if you have the declaration of `strtoull', and to 0 if you
++   don't. */
++#undef HAVE_DECL_STRTOULL
++
++/* Define to 1 if you have the declaration of `vsnprintf', and to 0 if you
++   don't. */
++#undef HAVE_DECL_VSNPRINTF
++
+ /* Define to 1 if you have the <dlfcn.h> header file. */
+ #undef HAVE_DLFCN_H
+ 
+diff --git a/opcodes/configure b/opcodes/configure
+index 4729ab49b3b..a46a1c54110 100755
+--- a/opcodes/configure
++++ b/opcodes/configure
+@@ -13969,6 +13969,16 @@ CPPFLAGS=$OLD_CPPFLAGS
+ 
+ 
+ 
++ac_fn_c_check_decl "$LINENO" "asprintf" "ac_cv_have_decl_asprintf" "$ac_includes_default"
++if test "x$ac_cv_have_decl_asprintf" = xyes; then :
++  ac_have_decl=1
++else
++  ac_have_decl=0
++fi
++
++cat >>confdefs.h <<_ACEOF
++#define HAVE_DECL_ASPRINTF $ac_have_decl
++_ACEOF
+ ac_fn_c_check_decl "$LINENO" "basename" "ac_cv_have_decl_basename" "$ac_includes_default"
+ if test "x$ac_cv_have_decl_basename" = xyes; then :
+   ac_have_decl=1
+@@ -13979,6 +13989,16 @@ fi
+ cat >>confdefs.h <<_ACEOF
+ #define HAVE_DECL_BASENAME $ac_have_decl
+ _ACEOF
++ac_fn_c_check_decl "$LINENO" "snprintf" "ac_cv_have_decl_snprintf" "$ac_includes_default"
++if test "x$ac_cv_have_decl_snprintf" = xyes; then :
++  ac_have_decl=1
++else
++  ac_have_decl=0
++fi
++
++cat >>confdefs.h <<_ACEOF
++#define HAVE_DECL_SNPRINTF $ac_have_decl
++_ACEOF
+ ac_fn_c_check_decl "$LINENO" "stpcpy" "ac_cv_have_decl_stpcpy" "$ac_includes_default"
+ if test "x$ac_cv_have_decl_stpcpy" = xyes; then :
+   ac_have_decl=1
+@@ -13989,6 +14009,26 @@ fi
+ cat >>confdefs.h <<_ACEOF
+ #define HAVE_DECL_STPCPY $ac_have_decl
+ _ACEOF
++ac_fn_c_check_decl "$LINENO" "strtoull" "ac_cv_have_decl_strtoull" "$ac_includes_default"
++if test "x$ac_cv_have_decl_strtoull" = xyes; then :
++  ac_have_decl=1
++else
++  ac_have_decl=0
++fi
++
++cat >>confdefs.h <<_ACEOF
++#define HAVE_DECL_STRTOULL $ac_have_decl
++_ACEOF
++ac_fn_c_check_decl "$LINENO" "vsnprintf" "ac_cv_have_decl_vsnprintf" "$ac_includes_default"
++if test "x$ac_cv_have_decl_vsnprintf" = xyes; then :
++  ac_have_decl=1
++else
++  ac_have_decl=0
++fi
++
++cat >>confdefs.h <<_ACEOF
++#define HAVE_DECL_VSNPRINTF $ac_have_decl
++_ACEOF
+ 
+ 
+ # Check if sigsetjmp is available.  Using AC_CHECK_FUNCS won't do
+diff --git a/opcodes/configure.ac b/opcodes/configure.ac
+index 2c2556598c9..c6d8972aa0a 100644
+--- a/opcodes/configure.ac
++++ b/opcodes/configure.ac
+@@ -96,7 +96,7 @@ BFD_64_BIT
+ AC_SUBST(HDEFINES)
+ AC_PROG_INSTALL
+ 
+-AC_CHECK_DECLS([basename, stpcpy])
++AC_CHECK_DECLS([asprintf, basename, snprintf, stpcpy, strtoull, vsnprintf])
+ 
+ # Check if sigsetjmp is available.  Using AC_CHECK_FUNCS won't do
+ # since sigsetjmp might only be defined as a macro.
