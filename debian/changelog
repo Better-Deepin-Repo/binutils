@@ -1,3 +1,9 @@
+binutils (2.47-6) unstable; urgency=medium
+
+  * Ignore 'gprofng.display/display.exp/jsynprog' test on arm64.
+
+ -- Matthias Klose <doko@debian.org>  Thu, 10 Sep 2026 15:31:32 +0200
+
 binutils (2.47-5) unstable; urgency=medium
 
   * Ignore 'ld-elf/elf.exp/Run PR ld/34184 test (PIE)' test on armhf.

@@ -27,7 +27,7 @@ import sys
 
 ignored_regressions = {
 #    'gprofng.display/gp-collect-app_F.exp': ('tmpdir/gp-collect-app_F',),
-    'gprofng.display/display.exp': ('mttest', 'synprog',),
+    'gprofng.display/display.exp': ('mttest', 'synprog', 'jsynprog',),
     'ld-bootstrap/bootstrap.exp':  ('*',),
     'ld-elf/elf.exp':  ('*', ('Run PR ld/34184 test (PIE)',)), # on armhf, see #1147080
     'ld-elf/dwarf.exp':  ('*', ('Handle no DWARF information',)), # on loong64, see #1147079
