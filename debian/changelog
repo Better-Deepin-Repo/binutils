@@ -1,3 +1,12 @@
+binutils (2.47-5) UNRELEASED; urgency=medium
+
+  * Ignore 'ld-elf/elf.exp/Run PR ld/34184 test (PIE)' test on armhf.
+    See #1147080.
+  * Ignore 'ld-elf/dwarf.exp/Handle no DWARF information' test on loong64.
+    See #1147079.
+
+ -- Matthias Klose <doko@debian.org>  Thu, 10 Sep 2026 09:30:20 +0200
+
 binutils (2.47-4) unstable; urgency=medium
 
   * Annotate the build autopkg test with the needs-root restriction.
