@@ -4,6 +4,7 @@ binutils (2.47-5) UNRELEASED; urgency=medium
     See #1147080.
   * Ignore 'ld-elf/dwarf.exp/Handle no DWARF information' test on loong64.
     See #1147079.
+  * d/copyright: Replace FSF postal address with web reference.
 
  -- Matthias Klose <doko@debian.org>  Thu, 10 Sep 2026 09:30:20 +0200
 
