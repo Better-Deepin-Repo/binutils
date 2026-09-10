@@ -1,4 +1,4 @@
-binutils (2.47-5) UNRELEASED; urgency=medium
+binutils (2.47-5) unstable; urgency=medium
 
   * Ignore 'ld-elf/elf.exp/Run PR ld/34184 test (PIE)' test on armhf.
     See #1147080.
@@ -6,7 +6,7 @@ binutils (2.47-5) UNRELEASED; urgency=medium
     See #1147079.
   * d/copyright: Replace FSF postal address with web reference.
 
- -- Matthias Klose <doko@debian.org>  Thu, 10 Sep 2026 09:30:20 +0200
+ -- Matthias Klose <doko@debian.org>  Thu, 10 Sep 2026 13:19:53 +0200
 
 binutils (2.47-4) unstable; urgency=medium
 
