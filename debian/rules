@@ -426,7 +426,7 @@ endif
 ifneq (,$(filter $(DEB_HOST_ARCH), none sparc64))
   with_check := disabled for architecture $(DEB_HOST_ARCH)
 endif
-#with_check := disabled for this upload
+with_check := disabled for OBS build chroots
 
 regression_archs = m68k sh4 x32
 regression_archs =
