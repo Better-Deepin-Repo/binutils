@@ -353,13 +353,11 @@ ifeq (,$(filter $(distrelease),squeeze wheezy stretch precise trusty xenial zest
   DPKG_DEV = dpkg-dev (>= 1.19.0.5),
 endif
 
-ifneq (,$(filter $(DEB_HOST_ARCH), amd64 arm64))
-  ifeq ($(distribution),Ubuntu)
-    SFRAME_BREAKS = '-Vsframe:breaks=libc6-dev (<< 2.42-2ubuntu4)'
-  else # Debian
-    SFRAME_BREAKS = '-Vsframe:breaks=libc6-dev (<< 2.42-10)'
-  endif
-endif
+# deepin v25: glibc 2.38 crt objects contain no .sframe sections at all,
+# so the SFrame V2 Breaks on libc6-dev (<< 2.42-10) does not apply here.
+# Keep the substvar defined but empty, same net effect as Debian's
+# non-amd64/arm64 builds (verified: no dangling comma in the field).
+SFRAME_BREAKS = '-Vsframe:breaks='
 
 NJOBS =
 # Support parallel=<n> in DEB_BUILD_OPTIONS (see #209008)
@@ -943,6 +941,11 @@ stamps/build-hppa64: stamps/configure-hppa64
 ###############################################################################
 
 pre-build:
+	: # gprofng/src/Makefile.in creates an empty QLParser.tab.cc via 'touch' when
+	: # the unpacked snapshot timestamps have QLParser.tab.hh >= QLParser.yy, which
+	: # shadows the real parser in out-of-tree builds (undefined QL::Parser symbols).
+	: # Invalidate the grammar so bison regenerates both files.
+	touch gprofng/src/QLParser.yy
 #ifneq (,$(filter $(DEB_HOST_ARCH), armel powerpc))
 #	@echo Build it ...
 #else
