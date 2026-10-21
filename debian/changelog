@@ -2,6 +2,7 @@ binutils (2.47.50.20261021-1) unstable; urgency=medium
 
   * New upstream snapshot, taken from the trunk.
   * Annotate the build autopkg test with the needs-root restriction.
+  * Refresh patches.
 
  -- Matthias Klose <doko@debian.org>  Wed, 21 Oct 2026 13:24:47 +0200
 
