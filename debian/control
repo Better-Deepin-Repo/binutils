@@ -60,6 +60,7 @@ Package: binutils
 Architecture: any
 Depends: ${shlibs:Depends}, binutils-common (= ${binary:Version}),
   libbinutils (= ${binary:Version}), ${binutils:native} (= ${binary:Version}),
+  libbinutils-2.41-compat (>= 2.41-6deepin18+compat1),
   ${gold:Depends},
 Conflicts: modutils (<< 2.4.19-1), ${extraConflicts},
   binutils-multiarch (<< 2.27-8)
